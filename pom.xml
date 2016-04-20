@@ -37,7 +37,7 @@
         <!-- spring核心包 -->
         <!--
             Core utilities used by other modules.
-            Define this if you use Spring Utility APIs (org.springframework.core.*/org.springframework.util.*)
+            Define this if you use Spring Utility APIs (org.springframework.common.*/org.springframework.util.*)
         -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -46,7 +46,7 @@
         </dependency>
         <!--
             Web application development utilities applicable to both Servlet and Portlet Environments
-            (depends on spring-core, spring-beans, spring-context)
+            (depends on spring-common, spring-beans, spring-context)
             Define this if you use Spring MVC, or wish to use Struts, JSF, or another web framework with Spring (org.springframework.web.*)
         -->
         <dependency>
@@ -55,7 +55,7 @@
             <version>${spring.version}</version>
         </dependency>
         <!--
-            Spring MVC for Servlet Environments (depends on spring-core, spring-beans, spring-context, spring-web)
+            Spring MVC for Servlet Environments (depends on spring-common, spring-beans, spring-context, spring-web)
             Define this if you use Spring MVC with a Servlet Container such as Apache Tomcat (org.springframework.web.servlet.*)
         -->
         <dependency>
@@ -65,7 +65,7 @@
         </dependency>
         <!--
             Object-to-XML Mapping (OXM) abstraction and integration with JAXB, JiBX, Castor, XStream, and XML Beans.
-            (depends on spring-core, spring-beans, spring-context)
+            (depends on spring-common, spring-beans, spring-context)
             Define this if you need OXM (org.springframework.oxm.*)
         -->
         <dependency>
@@ -74,9 +74,9 @@
             <version>${spring.version}</version>
         </dependency>
         <!--
-            Transaction Management Abstraction (depends on spring-core, spring-beans, spring-aop, spring-context)
+            Transaction Management Abstraction (depends on spring-common, spring-beans, spring-aop, spring-context)
             Define this if you use Spring Transactions or DAO Exception Hierarchy
-            (org.springframework.transaction.*/org.springframework.mapper.*)
+            (org.springframework.transaction.*/org.springframework.dao.*)
         -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -84,7 +84,7 @@
             <version>${spring.version}</version>
         </dependency>
         <!--
-            JDBC Data Access Library (depends on spring-core, spring-beans, spring-context, spring-tx)
+            JDBC Data Access Library (depends on spring-common, spring-beans, spring-context, spring-tx)
             Define this if you use Spring's JdbcTemplate API (org.springframework.jdbc.*)
         -->
         <dependency>
@@ -93,7 +93,7 @@
             <version>${spring.version}</version>
         </dependency>
         <!--
-            Aspect Oriented Programming (AOP) Framework (depends on spring-core, spring-beans)
+            Aspect Oriented Programming (AOP) Framework (depends on spring-common, spring-beans)
             Define this if you use Spring AOP APIs (org.springframework.aop.*)
         -->
         <dependency>

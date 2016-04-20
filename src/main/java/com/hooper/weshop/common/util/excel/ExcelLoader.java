@@ -1,4 +1,4 @@
-package com.hooper.weshop.core.util.excel;
+package com.hooper.weshop.common.util.excel;
 
 /**
  * Created by 47123 on 2016/3/19.
