@@ -13,7 +13,7 @@
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <!-- 扫描controller（controller层注入） -->
-    <context:component-scan base-package="com.hooper.weshop.web"/>
+    <context:component-scan base-package="com.hooper.hoshop.web.controller"/>
 
     <!-- 会自动注册DefaultAnnotationHandlerMapping与AnnotationMethodHandlerAdapter 两个bean,是spring MVC为@Controllers分发请求所必须的 -->
     <!-- 指定自己定义的validator -->
@@ -31,7 +31,7 @@
         <property name="basenames">
             <list>
                 <!-- 在web环境中一定要定位到classpath 否则默认到当前web应用下找 -->
-                <value>classpath*:messages.properties</value>
+                <value>classpath:message/messages.properties</value>
                 <value>classpath:org/hibernate/validator/ValidationMessages</value>
             </list>
         </property>
@@ -56,6 +56,7 @@
             </list>
         </property>
     </bean>
+
     <bean id="mappingJacksonHttpMessageConverter"
           class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
         <property name="supportedMediaTypes">
@@ -69,7 +70,7 @@
 
     <!-- 对模型视图添加前后缀 -->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-          p:prefix="/WEB-INF/views/" p:suffix=".jsp"/>
+          p:prefix="/WEB-INF/views/" p:suffix=".html"/>
 
     <!-- 配置springMVC处理上传文件的信息 -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -78,7 +79,7 @@
         <property name="maxInMemorySize" value="40960"/>
     </bean>
 
-    <!--&lt;!&ndash; 启用shrio授权注解拦截方式 &ndash;&gt;-->
+    <!-- 启用shrio授权注解拦截方式 -->
     <!--<aop:config proxy-target-class="true"></aop:config>-->
     <!--<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">-->
         <!--<property name="securityManager" ref="securityManager"/>-->

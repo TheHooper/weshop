@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hooper.hoshop.dao.UserVipMapper">
+    <resultMap id="BaseResultMap" type="com.hooper.hoshop.entity.UserVip">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="vip_score" property="vipScore" jdbcType="INTEGER"/>
+        <result column="vip_balance_score" property="vipBalanceScore" jdbcType="INTEGER"/>
+        <result column="type" property="type" jdbcType="TINYINT"/>
+        <result column="stream_type" property="streamType" jdbcType="BIT"/>
+        <result column="c_time" property="cTime" jdbcType="BIGINT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, user_id, vip_score, vip_balance_score, type, stream_type, c_time
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from h_user_vip
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from h_user_vip
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.hooper.hoshop.entity.UserVip">
+    insert into h_user_vip (id, user_id, vip_score, 
+      vip_balance_score, type, stream_type, 
+      c_time)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{vipScore,jdbcType=INTEGER}, 
+      #{vipBalanceScore,jdbcType=INTEGER}, #{type,jdbcType=TINYINT}, #{streamType,jdbcType=BIT}, 
+      #{cTime,jdbcType=BIGINT})
+  </insert>
+    <insert id="insertSelective" parameterType="com.hooper.hoshop.entity.UserVip">
+        insert into h_user_vip
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="vipScore != null">
+                vip_score,
+            </if>
+            <if test="vipBalanceScore != null">
+                vip_balance_score,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="streamType != null">
+                stream_type,
+            </if>
+            <if test="cTime != null">
+                c_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="vipScore != null">
+                #{vipScore,jdbcType=INTEGER},
+            </if>
+            <if test="vipBalanceScore != null">
+                #{vipBalanceScore,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=TINYINT},
+            </if>
+            <if test="streamType != null">
+                #{streamType,jdbcType=BIT},
+            </if>
+            <if test="cTime != null">
+                #{cTime,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hooper.hoshop.entity.UserVip">
+        update h_user_vip
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="vipScore != null">
+                vip_score = #{vipScore,jdbcType=INTEGER},
+            </if>
+            <if test="vipBalanceScore != null">
+                vip_balance_score = #{vipBalanceScore,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=TINYINT},
+            </if>
+            <if test="streamType != null">
+                stream_type = #{streamType,jdbcType=BIT},
+            </if>
+            <if test="cTime != null">
+                c_time = #{cTime,jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.hooper.hoshop.entity.UserVip">
+    update h_user_vip
+    set user_id = #{userId,jdbcType=INTEGER},
+      vip_score = #{vipScore,jdbcType=INTEGER},
+      vip_balance_score = #{vipBalanceScore,jdbcType=INTEGER},
+      type = #{type,jdbcType=TINYINT},
+      stream_type = #{streamType,jdbcType=BIT},
+      c_time = #{cTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

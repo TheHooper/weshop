@@ -3,9 +3,6 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-    <properties>
-        <property name="dialectClass" value="com.eliteams.quick4j.core.feature.orm.dialect.MySql5Dialect"/>
-    </properties>
 
     <!-- 配置mybatis的缓存，延迟加载等等一系列属性 -->
     <settings>
@@ -57,13 +54,8 @@
     </settings>
 
     <typeAliases>
-        <package name="com.eliteams.quick4j.web.model"/>
-        <package name="com.eliteams.quick4j.web.enums"/>
+        <package name="com.hooper.hoshop.entity"/>
     </typeAliases>
 
-    <plugins>
-        <plugin interceptor="com.eliteams.quick4j.core.feature.orm.mybatis.PaginationResultSetHandlerInterceptor"/>
-        <plugin interceptor="com.eliteams.quick4j.core.feature.orm.mybatis.PaginationStatementHandlerInterceptor"/>
-    </plugins>
 
 </configuration>

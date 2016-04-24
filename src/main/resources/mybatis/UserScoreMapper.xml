@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hooper.hoshop.dao.UserScoreMapper">
+    <resultMap id="BaseResultMap" type="com.hooper.hoshop.entity.UserScore">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="score" property="score" jdbcType="INTEGER"/>
+        <result column="balance_score" property="balanceScore" jdbcType="INTEGER"/>
+        <result column="type" property="type" jdbcType="TINYINT"/>
+        <result column="stream_type" property="streamType" jdbcType="BIT"/>
+        <result column="c_time" property="cTime" jdbcType="BIGINT"/>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.hooper.hoshop.entity.UserScore" extends="BaseResultMap">
+        <result column="sn" property="sn" jdbcType="VARBINARY"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, user_id, score, balance_score, type, stream_type, c_time
+  </sql>
+    <sql id="Blob_Column_List">
+    sn
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from h_user_score
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from h_user_score
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.hooper.hoshop.entity.UserScore">
+    insert into h_user_score (id, user_id, score, 
+      balance_score, type, stream_type, 
+      c_time, sn)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{score,jdbcType=INTEGER}, 
+      #{balanceScore,jdbcType=INTEGER}, #{type,jdbcType=TINYINT}, #{streamType,jdbcType=BIT}, 
+      #{cTime,jdbcType=BIGINT}, #{sn,jdbcType=VARBINARY})
+  </insert>
+    <insert id="insertSelective" parameterType="com.hooper.hoshop.entity.UserScore">
+        insert into h_user_score
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="score != null">
+                score,
+            </if>
+            <if test="balanceScore != null">
+                balance_score,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="streamType != null">
+                stream_type,
+            </if>
+            <if test="cTime != null">
+                c_time,
+            </if>
+            <if test="sn != null">
+                sn,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="score != null">
+                #{score,jdbcType=INTEGER},
+            </if>
+            <if test="balanceScore != null">
+                #{balanceScore,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=TINYINT},
+            </if>
+            <if test="streamType != null">
+                #{streamType,jdbcType=BIT},
+            </if>
+            <if test="cTime != null">
+                #{cTime,jdbcType=BIGINT},
+            </if>
+            <if test="sn != null">
+                #{sn,jdbcType=VARBINARY},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hooper.hoshop.entity.UserScore">
+        update h_user_score
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="score != null">
+                score = #{score,jdbcType=INTEGER},
+            </if>
+            <if test="balanceScore != null">
+                balance_score = #{balanceScore,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=TINYINT},
+            </if>
+            <if test="streamType != null">
+                stream_type = #{streamType,jdbcType=BIT},
+            </if>
+            <if test="cTime != null">
+                c_time = #{cTime,jdbcType=BIGINT},
+            </if>
+            <if test="sn != null">
+                sn = #{sn,jdbcType=VARBINARY},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hooper.hoshop.entity.UserScore">
+    update h_user_score
+    set user_id = #{userId,jdbcType=INTEGER},
+      score = #{score,jdbcType=INTEGER},
+      balance_score = #{balanceScore,jdbcType=INTEGER},
+      type = #{type,jdbcType=TINYINT},
+      stream_type = #{streamType,jdbcType=BIT},
+      c_time = #{cTime,jdbcType=BIGINT},
+      sn = #{sn,jdbcType=VARBINARY}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.hooper.hoshop.entity.UserScore">
+    update h_user_score
+    set user_id = #{userId,jdbcType=INTEGER},
+      score = #{score,jdbcType=INTEGER},
+      balance_score = #{balanceScore,jdbcType=INTEGER},
+      type = #{type,jdbcType=TINYINT},
+      stream_type = #{streamType,jdbcType=BIT},
+      c_time = #{cTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hooper.hoshop.dao.UserRateMapper">
+    <resultMap id="BaseResultMap" type="com.hooper.hoshop.entity.UserRate">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="goods_id" property="goodsId" jdbcType="INTEGER"/>
+        <result column="order_id" property="orderId" jdbcType="INTEGER"/>
+        <result column="level" property="level" jdbcType="BIT"/>
+        <result column="comment" property="comment" jdbcType="VARCHAR"/>
+        <result column="pic_url" property="picUrl" jdbcType="VARCHAR"/>
+        <result column="pic_url1" property="picUrl1" jdbcType="VARCHAR"/>
+        <result column="pic_url2" property="picUrl2" jdbcType="VARCHAR"/>
+        <result column="pic_url3" property="picUrl3" jdbcType="VARCHAR"/>
+        <result column="is_del" property="isDel" jdbcType="BIT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, user_id, goods_id, order_id, level, comment, pic_url, pic_url1, pic_url2, pic_url3, 
+    is_del
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from h_user_rate
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from h_user_rate
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.hooper.hoshop.entity.UserRate">
+    insert into h_user_rate (id, user_id, goods_id, 
+      order_id, level, comment, 
+      pic_url, pic_url1, pic_url2, 
+      pic_url3, is_del)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, 
+      #{orderId,jdbcType=INTEGER}, #{level,jdbcType=BIT}, #{comment,jdbcType=VARCHAR}, 
+      #{picUrl,jdbcType=VARCHAR}, #{picUrl1,jdbcType=VARCHAR}, #{picUrl2,jdbcType=VARCHAR}, 
+      #{picUrl3,jdbcType=VARCHAR}, #{isDel,jdbcType=BIT})
+  </insert>
+    <insert id="insertSelective" parameterType="com.hooper.hoshop.entity.UserRate">
+        insert into h_user_rate
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="goodsId != null">
+                goods_id,
+            </if>
+            <if test="orderId != null">
+                order_id,
+            </if>
+            <if test="level != null">
+                level,
+            </if>
+            <if test="comment != null">
+                comment,
+            </if>
+            <if test="picUrl != null">
+                pic_url,
+            </if>
+            <if test="picUrl1 != null">
+                pic_url1,
+            </if>
+            <if test="picUrl2 != null">
+                pic_url2,
+            </if>
+            <if test="picUrl3 != null">
+                pic_url3,
+            </if>
+            <if test="isDel != null">
+                is_del,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="goodsId != null">
+                #{goodsId,jdbcType=INTEGER},
+            </if>
+            <if test="orderId != null">
+                #{orderId,jdbcType=INTEGER},
+            </if>
+            <if test="level != null">
+                #{level,jdbcType=BIT},
+            </if>
+            <if test="comment != null">
+                #{comment,jdbcType=VARCHAR},
+            </if>
+            <if test="picUrl != null">
+                #{picUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="picUrl1 != null">
+                #{picUrl1,jdbcType=VARCHAR},
+            </if>
+            <if test="picUrl2 != null">
+                #{picUrl2,jdbcType=VARCHAR},
+            </if>
+            <if test="picUrl3 != null">
+                #{picUrl3,jdbcType=VARCHAR},
+            </if>
+            <if test="isDel != null">
+                #{isDel,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hooper.hoshop.entity.UserRate">
+        update h_user_rate
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="goodsId != null">
+                goods_id = #{goodsId,jdbcType=INTEGER},
+            </if>
+            <if test="orderId != null">
+                order_id = #{orderId,jdbcType=INTEGER},
+            </if>
+            <if test="level != null">
+                level = #{level,jdbcType=BIT},
+            </if>
+            <if test="comment != null">
+                comment = #{comment,jdbcType=VARCHAR},
+            </if>
+            <if test="picUrl != null">
+                pic_url = #{picUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="picUrl1 != null">
+                pic_url1 = #{picUrl1,jdbcType=VARCHAR},
+            </if>
+            <if test="picUrl2 != null">
+                pic_url2 = #{picUrl2,jdbcType=VARCHAR},
+            </if>
+            <if test="picUrl3 != null">
+                pic_url3 = #{picUrl3,jdbcType=VARCHAR},
+            </if>
+            <if test="isDel != null">
+                is_del = #{isDel,jdbcType=BIT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.hooper.hoshop.entity.UserRate">
+    update h_user_rate
+    set user_id = #{userId,jdbcType=INTEGER},
+      goods_id = #{goodsId,jdbcType=INTEGER},
+      order_id = #{orderId,jdbcType=INTEGER},
+      level = #{level,jdbcType=BIT},
+      comment = #{comment,jdbcType=VARCHAR},
+      pic_url = #{picUrl,jdbcType=VARCHAR},
+      pic_url1 = #{picUrl1,jdbcType=VARCHAR},
+      pic_url2 = #{picUrl2,jdbcType=VARCHAR},
+      pic_url3 = #{picUrl3,jdbcType=VARCHAR},
+      is_del = #{isDel,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
