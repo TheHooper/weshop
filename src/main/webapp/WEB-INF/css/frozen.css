@@ -2757,12 +2757,13 @@ h6, .ui-txt-tips {
 }
 
 .ui-switch input:checked:before {
-  border-color: #64bd63;
-  box-shadow: #64bd63 0px 0px 0px 16px inset;
-  background-color: #64bd63;
+  /** wechar color #64bd63 **/
+  border-color: #18b4ed;
+  box-shadow: #18b4ed 0px 0px 0px 16px inset;
+  background-color: #18b4ed;
   transition: border 0.4s, box-shadow 0.4s, background-color 1.2s;
   -webkit-transition: border 0.4s, box-shadow 0.4s, background-color 1.2s;
-  background-color: #64bd63;
+  background-color: #18b4ed;
 }
 
 .ui-switch input:checked:after {
@@ -3673,5 +3674,4 @@ h6, .ui-txt-tips {
     -webkit-background-size: 100% 1px;
   }
 }
-
 /*# sourceMappingURL=frozen.css.map */

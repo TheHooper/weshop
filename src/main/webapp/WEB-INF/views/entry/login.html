@@ -6,37 +6,21 @@
     <meta name="format-detection" content="telephone=no">
     <title>ho商城登录</title>
     <link href="../../css/frozen.css" rel="stylesheet" type="text/css"/>
+    <link href="../../css/homall.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="../../js/frozen.js"></script>
     <script type="text/javascript" src="../../js/lib/zeptojs/zepto.min.js"></script>
-    <style>
-        .header {
-            text-align: center;
-            position: relative;
-            z-index: 1;
-            height: 44px;
-            background: url(../../img/header-bg.png) repeat-x #efefef;
-            background-size: 100% 44px;
-            border-bottom: 1px solid #bfbfbf;
-            border-width: 0 0 1px;
-            /* -webkit-border-image: url(data:image/gif;base64,R0lGODlhBAAEAIABAL+/v////yH/C1hNUCBEYXRhWE1QPD94cGFja…kYFxYVFBMSERAPDg0MCwoJCAcGBQQDAgEAACH5BAEAAAEALAAAAAAEAAQAAAIFhBGpeVAAOw==) 2 0 stretch; */
-            -o-border-image: url(data:image/gif;base64,R0lGODlhBAAEAIABAL+/v////yH/C1hNUCBEYXRhWE1QPD94cGFja…kYFxYVFBMSERAPDg0MCwoJCAcGBQQDAgEAACH5BAEAAAEALAAAAAAEAAQAAAIFhBGpeVAAOw==) 2 0 round;
-            /* border-image: url(data:image/gif;base64,R0lGODlhBAAEAIABAL+/v////yH/C1hNUCBEYXRhWE1QPD94cGFja…kYFxYVFBMSERAPDg0MCwoJCAcGBQQDAgEAACH5BAEAAAEALAAAAAAEAAQAAAIFhBGpeVAAOw==) 2 0 round; */
-            font-family: PingHei, "Lucida Grande", "Lucida Sans Unicode", STHeiti, Helvetica, Arial, Verdana, sans-serif;
-            color: #252525;
-            font-size: 16px;
-            min-width: 320px;
-        }
-    </style>
 </head>
 <body>
-<div id="header" class="header" style="transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);">
+<div id="header" class="header">
     <h2 class="ui-flex-pack-center">HoMall登录</h2>
 </div>
+
+<br/>
+
 <div class="ui-form ui-border-t">
-    <form action="#">
         <div class="ui-form-item ui-border-b">
             <label>
-                用户名/手机
+                手机号
             </label>
             <input type="text" placeholder="请输入用户名或手机">
             <a href="#" class="ui-icon-close">
@@ -50,23 +34,51 @@
             <a href="#" class="ui-icon-close">
             </a>
         </div>
-        <div class="ui-form-item ui-form-item-textarea ui-form-item-l ui-border-b">
-            <label class="ui-border-r">
-                验证码
-            </label>
-            <input type="text" placeholder="请输入验证码">
-            <a href="#" class="ui-icon-close">
-            </a>
-        </div>
-        <div class="ui-form-item ui-border-b">
-            <p>
-                记住登录
-            </p>
-            <label class="ui-switch">
-                <input type="checkbox">
-            </label>
-        </div>
-    </form>
 </div>
+
+<br/>
+
+<div class="ui-form ui-border-t">
+    <div class="ui-form-item ui-form-item-l ui-border-b">
+        <label class="ui-border-r">
+            验证码
+        </label>
+        <input type="text" placeholder="请输入验证码">
+        <a href="#" class="ui-icon-close">
+        </a>
+    </div>
+</div>
+
+<br/>
+
+<div class="ui-form ui-border-t">
+    <div class="ui-form-item ui-border-b">
+        <p>
+            记住登录
+        </p>
+        <label class="ui-switch">
+            <input type="checkbox">
+        </label>
+    </div>
+</div>
+
+<ul class="ui-row text-center margin-top-m">
+    <li class="ui-col ui-col-33">
+        <a href="register.html">快速注册</a>
+    </li>
+    <li class="ui-col ui-col-33">
+        &nbsp;
+    </li>
+    <li class="ui-col ui-col-33">
+        <a href="forgetPassword.html">找回密码</a>
+    </li>
+</ul>
+
+<div class="ui-btn-wrap text-center margin-top-m">
+    <button class="ui-btn-lg ui-btn-primary">
+        登录
+    </button>
+</div>
+
 </body>
 </html>

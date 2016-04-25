@@ -22,4 +22,14 @@ public class UserController {
     public String loginView() {
         return "entry/login";
     }
+
+    @RequestMapping(value = "/register", method = {RequestMethod.POST, RequestMethod.GET})
+    public String registerView() {
+        return "entry/register";
+    }
+
+    @RequestMapping(value = "/forgetPassword", method = {RequestMethod.POST, RequestMethod.GET})
+    public String forgetPasswordView() {
+        return "entry/forgetPassword";
+    }
 }

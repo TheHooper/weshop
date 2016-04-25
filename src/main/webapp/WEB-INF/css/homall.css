@@ -1,0 +1,58 @@
+.header {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    height: 44px;
+    line-height: 44px;
+    background: url(../img/header-bg.png) repeat-x #efefef;
+    background-size: 100% 44px;
+    border-bottom: 1px solid #bfbfbf;
+    border-width: 0 0 1px;
+    /* -webkit-border-image: url(data:image/gif;base64,R0lGODlhBAAEAIABAL+/v////yH/C1hNUCBEYXRhWE1QPD94cGFja…kYFxYVFBMSERAPDg0MCwoJCAcGBQQDAgEAACH5BAEAAAEALAAAAAAEAAQAAAIFhBGpeVAAOw==) 2 0 stretch; */
+    -o-border-image: url(data:image/gif;base64,R0lGODlhBAAEAIABAL+/v////yH/C1hNUCBEYXRhWE1QPD94cGFja…kYFxYVFBMSERAPDg0MCwoJCAcGBQQDAgEAACH5BAEAAAEALAAAAAAEAAQAAAIFhBGpeVAAOw==) 2 0 round;
+    /* border-image: url(data:image/gif;base64,R0lGODlhBAAEAIABAL+/v////yH/C1hNUCBEYXRhWE1QPD94cGFja…kYFxYVFBMSERAPDg0MCwoJCAcGBQQDAgEAACH5BAEAAAEALAAAAAAEAAQAAAIFhBGpeVAAOw==) 2 0 round; */
+    font-family: PingHei, "Lucida Grande", "Lucida Sans Unicode", STHeiti, Helvetica, Arial, Verdana, sans-serif;
+    color: #252525;
+    font-size: 16px;
+    min-width: 320px;
+}
+
+/**
+   layout
+   ============================
+**/
+.margin-vertical-s {
+    margin: 10px 0;
+}
+
+.margin-vertical-m {
+    margin: 20px 0;
+}
+
+.margin-vertical-l {
+    margin: 30px 0;
+}
+
+.margin-vertical-xl {
+    margin: 40px 0;
+}
+
+.margin-top-s {
+    margin-top: 10px;
+}
+
+.margin-top-m {
+    margin-top: 20px;
+}
+
+.margin-top-l {
+    margin-top: 30px;
+}
+
+.margin-top-xl {
+    margin-top: 40px;
+}
+
+.text-center {
+    text-align: center;
+}
