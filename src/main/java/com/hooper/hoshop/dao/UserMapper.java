@@ -1,16 +1,16 @@
 package com.hooper.hoshop.dao;
 
 import com.hooper.hoshop.entity.User;
-import com.hooper.hoshop.entity.UserKey;
 
-public interface UserMapper {
-    int deleteByPrimaryKey(UserKey key);
+public interface UserMapper extends GenericDao<User, Integer> {
+
+    int deleteByPrimaryKey(Integer id);
 
     int insert(User record);
 
     int insertSelective(User record);
 
-    User selectByPrimaryKey(UserKey key);
+    User selectByPrimaryKey(Integer id);
 
     int updateByPrimaryKeySelective(User record);
 

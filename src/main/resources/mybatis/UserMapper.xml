@@ -1,189 +1,191 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hooper.hoshop.dao.UserMapper">
-    <resultMap id="BaseResultMap" type="com.hooper.hoshop.entity.User">
-        <id column="id" property="id" jdbcType="INTEGER"/>
-        <id column="mobile" property="mobile" jdbcType="VARCHAR"/>
-        <id column="user_name" property="userName" jdbcType="VARCHAR"/>
-        <result column="password" property="password" jdbcType="VARCHAR"/>
-        <result column="password_random" property="passwordRandom" jdbcType="VARCHAR"/>
-        <result column="gender" property="gender" jdbcType="BIT"/>
-        <result column="email" property="email" jdbcType="VARCHAR"/>
-        <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
-        <result column="vip" property="vip" jdbcType="BIT"/>
-        <result column="score" property="score" jdbcType="INTEGER"/>
-        <result column="c_time" property="cTime" jdbcType="BIGINT"/>
-        <result column="last_login_time" property="lastLoginTime" jdbcType="BIGINT"/>
-        <result column="last_login_ip" property="lastLoginIp" jdbcType="VARCHAR"/>
-        <result column="is_del" property="isDel" jdbcType="BIT"/>
-    </resultMap>
-    <sql id="Base_Column_List">
-    id, mobile, user_name, password, password_random, gender, email, avatar, vip, score, 
+  <resultMap id="BaseResultMap" type="com.hooper.hoshop.entity.User">
+    <id column="id" property="id" jdbcType="INTEGER"/>
+    <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+    <result column="password" property="password" jdbcType="VARCHAR"/>
+    <result column="password_random" property="passwordRandom" jdbcType="VARCHAR"/>
+    <result column="gender" property="gender" jdbcType="BIT"/>
+    <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+    <result column="email" property="email" jdbcType="VARCHAR"/>
+    <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
+    <result column="vip" property="vip" jdbcType="BIT"/>
+    <result column="score" property="score" jdbcType="INTEGER"/>
+    <result column="c_time" property="cTime" jdbcType="BIGINT"/>
+    <result column="last_login_time" property="lastLoginTime" jdbcType="BIGINT"/>
+    <result column="last_login_ip" property="lastLoginIp" jdbcType="VARCHAR"/>
+    <result column="is_del" property="isDel" jdbcType="BIT"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_name, password, password_random, gender, mobile, email, avatar, vip, score, 
     c_time, last_login_time, last_login_ip, is_del
   </sql>
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.hooper.hoshop.entity.UserKey">
-        select
-        <include refid="Base_Column_List"/>
-        from h_user
-        where id = #{id,jdbcType=INTEGER}
-        and mobile = #{mobile,jdbcType=VARCHAR}
-        and user_name = #{userName,jdbcType=VARCHAR}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="com.hooper.hoshop.entity.UserKey">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List"/>
+    from h_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from h_user
     where id = #{id,jdbcType=INTEGER}
-      and mobile = #{mobile,jdbcType=VARCHAR}
-      and user_name = #{userName,jdbcType=VARCHAR}
   </delete>
-    <insert id="insert" parameterType="com.hooper.hoshop.entity.User">
-    insert into h_user (id, mobile, user_name, 
-      password, password_random, gender, 
+  <insert id="insert" parameterType="com.hooper.hoshop.entity.User">
+    insert into h_user (id, user_name, password,
+    password_random, gender, mobile,
       email, avatar, vip, score, 
       c_time, last_login_time, last_login_ip, 
       is_del)
-    values (#{id,jdbcType=INTEGER}, #{mobile,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
-      #{password,jdbcType=VARCHAR}, #{passwordRandom,jdbcType=VARCHAR}, #{gender,jdbcType=BIT}, 
+    values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+    #{passwordRandom,jdbcType=VARCHAR}, #{gender,jdbcType=BIT}, #{mobile,jdbcType=VARCHAR},
       #{email,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, #{vip,jdbcType=BIT}, #{score,jdbcType=INTEGER}, 
       #{cTime,jdbcType=BIGINT}, #{lastLoginTime,jdbcType=BIGINT}, #{lastLoginIp,jdbcType=VARCHAR}, 
       #{isDel,jdbcType=BIT})
   </insert>
-    <insert id="insertSelective" parameterType="com.hooper.hoshop.entity.User">
-        insert into h_user
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
-            <if test="mobile != null">
-                mobile,
-            </if>
-            <if test="userName != null">
-                user_name,
-            </if>
-            <if test="password != null">
-                password,
-            </if>
-            <if test="passwordRandom != null">
-                password_random,
-            </if>
-            <if test="gender != null">
-                gender,
-            </if>
-            <if test="email != null">
-                email,
-            </if>
-            <if test="avatar != null">
-                avatar,
-            </if>
-            <if test="vip != null">
-                vip,
-            </if>
-            <if test="score != null">
-                score,
-            </if>
-            <if test="cTime != null">
-                c_time,
-            </if>
-            <if test="lastLoginTime != null">
-                last_login_time,
-            </if>
-            <if test="lastLoginIp != null">
-                last_login_ip,
-            </if>
-            <if test="isDel != null">
-                is_del,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=INTEGER},
-            </if>
-            <if test="mobile != null">
-                #{mobile,jdbcType=VARCHAR},
-            </if>
-            <if test="userName != null">
-                #{userName,jdbcType=VARCHAR},
-            </if>
-            <if test="password != null">
-                #{password,jdbcType=VARCHAR},
-            </if>
-            <if test="passwordRandom != null">
-                #{passwordRandom,jdbcType=VARCHAR},
-            </if>
-            <if test="gender != null">
-                #{gender,jdbcType=BIT},
-            </if>
-            <if test="email != null">
-                #{email,jdbcType=VARCHAR},
-            </if>
-            <if test="avatar != null">
-                #{avatar,jdbcType=VARCHAR},
-            </if>
-            <if test="vip != null">
-                #{vip,jdbcType=BIT},
-            </if>
-            <if test="score != null">
-                #{score,jdbcType=INTEGER},
-            </if>
-            <if test="cTime != null">
-                #{cTime,jdbcType=BIGINT},
-            </if>
-            <if test="lastLoginTime != null">
-                #{lastLoginTime,jdbcType=BIGINT},
-            </if>
-            <if test="lastLoginIp != null">
-                #{lastLoginIp,jdbcType=VARCHAR},
-            </if>
-            <if test="isDel != null">
-                #{isDel,jdbcType=BIT},
-            </if>
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.hooper.hoshop.entity.User">
-        update h_user
-        <set>
-            <if test="password != null">
-                password = #{password,jdbcType=VARCHAR},
-            </if>
-            <if test="passwordRandom != null">
-                password_random = #{passwordRandom,jdbcType=VARCHAR},
-            </if>
-            <if test="gender != null">
-                gender = #{gender,jdbcType=BIT},
-            </if>
-            <if test="email != null">
-                email = #{email,jdbcType=VARCHAR},
-            </if>
-            <if test="avatar != null">
-                avatar = #{avatar,jdbcType=VARCHAR},
-            </if>
-            <if test="vip != null">
-                vip = #{vip,jdbcType=BIT},
-            </if>
-            <if test="score != null">
-                score = #{score,jdbcType=INTEGER},
-            </if>
-            <if test="cTime != null">
-                c_time = #{cTime,jdbcType=BIGINT},
-            </if>
-            <if test="lastLoginTime != null">
-                last_login_time = #{lastLoginTime,jdbcType=BIGINT},
-            </if>
-            <if test="lastLoginIp != null">
-                last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
-            </if>
-            <if test="isDel != null">
-                is_del = #{isDel,jdbcType=BIT},
-            </if>
-        </set>
-        where id = #{id,jdbcType=INTEGER}
-        and mobile = #{mobile,jdbcType=VARCHAR}
-        and user_name = #{userName,jdbcType=VARCHAR}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.hooper.hoshop.entity.User">
+  <insert id="insertSelective" parameterType="com.hooper.hoshop.entity.User">
+    insert into h_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="passwordRandom != null">
+        password_random,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="avatar != null">
+        avatar,
+      </if>
+      <if test="vip != null">
+        vip,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="cTime != null">
+        c_time,
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time,
+      </if>
+      <if test="lastLoginIp != null">
+        last_login_ip,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="passwordRandom != null">
+        #{passwordRandom,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=BIT},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="vip != null">
+        #{vip,jdbcType=BIT},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="cTime != null">
+        #{cTime,jdbcType=BIGINT},
+      </if>
+      <if test="lastLoginTime != null">
+        #{lastLoginTime,jdbcType=BIGINT},
+      </if>
+      <if test="lastLoginIp != null">
+        #{lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hooper.hoshop.entity.User">
     update h_user
-    set password = #{password,jdbcType=VARCHAR},
+    <set>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="passwordRandom != null">
+        password_random = #{passwordRandom,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=BIT},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="vip != null">
+        vip = #{vip,jdbcType=BIT},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="cTime != null">
+        c_time = #{cTime,jdbcType=BIGINT},
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time = #{lastLoginTime,jdbcType=BIGINT},
+      </if>
+      <if test="lastLoginIp != null">
+        last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null">
+        is_del = #{isDel,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hooper.hoshop.entity.User">
+    update h_user
+    set user_name = #{userName,jdbcType=VARCHAR},
+    password = #{password,jdbcType=VARCHAR},
       password_random = #{passwordRandom,jdbcType=VARCHAR},
       gender = #{gender,jdbcType=BIT},
+    mobile = #{mobile,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       avatar = #{avatar,jdbcType=VARCHAR},
       vip = #{vip,jdbcType=BIT},
@@ -193,7 +195,5 @@
       last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
       is_del = #{isDel,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
-      and mobile = #{mobile,jdbcType=VARCHAR}
-      and user_name = #{userName,jdbcType=VARCHAR}
   </update>
 </mapper>

@@ -1,11 +1,17 @@
 package com.hooper.hoshop.entity;
 
-public class User extends UserKey {
+public class User {
+    private Integer id;
+
+    private String userName;
+
     private String password;
 
     private String passwordRandom;
 
     private Boolean gender;
+
+    private String mobile;
 
     private String email;
 
@@ -22,6 +28,22 @@ public class User extends UserKey {
     private String lastLoginIp;
 
     private Boolean isDel;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName == null ? null : userName.trim();
+    }
 
     public String getPassword() {
         return password;
@@ -45,6 +67,14 @@ public class User extends UserKey {
 
     public void setGender(Boolean gender) {
         this.gender = gender;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile == null ? null : mobile.trim();
     }
 
     public String getEmail() {

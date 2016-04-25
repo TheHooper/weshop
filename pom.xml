@@ -29,8 +29,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${plugin.maven-compiler}</version>
                 <configuration>
-                    <source>${project.build.jdk}</source>
-                    <target>${project.build.jdk}</target>
+                    <source>1.6</source>
+                    <target>1.6</target>
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>

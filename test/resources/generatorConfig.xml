@@ -45,20 +45,6 @@
                enableSelectByExample="false">
         </table>
 
-        <table tableName="h_user_rate" domainObjectName="UserRate" enableCountByExample="false"
-               enableUpdateByExample="false" enableDeleteByExample="false"
-               enableSelectByExample="false">
-        </table>
-
-        <table tableName="h_user_score" domainObjectName="UserScore" enableCountByExample="false"
-               enableUpdateByExample="false" enableDeleteByExample="false"
-               enableSelectByExample="false">
-        </table>
-
-        <table tableName="h_user_vip" domainObjectName="UserVip" enableCountByExample="false"
-               enableUpdateByExample="false" enableDeleteByExample="false"
-               enableSelectByExample="false">
-        </table>
 
     </context>
 </generatorConfiguration>

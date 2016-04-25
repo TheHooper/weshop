@@ -8,10 +8,15 @@ package com.hooper.hoshop.dao;
  * Model : 代表数据库中的表 映射的Java对象类型
  * PK :代表对象的主键类型
  *
- * @author StarZou
- * @since 2014年6月9日 下午6:14:06
  */
 public interface GenericDao<Model, PK> {
+
+    /**
+     * 插入对象
+     *
+     * @param model 对象
+     */
+    int insert(Model model);
 
     /**
      * 插入对象
@@ -26,6 +31,13 @@ public interface GenericDao<Model, PK> {
      * @param model 对象
      */
     int updateByPrimaryKeySelective(Model model);
+
+    /**
+     * 更新对象
+     *
+     * @param model 对象
+     */
+    int updateByPrimaryKey(Model model);
 
     /**
      * 通过主键, 删除对象

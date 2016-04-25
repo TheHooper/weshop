@@ -18,6 +18,10 @@
     <!-- 会自动注册DefaultAnnotationHandlerMapping与AnnotationMethodHandlerAdapter 两个bean,是spring MVC为@Controllers分发请求所必须的 -->
     <!-- 指定自己定义的validator -->
     <mvc:annotation-driven validator="validator"/>
+    <mvc:resources location="/WEB-INF/img/" mapping="/img/**"/>
+    <mvc:resources location="/WEB-INF/css/" mapping="/css/**"/>
+    <mvc:resources location="/WEB-INF/js/" mapping="/js/**"/>
+    <mvc:resources location="/WEB-INF/font/" mapping="/font/**"/>
 
     <!-- 以下 validator ConversionService 在使用 mvc:annotation-driven 会 自动注册 -->
     <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
