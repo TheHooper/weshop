@@ -70,37 +70,6 @@
 }(window.Zepto);
 !function (a) {
     function b(b) {
-        return a.adaptObject(this, d, b, c, e, "tips")
-    }
-
-    var c = '<div class="ui-poptips ui-poptips-<%=type%>"><div class="ui-poptips-cnt"><i></i><%=content%></div></div>', d = {
-        content: "",
-        stayTime: 1e3,
-        type: "info",
-        callback: function () {
-        }
-    }, e = function (b, c, e) {
-        var f = this;
-        this.element = a(b), this._isFromTpl = e, this.elementHeight = a(b).height(), this.option = a.extend(d, c), a(b).css({"-webkit-transform": "translateY(-" + this.elementHeight + "px)"}), setTimeout(function () {
-            a(b).css({"-webkit-transition": "all .5s"}), f.show()
-        }, 20)
-    };
-    e.prototype = {
-        show: function () {
-            var b = this;
-            b.element.trigger(a.Event("tips:show")), this.element.css({"-webkit-transform": "translateY(0px)"}), b.option.stayTime > 0 && setTimeout(function () {
-                b.hide()
-            }, b.option.stayTime)
-        }, hide: function () {
-            var b = this;
-            b.element.trigger(a.Event("tips:hide")), this.element.css({"-webkit-transform": "translateY(-" + this.elementHeight + "px)"}), setTimeout(function () {
-                b._isFromTpl && b.element.remove()
-            }, 500)
-        }
-    }, a.fn.tips = a.tips = b
-}(window.Zepto);
-!function (a) {
-    function b(b) {
         return a.adaptObject(this, d, b, c, e, "loading")
     }
 
@@ -456,242 +425,34 @@
         d.exports = b
     })
 }(window.Zepto);
-if ("undefined" == typeof Zepto)throw new Error("Parallax.js's script requires Zepto");
 !function (a) {
-    "use strict";
-    function b() {
-        w.loading ? a(".wrapper").append('<div class="parallax-loading"><i class="ui-loading ui-loading-white"></i></div>') : y = !1, p = 0, o = "stay", q = u.length, r = a(window).width(), s = a(window).height(), v = a("[data-animation]");
-        for (var b = 0; q > b; b++)a(u[b]).attr("data-id", b + 1);
-        t.addClass(w.direction).addClass(w.swipeAnim), u.css({
-            width: r + "px",
-            height: s + "px"
-        }), "horizontal" === w.direction ? t.css("width", r * u.length) : t.css("height", s * u.length), "cover" === w.swipeAnim && (t.css({
-            width: r,
-            height: s
-        }), u[0].style.display = "block"), w.loading || (a(u[p]).addClass("current"), w.onchange(p, u[p], o), j())
+    function b(b) {
+        return a.adaptObject(this, d, b, c, e, "tips")
     }
 
-    function c(a) {
-        return y === !0 ? (event.preventDefault(), !1) : (x = !0, k = "horizontal" === w.direction ? a.pageX : a.pageY, "default" === w.swipeAnim && (t.addClass("drag"), n = t.css("-webkit-transform").replace("matrix(", "").replace(")", "").split(","), n = parseInt("horizontal" === w.direction ? n[4] : n[5])), "cover" === w.swipeAnim && w.drag && u.addClass("drag"), void(m = 1))
-    }
-
-    function d(a) {
-        return y === !0 || x === !1 ? (event.preventDefault(), !1) : (event.preventDefault(), l = "horizontal" === w.direction ? a.pageX : a.pageY, h(), w.drag && !i() && f(), void(m = 2))
-    }
-
-    function e(b) {
-        y === !0 || 2 !== m || (x = !1, l = "horizontal" === w.direction ? b.pageX : b.pageY, "default" !== w.swipeAnim || i() ? "cover" !== w.swipeAnim || i() || (Math.abs(l - k) <= 50 && l >= k && w.drag ? (g(p, "keep-backward"), o = "stay") : Math.abs(l - k) <= 50 && k > l && w.drag ? (g(p, "keep-forward"), o = "stay") : Math.abs(l - k) > 50 && l >= k && w.drag ? (g(p - 1, "backward"), o = "backward") : Math.abs(l - k) > 50 && k > l && w.drag ? (g(p + 1, "forward"), o = "forward") : Math.abs(l - k) > 50 && l >= k && !w.drag ? (g(p - 1, "backward"), o = "backward") : Math.abs(l - k) > 50 && k > l && !w.drag && (g(p + 1, "forward"), o = "forward")) : (t.removeClass("drag"), Math.abs(l - k) <= 50 ? (g(p), o = "stay") : l >= k ? (g(p - 1), o = "backward") : k > l && (g(p + 1), o = "forward")), w.indicator && a(a(".parallax-h-indicator ul li, .parallax-v-indicator ul li").removeClass("current").get(p)).addClass("current"), m = 3)
-    }
-
-    function f() {
-        if ("default" === w.swipeAnim) {
-            var b = n + l - k;
-            "horizontal" === w.direction ? t.css("-webkit-transform", "matrix(1, 0, 0, 1, " + b + ", 0)") : t.css("-webkit-transform", "matrix(1, 0, 0, 1, 0, " + b + ")")
-        } else if ("cover" === w.swipeAnim) {
-            var b = l - k, c = a(u[p - 1]), d = a(u[p + 1]);
-            a(u).css({"z-index": 0}), "horizontal" === w.direction && l >= k ? c.css({
-                "z-index": 2,
-                display: "block",
-                "-webkit-transform": "translateX(" + (b - r) + "px)"
-            }) : "horizontal" === w.direction && k > l ? d.css({
-                "z-index": 2,
-                display: "block",
-                "-webkit-transform": "translateX(" + (r + b) + "px)"
-            }) : "vertical" === w.direction && l >= k ? c.css({
-                "z-index": 2,
-                display: "block",
-                "-webkit-transform": "translateY(" + (b - s) + "px)"
-            }) : "vertical" === w.direction && k > l && d.css({
-                "z-index": 2,
-                display: "block",
-                "-webkit-transform": "translateY(" + (s + b) + "px)"
-            })
-        }
-    }
-
-    function g(b, c) {
-        if (p = b, "default" === w.swipeAnim) {
-            var d = 0;
-            d = "horizontal" === w.direction ? b * -r : b * -s, t.css("horizontal" === w.direction ? {"-webkit-transform": "matrix(1, 0, 0, 1, " + d + ", 0)"} : {"-webkit-transform": "matrix(1, 0, 0, 1, 0, " + d + ")"})
-        } else"cover" === w.swipeAnim && ("keep-backward" === c && w.drag ? (u.removeClass("drag"), a(u[p - 1]).css("horizontal" === w.direction ? {"-webkit-transform": "translateX(-100%)"} : {"-webkit-transform": "translateY(-100%)"})) : "keep-forward" === c && w.drag ? (u.removeClass("drag"), a(u[p + 1]).css("horizontal" === w.direction ? {"-webkit-transform": "translateX(100%)"} : {"-webkit-transform": "translateY(100%)"})) : "forward" === c && w.drag ? (u.removeClass("drag"), a(u[p - 1]).addClass("back"), u[p].style.webkitTransform = "translate(0, 0)") : "backward" === c && w.drag ? (u.removeClass("drag"), a(u[p + 1]).addClass("back"), u[p].style.webkitTransform = "translate(0, 0)") : "forward" !== c || w.drag ? "backward" !== c || w.drag || (t.addClass("animate"), a(u[p + 1]).addClass("back"), a(u[p]).addClass("front").show()) : (t.addClass("animate"), a(u[p - 1]).addClass("back"), a(u[p]).addClass("front").show()));
-        y = !0, setTimeout(function () {
-            y = !1
-        }, 300)
-    }
-
-    function h() {
-        "horizontal" === w.direction ? l >= k ? t.removeClass("forward").addClass("backward") : k > l && t.removeClass("backward").addClass("forward") : l >= k ? t.removeClass("forward").addClass("backward") : k > l && t.removeClass("backward").addClass("forward")
-    }
-
-    function i() {
-        if ("horizontal" === w.direction) {
-            if (l >= k && 0 === p || k >= l && p === q - 1)return !0
-        } else if (l >= k && 0 === p || k >= l && p === q - 1)return !0;
-        return !1
-    }
-
-    function j() {
-        v.css({"-webkit-animation": "none"}), a(".current [data-animation]").each(function (b, c) {
-            var d = a(c), e = d.attr("data-animation"), f = d.attr("data-duration") || 500, g = d.attr("data-timing-function") || "ease", h = d.attr("data-delay") ? d.attr("data-delay") : 0;
-            "followSlide" === e && ("horizontal" === w.direction && "forward" === o ? e = "followSlideToLeft" : "horizontal" === w.direction && "backward" === o ? e = "followSlideToRight" : "vertical" === w.direction && "forward" === o ? e = "followSlideToTop" : "vertical" === w.direction && "backward" === o && (e = "followSlideToBottom")), d.css({
-                "-webkit-animation": e + " " + f + "ms " + g + " " + h + "ms both",
-                animation: e + " " + f + "ms " + g + " " + h + "ms both"
-            })
-        })
-    }
-
-    var k, l, m, n, o, p, q, r, s, t, u, v, w, x = !1, y = !0;
-    a.fn.parallax = function (c) {
-        return w = a.extend({}, a.fn.parallax.defaults, c), this.each(function () {
-            t = a(this), u = t.find(".page"), b()
-        })
-    }, a.fn.parallax.defaults = {
-        direction: "vertical",
-        swipeAnim: "default",
-        drag: !0,
-        loading: !1,
-        indicator: !1,
-        arrow: !1,
-        onchange: function () {
-        },
-        orientationchange: function () {
-        }
-    }, a(document).on("touchstart", ".page", function (a) {
-        c(a.changedTouches[0])
-    }).on("touchmove", ".page", function (a) {
-        d(a.changedTouches[0])
-    }).on("touchend", ".page", function (a) {
-        e(a.changedTouches[0])
-    }).on("webkitAnimationEnd webkitTransitionEnd", ".pages", function () {
-        "stay" !== o && (setTimeout(function () {
-            a(".back").hide().removeClass("back"), a(".front").show().removeClass("front"), t.removeClass("forward backward animate")
-        }, 10), a(u.removeClass("current").get(p)).addClass("current"), w.onchange(p, u[p], o), j())
-    }), a(".page *").on("webkitAnimationEnd", function () {
-        event.stopPropagation()
-    }), a(window).on("load", function () {
-        if (w.loading && (a(".parallax-loading").remove(), y = !1, a(u[p]).addClass("current"), w.onchange(p, u[p], o), j()), w.indicator) {
-            y = !1;
-            var b = "horizontal" === w.direction ? "parallax-h-indicator" : "parallax-v-indicator";
-            a(".wrapper").append("<div class=" + b + "></div>");
-            for (var c = "<ul>", d = 1; q >= d; d++)c += 1 === d ? '<li class="current">' + d + "</li>" : "<li>" + d + "</li>";
-            c += "</ul>", a("." + b).append(c)
-        }
-        w.arrow && (u.append('<span class="parallax-arrow"></span>'), a(u[q - 1]).find(".parallax-arrow").remove())
-    }), window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", function () {
-        (180 === window.orientation || 0 === window.orientation) && w.orientationchange("portrait"), (90 === window.orientation || -90 === window.orientation) && w.orientationchange("landscape")
-    }, !1)
-}(Zepto);
-!function (a) {
-    function b() {
-        return "#" + ("00000" + (16777216 * Math.random() << 0).toString(16)).slice(-6)
-    }
-
-    function c() {
-        return [20 * Math.random() - 10, 20 * Math.random() - 10]
-    }
-
-    function d(a) {
-        var b = a.css("position");
-        return "relative" === b || "fixed" === b || "absolute" === b ? !0 : !1
-    }
-
-    function e(a) {
-        a.preventDefault()
-    }
-
-    function f(b) {
-        var c = this;
-        return a.isArray(c) && a(this).length || (c = a("body")), c.each(function () {
-            var d = a(this), e = d.data("fz.cover");
-            e || d.data("fz.cover", e = new h(this, a.extend({}, g, "object" == typeof b && b, d.data()))), "string" == typeof b && e[b].call(c)
-        })
-    }
-
-    var g = {
-        trigger: null,
-        dismiss: null,
-        duration: 1e3,
-        startPos: "source",
-        offset: [0, 0],
-        expandAxis: "y",
-        isFloat: !0,
-        zIndex: 999,
+    var c = '<div class="ui-poptips ui-poptips-<%=type%>"><div class="ui-poptips-cnt"><i></i><%=content%></div></div>', d = {
+        content: "",
+        stayTime: 1e3,
+        type: "info",
         callback: function () {
         }
-    }, h = function (b, c) {
-        this.element = a(b), this.trigger = a(c.trigger), this.dismiss = a(c.dismiss), this.option = c, this.initMask(), this.render(), this._isShown = !1, this._isDismiss = !1, this._bindTrigger(), this.position || (this.position = {}, this.position.screenWidth = document.documentElement.clientWidth, this.position.screenHeight = document.documentElement.clientHeight)
+    }, e = function (b, c, e) {
+        var f = this;
+        this.element = a(b), this._isFromTpl = e, this.elementHeight = a(b).height(), this.option = a.extend(d, c), a(b).css({"-webkit-transform": "translateY(-" + this.elementHeight + "px)"}), setTimeout(function () {
+            a(b).css({"-webkit-transition": "all .5s"}), f.show()
+        }, 20)
     };
-    h.prototype = {
-        initMask: function () {
-            this._mask = a("<div></div>"), this._mask.css({
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: 100,
-                height: 100,
-                "z-index": -1,
-                "-webkit-transform": "scale(0)"
-            })
-        }, render: function () {
-            this._mask.appendTo(this.element), d(this.element) || this.element.css({
-                position: "relative",
-                overflow: "hidden"
-            })
-        }, setConfig: function (b) {
-            return this._isShown || (b = a.extend(b, this.currentTrigger.data()), this.currentOption = b), this
-        }, show: function (a) {
-            var d = this, e = this.currentOption;
-            if (!this._isShown && (this.currentTrigger || a)) {
-                a && (this.currentTrigger = a), e.callback("show", d), this._preventDefault(), d._isDismiss = !1, this._isShown = !0;
-                var f = c(), g = 2;
-                e.isFloat && (this._floatTrigger(), this.currentTrigger.css({zIndex: e.zIndex + 1}));
-                var h = this._getMaskPos(e.startPos, e.expandAxis), i = "x" == e.expandAxis ? "scale(0,1)" : "y" == e.expandAxis ? "scale(1,0)" : "scale(0,0)";
-                this._mask.css({
-                    left: h[0] + e.offset[0],
-                    top: h[1] + e.offset[1],
-                    background: e.background ? e.background : b(),
-                    "z-index": e.zIndex,
-                    "-webkit-transform": i + " skew(" + f[0] + "deg," + f[1] + "deg)"
-                }), this._aniMask(e.duration, e.offset, g)
-            }
-            return this
-        }, hide: function () {
-            var a = this;
-            a.option.callback("hide", a), this._isShown && (this._isDismiss = !0, this._mask.css({"-webkit-transform": this._originTransform}))
-        }, hidden: function () {
-            this._isShown = !1, this._isDismiss = !1, this._mask.css({"-webkit-transition": "none"}), this._relaseDefault(), this.currentTrigger.css(this._triggerOriginCss)
-        }, _bindTrigger: function () {
+    e.prototype = {
+        show: function () {
             var b = this;
-            this.trigger.on("tap", function () {
-                return b._isShown || (b.currentTrigger = a(this)), b.setConfig(a.extend({}, a(this).data(), b.option)).show(a(this)), !1
-            }), this.dismiss.on("tap", function () {
-                return b.dismiss = a(this), b.hide(), !1
-            }), this._mask[0].addEventListener("webkitTransitionEnd", function () {
-                b._isShown && !b._isDismiss ? b.option.callback("shown", b) : (b.hidden(), b.option.callback("hidden", b))
-            }, !1)
-        }, _preventDefault: function () {
-            document.addEventListener("mousewheel", e, !1), document.body.addEventListener("touchmove", e, !1), document.documentElement.addEventListener("touchmove", e, !1)
-        }, _relaseDefault: function () {
-            document.removeEventListener("mousewheel", e, !1), document.body.removeEventListener("touchmove", e, !1), document.documentElement.removeEventListener("touchmove", e, !1)
-        }, _floatTrigger: function () {
-            this._triggerOriginCss = {
-                position: this.currentTrigger.css("position"),
-                "z-index": this.currentTrigger.css("z-index")
-            }, d(this.currentTrigger) || this.currentTrigger.css({position: "relative"})
-        }, _getMaskPos: function (a, b) {
-            this.position || (this.position = {}, this.position.screenWidth = document.documentElement.clientWidth, this.position.screenHeight = document.documentElement.clientHeight), "x" == b ? this._mask.css({height: this.position.screenHeight}) : "y" == b && this._mask.css({width: this.position.screenWidth}), this.position.scrollTop = document.body.scrollTop, this.position.scrollLeft = document.body.scrollLeft, this.position.offsetTop = this.element.offset().top, this.position.offsetLeft = this.element.offset().left, this.position.triggerLeft = this.currentTrigger.offset().left, this.position.triggerTop = this.currentTrigger.offset().top, this.position.triggerHeight = this.currentTrigger.height(), this.position.triggerWidth = this.currentTrigger.width();
-            var c = parseInt(this._mask.css("width")), d = parseInt(this._mask.css("height")), e = this.position.scrollLeft - this.position.offsetLeft + this.position.screenWidth / 2 - c / 2, f = 0;
-            return "top" == a ? f = this.position.scrollTop - this.position.offsetTop - d / 2 : "bottom" == a ? f = this.position.scrollTop - this.position.offsetTop + this.position.screenHeight - d / 2 : "center" == a ? f = this.position.scrollTop - this.position.offsetTop + this.position.screenHeight / 2 - d / 2 : (e = this.position.triggerLeft - this.position.offsetLeft + this.position.triggerWidth / 2 - c / 2, f = this.position.triggerTop - this.position.offsetTop + this.position.triggerHeight / 2 - d / 2), [e, f]
-        }, _aniMask: function (a, b, c) {
-            var d = this;
-            this._originTransform = this._mask.css("-webkit-transform");
-            var e = Math.ceil(this.position.screenWidth / parseInt(this._mask.css("width"))) * c, f = Math.ceil(this.position.screenHeight / parseInt(this._mask.css("height"))) * c;
-            setTimeout(function () {
-                d._mask.css({
-                    "-webkit-transition": "all " + a + "ms",
-                    "-webkit-transform": "scale(" + e + "," + f + ") skew(0deg,0deg)"
-                })
-            }, 200)
+            b.element.trigger(a.Event("tips:show")), this.element.css({"-webkit-transform": "translateY(0px)"}), b.option.stayTime > 0 && setTimeout(function () {
+                b.hide()
+            }, b.option.stayTime)
+        }, hide: function () {
+            var b = this;
+            b.element.trigger(a.Event("tips:hide")), this.element.css({"-webkit-transform": "translateY(-" + this.elementHeight + "px)"}), setTimeout(function () {
+                b._isFromTpl && b.element.remove()
+            }, 500)
         }
-    }, a.fn.cover = a.cover = f
+    }, a.fn.tips = a.tips = b
 }(window.Zepto);
