@@ -35,36 +35,62 @@
     <ul class="ui-grid-trisect ui-flex ui-flex-align-stretch">
         <li>
             <div class="ui-border back-white" style="height: 100%">
-                <div class="text-center padding-vertical-s">
-                    <h4 class="ui-nowrap-multi">长书名长书名长书名</h4>
+                <div class="text-center padding-vertical-m">
+                    <h5 class="ui-nowrap">TISSOT</h5>
                 </div>
                 <div class="ui-grid-trisect-img">
-                    <span style="background-image:url(http://placeholder.qiniudn.com/190x284)"></span>
+                    <span style="background-image:url(img/recommand/rTissot1.jpg)"></span>
                 </div>
             </div>
         </li>
         <li>
-            <div class="ui-border back-white" style="height:inherit">
-                <div class="text-center padding-vertical-s">
-                    <h4 class="ui-nowrap-multi">长书名长长书</h4>
+            <div class="ui-border back-white">
+                <div class="text-center padding-vertical-m">
+                    <h5 class="ui-nowrap">Red Wing</h5>
                 </div>
                 <div class="ui-grid-trisect-img">
-                    <span style="background-image:url(http://placeholder.qiniudn.com/190x284)"></span>
+                    <span style="background-image:url(img/recommand/rRedWing.jpg)"></span>
                 </div>
             </div>
         </li>
         <li>
-            <div class="ui-border back-white" style="height: 100%">
-                <div class="text-center padding-vertical-s">
-                    <h4 class="ui-nowrap-multi">长书名长书名长书名长书</h4>
+            <div class="ui-border back-white">
+                <div class="text-center padding-vertical-m">
+                    <h5 class="ui-nowrap">Tommy</h5>
                 </div>
                 <div class="ui-grid-trisect-img">
-                    <span style="background-image:url(http://placeholder.qiniudn.com/190x284)"></span>
+                    <span style="background-image:url(img/recommand/rTommy.jpg)"></span>
                 </div>
             </div>
         </li>
     </ul>
 </section>
+
+<section class="ui-panel">
+    <h2 class="ui-arrowlink"><span>六一喂食计划</span><span class="ui-panel-title-tips">更多</span></h2>
+    <div class="hoTopic-head" style="background-image: url(img/section/t1.png);">
+        <div class="arrow-up hoTopic-head-arrow">
+        </div>
+    </div>
+    <!-- html -->
+    <div class="hoTopic-wapper">
+        <ul class="hoTopic-scroller">
+            <li style="background:url(img/food/f1.jpg)"
+                onclick="javascript:window.location.href='/h/v1/user/login'"></li>
+            <li style="background:url(img/food/f2.jpg)"></li>
+            <li style="background:url(img/food/f3.jpg)"></li>
+            <li style="background:url(img/food/f4.jpg)"></li>
+            <li style="background:url(img/food/f5.jpg)"></li>
+            <li style="background:url(img/food/f1.jpg)"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+</section>
+
 </body>
 <script type="text/javascript" src="js/frozen.js"></script>
 <script type="text/javascript">
@@ -83,13 +109,20 @@
         slider.on('scrollEnd', function (cruPage) {
             console.log(cruPage)
         });
+
+        $('.ui-searchbar').tap(function () {
+            $('.ui-searchbar-wrap').addClass('focus');
+            $('.ui-searchbar-input input').focus();
+        });
+        $('.ui-searchbar-cancel').tap(function () {
+            $('.ui-searchbar-wrap').removeClass('focus');
+        });
+
+        var scroll = new fz.Scroll('.hoTopic-wapper', {
+            scrollY: false,
+            scrollX: true
+        });
     })();
-    $('.ui-searchbar').tap(function () {
-        $('.ui-searchbar-wrap').addClass('focus');
-        $('.ui-searchbar-input input').focus();
-    });
-    $('.ui-searchbar-cancel').tap(function () {
-        $('.ui-searchbar-wrap').removeClass('focus');
-    });
+
 </script>
 </html>
