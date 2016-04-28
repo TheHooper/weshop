@@ -23,7 +23,7 @@
 
 .hoTopic-head {
     position: relative;
-    height: 12em;
+    padding-top: 62.5%;
     filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
     -moz-background-size: 100% 100%;
     background-size: 100% 100%;
@@ -41,9 +41,8 @@
 
 .hoTopic-wapper {
     width: 100%;
-    height: 4em;
     margin: 0 0;
-    padding: 5px 0;
+    padding-top: 5px;
     overflow: hidden;
     background-color: #ffffff;
 }
@@ -51,18 +50,20 @@
 .hoTopic-scroller {
     display: block;
     white-space: nowrap;
-    width: 999999px;
+    width: 9999px;
     overflow: auto;
 }
 
 .hoTopic-scroller li {
     width: 80px;
     height: 80px;
+    line-height: inherit;
     margin: 3px;
     background: #50eeff;
     border: 1px solid #e0e0e0;
     display: inline-block;
 }
+
 /**
    util
    ==========================
@@ -78,6 +79,16 @@
     border-right: 15px solid transparent;
     border-bottom: 15px solid #fff;
 }
+
+.price {
+    font-size: 14px;
+    color: #ff525e;
+}
+
+.min-height-100 {
+    min-height: 100%;
+    height: auto;
+}
 /**
    color
    ===========================
@@ -88,6 +99,10 @@
 
 .back-blue {
     background-color: #00a5e0;
+}
+
+.back-grey {
+    background-color: #f2f3f5;
 }
 
 /**
@@ -168,6 +183,26 @@
 
 .padding-vertical-xl {
     padding: 40px 0;
+}
+
+.padding-horizontal-xs {
+    padding: 0 5px;
+}
+
+.padding-horizontal-s {
+    padding: 0 10px;
+}
+
+.padding-horizontal-m {
+    padding: 0 20px;
+}
+
+.padding-horizontal-l {
+    padding: 0 30px;
+}
+
+.padding-horizontal-xl {
+    padding: 0 40px;
 }
 
 .padding-top-s {

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title>ho目录</title>
+    <link href="css/frozen.css" rel="stylesheet" type="text/css"/>
+    <link href="css/homall.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="js/lib/zeptojs/zepto.min.js"></script>
+</head>
+<style>
+    .ui-scroller {
+        width: auto;
+        height: 400px;
+        overflow: hidden;
+    }
+
+    .ui-scroller li {
+        padding: 10px 0;
+        border: 1px solid #ccc;
+    }
+
+    .ul-cat-active {
+        background-color: white;
+        border-right: none !important;
+    }
+</style>
+<body>
+<!-- header -->
+<div class="ui-searchbar-wrap ui-border-b">
+    <a href="/h/index"><i id="headerBarCat" class="ui-icon-prev"></i></a>
+    <div class="ui-searchbar ui-border-radius">
+        <i class="ui-icon-search"></i>
+        <div class="ui-searchbar-text">搜索商品</div>
+        <div class="ui-searchbar-input"><input value="" type="text" placeholder="商品名" autocapitalize="off"></div>
+        <i class="ui-icon-close"></i>
+    </div>
+    <button class="ui-searchbar-cancel">搜索</button>
+</div>
+<!-- header E -->
+
+<!-- cat body -->
+<ul class="ui-row  text-center">
+    <!-- father cat -->
+    <li class="ui-col ui-col-33 back-grey">
+        <div class="hoTopic-vertical-wapper">
+            <div class="ui-scroller">
+                <ul>
+                    <li class="ul-cat-active">服饰</li>
+                    <li>鞋靴</li>
+                    <li>美肤</li>
+                    <li>饰品</li>
+                    <li>食品</li>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                    <li>6</li>
+                    <li>7</li>
+                    <li>8</li>
+                    <li>9</li>
+                    <li>7</li>
+                    <li>8</li>
+                    <li>9</li>
+                    <li>7</li>
+                    <li>8</li>
+                    <li>9</li>
+                    <li>7</li>
+                    <li>8</li>
+                    <li>9</li>
+                </ul>
+            </div>
+        </div>
+    </li>
+    <!-- father cat E-->
+
+    <!-- son cat -->
+    <li id="sonCat" class="ui-col ui-col-67 back-white">
+    </li>
+    <!-- son cat -->
+</ul>
+<!-- car body E-->
+
+</body>
+<script type="text/javascript" src="js/frozen.js"></script>
+<script type="text/javascript">
+    (function () {
+
+        var initHeight = function () {
+            var winHeight = $(window).height();
+            var searchHeight = $(".ui-searchbar-wrap").height();
+            var scrollerHeight = winHeight - searchHeight - 2;
+            $(".ui-scroller").height(scrollerHeight);
+            $("#sonCat").height(scrollerHeight + 2);
+        }
+
+        var initSearchBar = function () {
+            $('.ui-searchbar').tap(function () {
+                $('.ui-searchbar-wrap').addClass('focus');
+                $('.ui-searchbar-input input').focus();
+            });
+            $('.ui-searchbar-cancel').tap(function () {
+                $('.ui-searchbar-wrap').removeClass('focus');
+            });
+        }
+
+        var initScroll = function () {
+            var scroll = new fz.Scroll('.ui-scroller', {
+                scrollY: true
+            });
+        }
+
+        var parentCatClickEve = function () {
+            console.log(" run ---");
+            $(".ui-scroller li").tap(function (e) {
+                $(".ul-cat-active").removeClass("ul-cat-active");
+                $(e.target).addClass("ul-cat-active");
+            })
+            //change the sonCat method
+        }
+
+        function init() {
+            initHeight();
+            initSearchBar();
+            initScroll();
+            parentCatClickEve();
+        }
+
+        init();
+    })();
+
+</script>
+</html>

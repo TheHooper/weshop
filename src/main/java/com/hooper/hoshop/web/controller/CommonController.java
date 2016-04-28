@@ -20,4 +20,14 @@ public class CommonController {
     public String index() {
         return "index";
     }
+
+    /**
+     * 类别目录
+     *
+     * @return
+     */
+    @RequestMapping("category")
+    public String category() {
+        return "category";
+    }
 }
