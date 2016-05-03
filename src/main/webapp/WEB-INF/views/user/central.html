@@ -105,7 +105,7 @@
 
 <!-- footer -->
 <div class="ui-btn-wrap text-center margin-top-s">
-    <button class="ui-btn-lg">
+    <button id="logout" class="ui-btn-lg">
         注销
     </button>
 </div>
@@ -124,7 +124,24 @@
             x_colors: 'random'
         });
 
+        var logoutEvent =
+
         $("#avatar-section").css('background', 'url("' + avatarBackground.png() + '")');
+
+        $("#logout").tap(function () {
+            var dia = $.dialog({
+                title: '<h3 style="text-align: center">注销</h3>',
+                content: '<h4 style="text-align: center">请问真的要注销吗?</h4>',
+                button: ["取消", "确认"]
+            });
+
+            dia.on("dialog:action", function (e) {
+                console.log(e.index)
+            });
+            dia.on("dialog:hide", function (e) {
+                console.log("dialog hide")
+            });
+        })
     })();
 </script>
 </html>
