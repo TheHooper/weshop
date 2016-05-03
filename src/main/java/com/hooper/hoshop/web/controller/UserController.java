@@ -32,4 +32,9 @@ public class UserController {
     public String forgetPasswordView() {
         return "entry/forgetPassword";
     }
+
+    @RequestMapping(value = "/central", method = {RequestMethod.POST, RequestMethod.GET})
+    public String central() {
+        return "user/central";
+    }
 }

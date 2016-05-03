@@ -113,6 +113,14 @@
     text-align: center;
 }
 
+.block-center-parent {
+    float: left;
+}
+
+.block-center {
+    position: relative;
+    left: -50%;
+}
 .margin-vertical-s {
     margin: 10px 0;
 }

@@ -27,13 +27,93 @@
 <!-- header E -->
 
 <!-- tool -->
-
+<div class="ui-row ui-whitespace back-white text-center">
+    <div class="ui-col ui-col-33"><i class="ui-icon-unfold" style="font-size: 1.5em"><span
+            style="font-size: 0.8em">综合</span></i></div>
+    <div class="ui-col ui-col-33">
+        <i onclick="sort(this)" class="ui-icon-sort-small sortable" value="SELL" style="font-size: 1.5em">
+            <span style="font-size: 0.8em">销量</span>
+        </i>
+    </div>
+    <div class="ui-col ui-col-33">
+        <i onclick="sort(this)" class="ui-icon-sort-small sortable" value="PRICE" style="font-size: 1.5em">
+            <span style="font-size: 0.8em">价格</span>
+        </i>
+    </div>
+</div>
 <!-- too E-->
 
+<section class="ui-panel padding-top-s">
+    <div>
+        <ul class="ui-grid-halve">
+            <li>
+                <div class="ui-border">
+                    <div class="ui-grid-trisect-img">
+                        <span style="background-image:url(http://placeholder.qiniudn.com/190x284)"></span>
+                    </div>
+                    <div class="padding-horizontal-xs">
+                        <h4 class="ui-nowrap-multi">长书名长书名长书名长书名长书名长书名长书名</h4>
+                        <h5 class="ui-nowrap price">&yen;2100 </h5>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="ui-border">
+                    <div class="ui-grid-trisect-img">
+                        <span style="background-image:url(http://placeholder.qiniudn.com/190x284)"></span>
+                    </div>
+                    <div class="padding-horizontal-xs">
+                        <h4 class="ui-nowrap-multi">长书名长书名长书名长书名长书名长书名长书名</h4>
+                        <h5 class="ui-nowrap price">&yen;2200 </h5>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="ui-border">
+                    <div class="ui-grid-trisect-img">
+                        <span style="background-image:url(http://placeholder.qiniudn.com/190x284)"></span>
+                    </div>
+                    <div class="padding-horizontal-xs">
+                        <h4 class="ui-nowrap-multi">长书名长书名长书名长书名长书名长书名长书名</h4>
+                        <h5 class="ui-nowrap price">&yen;220 </h5>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="ui-border">
+                    <div class="ui-grid-trisect-img">
+                        <span style="background-image:url(http://placeholder.qiniudn.com/190x284)"></span>
+                    </div>
+                    <div class="padding-horizontal-xs">
+                        <h4 class="ui-nowrap-multi">长书名长书名长书名长书名长书名长书名长书名</h4>
+                        <h5 class="ui-nowrap price">&yen;200 </h5>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>
 
 </body>
 <script type="text/javascript" src="../../js/frozen.js"></script>
 <script type="text/javascript">
+    function sort(target) {
+        $(".sortable").each(function (i, e) {
+            if (e != target) {
+                $(e).removeClass("ui-icon-asc");
+                $(e).removeClass("ui-icon-desc");
+            }
+        });
+        //asc to desc: cur desc
+        if ($(target).hasClass("ui-icon-asc")) {
+            $(target).removeClass("ui-icon-asc");
+            $(target).addClass("ui-icon-desc");
+        } else {
+            // to asc:cur asc
+            $(target).addClass("ui-icon-asc");
+        }
+
+    }
     (function () {
 
 //        var initHeight = function () {
