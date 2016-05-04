@@ -14,4 +14,9 @@ public class GoodController {
     public String goodsView() {
         return "/goods/goodsList";
     }
+
+    @RequestMapping("/detail")
+    public String goodsDetailView() {
+        return "/goods/goods";
+    }
 }

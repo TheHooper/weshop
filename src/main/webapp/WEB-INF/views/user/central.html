@@ -11,7 +11,8 @@
 </head>
 <body>
 <div id="header" class="header">
-    <h2 class="ui-flex-pack-center">个人中心</h2>
+    <a href="/h/index" class="header-arrow-l"><i id="headerBarCat" class="ui-icon-prev"></i></a>
+    <h2>个人中心</h2>
 </div>
 
 <!-- avatar -->
@@ -83,6 +84,14 @@
             <h4 class="ui-nowrap">我的收藏</h4>
         </div>
     </li>
+    <li>
+        <div class="ui-list-icon">
+            <span class="ui-icon-comment"></span>
+        </div>
+        <div class="ui-list-info ui-border-t">
+            <h4 class="ui-nowrap">我的评价</h4>
+        </div>
+    </li>
     <li class="ui-border-t">
         <div class="ui-list-icon">
             <span class="ui-icon-express"></span>
@@ -123,8 +132,6 @@
             seed: null,
             x_colors: 'random'
         });
-
-        var logoutEvent =
 
         $("#avatar-section").css('background', 'url("' + avatarBackground.png() + '")');
 

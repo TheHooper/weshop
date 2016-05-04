@@ -3326,6 +3326,7 @@ h6, .ui-txt-tips {
 }
 
 .ui-tab-nav li.current {
+  font-size: 18px;
   color: #00a5e0;
   border-bottom: 2px #00a5e0 solid;
 }

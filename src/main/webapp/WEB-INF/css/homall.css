@@ -2,6 +2,15 @@
    object
    ==========================
 **/
+.header-fixed {
+    position: fixed;
+    width: 100%;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    color: #252525;
+    font-size: 16px;
+}
 .header {
     text-align: center;
     position: relative;
@@ -21,6 +30,11 @@
     min-width: 320px;
 }
 
+.header-arrow-l {
+    position: absolute;
+    left: 3px;
+    top: -2px;
+}
 .hoTopic-head {
     position: relative;
     padding-top: 62.5%;
@@ -35,10 +49,13 @@
     left: 1.5em;
 }
 
+.hoTopic-footer {
+    color: #e6e6e6 !important;
+    background-color: rgba(0, 0, 0, 0.4);
+}
 .hoTopic-body {
 
 }
-
 .hoTopic-wapper {
     width: 100%;
     margin: 0 0;
@@ -64,14 +81,15 @@
     display: inline-block;
 }
 
+.list-title {
+    font-weight: 700;
+    color: #a5a7a9;
+    padding-right: 10px;
+}
 /**
    util
    ==========================
 **/
-.img-radius {
-
-}
-
 .arrow-up {
     width: 0;
     height: 0;
@@ -98,9 +116,12 @@
 }
 
 .back-blue {
-    background-color: #00a5e0;
+    background-color: #18b4ed;
 }
 
+.back-grey-soft {
+    background-color: #fdfdfe;
+}
 .back-grey {
     background-color: #f2f3f5;
 }
