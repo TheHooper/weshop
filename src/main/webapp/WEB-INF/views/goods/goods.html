@@ -13,16 +13,16 @@
 <!-- header part -->
 <header id="header" class="ui-header">
     <div class="ui-tab" id="tab1">
-        <ul class="ui-tab-nav ui-border-b">
-            <li class="current">商品</li>
-            <li>详情</li>
-            <li>评价</li>
+        <ul id="topTap" class="ui-tab-nav ui-border-b">
+            <li class="current" value="0">商品</li>
+            <li value="1">详情</li>
+            <li value="2">评价</li>
         </ul>
     </div>
 </header>
 <!-- header part end -->
 <!-- footer part -->
-<footer class="ui-footer" style="height: 48px">
+<footer id="buy-footer" class="ui-footer" style="height: 48px">
     <div class="ui-row-flex ui-flex-align-center text-center hoTopic-footer" style="height: 100%">
         <div class="ui-col ui-col-1" style="height: 100%">
             <span class="ui-icon-star" style="line-height: 25px;color: #e6e6e6"></span>
@@ -42,7 +42,8 @@
 </footer>
 <!-- footer part end-->
 
-<section class="ui-container">
+<!-- 商品 页面-->
+<section id="goods-section" class="ui-container">
     <!-- goods header -->
     <div class="back-white">
         <!-- slider -->
@@ -154,8 +155,19 @@
                 <div class="ui-col ui-col-1">
                     <span class="list-title">数量</span>
                 </div>
-                <div id="NUM" class="ui-col ui-col-5 ui-nowrap">
+                <div id="numTip" class="ui-col ui-col-5 ui-icon-unfold ui-right-icon ">
                     20
+                </div>
+            </div>
+        </li>
+        <li id="numSelector" style="display: none;">
+            <div class="ui-row-flex">
+                <div class="ui-col ui-col-1">
+                </div>
+                <div class="ui-col ui-col-5">
+                    <input type='button' value='-' class='num-btn' field='quantity'/>
+                    <input id="num" type='text' name='num' value='1' class='num'/>
+                    <input type='button' value='+' class='num-btn' field='quantity'/>
                 </div>
             </div>
         </li>
@@ -183,14 +195,14 @@
     <!-- buy ul end -->
     <!-- detail -->
     <ul class="ui-list ui-list-one  ui-list-link ui-border-tb margin-top-m">
-        <li>
+        <li id="detail-arrow-link">
             <span class="list-title">商品详情</span>
         </li>
     </ul>
     <!-- detail end -->
     <!-- rate -->
     <ul class="ui-list ui-list-text  ui-border-tb margin-top-m">
-        <li class="ui-arrowlink">
+        <li id="rate-arrow-link" class="ui-arrowlink">
             <h4 class="list-title">商品评价</h4>
             <div id="rateNum" class="ui-txt-info txt-m margin-right-m">5条评价</div>
         </li>
@@ -260,13 +272,87 @@
     </div>
     <!-- rate end -->
 </section>
+<!-- 商品 页面 end-->
+
+<!-- 详情 页面-->
+<section id="detail-section" class="ui-container" style="display: none">
+    detail
+</section>
+<!-- 详情 页面 end-->
+
+<!-- 评价 页面-->
+<section id="rate-section" class="ui-container" style="display: none">
+    rate
+</section>
+<!-- 评价 页面 end-->
 
 </body>
+<link href="../../css/all-animation.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../js/frozen.js"></script>
 <script type="text/javascript">
     (function () {
+        var tapEvent = function () {
+            function toDeatil() {
+                $("#goods-section").css("display", "none");
+                $("#rate-section").css("display", "none");
+                $("#detail-section").addClass('enter-right-bounce');
+                $("#detail-section").css("display", "block");
+                $("#buy-footer").addClass("rotate-out");
+                setTimeout(function () {
+                    $("#buy-footer").css("display", "none");
+                }, "1500");
+            }
+
+            function toRate() {
+                $("#goods-section").css("display", "none");
+                $("#detail-section").css("display", "none");
+                $("#rate-section").addClass('enter-right-bounce');
+                $("#rate-section").css("display", "block");
+                $("#buy-footer").addClass("rotate-out");
+                setTimeout(function () {
+                    $("#buy-footer").css("display", "none");
+                }, "1500");
+            }
+
+            function toGoods() {
+                $("#detail-section").css("display", "none");
+                $("#rate-section").css("display", "none");
+                $("#goods-section").addClass('enter-right-bounce');
+                $("#goods-section").css("display", "block");
+                $("#buy-footer").removeClass("rotate-out");
+                $("#buy-footer").addClass("flip-bottom");
+                setTimeout(function () {
+                    $("#buy-footer").css("display", "block");
+                }, "1000");
+            }
+
+            $('#topTap').children("li").tap(function () {
+                var index = $(this).val();
+                if (index == 1) {
+                    toDeatil();
+                } else if (index == 2) {
+                    toRate();
+                } else {
+                    toGoods();
+                }
+            })
+            $('#detail-arrow-link').tap(function () {
+                var lis = $('#topTap').children("li");
+                lis.removeClass("current");
+                var liArr = lis.toArray();
+                $(liArr[1]).addClass("current");
+                toDeatil();
+            });
+            $('#rate-arrow-link').tap(function () {
+                var lis = $('#topTap').children("li");
+                lis.removeClass("current");
+                var liArr = lis.toArray();
+                $(liArr[2]).addClass("current");
+                toRate();
+            });
+        }
+
         var initSliderData = function () {
-//            $("#slider .ui-slider-content li").remove();
             var size = $("#slider .ui-slider-content li").length;
             var li = '<li><span style="background-image:url(http://placeholder.qiniudn.com/640x400)"></span></li>';
             var size = size + 1;
@@ -311,6 +397,18 @@
             $("#selectedTip").text(tipString);
         }
 
+        var numEvent = function () {
+            $('#numTip').tap(function () {
+                if ($('#numSelector').css("display") == "none") {
+                    $('#numSelector').css("display", "-webkit-box");
+                } else {
+                    $('#numSelector').css("display", "none");
+                }
+            })
+        }
+
+        tapEvent();
+        numEvent();
         attrSelectEvent();
         initSliderData();
 
