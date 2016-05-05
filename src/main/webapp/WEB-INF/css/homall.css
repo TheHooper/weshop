@@ -86,6 +86,50 @@
     color: #a5a7a9;
     padding-right: 10px;
 }
+
+.comment-item-star {
+    display: inline-block;
+    overflow: hidden;
+    width: 75px;
+    height: 11px;
+    margin-top: 10px;
+    background: url('../img/rate/comment-star.png') repeat-x 0 -11px;
+    background-size: 15px 22px;
+}
+
+.real-star {
+    display: inline-block;
+    height: 26px;
+    background: url('../img/rate/comment-star.png') repeat-x 0 0;
+    background-size: 15px 22px;
+}
+
+.comment-stars-width1 {
+    width: 20%;
+}
+
+.comment-stars-width2 {
+    width: 40%;
+}
+
+.comment-stars-width3 {
+    width: 60%;
+}
+
+.comment-stars-width4 {
+    width: 80%;
+}
+
+.comment-stars-width5 {
+    width: 100%;
+}
+
+.comment-item-img {
+    width: 65px;
+    height: 65px;
+    overflow: hidden;
+    border-radius: 4px;
+}
 /**
    util
    ==========================
@@ -98,19 +142,56 @@
     border-bottom: 15px solid #fff;
 }
 
+.attr-span {
+    height: 30px;
+    line-height: 30px;
+    padding: 4px;
+    text-align: center;
+    font-size: 10px;
+    color: #a4a6a8;
+    border: 1px solid #eeeeee;
+    border-radius: 5px;
+    width: 85%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.attr-span.active {
+    color: #18b4ed;
+    border: 1px solid #18b4ed;
+}
+/**
+   color & font
+   ===========================
+**/
+
 .price {
     font-size: 14px;
     color: #ff525e;
 }
 
-.min-height-100 {
-    min-height: 100%;
-    height: auto;
+.price-fade {
+    margin-left: 5px;
+    font-size: 14px;
+    color: #7d7e7e;
 }
-/**
-   color
-   ===========================
-**/
+
+.txt-m {
+    font-size: 14px;
+}
+
+.txt-lg {
+    font-size: 20px;
+}
+
+.txt-xl {
+    font-size: 25px;
+}
+
+.txt-xxl {
+    font-size: 30px;
+}
 .back-white {
     background-color: white;
 }
@@ -132,15 +213,6 @@
 **/
 .text-center {
     text-align: center;
-}
-
-.block-center-parent {
-    float: left;
-}
-
-.block-center {
-    position: relative;
-    left: -50%;
 }
 .margin-vertical-s {
     margin: 10px 0;
@@ -198,6 +270,9 @@
     margin-right: 40px;
 }
 
+.padding-fix {
+    padding: 0 !important;
+}
 .padding-vertical-s {
     padding: 10px 0;
 }
@@ -264,4 +339,20 @@
 
 .padding-right-xl {
     padding-right: 40px;
+}
+
+.padding-left-s {
+    padding-left: 10px;
+}
+
+.padding-left-m {
+    padding-left: 20px;
+}
+
+.padding-left-l {
+    padding-left: 30px;
+}
+
+.padding-left-xl {
+    padding-left: 40px;
 }

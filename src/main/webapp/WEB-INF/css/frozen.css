@@ -1039,6 +1039,9 @@ h6, .ui-txt-tips {
   -webkit-box-flex: 4;
 }
 
+.ui-row-flex .ui-col-5 {
+  -webkit-box-flex: 5;
+}
 .ui-row-flex-ver {
   -webkit-box-orient: vertical;
 }
