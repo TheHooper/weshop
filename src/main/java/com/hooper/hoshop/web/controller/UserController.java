@@ -37,4 +37,9 @@ public class UserController {
     public String central() {
         return "user/central";
     }
+
+    @RequestMapping("carts")
+    public String shoppingCarts() {
+        return "/user/carts";
+    }
 }
