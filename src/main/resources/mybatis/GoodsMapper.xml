@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hooper.hoshop.dao.GoodsMapper">
+    <resultMap id="BaseResultMap" type="com.hooper.hoshop.entity.Goods">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="intro" property="intro" jdbcType="VARCHAR"/>
+        <result column="goods_list_pic" property="goodsListPic" jdbcType="VARCHAR"/>
+        <result column="goods_main_pic" property="goodsMainPic" jdbcType="VARCHAR"/>
+        <result column="goods_second_pic" property="goodsSecondPic" jdbcType="VARCHAR"/>
+        <result column="goods_thirth_pic" property="goodsThirthPic" jdbcType="VARCHAR"/>
+        <result column="price" property="price" jdbcType="DECIMAL"/>
+        <result column="o_price" property="oPrice" jdbcType="DECIMAL"/>
+        <result column="d_charge" property="dCharge" jdbcType="DECIMAL"/>
+        <result column="status" property="status" jdbcType="BIT"/>
+        <result column="orginal_num" property="orginalNum" jdbcType="INTEGER"/>
+        <result column="stock" property="stock" jdbcType="INTEGER"/>
+        <result column="saled_num" property="saledNum" jdbcType="INTEGER"/>
+        <result column="detail_id" property="detailId" jdbcType="INTEGER"/>
+        <result column="c_time" property="cTime" jdbcType="BIGINT"/>
+        <result column="u_time" property="uTime" jdbcType="BIGINT"/>
+        <result column="is_del" property="isDel" jdbcType="BIT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, title, intro, goods_list_pic, goods_main_pic, goods_second_pic, goods_thirth_pic,
+        price, o_price, d_charge, status, orginal_num, stock, saled_num, detail_id, c_time,
+        u_time, is_del
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from h_goods
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectListPagedWithoutPulloff" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        g.id, title, intro, goods_list_pic AS goodsListPic, goods_main_pic AS goodsMainPic, goods_second_pic AS
+        goodsSecondPic,
+        goods_thirth_pic AS goodsThirthPic,price, o_price AS oPrice, d_charge AS dCharge, status, orginal_num AS
+        orginalNum, stock,
+        saled_num AS saledNum, detail_id AS detailId, g.c_time AS cTime, g.u_time AS uTime, g.is_del AS isDel
+        from h_goods g
+        <if test="catId != null">
+            INNER JOIN h_goods_cats gc ON gc.`goods_id` = g.`id` AND (gc.`cats` IN ( SELECT id FROM h_cats WHERE
+            parent_id = #{catId}) OR gc.`cats` = #{catId})
+        </if>
+        where is_del = 0
+        AND status != 0
+        <if test="title != null">
+            AND title like concat(concat('%',#{title}),'%')
+        </if>
+        ORDER BY
+        <if test="time == 1">
+            c_time
+        </if>
+        <if test="price == 1">
+            price
+        </if>
+        <if test="sold == 1">
+            saled_num
+        </if>
+        <if test=" time == null and price == null and sold == null">
+            c_time
+        </if>
+        <if test=" time == 0 and price == 0 and sold == 0">
+            c_time
+        </if>
+        <if test="orderType == 0">
+            ASC
+        </if>
+        <if test="orderType == 1 or orderType == null">
+            DESC
+        </if>
+        limit #{offset},#{limit}
+    </select>
+    <select id="selectListPaged" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        g.id, title, intro, goods_list_pic AS goodsListPic, goods_main_pic AS goodsMainPic, goods_second_pic AS
+        goodsSecondPic,
+        goods_thirth_pic AS goodsThirthPic,price, o_price AS oPrice, d_charge AS dCharge, status, orginal_num AS
+        orginalNum, stock,
+        saled_num AS saledNum, detail_id AS detailId, g.c_time AS cTime, g.u_time AS uTime, g.is_del AS isDel
+        from h_goods g
+        <if test="catId != null">
+            INNER JOIN h_goods_cats gc ON gc.`goods_id` = g.`id` AND (gc.`cats` IN ( SELECT id FROM h_cats WHERE
+            parent_id = #{catId}) OR gc.`cats` = #{catId})
+        </if>
+        where is_del = 0
+        <if test="status != null">
+            AND status = #{status}
+        </if>
+        <if test="title != null">
+            AND title like concat(concat('%',#{title}),'%')
+        </if>
+        ORDER BY
+        <if test="time == 1">
+            c_time
+        </if>
+        <if test="price == 1">
+            price
+        </if>
+        <if test="sold == 1">
+            saled_num
+        </if>
+        <if test=" time == null and price == null and sold == null">
+            c_time
+        </if>
+        <if test="orderType == 0">
+            ASC
+        </if>
+        <if test="orderType == 1 or orderType == null">
+            DESC
+        </if>
+        limit #{offset},#{limit}
+    </select>
+    <select id="countListPaged" resultType="int" parameterType="java.lang.Integer">
+        select
+        COUNT(*)
+        from h_goods g
+        <if test="catId != null">
+            INNER JOIN h_goods_cats gc ON gc.`goods_id` = g.`id` AND (gc.`cats` IN ( SELECT id FROM h_cats WHERE
+            parent_id = #{catId}) OR gc.`cats` = #{catId})
+        </if>
+        where is_del = 0
+        <if test="status != null">
+            AND status = #{status}
+        </if>
+        <if test="title != null">
+            AND title like concat(concat('%',#{title}),'%')
+        </if>
+    </select>
+    <select id="countListPagedWithoutPulloff" resultType="int" parameterType="java.lang.Integer">
+        select
+        COUNT(*)
+        from h_goods g
+        <if test="catId != null">
+            INNER JOIN h_goods_cats gc ON gc.`goods_id` = g.`id` AND (gc.`cats` IN ( SELECT id FROM h_cats WHERE
+            parent_id = #{catId}) OR gc.`cats` = #{catId})
+        </if>
+        where is_del = 0
+        AND status != 0
+        <if test="title != null">
+            AND title like concat(concat('%',#{title}),'%')
+        </if>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from h_goods
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.hooper.hoshop.entity.Goods">
+        insert into h_goods (title, intro,
+        goods_list_pic, goods_main_pic, goods_second_pic,
+        goods_thirth_pic, price, o_price,
+        d_charge, status, orginal_num,
+        stock, saled_num, detail_id,
+        c_time, u_time, is_del)
+        values (#{title,jdbcType=VARCHAR}, #{intro,jdbcType=VARCHAR},
+        #{goodsListPic,jdbcType=VARCHAR}, #{goodsMainPic,jdbcType=VARCHAR}, #{goodsSecondPic,jdbcType=VARCHAR},
+        #{goodsThirthPic,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{oPrice,jdbcType=DECIMAL},
+        #{dCharge,jdbcType=DECIMAL}, #{status,jdbcType=BIT}, #{orginalNum,jdbcType=INTEGER},
+        #{stock,jdbcType=INTEGER}, #{saledNum,jdbcType=INTEGER}, #{detailId,jdbcType=INTEGER},
+        #{cTime,jdbcType=BIGINT}, #{uTime,jdbcType=BIGINT}, #{isDel,jdbcType=BIT})
+    </insert>
+    <insert id="insertSelective" parameterType="com.hooper.hoshop.entity.Goods">
+        insert into h_goods
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="intro != null">
+                intro,
+            </if>
+            <if test="goodsListPic != null">
+                goods_list_pic,
+            </if>
+            <if test="goodsMainPic != null">
+                goods_main_pic,
+            </if>
+            <if test="goodsSecondPic != null">
+                goods_second_pic,
+            </if>
+            <if test="goodsThirthPic != null">
+                goods_thirth_pic,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+            <if test="oPrice != null">
+                o_price,
+            </if>
+            <if test="dCharge != null">
+                d_charge,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="orginalNum != null">
+                orginal_num,
+            </if>
+            <if test="stock != null">
+                stock,
+            </if>
+            <if test="saledNum != null">
+                saled_num,
+            </if>
+            <if test="detailId != null">
+                detail_id,
+            </if>
+            <if test="cTime != null">
+                c_time,
+            </if>
+            <if test="uTime != null">
+                u_time,
+            </if>
+            <if test="isDel != null">
+                is_del,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="intro != null">
+                #{intro,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsListPic != null">
+                #{goodsListPic,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsMainPic != null">
+                #{goodsMainPic,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsSecondPic != null">
+                #{goodsSecondPic,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsThirthPic != null">
+                #{goodsThirthPic,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null">
+                #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="oPrice != null">
+                #{oPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="dCharge != null">
+                #{dCharge,jdbcType=DECIMAL},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=BIT},
+            </if>
+            <if test="orginalNum != null">
+                #{orginalNum,jdbcType=INTEGER},
+            </if>
+            <if test="stock != null">
+                #{stock,jdbcType=INTEGER},
+            </if>
+            <if test="saledNum != null">
+                #{saledNum,jdbcType=INTEGER},
+            </if>
+            <if test="detailId != null">
+                #{detailId,jdbcType=INTEGER},
+            </if>
+            <if test="cTime != null">
+                #{cTime,jdbcType=BIGINT},
+            </if>
+            <if test="uTime != null">
+                #{uTime,jdbcType=BIGINT},
+            </if>
+            <if test="isDel != null">
+                #{isDel,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hooper.hoshop.entity.Goods">
+        update h_goods
+        <set>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="intro != null">
+                intro = #{intro,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsListPic != null">
+                goods_list_pic = #{goodsListPic,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsMainPic != null">
+                goods_main_pic = #{goodsMainPic,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsSecondPic != null">
+                goods_second_pic = #{goodsSecondPic,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsThirthPic != null">
+                goods_thirth_pic = #{goodsThirthPic,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null">
+                price = #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="oPrice != null">
+                o_price = #{oPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="dCharge != null">
+                d_charge = #{dCharge,jdbcType=DECIMAL},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=BIT},
+            </if>
+            <if test="orginalNum != null">
+                orginal_num = #{orginalNum,jdbcType=INTEGER},
+            </if>
+            <if test="stock != null">
+                stock = #{stock,jdbcType=INTEGER},
+            </if>
+            <if test="saledNum != null">
+                saled_num = #{saledNum,jdbcType=INTEGER},
+            </if>
+            <if test="detailId != null">
+                detail_id = #{detailId,jdbcType=INTEGER},
+            </if>
+            <if test="cTime != null">
+                c_time = #{cTime,jdbcType=BIGINT},
+            </if>
+            <if test="uTime != null">
+                u_time = #{uTime,jdbcType=BIGINT},
+            </if>
+            <if test="isDel != null">
+                is_del = #{isDel,jdbcType=BIT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.hooper.hoshop.entity.Goods">
+        update h_goods
+        set title = #{title,jdbcType=VARCHAR},
+        intro = #{intro,jdbcType=VARCHAR},
+        goods_list_pic = #{goodsListPic,jdbcType=VARCHAR},
+        goods_main_pic = #{goodsMainPic,jdbcType=VARCHAR},
+        goods_second_pic = #{goodsSecondPic,jdbcType=VARCHAR},
+        goods_thirth_pic = #{goodsThirthPic,jdbcType=VARCHAR},
+        price = #{price,jdbcType=DECIMAL},
+        o_price = #{oPrice,jdbcType=DECIMAL},
+        d_charge = #{dCharge,jdbcType=DECIMAL},
+        status = #{status,jdbcType=BIT},
+        orginal_num = #{orginalNum,jdbcType=INTEGER},
+        stock = #{stock,jdbcType=INTEGER},
+        saled_num = #{saledNum,jdbcType=INTEGER},
+        detail_id = #{detailId,jdbcType=INTEGER},
+        c_time = #{cTime,jdbcType=BIGINT},
+        u_time = #{uTime,jdbcType=BIGINT},
+        is_del = #{isDel,jdbcType=BIT}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

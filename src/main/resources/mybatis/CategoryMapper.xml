@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hooper.hoshop.dao.CategoryMapper">
+    <resultMap id="BaseResultMap" type="com.hooper.hoshop.entity.Category">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="logo" property="logo" jdbcType="VARCHAR"/>
+        <result column="type_name" property="typeName" jdbcType="VARCHAR"/>
+        <result column="parent_id" property="parentId" jdbcType="INTEGER"/>
+        <result column="c_time" property="cTime" jdbcType="BIGINT"/>
+        <result column="u_time" property="uTime" jdbcType="BIGINT"/>
+        <result column="is_del" property="isDel" jdbcType="BIT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, logo, type_name, parent_id, c_time, u_time, is_del
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from h_cats
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectParents" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from h_cats
+        where parent_id = 0 AND is_del = 0
+        ORDER BY u_time ASC
+    </select>
+    <select id="selectCategoryByParent" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from h_cats
+        where is_del = 0
+        <if test="parentId != 0">
+            AND parent_id = #{parentId}
+        </if>
+        <if test="parentId == 0">
+            AND parent_id != 0
+        </if>
+        <if test="limit != null and offset != null">
+            ORDER BY c_time DESC
+            Limit #{offset},#{limit}
+        </if>
+    </select>
+    <select id="countCategoryByParent" resultType="int" parameterType="java.lang.Integer">
+        SELECT COUNT(*)
+        from h_cats
+        where is_del = 0
+        <if test="parentId != 0">
+            AND parent_id = #{parentId}
+        </if>
+        <if test="parentId == 0">
+            AND parent_id != 0
+        </if>
+    </select>
+    <select id="selectAllSecondary" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from h_cats
+        where parent_id != 0 AND is_del = 0
+        ORDER BY c_time DESC
+        Limit #{offset},#{limit}
+    </select>
+    <select id="countAllSecondary" resultType="int">
+        SELECT COUNT(*)
+        from h_cats
+        where parent_id != 0 AND is_del = 0
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from h_cats
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.hooper.hoshop.entity.Category">
+        insert into h_cats (logo, type_name,
+        parent_id, c_time, u_time,
+        is_del)
+        values ( #{logo,jdbcType=VARCHAR}, #{typeName,jdbcType=VARCHAR},
+        #{parentId,jdbcType=INTEGER}, #{cTime,jdbcType=BIGINT}, #{uTime,jdbcType=BIGINT},
+        0)
+    </insert>
+    <insert id="insertSelective" parameterType="com.hooper.hoshop.entity.Category">
+        insert into h_cats
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="logo != null">
+                logo,
+            </if>
+            <if test="typeName != null">
+                type_name,
+            </if>
+            <if test="parentId != null">
+                parent_id,
+            </if>
+            <if test="cTime != null">
+                c_time,
+            </if>
+            <if test="uTime != null">
+                u_time,
+            </if>
+            <if test="isDel != null">
+                is_del,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="logo != null">
+                #{logo,jdbcType=VARCHAR},
+            </if>
+            <if test="typeName != null">
+                #{typeName,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                #{parentId,jdbcType=INTEGER},
+            </if>
+            <if test="cTime != null">
+                #{cTime,jdbcType=BIGINT},
+            </if>
+            <if test="uTime != null">
+                #{uTime,jdbcType=BIGINT},
+            </if>
+            <if test="isDel != null">
+                #{isDel,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hooper.hoshop.entity.Category">
+        update h_cats
+        <set>
+            <if test="logo != null">
+                logo = #{logo,jdbcType=VARCHAR},
+            </if>
+            <if test="typeName != null">
+                type_name = #{typeName,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                parent_id = #{parentId,jdbcType=INTEGER},
+            </if>
+            <if test="cTime != null">
+                c_time = #{cTime,jdbcType=BIGINT},
+            </if>
+            <if test="uTime != null">
+                u_time = #{uTime,jdbcType=BIGINT},
+            </if>
+            <if test="isDel != null">
+                is_del = #{isDel,jdbcType=BIT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.hooper.hoshop.entity.Category">
+        update h_cats
+        set logo = #{logo,jdbcType=VARCHAR},
+        type_name = #{typeName,jdbcType=VARCHAR},
+        parent_id = #{parentId,jdbcType=INTEGER},
+        c_time = #{cTime,jdbcType=BIGINT},
+        u_time = #{uTime,jdbcType=BIGINT},
+        is_del = #{isDel,jdbcType=BIT}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

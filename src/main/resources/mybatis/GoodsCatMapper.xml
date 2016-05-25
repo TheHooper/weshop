@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hooper.hoshop.dao.GoodsCatMapper">
+    <resultMap id="BaseResultMap" type="com.hooper.hoshop.entity.GoodsCat">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="goods_id" property="goodsId" jdbcType="INTEGER"/>
+        <result column="cats" property="cats" jdbcType="INTEGER"/>
+        <result column="cats_parent_id" property="catsParentId" jdbcType="INTEGER"/>
+        <result column="cats_name" property="catsName" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, goods_id, cats, cats_parent_id, cats_name
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from h_goods_cats
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectByGoodsId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from h_goods_cats
+        where goods_id = #{goodsId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from h_goods_cats
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.hooper.hoshop.entity.GoodsCat">
+    insert into h_goods_cats (id, goods_id, cats, 
+      cats_parent_id, cats_name)
+    values (#{id,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{cats,jdbcType=INTEGER}, 
+      #{catsParentId,jdbcType=INTEGER}, #{catsName,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.hooper.hoshop.entity.GoodsCat">
+        insert into h_goods_cats
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="goodsId != null">
+                goods_id,
+            </if>
+            <if test="cats != null">
+                cats,
+            </if>
+            <if test="catsParentId != null">
+                cats_parent_id,
+            </if>
+            <if test="catsName != null">
+                cats_name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="goodsId != null">
+                #{goodsId,jdbcType=INTEGER},
+            </if>
+            <if test="cats != null">
+                #{cats,jdbcType=INTEGER},
+            </if>
+            <if test="catsParentId != null">
+                #{catsParentId,jdbcType=INTEGER},
+            </if>
+            <if test="catsName != null">
+                #{catsName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hooper.hoshop.entity.GoodsCat">
+        update h_goods_cats
+        <set>
+            <if test="goodsId != null">
+                goods_id = #{goodsId,jdbcType=INTEGER},
+            </if>
+            <if test="cats != null">
+                cats = #{cats,jdbcType=INTEGER},
+            </if>
+            <if test="catsParentId != null">
+                cats_parent_id = #{catsParentId,jdbcType=INTEGER},
+            </if>
+            <if test="catsName != null">
+                cats_name = #{catsName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.hooper.hoshop.entity.GoodsCat">
+    update h_goods_cats
+    set goods_id = #{goodsId,jdbcType=INTEGER},
+      cats = #{cats,jdbcType=INTEGER},
+      cats_parent_id = #{catsParentId,jdbcType=INTEGER},
+      cats_name = #{catsName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

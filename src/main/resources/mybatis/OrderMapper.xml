@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hooper.hoshop.dao.OrderMapper">
+    <resultMap id="BaseResultMap" type="com.hooper.hoshop.entity.Order">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="sn" property="sn" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="coupons_id" property="couponsId" jdbcType="INTEGER"/>
+        <result column="total" property="total" jdbcType="DECIMAL"/>
+        <result column="r_total" property="rTotal" jdbcType="DECIMAL"/>
+        <result column="c_time" property="cTime" jdbcType="BIGINT"/>
+        <result column="p_time" property="pTime" jdbcType="BIGINT"/>
+        <result column="delivery_time" property="deliveryTime" jdbcType="BIGINT"/>
+        <result column="status" property="status" jdbcType="BIT"/>
+        <result column="is_del" property="isDel" jdbcType="BIT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, sn, user_id, coupons_id, total, r_total, c_time, p_time, delivery_time, status, 
+    is_del
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from h_order
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from h_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.hooper.hoshop.entity.Order">
+    insert into h_order (id, sn, user_id, 
+      coupons_id, total, r_total, 
+      c_time, p_time, delivery_time, 
+      status, is_del)
+    values (#{id,jdbcType=INTEGER}, #{sn,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
+      #{couponsId,jdbcType=INTEGER}, #{total,jdbcType=DECIMAL}, #{rTotal,jdbcType=DECIMAL}, 
+      #{cTime,jdbcType=BIGINT}, #{pTime,jdbcType=BIGINT}, #{deliveryTime,jdbcType=BIGINT}, 
+      #{status,jdbcType=BIT}, #{isDel,jdbcType=BIT})
+  </insert>
+    <insert id="insertSelective" parameterType="com.hooper.hoshop.entity.Order">
+        insert into h_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="sn != null">
+                sn,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="couponsId != null">
+                coupons_id,
+            </if>
+            <if test="total != null">
+                total,
+            </if>
+            <if test="rTotal != null">
+                r_total,
+            </if>
+            <if test="cTime != null">
+                c_time,
+            </if>
+            <if test="pTime != null">
+                p_time,
+            </if>
+            <if test="deliveryTime != null">
+                delivery_time,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="isDel != null">
+                is_del,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="sn != null">
+                #{sn,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="couponsId != null">
+                #{couponsId,jdbcType=INTEGER},
+            </if>
+            <if test="total != null">
+                #{total,jdbcType=DECIMAL},
+            </if>
+            <if test="rTotal != null">
+                #{rTotal,jdbcType=DECIMAL},
+            </if>
+            <if test="cTime != null">
+                #{cTime,jdbcType=BIGINT},
+            </if>
+            <if test="pTime != null">
+                #{pTime,jdbcType=BIGINT},
+            </if>
+            <if test="deliveryTime != null">
+                #{deliveryTime,jdbcType=BIGINT},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=BIT},
+            </if>
+            <if test="isDel != null">
+                #{isDel,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hooper.hoshop.entity.Order">
+        update h_order
+        <set>
+            <if test="sn != null">
+                sn = #{sn,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="couponsId != null">
+                coupons_id = #{couponsId,jdbcType=INTEGER},
+            </if>
+            <if test="total != null">
+                total = #{total,jdbcType=DECIMAL},
+            </if>
+            <if test="rTotal != null">
+                r_total = #{rTotal,jdbcType=DECIMAL},
+            </if>
+            <if test="cTime != null">
+                c_time = #{cTime,jdbcType=BIGINT},
+            </if>
+            <if test="pTime != null">
+                p_time = #{pTime,jdbcType=BIGINT},
+            </if>
+            <if test="deliveryTime != null">
+                delivery_time = #{deliveryTime,jdbcType=BIGINT},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=BIT},
+            </if>
+            <if test="isDel != null">
+                is_del = #{isDel,jdbcType=BIT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.hooper.hoshop.entity.Order">
+    update h_order
+    set sn = #{sn,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      coupons_id = #{couponsId,jdbcType=INTEGER},
+      total = #{total,jdbcType=DECIMAL},
+      r_total = #{rTotal,jdbcType=DECIMAL},
+      c_time = #{cTime,jdbcType=BIGINT},
+      p_time = #{pTime,jdbcType=BIGINT},
+      delivery_time = #{deliveryTime,jdbcType=BIGINT},
+      status = #{status,jdbcType=BIT},
+      is_del = #{isDel,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

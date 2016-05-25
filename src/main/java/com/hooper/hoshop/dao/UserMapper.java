@@ -15,4 +15,8 @@ public interface UserMapper extends GenericDao<User, Integer> {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    User selectByMobile(String mobile);
+
+    User selectByName(String name);
 }

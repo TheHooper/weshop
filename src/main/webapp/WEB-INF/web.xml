@@ -16,6 +16,7 @@
         <param-value>
             classpath*:applicationContext.xml
             <!--classpath*:applicationContext-shiro.xml-->
+            classpath*:applicationContext-captcha.xml
         </param-value>
     </context-param>
     <!-- 配置Spring上下文监听器 -->
@@ -96,16 +97,16 @@
 
     <!-- 错误页 -->
     <!--<error-page>-->
-    <!--<error-code>404</error-code>-->
-    <!--<location>/rest/page/404</location>-->
+    <!--<exception-type>java.lang.Throwable</exception-type>-->
+    <!--<location>/500.jsp</location>-->
     <!--</error-page>-->
     <!--<error-page>-->
     <!--<error-code>500</error-code>-->
-    <!--<location>/rest/page/500</location>-->
+    <!--<location>/500.jsp</location>-->
     <!--</error-page>-->
     <!--<error-page>-->
-    <!--<exception-type>org.apache.shiro.authz.AuthorizationException</exception-type>-->
-    <!--<location>/rest/page/401</location>-->
+    <!--<error-code>404</error-code>-->
+    <!--<location>/404.jsp</location>-->
     <!--</error-page>-->
 
 </web-app>

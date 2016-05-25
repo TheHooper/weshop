@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hooper.hoshop.dao.RoleMapper">
+    <resultMap id="BaseResultMap" type="com.hooper.hoshop.entity.Role">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="authorities" property="authorities" jdbcType="BIGINT"/>
+        <result column="c_time" property="cTime" jdbcType="INTEGER"/>
+        <result column="u_time" property="uTime" jdbcType="INTEGER"/>
+        <result column="is_del" property="isDel" jdbcType="BIT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, name, authorities, c_time, u_time, is_del
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from h_role
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from h_role
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.hooper.hoshop.entity.Role">
+        insert into h_role (id, name, authorities,
+        c_time, u_time, is_del)
+        values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{authorities,jdbcType=BIGINT},
+        #{cTime,jdbcType=INTEGER}, #{uTime,jdbcType=INTEGER}, #{isDel,jdbcType=BIT})
+    </insert>
+    <insert id="insertSelective" parameterType="com.hooper.hoshop.entity.Role">
+        insert into h_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="authorities != null">
+                authorities,
+            </if>
+            <if test="cTime != null">
+                c_time,
+            </if>
+            <if test="uTime != null">
+                u_time,
+            </if>
+            <if test="isDel != null">
+                is_del,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="authorities != null">
+                #{authorities,jdbcType=BIGINT},
+            </if>
+            <if test="cTime != null">
+                #{cTime,jdbcType=INTEGER},
+            </if>
+            <if test="uTime != null">
+                #{uTime,jdbcType=INTEGER},
+            </if>
+            <if test="isDel != null">
+                #{isDel,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hooper.hoshop.entity.Role">
+        update h_role
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="authorities != null">
+                authorities = #{authorities,jdbcType=BIGINT},
+            </if>
+            <if test="cTime != null">
+                c_time = #{cTime,jdbcType=INTEGER},
+            </if>
+            <if test="uTime != null">
+                u_time = #{uTime,jdbcType=INTEGER},
+            </if>
+            <if test="isDel != null">
+                is_del = #{isDel,jdbcType=BIT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.hooper.hoshop.entity.Role">
+        update h_role
+        set name = #{name,jdbcType=VARCHAR},
+        authorities = #{authorities,jdbcType=BIGINT},
+        c_time = #{cTime,jdbcType=INTEGER},
+        u_time = #{uTime,jdbcType=INTEGER},
+        is_del = #{isDel,jdbcType=BIT}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

@@ -39,15 +39,6 @@ public interface GenericService<Model, PK> {
      */
     Model selectById(PK id);
 
-
-    /**
-     * 查询单个对象
-     *
-     * @return 对象
-     */
-    Model selectOne();
-
-
     /**
      * 查询多个对象
      *

@@ -140,4 +140,25 @@ public class User {
     public void setIsDel(Boolean isDel) {
         this.isDel = isDel;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("User{");
+        sb.append("avatar='").append(avatar).append('\'');
+        sb.append(", id=").append(id);
+        sb.append(", userName='").append(userName).append('\'');
+        sb.append(", password='").append(password).append('\'');
+        sb.append(", passwordRandom='").append(passwordRandom).append('\'');
+        sb.append(", gender=").append(gender);
+        sb.append(", mobile='").append(mobile).append('\'');
+        sb.append(", email='").append(email).append('\'');
+        sb.append(", vip=").append(vip);
+        sb.append(", score=").append(score);
+        sb.append(", cTime=").append(cTime);
+        sb.append(", lastLoginTime=").append(lastLoginTime);
+        sb.append(", lastLoginIp='").append(lastLoginIp).append('\'');
+        sb.append(", isDel=").append(isDel);
+        sb.append('}');
+        return sb.toString();
+    }
 }

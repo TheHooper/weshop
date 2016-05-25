@@ -1,0 +1,72 @@
+package com.hooper.hoshop.common.aspect;
+
+import com.hooper.hoshop.common.aspect.annotation.UserLoginAnnotation;
+import com.hooper.hoshop.common.constant.WebConstant;
+import com.hooper.hoshop.common.exception.UserUnloginException;
+import com.hooper.hoshop.entity.User;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.*;
+import org.springframework.core.Ordered;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.servlet.http.HttpSession;
+
+/**
+ * Created by 47123 on 2016/5/21.
+ */
+@Aspect
+@Component
+public class UserLoginAspect {
+
+    @Pointcut("@annotation(com.hooper.hoshop.common.aspect.annotation.UserLoginAnnotation)")
+    public void userAccess() {
+    }
+
+//    @After("userAccess()")
+//    public void after(JoinPoint joinPoint) {
+//        System.out.println("after aspect executed");
+//    }
+
+    @Before(value = "userAccess()&&" +
+            "@annotation(userLoginAnnotation)")
+    public void before(JoinPoint joinPoint, UserLoginAnnotation userLoginAnnotation) {
+        //如果需要这里可以取出参数进行处理
+        //Object[] args = joinPoint.getArgs();
+        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        HttpSession session = attr.getRequest().getSession(true);
+        User user = (User) session.getAttribute(WebConstant.SESSION_SIGNIN_USER);
+        if (user == null) {
+
+        } else {
+            System.out.println("before aspect executing: " + user.toString());
+        }
+//        throw new UserUnloginException();
+    }
+
+//    @AfterReturning(pointcut = "userAccess()", returning = "returnVal")
+//    public void afterReturning(JoinPoint joinPoint, Object returnVal) {
+//        System.out.println("afterReturning executed, return result is "
+//                + returnVal);
+//    }
+
+//    @Around("userAccess()")
+//    public void around(ProceedingJoinPoint pjp) throws Throwable {
+//        System.out.println("around start..");
+//        try {
+//            pjp.proceed();
+//        } catch (Throwable ex) {
+//            System.out.println("error in around");
+//            throw ex;
+//        }
+//        System.out.println("around end");
+//    }
+
+//    @AfterThrowing(pointcut = "userAccess()", throwing = "error")
+//    public void afterThrowing(JoinPoint jp, Throwable error) {
+//        System.out.println("error:" + error);
+//    }
+
+}

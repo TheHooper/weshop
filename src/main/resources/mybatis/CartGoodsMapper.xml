@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hooper.hoshop.dao.CartGoodsMapper">
+    <resultMap id="BaseResultMap" type="com.hooper.hoshop.entity.CartGoods">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="goods_id" property="goodsId" jdbcType="INTEGER"/>
+        <result column="goods_pic" property="goodsPic" jdbcType="VARCHAR"/>
+        <result column="sales_attr" property="salesAttr" jdbcType="VARCHAR"/>
+        <result column="sku_id" property="skuId" jdbcType="VARCHAR"/>
+        <result column="goods_title" property="goodsTitle" jdbcType="VARCHAR"/>
+        <result column="num" property="num" jdbcType="INTEGER"/>
+        <result column="c_time" property="cTime" jdbcType="BIGINT"/>
+        <result column="u_time" property="uTime" jdbcType="BIGINT"/>
+        <result column="is_del" property="isDel" jdbcType="BIT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, user_id, goods_id, goods_pic, sales_attr, sku_id, goods_title, num, c_time, u_time, 
+    is_del
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from h_cart_goods
+        where id = #{id,jdbcType=INTEGER} AND is_del = 0
+    </select>
+    <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from h_cart_goods
+        where user_id = #{id,jdbcType=INTEGER} AND is_del = 0
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from h_cart_goods
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.hooper.hoshop.entity.CartGoods">
+    insert into h_cart_goods (user_id, goods_id,
+      goods_pic, sales_attr, sku_id, 
+      goods_title, num, c_time, 
+      u_time, is_del)
+    values (#{userId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER},
+      #{goodsPic,jdbcType=VARCHAR}, #{salesAttr,jdbcType=VARCHAR}, #{skuId,jdbcType=VARCHAR}, 
+      #{goodsTitle,jdbcType=VARCHAR}, #{num,jdbcType=INTEGER}, #{cTime,jdbcType=BIGINT}, 
+      #{uTime,jdbcType=BIGINT}, #{isDel,jdbcType=BIT})
+  </insert>
+    <insert id="insertSelective" parameterType="com.hooper.hoshop.entity.CartGoods">
+        insert into h_cart_goods
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="goodsId != null">
+                goods_id,
+            </if>
+            <if test="goodsPic != null">
+                goods_pic,
+            </if>
+            <if test="salesAttr != null">
+                sales_attr,
+            </if>
+            <if test="skuId != null">
+                sku_id,
+            </if>
+            <if test="goodsTitle != null">
+                goods_title,
+            </if>
+            <if test="num != null">
+                num,
+            </if>
+            <if test="cTime != null">
+                c_time,
+            </if>
+            <if test="uTime != null">
+                u_time,
+            </if>
+            <if test="isDel != null">
+                is_del,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="goodsId != null">
+                #{goodsId,jdbcType=INTEGER},
+            </if>
+            <if test="goodsPic != null">
+                #{goodsPic,jdbcType=VARCHAR},
+            </if>
+            <if test="salesAttr != null">
+                #{salesAttr,jdbcType=VARCHAR},
+            </if>
+            <if test="skuId != null">
+                #{skuId,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsTitle != null">
+                #{goodsTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="num != null">
+                #{num,jdbcType=INTEGER},
+            </if>
+            <if test="cTime != null">
+                #{cTime,jdbcType=BIGINT},
+            </if>
+            <if test="uTime != null">
+                #{uTime,jdbcType=BIGINT},
+            </if>
+            <if test="isDel != null">
+                #{isDel,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hooper.hoshop.entity.CartGoods">
+        update h_cart_goods
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="goodsId != null">
+                goods_id = #{goodsId,jdbcType=INTEGER},
+            </if>
+            <if test="goodsPic != null">
+                goods_pic = #{goodsPic,jdbcType=VARCHAR},
+            </if>
+            <if test="salesAttr != null">
+                sales_attr = #{salesAttr,jdbcType=VARCHAR},
+            </if>
+            <if test="skuId != null">
+                sku_id = #{skuId,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsTitle != null">
+                goods_title = #{goodsTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="num != null">
+                num = #{num,jdbcType=INTEGER},
+            </if>
+            <if test="cTime != null">
+                c_time = #{cTime,jdbcType=BIGINT},
+            </if>
+            <if test="uTime != null">
+                u_time = #{uTime,jdbcType=BIGINT},
+            </if>
+            <if test="isDel != null">
+                is_del = #{isDel,jdbcType=BIT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.hooper.hoshop.entity.CartGoods">
+    update h_cart_goods
+    set user_id = #{userId,jdbcType=INTEGER},
+      goods_id = #{goodsId,jdbcType=INTEGER},
+      goods_pic = #{goodsPic,jdbcType=VARCHAR},
+      sales_attr = #{salesAttr,jdbcType=VARCHAR},
+      sku_id = #{skuId,jdbcType=VARCHAR},
+      goods_title = #{goodsTitle,jdbcType=VARCHAR},
+      num = #{num,jdbcType=INTEGER},
+      c_time = #{cTime,jdbcType=BIGINT},
+      u_time = #{uTime,jdbcType=BIGINT},
+      is_del = #{isDel,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

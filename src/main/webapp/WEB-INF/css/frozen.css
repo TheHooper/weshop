@@ -965,7 +965,7 @@ h6, .ui-txt-tips {
 }
 
 .ui-grid-trisect-img {
-  padding-top: 149.47%;
+  padding-top: 114.28%; /** 149.47% 190*284 105.2% 190*200 133.33% 320*240 320*280 **/
 }
 
 .ui-grid-trisect h4 {
@@ -2415,7 +2415,7 @@ h6, .ui-txt-tips {
 /*列表普通图片*/
 .ui-list-img {
   width: 100px;
-  height: 68px;
+  height: 100px;
 }
 
 .ui-list-thumb-s {

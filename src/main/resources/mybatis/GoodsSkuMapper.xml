@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hooper.hoshop.dao.GoodsSkuMapper">
+    <resultMap id="BaseResultMap" type="com.hooper.hoshop.entity.GoodsSku">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="sku_id" property="skuId" jdbcType="VARCHAR"/>
+        <result column="sku_name" property="skuName" jdbcType="VARCHAR"/>
+        <result column="orginal_num" property="orginalNum" jdbcType="INTEGER"/>
+        <result column="stock_num" property="stockNum" jdbcType="INTEGER"/>
+        <result column="saled_num" property="saledNum" jdbcType="INTEGER"/>
+        <result column="goods_id" property="goodsId" jdbcType="INTEGER"/>
+        <result column="attribute_id_a" property="attributeIdA" jdbcType="INTEGER"/>
+        <result column="attribute_id_aa" property="attributeIdAa" jdbcType="INTEGER"/>
+        <result column="ext1" property="ext1" jdbcType="VARCHAR"/>
+        <result column="ext2" property="ext2" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, sku_id, sku_name, orginal_num, stock_num, saled_num, goods_id, attribute_id_a,
+        attribute_id_aa, ext1, ext2
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from h_goods_sku
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectByGoodsId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from h_goods_sku
+        where goods_id = #{goodsId}
+    </select>
+    <select id="selectBySkuIdAndGoodsId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from h_goods_sku
+        where goods_id = #{goodsId} AND
+        (sku_id = #{skuId1}
+        <if test="skuId2 != null">
+            OR sku_id = #{skuId2}
+        </if>
+        )
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from h_goods_sku
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.hooper.hoshop.entity.GoodsSku">
+        insert into h_goods_sku (sku_id, sku_name,
+        orginal_num, stock_num, saled_num,
+        goods_id, attribute_id_a, attribute_id_aa,
+        ext1, ext2)
+        values (#{skuId,jdbcType=VARCHAR}, #{skuName,jdbcType=VARCHAR},
+        #{orginalNum,jdbcType=INTEGER}, #{stockNum,jdbcType=INTEGER}, #{saledNum,jdbcType=INTEGER},
+        #{goodsId,jdbcType=INTEGER}, #{attributeIdA,jdbcType=INTEGER}, #{attributeIdAa,jdbcType=INTEGER},
+        #{ext1,jdbcType=VARCHAR}, #{ext2,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.hooper.hoshop.entity.GoodsSku">
+        insert into h_goods_sku
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="skuId != null">
+                sku_id,
+            </if>
+            <if test="skuName != null">
+                sku_name,
+            </if>
+            <if test="orginalNum != null">
+                orginal_num,
+            </if>
+            <if test="stockNum != null">
+                stock_num,
+            </if>
+            <if test="saledNum != null">
+                saled_num,
+            </if>
+            <if test="goodsId != null">
+                goods_id,
+            </if>
+            <if test="attributeIdA != null">
+                attribute_id_a,
+            </if>
+            <if test="attributeIdAa != null">
+                attribute_id_aa,
+            </if>
+            <if test="ext1 != null">
+                ext1,
+            </if>
+            <if test="ext2 != null">
+                ext2,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="skuId != null">
+                #{skuId,jdbcType=VARCHAR},
+            </if>
+            <if test="skuName != null">
+                #{skuName,jdbcType=VARCHAR},
+            </if>
+            <if test="orginalNum != null">
+                #{orginalNum,jdbcType=INTEGER},
+            </if>
+            <if test="stockNum != null">
+                #{stockNum,jdbcType=INTEGER},
+            </if>
+            <if test="saledNum != null">
+                #{saledNum,jdbcType=INTEGER},
+            </if>
+            <if test="goodsId != null">
+                #{goodsId,jdbcType=INTEGER},
+            </if>
+            <if test="attributeIdA != null">
+                #{attributeIdA,jdbcType=INTEGER},
+            </if>
+            <if test="attributeIdAa != null">
+                #{attributeIdAa,jdbcType=INTEGER},
+            </if>
+            <if test="ext1 != null">
+                #{ext1,jdbcType=VARCHAR},
+            </if>
+            <if test="ext2 != null">
+                #{ext2,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <insert id="insertOrUpdate" parameterType="com.hooper.hoshop.entity.GoodsSku">
+        insert into h_goods_sku
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="skuId != null">
+                sku_id,
+            </if>
+            <if test="skuName != null">
+                sku_name,
+            </if>
+            <if test="orginalNum != null">
+                orginal_num,
+            </if>
+            <if test="stockNum != null">
+                stock_num,
+            </if>
+            <if test="saledNum != null">
+                saled_num,
+            </if>
+            <if test="goodsId != null">
+                goods_id,
+            </if>
+            <if test="attributeIdA != null">
+                attribute_id_a,
+            </if>
+            <if test="attributeIdAa != null">
+                attribute_id_aa,
+            </if>
+            <if test="ext1 != null">
+                ext1,
+            </if>
+            <if test="ext2 != null">
+                ext2,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="skuId != null">
+                #{skuId,jdbcType=VARCHAR},
+            </if>
+            <if test="skuName != null">
+                #{skuName,jdbcType=VARCHAR},
+            </if>
+            <if test="orginalNum != null">
+                #{orginalNum,jdbcType=INTEGER},
+            </if>
+            <if test="stockNum != null">
+                #{stockNum,jdbcType=INTEGER},
+            </if>
+            <if test="saledNum != null">
+                #{saledNum,jdbcType=INTEGER},
+            </if>
+            <if test="goodsId != null">
+                #{goodsId,jdbcType=INTEGER},
+            </if>
+            <if test="attributeIdA != null">
+                #{attributeIdA,jdbcType=INTEGER},
+            </if>
+            <if test="attributeIdAa != null">
+                #{attributeIdAa,jdbcType=INTEGER},
+            </if>
+            <if test="ext1 != null">
+                #{ext1,jdbcType=VARCHAR},
+            </if>
+            <if test="ext2 != null">
+                #{ext2,jdbcType=VARCHAR},
+            </if>
+        </trim>
+        ON DUPLICATE KEY UPDATE
+        <trim suffixOverrides=",">
+            <if test="skuId != null">
+                sku_id = #{skuId,jdbcType=VARCHAR},
+            </if>
+            <if test="skuName != null">
+                sku_name = #{skuName,jdbcType=VARCHAR},
+            </if>
+            <if test="orginalNum != null">
+                orginal_num = #{orginalNum,jdbcType=INTEGER},
+            </if>
+            <if test="stockNum != null">
+                stock_num = #{stockNum,jdbcType=INTEGER},
+            </if>
+            <if test="saledNum != null">
+                saled_num = #{saledNum,jdbcType=INTEGER},
+            </if>
+            <if test="goodsId != null">
+                goods_id = #{goodsId,jdbcType=INTEGER},
+            </if>
+            <if test="attributeIdA != null">
+                attribute_id_a = #{attributeIdA,jdbcType=INTEGER},
+            </if>
+            <if test="attributeIdAa != null">
+                attribute_id_aa = #{attributeIdAa,jdbcType=INTEGER},
+            </if>
+            <if test="ext1 != null">
+                ext1 = #{ext1,jdbcType=VARCHAR},
+            </if>
+            <if test="ext2 != null">
+                ext2 = #{ext2,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hooper.hoshop.entity.GoodsSku">
+        update h_goods_sku
+        <set>
+            <if test="skuId != null">
+                sku_id = #{skuId,jdbcType=VARCHAR},
+            </if>
+            <if test="skuName != null">
+                sku_name = #{skuName,jdbcType=VARCHAR},
+            </if>
+            <if test="orginalNum != null">
+                orginal_num = #{orginalNum,jdbcType=INTEGER},
+            </if>
+            <if test="stockNum != null">
+                stock_num = #{stockNum,jdbcType=INTEGER},
+            </if>
+            <if test="saledNum != null">
+                saled_num = #{saledNum,jdbcType=INTEGER},
+            </if>
+            <if test="goodsId != null">
+                goods_id = #{goodsId,jdbcType=INTEGER},
+            </if>
+            <if test="attributeIdA != null">
+                attribute_id_a = #{attributeIdA,jdbcType=INTEGER},
+            </if>
+            <if test="attributeIdAa != null">
+                attribute_id_aa = #{attributeIdAa,jdbcType=INTEGER},
+            </if>
+            <if test="ext1 != null">
+                ext1 = #{ext1,jdbcType=VARCHAR},
+            </if>
+            <if test="ext2 != null">
+                ext2 = #{ext2,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.hooper.hoshop.entity.GoodsSku">
+        update h_goods_sku
+        set sku_id = #{skuId,jdbcType=VARCHAR},
+        sku_name = #{skuName,jdbcType=VARCHAR},
+        orginal_num = #{orginalNum,jdbcType=INTEGER},
+        stock_num = #{stockNum,jdbcType=INTEGER},
+        saled_num = #{saledNum,jdbcType=INTEGER},
+        goods_id = #{goodsId,jdbcType=INTEGER},
+        attribute_id_a = #{attributeIdA,jdbcType=INTEGER},
+        attribute_id_aa = #{attributeIdAa,jdbcType=INTEGER},
+        ext1 = #{ext1,jdbcType=VARCHAR},
+        ext2 = #{ext2,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

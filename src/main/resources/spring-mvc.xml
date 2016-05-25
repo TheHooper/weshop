@@ -13,11 +13,29 @@
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <!-- 扫描controller（controller层注入） -->
-    <context:component-scan base-package="com.hooper.hoshop.web.controller"/>
+    <!--<context:component-scan base-package="com.hooper.hoshop.web.controller"/>-->
+    <!--<context:component-scan base-package="com.hooper.hoshop.admin.controller"/>-->
+    <!--<context:component-scan base-package="com.hooper.hoshop.common.aspect"/>-->
+    <context:component-scan base-package="com.hooper.hoshop">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!-- 引入配置文件 -->
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath*:/application.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- AOP配置 -->
+    <aop:aspectj-autoproxy/>
 
     <!-- 会自动注册DefaultAnnotationHandlerMapping与AnnotationMethodHandlerAdapter 两个bean,是spring MVC为@Controllers分发请求所必须的 -->
     <!-- 指定自己定义的validator -->
     <mvc:annotation-driven validator="validator"/>
+    <mvc:resources location="/WEB-INF/admin/" mapping="/admin/**"/>
     <mvc:resources location="/WEB-INF/img/" mapping="/img/**"/>
     <mvc:resources location="/WEB-INF/css/" mapping="/css/**"/>
     <mvc:resources location="/WEB-INF/js/" mapping="/js/**"/>
@@ -74,7 +92,8 @@
 
     <!-- 对模型视图添加前后缀 -->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-          p:prefix="/WEB-INF/views/" p:suffix=".html"/>
+          p:prefix="/WEB-INF/views/" p:suffix=".jsp" p:order="1"/>
+
 
     <!-- 配置springMVC处理上传文件的信息 -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -83,10 +102,5 @@
         <property name="maxInMemorySize" value="40960"/>
     </bean>
 
-    <!-- 启用shrio授权注解拦截方式 -->
-    <!--<aop:config proxy-target-class="true"></aop:config>-->
-    <!--<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">-->
-        <!--<property name="securityManager" ref="securityManager"/>-->
-    <!--</bean>-->
 
 </beans>
