@@ -40,17 +40,10 @@
         </javaClientGenerator>
 
         <!--对应数据库表名 -->
-        <table tableName="h_order" domainObjectName="Order" enableCountByExample="false"
+        <table tableName="h_coupons_cats" domainObjectName="CouponCats" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false">
         </table>
-
-        <!--对应数据库表名 -->
-        <table tableName="h_order_goods" domainObjectName="OrderGoods" enableCountByExample="false"
-               enableUpdateByExample="false" enableDeleteByExample="false"
-               enableSelectByExample="false">
-        </table>
-
 
     </context>
 </generatorConfiguration>

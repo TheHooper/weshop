@@ -14,9 +14,10 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
     <title>ho商城</title>
-    <link href="<c:url value="../../css/frozen.css"/>" rel="stylesheet" type="text/css"/>
-    <link href="<c:url value="../../css/homall.css"/>" rel="stylesheet" type="text/css"/>
-    <script type="text/javascript" src="<c:url value="../../js/lib/zeptojs/zepto.min.js"/>"></script>
+    <link href="<c:url value="${pageContext.request.contextPath}/h/css/frozen.css"/>" rel="stylesheet" type="text/css"/>
+    <link href="<c:url value="${pageContext.request.contextPath}/h/css/homall.css"/>" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript"
+            src="<c:url value="${pageContext.request.contextPath}/h/js/lib/zeptojs/zepto.min.js"/>"></script>
 </head>
 <body>
 <!-- header part -->
@@ -44,7 +45,7 @@
         <div id="add-cart-btn" class="ui-col ui-col-2" style="height: 100%;line-height: 48px;">
             <h4>加入购物车</h4>
         </div>
-        <div class="ui-col ui-col-2 back-blue" style="height: 100%;line-height: 48px">
+        <div id="buy-btn" class="ui-col ui-col-2 back-blue" style="height: 100%;line-height: 48px">
             <h4>立即购买</h4>
         </div>
     </div>
@@ -162,18 +163,6 @@
             </div>
         </li>
         <li>
-            <div class="ui-row-flex ui-whitespace padding-fix">
-                <img src="http://img30.360buyimg.com/shaidan/s310x310_jfs/t2743/145/737207555/3827/ea7747e/5724a059Ne169562d.jpg"
-                     class="comment-item-img"/>
-                <img src="http://img30.360buyimg.com/shaidan/s310x310_jfs/t2743/145/737207555/3827/ea7747e/5724a059Ne169562d.jpg"
-                     class="comment-item-img"/>
-                <img src="http://img30.360buyimg.com/shaidan/s310x310_jfs/t2743/145/737207555/3827/ea7747e/5724a059Ne169562d.jpg"
-                     class="comment-item-img"/>
-                <img src="http://img30.360buyimg.com/shaidan/s310x310_jfs/t2743/145/737207555/3827/ea7747e/5724a059Ne169562d.jpg"
-                     class="comment-item-img"/>
-            </div>
-        </li>
-        <li>
             <div class="price-fade">
                 <h5>2016-05-12</h5>
             </div>
@@ -191,14 +180,6 @@
         <li>
             <div class="ui-row-flex ui-justify-flex txt-m">
                 我是红卫兵
-            </div>
-        </li>
-        <li>
-            <div class="ui-row-flex ui-whitespace padding-fix">
-                <img src="http://img30.360buyimg.com/shaidan/s310x310_jfs/t1936/178/2833003571/103010/b8c7b885/56f8a2dbNf5cc2281.jpg"
-                     class="comment-item-img"/>
-                <img src="http://img30.360buyimg.com/shaidan/s310x310_jfs/t1936/178/2833003571/103010/b8c7b885/56f8a2dbNf5cc2281.jpg"
-                     class="comment-item-img"/>
             </div>
         </li>
         <li>
@@ -313,8 +294,9 @@
 
 
 </body>
-<link href="<c:url value="../../css/all-animation.css"/>" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="<c:url value="../../js/frozen.js"/>"></script>
+<link href="<c:url value="${pageContext.request.contextPath}/h/css/all-animation.css"/>" rel="stylesheet"
+      type="text/css"/>
+<script type="text/javascript" src="<c:url value="${pageContext.request.contextPath}/h/js/frozen.js"/>"></script>
 <script type="text/javascript">
     (function () {
         var prefix = "${pageContext.request.scheme}" + "://" + "${pageContext.request.serverName}" + ":" + "${pageContext.request.localPort}" + "/";
@@ -634,12 +616,60 @@
             })
         }
 
+        var buyEvent = function () {
+            $("#buy-btn").tap(function () {
+                var checkoutForm = {
+                    goodsId: "${goods.id}",
+                    skuId: $("#selectedTip").attr("value"),
+                    salesAttr: $("#selectedTip").text(),
+                    num: $("#num").val(),
+                }
+                if (typeof (checkoutForm.skuId) == "undefined" || "" == checkoutForm.skuId || checkoutForm.skuId == null) {
+                    $("#error-view").css("display", "block");
+                    setTimeout(function () {
+                        $("#error-view").css("display", "none");
+                    }, 1500)
+                } else {
+                    var my_val = $.trim($('#ipt').val());
+                    // 取得要提交页面的URL
+                    var action = prefix + "/h/orders/buy";
+                    // 创建Form
+                    var form = $('<form></form>');
+                    // 设置属性
+                    form.attr('action', action);
+                    form.attr('method', 'post');
+                    // form的target属性决定form在哪个页面提交
+                    // _self -> 当前页面 _blank -> 新页面
+                    form.attr('target', '_self');
+                    // 创建Input
+                    var goodsId_input = $('<input type="text" name="goodsId" />');
+                    goodsId_input.attr('value', checkoutForm.goodsId);
+                    var skuId_input = $('<input type="text" name="skuId" />');
+                    skuId_input.attr('value', checkoutForm.skuId);
+                    var salesAttr_input = $('<input type="text" name="salesAttr" />');
+                    salesAttr_input.attr('value', checkoutForm.salesAttr);
+                    var num_input = $('<input type="text" name="num" />');
+                    num_input.attr('value', checkoutForm.num);
+                    // 附加到Form
+                    form.append(goodsId_input);
+                    form.append(skuId_input);
+                    form.append(salesAttr_input);
+                    form.append(num_input);
+                    // 提交表单
+                    form.submit();
+                    // 注意return false取消链接的默认动作
+                    return false;
+                }
+            })
+        }
+
         tapEvent();
         numEvent();
         attrEvent();
         initSliderData();
         addToCartEvent();
         goCartEvent();
+        buyEvent();
 
 
         $(".ui-tab-nav li").tap(function () {

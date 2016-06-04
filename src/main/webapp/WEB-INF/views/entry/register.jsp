@@ -14,9 +14,10 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
     <title>快速注册</title>
-    <link href="../css/frozen.css" rel="stylesheet" type="text/css"/>
-    <link href="../css/homall.css" rel="stylesheet" type="text/css"/>
-    <script type="text/javascript" src="../js/lib/zeptojs/zepto.min.js"></script>
+    <link href="<c:url value="${pageContext.request.contextPath}/h/css/frozen.css"/>" rel="stylesheet" type="text/css"/>
+    <link href="<c:url value="${pageContext.request.contextPath}/h/css/homall.css"/>" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript"
+            src="<c:url value="${pageContext.request.contextPath}/h/js/lib/zeptojs/zepto.min.js"/>"></script>
 </head>
 <body>
 <header id="header" class="header">
@@ -92,8 +93,9 @@
 </div>
 
 </body>
-<script type="text/javascript" src="../js/frozen.js"></script>
-<script type="text/javascript" src="../js/util/base64.min.js"></script>
+<script type="text/javascript" src="<c:url value="${pageContext.request.contextPath}/h/js/frozen.js"/>"></script>
+<script type="text/javascript"
+        src="<c:url value="${pageContext.request.contextPath}/h/js/util/base64.min.js"/>"></script>
 <script>
     var prefix = "${pageContext.request.scheme}" + "://" + "${pageContext.request.serverName}" + ":" + "${pageContext.request.localPort}" + "/";
 

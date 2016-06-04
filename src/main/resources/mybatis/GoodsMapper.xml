@@ -30,7 +30,7 @@
         select
         <include refid="Base_Column_List"/>
         from h_goods
-        where id = #{id,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER} AND is_del = 0
     </select>
     <select id="selectListPagedWithoutPulloff" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select

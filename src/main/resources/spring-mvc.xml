@@ -102,5 +102,17 @@
         <property name="maxInMemorySize" value="40960"/>
     </bean>
 
-
+    <!-- 异常拦截 -->
+    <bean id="exceptionResolver" class="com.hooper.hoshop.common.exception.MyExceptionHandler">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="com.hooper.hoshop.common.exception.SystemException">error/500</prop>
+                <prop key="com.hooper.hoshop.common.exception.BusinessException">error/errorpage</prop>
+                <prop key="com.hooper.hoshop.common.exception.UserUnloginException">entry/login</prop>
+                <prop key="com.hooper.hoshop.common.exception.CheckOutExcpetion">orders/checkoutError</prop>
+                <prop key="com.hooper.hoshop.common.exception.NoFoundException">error/404</prop>
+                <prop key="java.lang.exception">error/500</prop>
+            </props>
+        </property>
+    </bean>
 </beans>

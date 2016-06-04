@@ -1,188 +1,218 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hooper.hoshop.dao.OrderGoodsMapper">
-    <resultMap id="BaseResultMap" type="com.hooper.hoshop.entity.OrderGoods">
-        <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="goods_id" property="goodsId" jdbcType="INTEGER"/>
-        <result column="order_id" property="orderId" jdbcType="INTEGER"/>
-        <result column="goods_pic" property="goodsPic" jdbcType="VARCHAR"/>
-        <result column="sku_id" property="skuId" jdbcType="VARCHAR"/>
-        <result column="sales_attr" property="salesAttr" jdbcType="VARCHAR"/>
-        <result column="goods_title" property="goodsTitle" jdbcType="VARCHAR"/>
-        <result column="o_price" property="oPrice" jdbcType="DECIMAL"/>
-        <result column="price" property="price" jdbcType="DECIMAL"/>
-        <result column="num" property="num" jdbcType="INTEGER"/>
-        <result column="c_time" property="cTime" jdbcType="BIGINT"/>
-        <result column="d_time" property="dTime" jdbcType="BIGINT"/>
-        <result column="is_del" property="isDel" jdbcType="BIT"/>
-    </resultMap>
-    <sql id="Base_Column_List">
-        id, goods_id, order_id, goods_pic, sku_id, sales_attr, goods_title, o_price, price,
-        num, c_time, d_time, is_del
-    </sql>
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-        select
-        <include refid="Base_Column_List"/>
-        from h_order_goods
-        where id = #{id,jdbcType=INTEGER}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        delete from h_order_goods
-        where id = #{id,jdbcType=INTEGER}
-    </delete>
-    <insert id="insert" parameterType="com.hooper.hoshop.entity.OrderGoods">
-        insert into h_order_goods (id, goods_id, order_id,
-        goods_pic, sku_id, sales_attr,
-        goods_title, o_price, price,
-        num, c_time, d_time, is_del
-        )
-        values (#{id,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER},
-        #{goodsPic,jdbcType=VARCHAR}, #{skuId,jdbcType=VARCHAR}, #{salesAttr,jdbcType=VARCHAR},
-        #{goodsTitle,jdbcType=VARCHAR}, #{oPrice,jdbcType=DECIMAL}, #{price,jdbcType=DECIMAL},
-        #{num,jdbcType=INTEGER}, #{cTime,jdbcType=BIGINT}, #{dTime,jdbcType=BIGINT}, #{isDel,jdbcType=BIT}
-        )
-    </insert>
-    <insert id="insertSelective" parameterType="com.hooper.hoshop.entity.OrderGoods">
-        insert into h_order_goods
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
-            <if test="goodsId != null">
-                goods_id,
-            </if>
-            <if test="orderId != null">
-                order_id,
-            </if>
-            <if test="goodsPic != null">
-                goods_pic,
-            </if>
-            <if test="skuId != null">
-                sku_id,
-            </if>
-            <if test="salesAttr != null">
-                sales_attr,
-            </if>
-            <if test="goodsTitle != null">
-                goods_title,
-            </if>
-            <if test="oPrice != null">
-                o_price,
-            </if>
-            <if test="price != null">
-                price,
-            </if>
-            <if test="num != null">
-                num,
-            </if>
-            <if test="cTime != null">
-                c_time,
-            </if>
-            <if test="dTime != null">
-                d_time,
-            </if>
-            <if test="isDel != null">
-                is_del,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=INTEGER},
-            </if>
-            <if test="goodsId != null">
-                #{goodsId,jdbcType=INTEGER},
-            </if>
-            <if test="orderId != null">
-                #{orderId,jdbcType=INTEGER},
-            </if>
-            <if test="goodsPic != null">
-                #{goodsPic,jdbcType=VARCHAR},
-            </if>
-            <if test="skuId != null">
-                #{skuId,jdbcType=VARCHAR},
-            </if>
-            <if test="salesAttr != null">
-                #{salesAttr,jdbcType=VARCHAR},
-            </if>
-            <if test="goodsTitle != null">
-                #{goodsTitle,jdbcType=VARCHAR},
-            </if>
-            <if test="oPrice != null">
-                #{oPrice,jdbcType=DECIMAL},
-            </if>
-            <if test="price != null">
-                #{price,jdbcType=DECIMAL},
-            </if>
-            <if test="num != null">
-                #{num,jdbcType=INTEGER},
-            </if>
-            <if test="cTime != null">
-                #{cTime,jdbcType=BIGINT},
-            </if>
-            <if test="dTime != null">
-                #{dTime,jdbcType=BIGINT},
-            </if>
-            <if test="isDel != null">
-                #{isDel,jdbcType=BIT},
-            </if>
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.hooper.hoshop.entity.OrderGoods">
-        update h_order_goods
-        <set>
-            <if test="goodsId != null">
-                goods_id = #{goodsId,jdbcType=INTEGER},
-            </if>
-            <if test="orderId != null">
-                order_id = #{orderId,jdbcType=INTEGER},
-            </if>
-            <if test="goodsPic != null">
-                goods_pic = #{goodsPic,jdbcType=VARCHAR},
-            </if>
-            <if test="skuId != null">
-                sku_id = #{skuId,jdbcType=VARCHAR},
-            </if>
-            <if test="salesAttr != null">
-                sales_attr = #{salesAttr,jdbcType=VARCHAR},
-            </if>
-            <if test="goodsTitle != null">
-                goods_title = #{goodsTitle,jdbcType=VARCHAR},
-            </if>
-            <if test="oPrice != null">
-                o_price = #{oPrice,jdbcType=DECIMAL},
-            </if>
-            <if test="price != null">
-                price = #{price,jdbcType=DECIMAL},
-            </if>
-            <if test="num != null">
-                num = #{num,jdbcType=INTEGER},
-            </if>
-            <if test="cTime != null">
-                c_time = #{cTime,jdbcType=BIGINT},
-            </if>
-            <if test="dTime != null">
-                d_time = #{dTime,jdbcType=BIGINT},
-            </if>
-            <if test="isDel != null">
-                is_del = #{isDel,jdbcType=BIT},
-            </if>
-        </set>
-        where id = #{id,jdbcType=INTEGER}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.hooper.hoshop.entity.OrderGoods">
-        update h_order_goods
-        set goods_id = #{goodsId,jdbcType=INTEGER},
+  <resultMap id="BaseResultMap" type="com.hooper.hoshop.entity.OrderGoods">
+    <id column="id" property="id" jdbcType="INTEGER"/>
+    <result column="goods_id" property="goodsId" jdbcType="INTEGER"/>
+    <result column="order_id" property="orderId" jdbcType="INTEGER"/>
+    <result column="goods_pic" property="goodsPic" jdbcType="VARCHAR"/>
+    <result column="sku_id" property="skuId" jdbcType="VARCHAR"/>
+    <result column="attr_id" property="attrId" jdbcType="INTEGER"/>
+    <result column="attr_id1" property="attrId1" jdbcType="INTEGER"/>
+    <result column="sales_attr" property="salesAttr" jdbcType="VARCHAR"/>
+    <result column="goods_title" property="goodsTitle" jdbcType="VARCHAR"/>
+    <result column="o_price" property="oPrice" jdbcType="DECIMAL"/>
+    <result column="price" property="price" jdbcType="DECIMAL"/>
+    <result column="num" property="num" jdbcType="INTEGER"/>
+    <result column="c_time" property="cTime" jdbcType="BIGINT"/>
+    <result column="d_time" property="dTime" jdbcType="BIGINT"/>
+    <result column="is_del" property="isDel" jdbcType="BIT"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, goods_id, order_id, goods_pic, sku_id, attr_id, attr_id1, sales_attr, goods_title, 
+    o_price, price, num, c_time, d_time, is_del
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List"/>
+    from h_order_goods
+    where id = #{id,jdbcType=INTEGER} AND is_del = 0
+  </select>
+  <select id="selectByOrderId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List"/>
+    from h_order_goods
+    where order_id = #{id,jdbcType=INTEGER} AND is_del = 0
+  </select>
+  <select id="selectOneByOrderId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List"/>
+    from h_order_goods
+    where order_id = #{id,jdbcType=INTEGER} AND is_del = 0
+    Limit 1
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from h_order_goods
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hooper.hoshop.entity.OrderGoods">
+    insert into h_order_goods (goods_id, order_id,
+      goods_pic, sku_id, attr_id, 
+      attr_id1, sales_attr, goods_title, 
+      o_price, price, num, 
+      c_time, d_time, is_del)
+    values (#{goodsId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER},
+      #{goodsPic,jdbcType=VARCHAR}, #{skuId,jdbcType=VARCHAR}, #{attrId,jdbcType=INTEGER}, 
+      #{attrId1,jdbcType=INTEGER}, #{salesAttr,jdbcType=VARCHAR}, #{goodsTitle,jdbcType=VARCHAR}, 
+      #{oPrice,jdbcType=DECIMAL}, #{price,jdbcType=DECIMAL}, #{num,jdbcType=INTEGER}, 
+      #{cTime,jdbcType=BIGINT}, #{dTime,jdbcType=BIGINT}, #{isDel,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hooper.hoshop.entity.OrderGoods">
+    insert into h_order_goods
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+
+      <if test="goodsId != null">
+        goods_id,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="goodsPic != null">
+        goods_pic,
+      </if>
+      <if test="skuId != null">
+        sku_id,
+      </if>
+      <if test="attrId != null">
+        attr_id,
+      </if>
+      <if test="attrId1 != null">
+        attr_id1,
+      </if>
+      <if test="salesAttr != null">
+        sales_attr,
+      </if>
+      <if test="goodsTitle != null">
+        goods_title,
+      </if>
+      <if test="oPrice != null">
+        o_price,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="num != null">
+        num,
+      </if>
+      <if test="cTime != null">
+        c_time,
+      </if>
+      <if test="dTime != null">
+        d_time,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="goodsId != null">
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsPic != null">
+        #{goodsPic,jdbcType=VARCHAR},
+      </if>
+      <if test="skuId != null">
+        #{skuId,jdbcType=VARCHAR},
+      </if>
+      <if test="attrId != null">
+        #{attrId,jdbcType=INTEGER},
+      </if>
+      <if test="attrId1 != null">
+        #{attrId1,jdbcType=INTEGER},
+      </if>
+      <if test="salesAttr != null">
+        #{salesAttr,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsTitle != null">
+        #{goodsTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="oPrice != null">
+        #{oPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="cTime != null">
+        #{cTime,jdbcType=BIGINT},
+      </if>
+      <if test="dTime != null">
+        #{dTime,jdbcType=BIGINT},
+      </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hooper.hoshop.entity.OrderGoods">
+    update h_order_goods
+    <set>
+      <if test="goodsId != null">
+        goods_id = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null">
         order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsPic != null">
         goods_pic = #{goodsPic,jdbcType=VARCHAR},
+      </if>
+      <if test="skuId != null">
         sku_id = #{skuId,jdbcType=VARCHAR},
+      </if>
+      <if test="attrId != null">
+        attr_id = #{attrId,jdbcType=INTEGER},
+      </if>
+      <if test="attrId1 != null">
+        attr_id1 = #{attrId1,jdbcType=INTEGER},
+      </if>
+      <if test="salesAttr != null">
         sales_attr = #{salesAttr,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsTitle != null">
         goods_title = #{goodsTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="oPrice != null">
         o_price = #{oPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="price != null">
         price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="num != null">
         num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="cTime != null">
         c_time = #{cTime,jdbcType=BIGINT},
+      </if>
+      <if test="dTime != null">
         d_time = #{dTime,jdbcType=BIGINT},
-        is_del = #{isDel,jdbcType=BIT}
-        where id = #{id,jdbcType=INTEGER}
-    </update>
+      </if>
+      <if test="isDel != null">
+        is_del = #{isDel,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hooper.hoshop.entity.OrderGoods">
+    update h_order_goods
+    set goods_id = #{goodsId,jdbcType=INTEGER},
+    order_id = #{orderId,jdbcType=INTEGER},
+    goods_pic = #{goodsPic,jdbcType=VARCHAR},
+    sku_id = #{skuId,jdbcType=VARCHAR},
+    attr_id = #{attrId,jdbcType=INTEGER},
+    attr_id1 = #{attrId1,jdbcType=INTEGER},
+    sales_attr = #{salesAttr,jdbcType=VARCHAR},
+    goods_title = #{goodsTitle,jdbcType=VARCHAR},
+    o_price = #{oPrice,jdbcType=DECIMAL},
+    price = #{price,jdbcType=DECIMAL},
+    num = #{num,jdbcType=INTEGER},
+    c_time = #{cTime,jdbcType=BIGINT},
+    d_time = #{dTime,jdbcType=BIGINT},
+    is_del = #{isDel,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>

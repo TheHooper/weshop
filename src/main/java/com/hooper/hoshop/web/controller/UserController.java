@@ -1,5 +1,6 @@
 package com.hooper.hoshop.web.controller;
 
+import com.hooper.hoshop.common.aspect.annotation.UserLoginAnnotation;
 import com.hooper.hoshop.common.constant.WebConstant;
 import com.hooper.hoshop.common.constant.WebErrorConstant;
 import com.hooper.hoshop.common.exception.BusinessException;
@@ -107,18 +108,32 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "/forgetPassword", method = {RequestMethod.POST, RequestMethod.GET})
+    @RequestMapping(value = "/forgetPassword", method = {RequestMethod.GET})
     public String forgetPasswordView() {
         return "entry/forgetPassword";
     }
 
+
+    @RequestMapping(value = "/forgetPassword", method = {RequestMethod.POST})
+    public String forgetPassword() {
+        return "entry/forgetPassword";
+    }
+
+    @UserLoginAnnotation
     @RequestMapping(value = "/central", method = {RequestMethod.POST, RequestMethod.GET})
     public String central() {
         return "user/central";
     }
 
+    @UserLoginAnnotation
     @RequestMapping("carts")
     public String shoppingCarts() {
         return "/user/carts";
+    }
+
+    @UserLoginAnnotation
+    @RequestMapping("orders")
+    public String ordersView() {
+        return "/user/orders";
     }
 }

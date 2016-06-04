@@ -14,9 +14,10 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
     <title>ho商城个人中心</title>
-    <link href="../css/frozen.css" rel="stylesheet" type="text/css"/>
-    <link href="../css/homall.css" rel="stylesheet" type="text/css"/>
-    <script type="text/javascript" src="../js/lib/zeptojs/zepto.min.js"></script>
+    <link href="<c:url value="${pageContext.request.contextPath}/h/css/frozen.css"/>" rel="stylesheet" type="text/css"/>
+    <link href="<c:url value="${pageContext.request.contextPath}/h/css/homall.css"/>" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript"
+            src="<c:url value="${pageContext.request.contextPath}/h/js/lib/zeptojs/zepto.min.js"/>"></script>
 </head>
 <body>
 <div id="header" class="header">
@@ -28,7 +29,8 @@
 <div id="avatar-section"
      class="ui-flex ui-flex-ver ui-flex-align-center ui-flex-pack-center padding-vertical-m back-white">
     <div class="ui-avatar-lg">
-        <span style="background-image:url(../img/avatar/avatar.jpg)"></span>
+        <span style="background-image:url(<c:url
+                value="${pageContext.request.contextPath}/h/img/avatar/avatar.jpg"/>)"></span>
     </div>
     <div class="ui-flex-pack-end">
         <h3 id="username">${ho_user.userName}</h3>
@@ -39,8 +41,10 @@
 <!-- tool bar -->
 <div class="ui-row-flex ui-border ui-whitespace padding-vertical-s margin-top-s text-center back-white">
     <div class="ui-col ui-col">
+        <a href="/h/user/orders" class="color-black">
         <i class="ui-icon-dingdan"></i>
         <h5>全部订单</h5>
+        </a>
     </div>
     <div class="ui-col ui-col">
         <i class="ui-icon-daifahuo"></i>
@@ -129,8 +133,9 @@
 </div>
 <!-- footer end-->
 </body>
-<script type="text/javascript" src="../js/frozen.js"></script>
-<script type="text/javascript" src="../js/trianglify/trianglify.min.js"></script>
+<script type="text/javascript" src="<c:url value="${pageContext.request.contextPath}/h/js/frozen.js"/>"></script>
+<script type="text/javascript"
+        src="<c:url value="${pageContext.request.contextPath}/h/js/trianglify/trianglify.min.js"/>"></script>
 <script type="text/javascript">
     (function () {
         var avatarBackground = Trianglify({

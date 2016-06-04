@@ -18,4 +18,6 @@ public interface CartGoodsMapper extends GenericDao<CartGoods, Integer> {
     int updateByPrimaryKeySelective(CartGoods record);
 
     int updateByPrimaryKey(CartGoods record);
+
+    int cleanCartsByUserId(Integer id);
 }

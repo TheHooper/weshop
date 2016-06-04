@@ -14,9 +14,10 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
     <title>购物车</title>
-    <link href="../css/frozen.css" rel="stylesheet" type="text/css"/>
-    <link href="../css/homall.css" rel="stylesheet" type="text/css"/>
-    <script type="text/javascript" src="../js/lib/zeptojs/zepto.min.js"></script>
+    <link href="<c:url value="${pageContext.request.contextPath}/h/css/frozen.css"/>" rel="stylesheet" type="text/css"/>
+    <link href="<c:url value="${pageContext.request.contextPath}/h/css/homall.css"/>" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript"
+            src="<c:url value="${pageContext.request.contextPath}/h/js/lib/zeptojs/zepto.min.js"/>"></script>
 </head>
 <body>
 <header id="header" class="header">
@@ -25,7 +26,7 @@
 </header>
 
 <!-- footer part -->
-<footer id="buy-footer" class="ui-footer" style="height: 48px">
+<footer id="buy-footer" class="ui-footer" style="height: 48px;visibility:hidden">
     <div class="ui-row-flex ui-flex-align-center text-center hoTopic-footer" style="height: 100%">
         <div class="ui-col ui-col-1">
         </div>
@@ -34,7 +35,9 @@
         <div class="ui-col ui-col-2">
         </div>
         <div class="ui-col ui-col-2 back-blue" style="height: 100%;line-height: 48px">
-            <h4>结算</h4>
+            <a href="/h/orders/checkout">
+                <h4 class="color-white">结算</h4>
+            </a>
         </div>
     </div>
 </footer>
@@ -48,20 +51,26 @@
         </div>
     </li>
     <li class="ui-col ui-flex ui-flex-ver  ui-flex-align-end ui-flex-pack-center">
-        <div id="edit" class="padding-right-s">
+        <div id="edit" class="padding-right-s" style="visibility:hidden">
             <i class="ui-icon-set txt-lg"><span>编辑</span></i>
         </div>
     </li>
 </ul>
 <!-- tool bar E -->
 
+<section class="ui-notice" style="height: 50%">
+    <i></i>
+    <p>购物车空空如也~</p>
+</section>
+
 <ul id="carts-ul" class="ui-list  ui-border-tb ho-margin-bottom-sm">
 
 </ul>
 
 </body>
-<link href="../css/all-animation.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="../js/frozen.js"></script>
+<link href="<c:url value="${pageContext.request.contextPath}/h/css/all-animation.css"/>" rel="stylesheet"
+      type="text/css"/>
+<script type="text/javascript" src="<c:url value="${pageContext.request.contextPath}/h/js/frozen.js"/>"></script>
 <script type="text/javascript">
     (function () {
         var prefix = "${pageContext.request.scheme}" + "://" + "${pageContext.request.serverName}" + ":" + "${pageContext.request.localPort}" + "/";
@@ -72,6 +81,7 @@
                 $('#edit').children("i").children("span").text("保存");
                 $('.h-list-checkbox').css("display", "block");
                 $('.h-list-num').css("display", "block");
+                $(".carts-num-tip").css("display", "none");
                 $('.h-list-del').css("display", "block");
                 $('.h-list-checkbox').toggleClass("flash-bang");
                 $('.h-list-num').toggleClass("flash-bang");
@@ -84,6 +94,7 @@
                 $('#edit').children("i").children("span").text("编辑");
                 $('.h-list-checkbox').css("display", "none");
                 $('.h-list-num').css("display", "none");
+                $(".carts-num-tip").css("display", "block");
                 $('.h-list-del').css("display", "none");
                 $('.h-list-checkbox').toggleClass("flash-bang");
                 $('.h-list-num').toggleClass("flash-bang");
@@ -101,7 +112,7 @@
             return $(
                     '<li class="ui-border-t">'
                     + '<div class="h-list-center h-list-checkbox" style="display: none">'
-                    + '<input type="checkbox"/>'
+                    + '<input type="checkbox" style="display: none"/>'
                     + '<input value="' + carts.goodsId + '" class="carts-goodsId" type="checkbox" style="display: none"/>'
                     + '</div>'
                     + '<div class="ui-list-img">'
@@ -111,6 +122,7 @@
                     + '<div class="ui-list-info">'
                     + ' <h4 class="ui-nowrap carts-title">' + carts.goodsTitle + '</h4>'
                     + '<p class="ui-nowrap carts-salesAttr">' + carts.salesAttr + '</p>'
+                    + '<p class="ui-nowrap carts-num-tip">x' + carts.num + '</p>'
                     + '<div class="h-list-num" style="display: none">'
                     + '<input type="button" value="-" class="num-btn" field="quantity"/>'
                     + '<input type="text" name="num" value="' + carts.num + '" class="num carts-num"/>'
@@ -193,7 +205,7 @@
                     dataType: "json",
                     success: function (data) {
                         if (data.code == "0") {
-                            console.log(data);
+                            loadCarts();
                         }
                     },
                     error: function (msg) {
@@ -220,6 +232,12 @@
                 success: function (data) {
                     if (typeof (data.code) == "undefined") {
                         console.log(data);
+                        $("#carts-ul").html("");
+                        if ($(data).size() > 0) {
+                            $(".ui-notice").css("display", "none");
+                            $("#edit").css("visibility", "visible");
+                            $("#buy-footer").css("visibility", "visible");
+                        }
                         $(data).each(function (i, e) {
                             var li = getChartGood(e);
                             $("#carts-ul").append(li);

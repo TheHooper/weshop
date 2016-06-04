@@ -1,6 +1,6 @@
 package com.hooper.hoshop.entity;
 
-public class UserRate {
+public class Rate {
     private Integer id;
 
     private Integer userId;
@@ -9,7 +9,11 @@ public class UserRate {
 
     private Integer orderId;
 
-    private Boolean level;
+    private String username;
+
+    private Integer level;
+
+    private Integer score;
 
     private String comment;
 
@@ -20,6 +24,10 @@ public class UserRate {
     private String picUrl2;
 
     private String picUrl3;
+
+    private Long cTime;
+
+    private Long uTime;
 
     private Boolean isDel;
 
@@ -55,12 +63,28 @@ public class UserRate {
         this.orderId = orderId;
     }
 
-    public Boolean getLevel() {
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
+    }
+
+    public Integer getLevel() {
         return level;
     }
 
-    public void setLevel(Boolean level) {
+    public void setLevel(Integer level) {
         this.level = level;
+    }
+
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
     }
 
     public String getComment() {
@@ -101,6 +125,22 @@ public class UserRate {
 
     public void setPicUrl3(String picUrl3) {
         this.picUrl3 = picUrl3 == null ? null : picUrl3.trim();
+    }
+
+    public Long getcTime() {
+        return cTime;
+    }
+
+    public void setcTime(Long cTime) {
+        this.cTime = cTime;
+    }
+
+    public Long getuTime() {
+        return uTime;
+    }
+
+    public void setuTime(Long uTime) {
+        this.uTime = uTime;
     }
 
     public Boolean getIsDel() {

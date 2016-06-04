@@ -5,9 +5,7 @@ import com.hooper.hoshop.common.constant.WebConstant;
 import com.hooper.hoshop.common.exception.UserUnloginException;
 import com.hooper.hoshop.entity.User;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
-import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -39,9 +37,9 @@ public class UserLoginAspect {
         HttpSession session = attr.getRequest().getSession(true);
         User user = (User) session.getAttribute(WebConstant.SESSION_SIGNIN_USER);
         if (user == null) {
-
+            throw new UserUnloginException();
         } else {
-            System.out.println("before aspect executing: " + user.toString());
+
         }
 //        throw new UserUnloginException();
     }
@@ -50,6 +48,27 @@ public class UserLoginAspect {
 //    public void afterReturning(JoinPoint joinPoint, Object returnVal) {
 //        System.out.println("afterReturning executed, return result is "
 //                + returnVal);
+//    }
+
+//        @Around(value = "userAccess()&&" +
+//            "@annotation(userLoginAnnotation)")
+//    public void around(ProceedingJoinPoint pjp, UserLoginAnnotation userLoginAnnotation) throws Throwable {
+//            //如果需要这里可以取出参数进行处理
+//            //Object[] args = joinPoint.getArgs();
+//            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+//            HttpSession session = attr.getRequest().getSession(true);
+//            HttpServletRequest request = attr.getRequest();
+//            User user = (User) session.getAttribute(WebConstant.SESSION_SIGNIN_USER);
+//            if (user == null) {
+//                ModelAndView modelAndView = new ModelAndView("/user/login");
+//                modelAndView.addObject("backUrl",request.getRequestURI());
+//                Object[] objects = new Object[1];
+//                objects[0] = modelAndView;
+//                pjp.proceed(objects);
+//            } else {
+//                pjp.proceed();
+//            }
+////        throw new UserUnloginException()
 //    }
 
 //    @Around("userAccess()")

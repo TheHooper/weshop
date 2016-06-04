@@ -21,4 +21,9 @@ public class WebErrorConstant {
     public static final String SMS_SEND_ERROR = "30000";
 
 
+    //buy
+    public static final String OUT_OF_STOCK = "4000";
+    public static final String MISSED_SKU = "4001";
+    public static final String MISSED_ORDER = "4011";
+    public static final String ILLEGAL_USER = "4012";
 }

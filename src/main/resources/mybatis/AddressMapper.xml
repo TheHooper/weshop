@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hooper.hoshop.dao.AddressMapper">
+    <resultMap id="BaseResultMap" type="com.hooper.hoshop.entity.Address">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+        <result column="province_id" property="provinceId" jdbcType="INTEGER"/>
+        <result column="province" property="province" jdbcType="VARCHAR"/>
+        <result column="city_id" property="cityId" jdbcType="INTEGER"/>
+        <result column="city" property="city" jdbcType="VARCHAR"/>
+        <result column="area_id" property="areaId" jdbcType="INTEGER"/>
+        <result column="area" property="area" jdbcType="VARCHAR"/>
+        <result column="zipcode_id" property="zipcodeId" jdbcType="INTEGER"/>
+        <result column="zipcode" property="zipcode" jdbcType="VARCHAR"/>
+        <result column="detail" property="detail" jdbcType="VARCHAR"/>
+        <result column="is_default" property="isDefault" jdbcType="BIT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, user_id, name, mobile, province_id, province, city_id, city, area_id, area, zipcode_id,
+        zipcode, detail, is_default
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from h_address
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectAllByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from h_address
+        where user_id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectDefaultByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from h_address
+        where user_id = #{id,jdbcType=INTEGER} AND is_default = 1
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from h_address
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.hooper.hoshop.entity.Address">
+        insert into h_address (user_id, name,
+        mobile, province_id, province,
+        city_id, city, area_id,
+        area, zipcode_id, zipcode,
+        detail, is_default)
+        values (#{userId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+        #{mobile,jdbcType=VARCHAR}, #{provinceId,jdbcType=INTEGER}, #{province,jdbcType=VARCHAR},
+        #{cityId,jdbcType=INTEGER}, #{city,jdbcType=VARCHAR}, #{areaId,jdbcType=INTEGER},
+        #{area,jdbcType=VARCHAR}, #{zipcodeId,jdbcType=INTEGER}, #{zipcode,jdbcType=VARCHAR},
+        #{detail,jdbcType=VARCHAR}, #{isDefault,jdbcType=BIT})
+    </insert>
+    <insert id="insertSelective" parameterType="com.hooper.hoshop.entity.Address">
+        insert into h_address
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="mobile != null">
+                mobile,
+            </if>
+            <if test="provinceId != null">
+                province_id,
+            </if>
+            <if test="province != null">
+                province,
+            </if>
+            <if test="cityId != null">
+                city_id,
+            </if>
+            <if test="city != null">
+                city,
+            </if>
+            <if test="areaId != null">
+                area_id,
+            </if>
+            <if test="area != null">
+                area,
+            </if>
+            <if test="zipcodeId != null">
+                zipcode_id,
+            </if>
+            <if test="zipcode != null">
+                zipcode,
+            </if>
+            <if test="detail != null">
+                detail,
+            </if>
+            <if test="isDefault != null">
+                is_default,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="provinceId != null">
+                #{provinceId,jdbcType=INTEGER},
+            </if>
+            <if test="province != null">
+                #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="cityId != null">
+                #{cityId,jdbcType=INTEGER},
+            </if>
+            <if test="city != null">
+                #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="areaId != null">
+                #{areaId,jdbcType=INTEGER},
+            </if>
+            <if test="area != null">
+                #{area,jdbcType=VARCHAR},
+            </if>
+            <if test="zipcodeId != null">
+                #{zipcodeId,jdbcType=INTEGER},
+            </if>
+            <if test="zipcode != null">
+                #{zipcode,jdbcType=VARCHAR},
+            </if>
+            <if test="detail != null">
+                #{detail,jdbcType=VARCHAR},
+            </if>
+            <if test="isDefault != null">
+                #{isDefault,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hooper.hoshop.entity.Address">
+        update h_address
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                mobile = #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="provinceId != null">
+                province_id = #{provinceId,jdbcType=INTEGER},
+            </if>
+            <if test="province != null">
+                province = #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="cityId != null">
+                city_id = #{cityId,jdbcType=INTEGER},
+            </if>
+            <if test="city != null">
+                city = #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="areaId != null">
+                area_id = #{areaId,jdbcType=INTEGER},
+            </if>
+            <if test="area != null">
+                area = #{area,jdbcType=VARCHAR},
+            </if>
+            <if test="zipcodeId != null">
+                zipcode_id = #{zipcodeId,jdbcType=INTEGER},
+            </if>
+            <if test="zipcode != null">
+                zipcode = #{zipcode,jdbcType=VARCHAR},
+            </if>
+            <if test="detail != null">
+                detail = #{detail,jdbcType=VARCHAR},
+            </if>
+            <if test="isDefault != null">
+                is_default = #{isDefault,jdbcType=BIT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.hooper.hoshop.entity.Address">
+        update h_address
+        set user_id = #{userId,jdbcType=INTEGER},
+        name = #{name,jdbcType=VARCHAR},
+        mobile = #{mobile,jdbcType=VARCHAR},
+        province_id = #{provinceId,jdbcType=INTEGER},
+        province = #{province,jdbcType=VARCHAR},
+        city_id = #{cityId,jdbcType=INTEGER},
+        city = #{city,jdbcType=VARCHAR},
+        area_id = #{areaId,jdbcType=INTEGER},
+        area = #{area,jdbcType=VARCHAR},
+        zipcode_id = #{zipcodeId,jdbcType=INTEGER},
+        zipcode = #{zipcode,jdbcType=VARCHAR},
+        detail = #{detail,jdbcType=VARCHAR},
+        is_default = #{isDefault,jdbcType=BIT}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

@@ -1,5 +1,7 @@
 package com.hooper.hoshop.entity;
 
+import java.math.BigDecimal;
+
 public class OrderGoods {
     private Integer id;
 
@@ -11,13 +13,17 @@ public class OrderGoods {
 
     private String skuId;
 
+    private Integer attrId;
+
+    private Integer attrId1;
+
     private String salesAttr;
 
     private String goodsTitle;
 
-    private Long oPrice;
+    private BigDecimal oPrice;
 
-    private Long price;
+    private BigDecimal price;
 
     private Integer num;
 
@@ -67,6 +73,22 @@ public class OrderGoods {
         this.skuId = skuId == null ? null : skuId.trim();
     }
 
+    public Integer getAttrId() {
+        return attrId;
+    }
+
+    public void setAttrId(Integer attrId) {
+        this.attrId = attrId;
+    }
+
+    public Integer getAttrId1() {
+        return attrId1;
+    }
+
+    public void setAttrId1(Integer attrId1) {
+        this.attrId1 = attrId1;
+    }
+
     public String getSalesAttr() {
         return salesAttr;
     }
@@ -83,19 +105,19 @@ public class OrderGoods {
         this.goodsTitle = goodsTitle == null ? null : goodsTitle.trim();
     }
 
-    public Long getoPrice() {
+    public BigDecimal getoPrice() {
         return oPrice;
     }
 
-    public void setoPrice(Long oPrice) {
+    public void setoPrice(BigDecimal oPrice) {
         this.oPrice = oPrice;
     }
 
-    public Long getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

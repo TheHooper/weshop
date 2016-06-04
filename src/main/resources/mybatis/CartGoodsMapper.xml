@@ -30,6 +30,12 @@
         from h_cart_goods
         where user_id = #{id,jdbcType=INTEGER} AND is_del = 0
     </select>
+    <update id="cleanCartsByUserId" parameterType="com.hooper.hoshop.entity.CartGoods">
+        update h_cart_goods
+        set
+        is_del = 1
+        where user_id = #{id,jdbcType=INTEGER}
+    </update>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from h_cart_goods
     where id = #{id,jdbcType=INTEGER}

@@ -1,0 +1,23 @@
+/* -----------------------------------------------------------------------------
+
+  COMPENENTS - RATING
+  
+----------------------------------------------------------------------------- */
+.c-rating {
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+
+.c-rating__item {
+    height: 24px;
+    width: 24px;
+    background: url("../img/rate/stars.svg");
+    background-position: 0 0;
+    cursor: pointer;
+}
+
+.c-rating__item:hover,
+.c-rating__item.is-active {
+    background-position: -24px 0;
+}
