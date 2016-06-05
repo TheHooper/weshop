@@ -193,6 +193,7 @@
 <script type="text/javascript">
     (function () {
         var prefix = "${pageContext.request.scheme}" + "://" + "${pageContext.request.serverName}" + ":" + "${pageContext.request.localPort}" + "/";
+        console.log(${pageContext.request.contextPath});
 
         var slider = new fz.Scroll('.ui-slider', {
             role: 'slider',
