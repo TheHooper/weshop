@@ -208,8 +208,8 @@
         </div>
     </div>
 
-    <link rel="stylesheet" href="<c:url value="../h/css/tag/tagsinput.css"/>">
-    <script src="<c:url value="../h/js/tag/tagsinput.js"/>"></script>
+    <link rel="stylesheet" href="<c:url value="../css/tag/tagsinput.css"/>">
+    <script src="<c:url value="../js/tag/tagsinput.js"/>"></script>
     <link rel="stylesheet"
           href="<c:url value="../h/admin/css/easyui/themes/metro/datagrid.css"/>"></link>
     <link rel="stylesheet"

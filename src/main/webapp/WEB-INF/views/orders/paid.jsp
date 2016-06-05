@@ -14,10 +14,10 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
     <title>ho商城支付</title>
-    <link href="<c:url value="../h/css/frozen.css"/>" rel="stylesheet" type="text/css"/>
-    <link href="<c:url value="../h/css/homall.css"/>" rel="stylesheet" type="text/css"/>
+    <link href="<c:url value="../css/frozen.css"/>" rel="stylesheet" type="text/css"/>
+    <link href="<c:url value="../css/homall.css"/>" rel="stylesheet" type="text/css"/>
     <script type="text/javascript"
-            src="<c:url value="../h/js/lib/zeptojs/zepto.min.js"/>"></script>
+            src="<c:url value="../js/lib/zeptojs/zepto.min.js"/>"></script>
 </head>
 <body>
 <header id="header" class="header" style="position: absolute;width: 100%">
@@ -37,7 +37,7 @@
 </section>
 
 </body>
-<script type="text/javascript" src="<c:url value="../h/js/frozen.js"/>"></script>
+<script type="text/javascript" src="<c:url value="../js/frozen.js"/>"></script>
 <script>
     var prefix = "${pageContext.request.scheme}" + "://" + "${pageContext.request.serverName}" + ":" + "${pageContext.request.localPort}" + "/";
 

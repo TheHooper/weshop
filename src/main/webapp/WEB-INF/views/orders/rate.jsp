@@ -14,11 +14,11 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
     <title>评价</title>
-    <link href="<c:url value="../h/css/frozen.css"/>" rel="stylesheet" type="text/css"/>
-    <link href="<c:url value="../h/css/homall.css"/>" rel="stylesheet" type="text/css"/>
-    <link href="<c:url value="../h/css/rating.css"/>" rel="stylesheet" type="text/css"/>
+    <link href="<c:url value="../css/frozen.css"/>" rel="stylesheet" type="text/css"/>
+    <link href="<c:url value="../css/homall.css"/>" rel="stylesheet" type="text/css"/>
+    <link href="<c:url value="../css/rating.css"/>" rel="stylesheet" type="text/css"/>
     <script type="text/javascript"
-            src="<c:url value="../h/js/lib/zeptojs/zepto.min.js"/>"></script>
+            src="<c:url value="../js/lib/zeptojs/zepto.min.js"/>"></script>
 </head>
 <body>
 
@@ -94,11 +94,11 @@
 </section>
 
 </body>
-<%--<link href="<c:url value="../h/css/all-animation.css">" rel="stylesheet" type="text/css"/>--%>
-<script type="text/javascript" src="<c:url value="../h/js/frozen.js"/>"></script>
+<%--<link href="<c:url value="../css/all-animation.css">" rel="stylesheet" type="text/css"/>--%>
+<script type="text/javascript" src="<c:url value="../js/frozen.js"/>"></script>
 <script type="text/javascript"
-        src="<c:url value="../h/js/homall/address.js"/>"></script>
-<script type="text/javascript" src="<c:url value="../h/js/util/rating.js"/>"></script>
+        src="<c:url value="../js/homall/address.js"/>"></script>
+<script type="text/javascript" src="<c:url value="../js/util/rating.js"/>"></script>
 <script type="text/javascript">
     (function () {
         var prefix = "${pageContext.request.scheme}" + "://" + "${pageContext.request.serverName}" + ":" + "${pageContext.request.localPort}" + "/";
