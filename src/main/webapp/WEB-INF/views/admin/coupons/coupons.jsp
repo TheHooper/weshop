@@ -208,14 +208,14 @@
         </div>
     </div>
 
-    <link rel="stylesheet" href="<c:url value="${pageContext.request.contextPath}/h/css/tag/tagsinput.css"/>">
-    <script src="<c:url value="${pageContext.request.contextPath}/h/js/tag/tagsinput.js"/>"></script>
+    <link rel="stylesheet" href="<c:url value="../h/css/tag/tagsinput.css"/>">
+    <script src="<c:url value="../h/js/tag/tagsinput.js"/>"></script>
     <link rel="stylesheet"
-          href="<c:url value="${pageContext.request.contextPath}/h/admin/css/easyui/themes/metro/datagrid.css"/>"></link>
+          href="<c:url value="../h/admin/css/easyui/themes/metro/datagrid.css"/>"></link>
     <link rel="stylesheet"
-          href="<c:url value="${pageContext.request.contextPath}/h/admin/css/easyui/themes/metro/pagination.css"/>"></link>
-    <script src="<c:url value="${pageContext.request.contextPath}/h/admin/js/easyui/plugins/jquery.pagination.js"/>"></script>
-    <script src="<c:url value="${pageContext.request.contextPath}/h/admin/js/easyui/plugins/jquery.datagrid.js"/>"></script>
+          href="<c:url value="../h/admin/css/easyui/themes/metro/pagination.css"/>"></link>
+    <script src="<c:url value="../h/admin/js/easyui/plugins/jquery.pagination.js"/>"></script>
+    <script src="<c:url value="../h/admin/js/easyui/plugins/jquery.datagrid.js"/>"></script>
     <script type="text/javascript">
         (function () {
             var prefix = "${pageContext.request.scheme}" + "://" + "${pageContext.request.serverName}" + ":" + "${pageContext.request.localPort}" + "/";

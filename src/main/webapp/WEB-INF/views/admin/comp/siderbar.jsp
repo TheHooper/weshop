@@ -20,27 +20,27 @@
                     <li><a href="admin-404.html"><span class="am-icon-bug"></span> 404</a></li>
                 </ul>
             </li>
-            <li><a href="<c:url value="${pageContext.request.contextPath}/h/admin/goods/list"/>"><span
+            <li><a href="<c:url value="../h/admin/goods/list"/>"><span
                     class="am-icon-barcode"></span>商品管理</a></li>
-            <li><a href="<c:url value="${pageContext.request.contextPath}/h/admin/cat/list"/>"><span
+            <li><a href="<c:url value="../h/admin/cat/list"/>"><span
                     class="am-icon-navicon"></span>类别管理</a></li>
             <li class="admin-parent">
                 <a class="am-cf" data-am-collapse="{target: '#order-collapse-nav'}"><span
                         class="am-icon-list-alt"></span> 订单管理
                     <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
                 <ul class="am-list am-collapse admin-sidebar-sub am-in" id="order-collapse-nav">
-                    <li><a href="<c:url value="${pageContext.request.contextPath}/h//admin/orders/orders"/>"><span
+                    <li><a href="<c:url value="../h//admin/orders/orders"/>"><span
                             class="am-icon-search"></span> 订单查询</a></li>
                     <li>
-                        <a href="<c:url value="${pageContext.request.contextPath}/h//admin/orders/ordersDelivery"/>"><span
+                        <a href="<c:url value="../h//admin/orders/ordersDelivery"/>"><span
                                 class="am-icon-truck"></span> 订单发货</a></li>
                 </ul>
             </li>
-            <li><a href="<c:url value="${pageContext.request.contextPath}/h/admin/cat/list"/>"><span
+            <li><a href="<c:url value="../h/admin/cat/list"/>"><span
                     class="am-icon-comment"></span>评价管理</a></li>
-            <li><a href="<c:url value="${pageContext.request.contextPath}/h//admin/coupon/coupons"/>"><span
+            <li><a href="<c:url value="../h//admin/coupon/coupons"/>"><span
                     class="am-icon-money"></span>优惠券管理</a></li>
-            <li><a href="<c:url value="${pageContext.request.contextPath}/h/admin/cat/list"/>"><span
+            <li><a href="<c:url value="../h/admin/cat/list"/>"><span
                     class="am-icon-bar-chart"></span>统计管理</a></li>
             <li><a href="admin-form.html"><span class="am-icon-pencil-square-o"></span> 表单</a></li>
             <li><a href="#"><span class="am-icon-sign-out"></span> 注销</a></li>

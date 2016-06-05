@@ -14,10 +14,10 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
     <title>确认订单</title>
-    <link href="<c:url value="${pageContext.request.contextPath}/h/css/frozen.css"/>" rel="stylesheet" type="text/css"/>
-    <link href="<c:url value="${pageContext.request.contextPath}/h/css/homall.css"/>" rel="stylesheet" type="text/css"/>
+    <link href="<c:url value="../h/css/frozen.css"/>" rel="stylesheet" type="text/css"/>
+    <link href="<c:url value="../h/css/homall.css"/>" rel="stylesheet" type="text/css"/>
     <script type="text/javascript"
-            src="<c:url value="${pageContext.request.contextPath}/h/js/lib/zeptojs/zepto.min.js"/>"></script>
+            src="<c:url value="../h/js/lib/zeptojs/zepto.min.js"/>"></script>
 </head>
 <body>
 
@@ -186,11 +186,11 @@
 
 </body>
 <%--<link href="../css/all-animation.css" rel="stylesheet" type="text/css"/>--%>
-<script type="text/javascript" src="<c:url value="${pageContext.request.contextPath}/h/js/frozen.js"/>"></script>
+<script type="text/javascript" src="<c:url value="../h/js/frozen.js"/>"></script>
 <script type="text/javascript"
-        src="<c:url value="${pageContext.request.contextPath}/h/js/homall/address.js"/>"></script>
+        src="<c:url value="../h/js/homall/address.js"/>"></script>
 <script type="text/javascript"
-        src="<c:url value="${pageContext.request.contextPath}/h/js/util/base64.min.js"/>"></script>
+        src="<c:url value="../h/js/util/base64.min.js"/>"></script>
 <script type="text/javascript">
     (function () {
         var prefix = "${pageContext.request.scheme}" + "://" + "${pageContext.request.serverName}" + ":" + "${pageContext.request.localPort}" + "/";

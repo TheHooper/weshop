@@ -14,10 +14,10 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
     <title>ho商城商品列表</title>
-    <link href="<c:url value="${pageContext.request.contextPath}/h/css/frozen.css"/>" rel="stylesheet" type="text/css"/>
-    <link href="<c:url value="${pageContext.request.contextPath}/h/css/homall.css"/>" rel="stylesheet" type="text/css"/>
+    <link href="<c:url value="../h/css/frozen.css"/>" rel="stylesheet" type="text/css"/>
+    <link href="<c:url value="../h/css/homall.css"/>" rel="stylesheet" type="text/css"/>
     <script type="text/javascript"
-            src="<c:url value="${pageContext.request.contextPath}/h/js/lib/zeptojs/zepto.min.js"/>"></script>
+            src="<c:url value="../h/js/lib/zeptojs/zepto.min.js"/>"></script>
 </head>
 <style>
 
@@ -25,8 +25,8 @@
 <body>
 <!-- header -->
 <header class="ui-searchbar-wrap ui-border-b">
-    <a href="<c:url value="${pageContext.request.contextPath}/h//category"/>"><i id="headerBarCat"
-                                                                                 class="ui-icon-prev"></i></a>
+    <a href="<c:url value="../h//category"/>"><i id="headerBarCat"
+                                                 class="ui-icon-prev"></i></a>
     <div class="ui-searchbar ui-border-radius">
         <i class="ui-icon-search"></i>
         <div class="ui-searchbar-text">搜索商品</div>
@@ -107,8 +107,8 @@
 </section>
 
 </body>
-<script type="text/javascript" src="<c:url value="${pageContext.request.contextPath}/h/js/frozen.js"/>"></script>
-<script type="text/javascript" src="<c:url value="${pageContext.request.contextPath}/h/js/homall/goods.js"/>"></script>
+<script type="text/javascript" src="<c:url value="../h/js/frozen.js"/>"></script>
+<script type="text/javascript" src="<c:url value="../h/js/homall/goods.js"/>"></script>
 <script type="text/javascript">
 //        var initHeight = function () {
 //            var winHeight = $(window).height();
