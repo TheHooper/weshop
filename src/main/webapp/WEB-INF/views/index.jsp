@@ -14,10 +14,10 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
     <title>HoMall初心</title>
-    <link href="<c:url value="../h/css/frozen.css"/>" rel="stylesheet" type="text/css"/>
-    <link href="<c:url value="../h/css/homall.css"/>" rel="stylesheet" type="text/css"/>
+    <link href="<c:url value="../css/frozen.css"/>" rel="stylesheet" type="text/css"/>
+    <link href="<c:url value="../css/homall.css"/>" rel="stylesheet" type="text/css"/>
     <script type="text/javascript"
-            src="<c:url value="../h/js/lib/zeptojs/zepto.min.js"/>"></script>
+            src="<c:url value="../js/lib/zeptojs/zepto.min.js"/>"></script>
 </head>
 <body>
 <!-- header -->
@@ -188,11 +188,11 @@
 <!-- Hot Goods E -->
 </body>
 
-<script type="text/javascript" src="<c:url value="../h/js/frozen.js"/>"></script>
-<script type="text/javascript" src="<c:url value="../h/js/homall/goods.js"/>"></script>
+<script type="text/javascript" src="<c:url value="../js/frozen.js"/>"></script>
+<script type="text/javascript" src="<c:url value="../js/homall/goods.js"/>"></script>
 <script type="text/javascript">
     (function () {
-        var prefix = "${pageContext.request.scheme}" + "://" + "${pageContext.request.serverName}" + ":" + "${pageContext.request.localPort}" + "/";
+        var prefix = "${pageContext.request.contextPath}";
 
         var slider = new fz.Scroll('.ui-slider', {
             role: 'slider',

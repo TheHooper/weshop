@@ -218,7 +218,7 @@
     <script src="<c:url value="../h/admin/js/easyui/plugins/jquery.datagrid.js"/>"></script>
     <script type="text/javascript">
         (function () {
-            var prefix = "${pageContext.request.scheme}" + "://" + "${pageContext.request.serverName}" + ":" + "${pageContext.request.localPort}" + "/";
+            var prefix = "${pageContext.request.contextPath}"
 
             var statusEnum = new Array(
                     '<span class="am-badge am-badge-danger">待付款</span>',

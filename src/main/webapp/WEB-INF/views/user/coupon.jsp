@@ -45,7 +45,7 @@
         src="<c:url value="../js/homall/address.js"/>"></script>
 <script type="text/javascript">
     (function () {
-        var prefix = "${pageContext.request.scheme}" + "://" + "${pageContext.request.serverName}" + ":" + "${pageContext.request.localPort}" + "/";
+        var prefix = "${pageContext.request.contextPath}"
 
         var filterForm = {
             state: null,

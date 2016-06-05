@@ -39,7 +39,7 @@
 </body>
 <script type="text/javascript" src="<c:url value="../js/frozen.js"/>"></script>
 <script>
-    var prefix = "${pageContext.request.scheme}" + "://" + "${pageContext.request.serverName}" + ":" + "${pageContext.request.localPort}" + "/";
+    var prefix = "${pageContext.request.contextPath}"
 
     $("#back").tap(function () {
         window.location.href = "${pageContext.request.contextPath}/h/user/orders";

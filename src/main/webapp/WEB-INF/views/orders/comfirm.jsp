@@ -193,7 +193,7 @@
         src="<c:url value="../js/util/base64.min.js"/>"></script>
 <script type="text/javascript">
     (function () {
-        var prefix = "${pageContext.request.scheme}" + "://" + "${pageContext.request.serverName}" + ":" + "${pageContext.request.localPort}" + "/";
+        var prefix = "${pageContext.request.contextPath}"
 
         AddressApi.urlPrefix = prefix;
         console.log(AddressApi.urlPrefix);

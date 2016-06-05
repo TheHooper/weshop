@@ -101,7 +101,7 @@
 <script type="text/javascript"
         src="<c:url value="../js/util/base64.min.js"/>"></script>
 <script>
-    var prefix = "${pageContext.request.scheme}" + "://" + "${pageContext.request.serverName}" + ":" + "${pageContext.request.localPort}" + "/";
+    var prefix = "${pageContext.request.contextPath}"
     var backUrl = "${backUrl}";
 
     $("#login-btn").tap(function () {
