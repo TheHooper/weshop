@@ -73,7 +73,7 @@
 <script type="text/javascript" src="<c:url value="../js/frozen.js"/>"></script>
 <script type="text/javascript">
     (function () {
-        var prefix = "${pageContext.request.contextPath}"
+        var prefix = ""
 
         var editEvent = $('#edit').tap(function () {
             $('#edit').toggleClass("editing");

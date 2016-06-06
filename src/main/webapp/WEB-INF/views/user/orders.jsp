@@ -46,7 +46,7 @@
         src="<c:url value="../js/homall/address.js"/>"></script>
 <script type="text/javascript">
     (function () {
-        var prefix = "${pageContext.request.contextPath}"
+        var prefix = ""
 
         var filterForm = {
             state: null,
@@ -137,10 +137,10 @@
 
         function getOrderFaceUrl(state, id) {
             if (state == 0) {
-                var url = "${pageContext.request.contextPath}/orders/buy/" + id;
+                var url = "/orders/buy/" + id;
                 return url;
             } else {
-                var url = "${pageContext.request.contextPath}/orders/detail/" + id;
+                var url = "/orders/detail/" + id;
                 return url;
             }
         }
@@ -191,21 +191,21 @@
 
         var payBtnEvent = function () {
             $(document).on("tap", ".pay-btn", function () {
-                var url = "${pageContext.request.contextPath}/orders/buy/" + $(this).attr("value");
+                var url = "/orders/buy/" + $(this).attr("value");
                 window.location.href = url;
             })
         }
 
         var detailBtnEvent = function () {
             $(document).on("tap", ".detail-btn", function () {
-                var url = "${pageContext.request.contextPath}/orders/detail/" + $(this).attr("value");
+                var url = "/orders/detail/" + $(this).attr("value");
                 window.location.href = url;
             })
         }
 
         var rateBtnEvent = function () {
             $(document).on("tap", ".rate-btn", function () {
-                var url = "${pageContext.request.contextPath}/orders/rate/" + $(this).attr("value");
+                var url = "/orders/rate/" + $(this).attr("value");
                 window.location.href = url;
             })
         }

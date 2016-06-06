@@ -39,10 +39,10 @@
 </body>
 <script type="text/javascript" src="<c:url value="../js/frozen.js"/>"></script>
 <script>
-    var prefix = "${pageContext.request.contextPath}"
+    var prefix = ""
 
     $("#back").tap(function () {
-        window.location.href = "${pageContext.request.contextPath}/user/orders";
+        window.location.href = "/user/orders";
     })
 </script>
 </html>

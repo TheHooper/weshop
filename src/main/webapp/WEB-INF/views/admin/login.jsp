@@ -72,7 +72,7 @@
 <script src="<c:url value="../admin/js/jquery.js"/>"></script>
 <script src="<c:url value="../admin/js/az/amazeui.min.js"/>"></script>
 <script>
-    var prefix = "${pageContext.request.contextPath}";
+    var prefix = "";
 
     function valid() {
         var username = jQuery("#username").val();

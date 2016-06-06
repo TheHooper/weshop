@@ -139,7 +139,7 @@
         src="<c:url value="../js/homall/address.js"/>"></script>
 <script type="text/javascript">
 
-    var prefix = "${pageContext.request.contextPath}"
+    var prefix = ""
 
     function moreDetail(el) {
         var id = $(el).attr("data-target");
@@ -184,7 +184,7 @@
         }
     }
     (function () {
-        var prefix = "${pageContext.request.contextPath}"
+        var prefix = ""
 
         var filterForm = {
             state: 0,

@@ -456,7 +456,7 @@
     <script src="<c:url value="../js/qiniu/qiniu.min.js"/>"></script>
     <script type="text/javascript">
         (function () {
-            var prefix = "${pageContext.request.contextPath}"
+            var prefix = ""
 
             var statusEnum = new Array(
                     '<span class="am-badge am-badge-primary">未上架</span>',

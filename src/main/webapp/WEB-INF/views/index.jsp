@@ -18,6 +18,10 @@
     <link href="<c:url value="../css/homall.css"/>" rel="stylesheet" type="text/css"/>
     <script type="text/javascript"
             src="<c:url value="../js/lib/zeptojs/zepto.min.js"/>"></script>
+    <link href="<c:url value="../../css/frozen.css"/>" rel="stylesheet" type="text/css"/>
+    <link href="<c:url value="../../css/homall.css"/>" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript"
+            src="<c:url value="../../js/lib/zeptojs/zepto.min.js"/>"></script>
 </head>
 <body>
 <!-- header -->
@@ -190,9 +194,11 @@
 
 <script type="text/javascript" src="<c:url value="../js/frozen.js"/>"></script>
 <script type="text/javascript" src="<c:url value="../js/homall/goods.js"/>"></script>
+<script type="text/javascript" src="<c:url value="../../js/frozen.js"/>"></script>
+<script type="text/javascript" src="<c:url value="../../js/homall/goods.js"/>"></script>
 <script type="text/javascript">
     (function () {
-        var prefix = "${pageContext.request.contextPath}";
+        var prefix = "";
 
         var slider = new fz.Scroll('.ui-slider', {
             role: 'slider',

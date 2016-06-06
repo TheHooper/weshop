@@ -82,7 +82,7 @@ To change this template use File | Settings | File Templates.
 <script type="text/javascript" src="<c:url value="../js/frozen.js"/>"></script>
 <script type="text/javascript">
     (function () {
-        var prefix = "${pageContext.request.contextPath}"
+        var prefix = ""
         var loadParentCats = function () {
             $.ajax({
                 type: "GET",
