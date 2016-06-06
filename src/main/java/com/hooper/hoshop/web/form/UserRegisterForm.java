@@ -10,7 +10,7 @@ public class UserRegisterForm {
     private String mobile;
     @NotBlank(message = "手机、密码不能为空")
     private String password;
-    @NotBlank(message = "验证码不能为空")
+    //    @NotBlank(message = "验证码不能为空")
     private String captcha;
     @NotBlank(message = "手机验证码不能为空")
     private String mobileCode;
