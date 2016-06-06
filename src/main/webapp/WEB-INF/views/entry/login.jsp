@@ -50,8 +50,8 @@
 <div class="ui-form ui-border-t">
     <div class="ui-form-item ui-form-item-l ui-border-b">
         <label class="ui-border-r">
-            <img src="<c:url value="/captcha/getCaptcha"/>" class="ho-vertical-align-middle"
-                 onclick="this.src='<c:url value="/captcha/getCaptcha"/>&d='+new Date().getTime()"/>
+            <img src="/captcha/getCaptcha" class="ho-vertical-align-middle"
+                 onclick="this.src='/captcha/getCaptcha'"/>
         </label>
         <input id="captcha-input" type="text" placeholder="请输入验证码">
         <a href="#" class="ui-icon-close">
@@ -74,13 +74,13 @@
 
 <ul class="ui-row text-center margin-top-m">
     <li class="ui-col ui-col-33">
-        <a href="register.jsp">快速注册</a>
+        <a href="<c:url value="/user/register"/>">快速注册</a>
     </li>
     <li class="ui-col ui-col-33">
         &nbsp;
     </li>
     <li class="ui-col ui-col-33">
-        <a href="forgetPassword.jsp">找回密码</a>
+        <a href="forgetPassword">找回密码</a>
     </li>
 </ul>
 

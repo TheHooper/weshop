@@ -94,6 +94,9 @@
     <welcome-file-list>
         <welcome-file>/index</welcome-file>
     </welcome-file-list>
+    <welcome-file-list>
+        <welcome-file>index</welcome-file>
+    </welcome-file-list>
 
     <!-- 错误页 -->
     <!--<error-page>-->
