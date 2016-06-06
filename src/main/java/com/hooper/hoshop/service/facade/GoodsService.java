@@ -2,13 +2,11 @@ package com.hooper.hoshop.service.facade;
 
 import com.hooper.hoshop.admin.form.GoodsForm;
 import com.hooper.hoshop.admin.form.GoodsSelectorForm;
-import com.hooper.hoshop.dto.Goods.GoodsAttrVo;
-import com.hooper.hoshop.dto.Goods.GoodsCatVo;
+import com.hooper.hoshop.dto.goods.GoodsAttrVo;
 import com.hooper.hoshop.entity.*;
 import com.hooper.hoshop.web.form.GoodsFilterForm;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by 47123 on 2016/5/16.

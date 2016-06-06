@@ -14,17 +14,17 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
     <title>评价</title>
-    <link href="<c:url value="../css/frozen.css"/>" rel="stylesheet" type="text/css"/>
-    <link href="<c:url value="../css/homall.css"/>" rel="stylesheet" type="text/css"/>
-    <link href="<c:url value="../css/rating.css"/>" rel="stylesheet" type="text/css"/>
+    <link href="<c:url value="../../css/frozen.css"/>" rel="stylesheet" type="text/css"/>
+    <link href="<c:url value="../../css/homall.css"/>" rel="stylesheet" type="text/css"/>
+    <link href="<c:url value="../../css/rating.css"/>" rel="stylesheet" type="text/css"/>
     <script type="text/javascript"
-            src="<c:url value="../js/lib/zeptojs/zepto.min.js"/>"></script>
+            src="<c:url value="../../js/lib/zeptojs/zepto.min.js"/>"></script>
 </head>
 <body>
 
 <header id="header" class="header">
-    <a href="${pageContext.request.contextPath}/h/user/orders" class="header-arrow-l"><i id="headerBarCat"
-                                                                                         class="ui-icon-prev"></i></a>
+    <a href="${pageContext.request.contextPath}/user/orders" class="header-arrow-l"><i id="headerBarCat"
+                                                                                       class="ui-icon-prev"></i></a>
     <h2 class="ui-flex-pack-center">订单评价</h2>
 </header>
 
@@ -94,18 +94,18 @@
 </section>
 
 </body>
-<%--<link href="<c:url value="../css/all-animation.css">" rel="stylesheet" type="text/css"/>--%>
-<script type="text/javascript" src="<c:url value="../js/frozen.js"/>"></script>
+<%--<link href="<c:url value="../../css/all-animation.css">" rel="stylesheet" type="text/css"/>--%>
+<script type="text/javascript" src="<c:url value="../../js/frozen.js"/>"></script>
 <script type="text/javascript"
-        src="<c:url value="../js/homall/address.js"/>"></script>
-<script type="text/javascript" src="<c:url value="../js/util/rating.js"/>"></script>
+        src="<c:url value="../../js/homall/address.js"/>"></script>
+<script type="text/javascript" src="<c:url value="../../js/util/rating.js"/>"></script>
 <script type="text/javascript">
     (function () {
         var prefix = "${pageContext.request.contextPath}"
 
 
         $("#back-btn").tap(function () {
-            window.location.href = "${pageContext.request.contextPath}/h/user/orders";
+            window.location.href = "${pageContext.request.contextPath}/user/orders";
         })
 
         var rateIdArrays = new Array();
@@ -154,7 +154,7 @@
             }
             $.ajax({
                 type: "POST",
-                url: prefix + "h/orders/rate",
+                url: prefix + "/orders/rate",
                 data: $.customParam(rateListForm),
                 contentType: "application/x-www-form-urlencoded; charset=utf-8",
                 dataType: "json",
@@ -180,7 +180,7 @@
         })
 
         $("#back").tap(function () {
-            window.location.href = "${pageContext.request.contextPath}/h/user/orders?state=3";
+            window.location.href = "${pageContext.request.contextPath}/user/orders?state=3";
         })
     })();
 </script>

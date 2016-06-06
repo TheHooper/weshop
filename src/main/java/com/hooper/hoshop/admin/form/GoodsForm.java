@@ -1,6 +1,5 @@
 package com.hooper.hoshop.admin.form;
 
-import com.hooper.hoshop.dto.Goods.GoodsAttrVo;
 import com.hooper.hoshop.entity.*;
 
 import java.util.List;

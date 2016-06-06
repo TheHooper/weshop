@@ -18,6 +18,10 @@
     <link href="<c:url value="../css/homall.css"/>" rel="stylesheet" type="text/css"/>
     <script type="text/javascript"
             src="<c:url value="../js/lib/zeptojs/zepto.min.js"/>"></script>
+    <link href="<c:url value="../../css/frozen.css"/>" rel="stylesheet" type="text/css"/>
+    <link href="<c:url value="../../css/homall.css"/>" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript"
+            src="<c:url value="../../js/lib/zeptojs/zepto.min.js"/>"></script>
 </head>
 <body>
 
@@ -47,15 +51,13 @@
             <ul id="carts-ul" class="ui-list  ui-border-tb">
                 <c:forEach items="${orderGoodses}" var="orderGoods">
                     <li class="ui-border-t">
+                        <input class="orderGoods-id" value="${orderGoods.goodsId}" type="text" style="display: none">
                         <div class="ui-list-img">
                             <span style="background-image:url(${orderGoods.goodsPic}?imageMogr2/thumbnail/200x200)"></span>
                         </div>
                         <div class="ui-list-info"><h4 class="ui-nowrap carts-title">${orderGoods.goodsTitle}</h4>
                             <p class="ui-nowrap carts-salesAttr">${orderGoods.salesAttr}</p>
                             <p class="ui-nowrap"><span class="carts-num">x${orderGoods.num}</span></p>
-                            <button class="ui-btn-s">
-                                评价
-                            </button>
                         </div>
                     </li>
                 </c:forEach>
@@ -64,10 +66,11 @@
     </section>
 
     <!-- coupon -->
-    <ul class="ui-list ui-list-one  ui-list-link ui-border-tb margin-top-m">
-        <li id="detail-arrow-link">
-            <span class="list-title">优惠券</span>
-            <div class="ui-badge-num back-blue">1</div>
+    <ul class="ui-list ui-list-text ui-list-link ui-border-tb">
+        <li id="to-list-coupon-section-btn" class="ui-border-t">
+            <h4 class="ui-nowrap">优惠券</h4>
+            <span id="coupon-tip" class="ui-badge-num back-blue">1</span>
+            <div id="coupon-check" class="ui-txt-info"></div>
         </li>
     </ul>
     <!-- coupon end -->
@@ -90,13 +93,13 @@
             <div class="ui-list-info">
                 <h4 class="ui-nowrap">优惠金额</h4>
             </div>
-            <div class="ui-list-action">&yen;0</div>
+            <div class="ui-list-action">&yen;<span id="coupon-cost-view">0</span></div>
         </li>
         <li class="ui-border-t">
             <div class="ui-list-info">
                 <h4 class="ui-nowrap">实际应付</h4>
             </div>
-            <div class="ui-list-action">&yen;${order.totalAndDelivery}</div>
+            <div class="ui-list-action">&yen;<span id="r-total-view"></span>${order.totalAndDelivery}</div>
         </li>
     </ul>
     <!-- total end -->
@@ -184,6 +187,16 @@
     </div>
 </section>
 
+<section id="select-coupon-section" style="display: none">
+    <ul id="select-coupon-ul" class="ui-list ui-border-tb ho-margin-top-sm">
+
+    </ul>
+    <div class="ui-footer" style="bottom:56px">
+        <button id="select-coupon-ok" class="ui-btn-primary ui-btn-lg">确认选择</button>
+        <button id="select-coupon-canel" class="ui-btn-default ui-btn-lg ho-margin-top-xs">取消返回</button>
+    </div>
+</section>
+
 </body>
 <%--<link href="../css/all-animation.css" rel="stylesheet" type="text/css"/>--%>
 <script type="text/javascript" src="<c:url value="../js/frozen.js"/>"></script>
@@ -191,6 +204,11 @@
         src="<c:url value="../js/homall/address.js"/>"></script>
 <script type="text/javascript"
         src="<c:url value="../js/util/base64.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="../../js/frozen.js"/>"></script>
+<script type="text/javascript"
+        src="<c:url value="../../js/homall/address.js"/>"></script>
+<script type="text/javascript"
+        src="<c:url value="../../js/util/base64.min.js"/>"></script>
 <script type="text/javascript">
     (function () {
         var prefix = "${pageContext.request.contextPath}"
@@ -203,25 +221,68 @@
         $("#address-canel-btn").tap(function () {
             $("#add-address-section").css("display", "none");
             $("#select-address-section").css("display", "none");
+            $("#select-coupon-section").css("display", "none");
             $("#pay-section").css("display", "block");
         })
 
         $("#select-address-canel-btn").tap(function () {
             $("#add-address-section").css("display", "none");
             $("#select-address-section").css("display", "none");
+            $("#select-coupon-section").css("display", "none");
             $("#pay-section").css("display", "block");
         })
 
         $("#to-add-address-section-btn").tap(function () {
             $("#add-address-section").css("display", "block");
             $("#select-address-section").css("display", "none");
+            $("#select-coupon-section").css("display", "none");
             $("#pay-section").css("display", "none");
         })
 
         $("#to-list-address-section-btn").tap(function () {
+            $("#select-coupon-section").css("display", "none");
             $("#add-address-section").css("display", "none");
             $("#select-address-section").css("display", "block");
             $("#pay-section").css("display", "none");
+        })
+
+        $("#to-list-coupon-section-btn").tap(function () {
+            if ($("#coupon-tip").text() == 0) {
+                el = $.tips({
+                    content: '本次订单无可用优惠券',
+                    stayTime: 2000,
+                    type: "warn"
+                })
+            } else {
+                $("#add-address-section").css("display", "none");
+                $("#select-address-section").css("display", "none");
+                $("#pay-section").css("display", "none");
+                $("#select-coupon-section").css("display", "block");
+            }
+        })
+
+        $("#select-coupon-canel").tap(function () {
+            $("#add-address-section").css("display", "none");
+            $("#select-address-section").css("display", "none");
+            $("#pay-section").css("display", "block");
+            $("#select-coupon-section").css("display", "none");
+        })
+
+        $("#select-coupon-ok").tap(function () {
+            if ($("input[name='CouponRadio']:checked").length > 0) {
+                var id = $("input[name='CouponRadio']:checked").val();
+                $("#coupon-check").text("已选");
+                var rTotal = ${order.totalAndDelivery};
+                var cPrice = $("#couponFee" + id).text();
+                var newP = parseInt(rTotal) - parseInt(cPrice);
+                $("#coupon-cost-view").text(cPrice);
+                $("#r-total-view").text(newP);
+                payForm.couponId = parseInt(id);
+                $("#add-address-section").css("display", "none");
+                $("#select-address-section").css("display", "none");
+                $("#pay-section").css("display", "block");
+                $("#select-coupon-section").css("display", "none");
+            }
         })
 
         $("#address-confirm-btn").tap(function () {
@@ -323,6 +384,13 @@
         }
         toAddressSelect(addresses);
 
+        var payForm = {
+            addressId: null,
+            orderId: "${order.id}",
+            password: null,
+            couponId: null,
+        }
+
         $("#pay-btn").tap(function () {
             var dia = $.dialog({
                 title: '请输入密码',
@@ -342,19 +410,17 @@
                         })
                     } else {
                         var password64 = Base64.encode(password);
+                        payForm.password = password64;
+                        payForm.addressId = $("#pay-address-id").val();
                         $.ajax({
                             type: "POST",
-                            url: prefix + "h/orders/pay",
-                            data: {
-                                addressId: $("#pay-address-id").val(),
-                                orderId:${order.id},
-                                password: password64
-                            },
+                            url: prefix + "/orders/pay",
+                            data: payForm,
                             contentType: "application/x-www-form-urlencoded; charset=utf-8",
                             dataType: "json",
                             success: function (data) {
                                 if (data.code == "0") {
-                                    window.location.href = "${pageContext.request.contextPath}/h/orders/paid";
+                                    window.location.href = "${pageContext.request.contextPath}/orders/paid";
                                 } else {
                                     el = $.tips({
                                         content: data.msg,
@@ -371,6 +437,102 @@
                 }
             });
         });
+
+        var couponsForm = {
+            total:${order.totalAndDelivery},
+            goodsIds: ""
+        }
+
+        var loadCoupon = function () {
+            var ids = new Array();
+            $(".orderGoods-id").each(function (i, e) {
+                ids.push($(e).val());
+            })
+            couponsForm.goodsIds = ids;
+            $.ajax({
+                type: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'charset': 'utf-8'
+                },
+                url: prefix + "/coupon/useable",
+                data: JSON.stringify(couponsForm),
+                //contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data.code == null) {
+                        console.log(data);
+                        $("#coupon-tip").text(data.length)
+                        if (data.length > 0) {
+                            $("#select-coupon-ul").html("");
+                            $(data).each(function (i, e) {
+                                var li = '<li>'
+                                        + '<div class="ui-avatar ho-text-center" style=" background-image:none">'
+                                        + '<label class="ui-radio" for="radio">'
+                                        + '<input  value="' + e.id + '" type="radio" name="CouponRadio">'
+                                        + '</label>'
+                                        + '</div>'
+                                        + '<div class="ui-list-info ui-border-t">'
+                                        + '<h4 class="ui-nowrap">' + e.title + '</h4>'
+                                        + '<p class="ui-nowrap">有效期至：' + generateDate(e.deadline) + '</p>'
+                                        + '<p class="ui-nowrap">满 &yen;' + e.threshold + ' - &yen;<span id="couponFee' + e.id + '">' + e.price + '</span></p>'
+                                        + '</div>'
+                                        + '</li>'
+                                $("#select-coupon-ul").append($(li));
+                            })
+                        }
+                    }
+                },
+                error: function (msg) {
+                    console.log(JSON.stringify(msg));
+                }
+            })
+        }
+
+        loadCoupon();
+
+        //加载日期
+        function generateDate(time) {
+            var data = new Date(parseInt(time));
+            var formatDate = data.format('yyyy-MM-dd');
+            return formatDate;
+        }
+
+        //日期格式方法
+        Date.prototype.format = function (fmt) {
+            var o = {
+                "M+": this.getMonth() + 1, //月份
+                "d+": this.getDate(), //日
+                "h+": this.getHours() % 12 == 0 ? 12 : this.getHours() % 12, //小时
+                "H+": this.getHours(), //小时
+                "m+": this.getMinutes(), //分
+                "s+": this.getSeconds(), //秒
+                "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+                "S": this.getMilliseconds() //毫秒
+            };
+            var week = {
+                "0": "\u65e5",
+                "1": "\u4e00",
+                "2": "\u4e8c",
+                "3": "\u4e09",
+                "4": "\u56db",
+                "5": "\u4e94",
+                "6": "\u516d"
+            };
+            if (/(y+)/.test(fmt)) {
+                fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            }
+            if (/(E+)/.test(fmt)) {
+                fmt = fmt.replace(RegExp.$1, ((RegExp.$1.length > 1) ? (RegExp.$1.length > 2 ? "\u661f\u671f" : "\u5468") : "") + week[this.getDay() + ""]);
+            }
+            for (var k in o) {
+                if (new RegExp("(" + k + ")").test(fmt)) {
+                    fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+                }
+            }
+            return fmt;
+        }
     })();
 </script>
 </html>

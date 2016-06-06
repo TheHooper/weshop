@@ -21,7 +21,7 @@
 </head>
 <body>
 <header id="header" class="header">
-    <a href="/h/index" class="header-arrow-l"><i id="headerBarCat" class="ui-icon-prev"></i></a>
+    <a href="/index" class="header-arrow-l"><i id="headerBarCat" class="ui-icon-prev"></i></a>
     <h2 class="ui-flex-pack-center">购物车</h2>
 </header>
 
@@ -35,7 +35,7 @@
         <div class="ui-col ui-col-2">
         </div>
         <div class="ui-col ui-col-2 back-blue" style="height: 100%;line-height: 48px">
-            <a href="/h/orders/checkout">
+            <a href="/orders/checkout">
                 <h4 class="color-white">结算</h4>
             </a>
         </div>
@@ -142,7 +142,7 @@
                 console.log(li);
                 $.ajax({
                     type: "POST",
-                    url: prefix + "h/carts/del",
+                    url: prefix + "/carts/del",
                     data: {
                         id: id
                     },
@@ -199,7 +199,7 @@
                         'Content-Type': 'application/json',
                         'charset': 'utf-8'
                     },
-                    url: prefix + "h/carts/update",
+                    url: prefix + "/carts/update",
                     data: JSON.stringify(cartModifyFormList),
                     //contentType: "application/x-www-form-urlencoded; charset=utf-8",
                     dataType: "json",
@@ -225,7 +225,7 @@
         var loadCarts = function () {
             $.ajax({
                 type: "POST",
-                url: prefix + "h/carts/get",
+                url: prefix + "/carts/get",
                 data: {},
                 contentType: "application/x-www-form-urlencoded; charset=utf-8",
                 dataType: "json",

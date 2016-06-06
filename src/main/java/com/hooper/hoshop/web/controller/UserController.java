@@ -136,4 +136,10 @@ public class UserController {
     public String ordersView() {
         return "/user/orders";
     }
+
+    @UserLoginAnnotation
+    @RequestMapping("coupon")
+    public String couponView() {
+        return "/user/coupon";
+    }
 }

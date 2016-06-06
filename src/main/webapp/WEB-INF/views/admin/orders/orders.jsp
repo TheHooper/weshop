@@ -202,7 +202,7 @@
 
         var table = $('#table').DataTable({
             ajax: {
-                url: prefix + "/h/admin/orders/ordersList",
+                url: prefix + "/admin/orders/ordersList",
                 type: "GET"
             },
             autoWidth: false,
@@ -306,7 +306,7 @@
                 orderFilterForm.state = null;
             }
             var url = formToUrlParm(orderFilterForm);
-            var reloadObj = table.ajax.url(prefix + "/h/admin/orders/ordersList" + url);
+            var reloadObj = table.ajax.url(prefix + "/admin/orders/ordersList" + url);
             reloadObj.load();
             table.draw();
         })
@@ -326,7 +326,7 @@
             }
             var url = formToUrlParm(orderFilterForm);
             console.log(url);
-            var reloadObj = table.ajax.url(prefix + "/h/admin/orders/ordersList" + url);
+            var reloadObj = table.ajax.url(prefix + "/admin/orders/ordersList" + url);
             reloadObj.load();
             table.draw();
         })
@@ -339,7 +339,7 @@
             if ($('#detail-id').val() != oData.id) {
                 $.ajax({
                     type: "GET",
-                    url: prefix + "/h/admin/orders/detail/" + oData.id,
+                    url: prefix + "/admin/orders/detail/" + oData.id,
                     data: {},
                     contentType: "application/x-www-form-urlencoded; charset=utf-8",
                     dataType: "json",
@@ -389,7 +389,7 @@
                 if (r) {
                     $.ajax({
                         type: "POST",
-                        url: prefix + "/h/admin/goods/del/",
+                        url: prefix + "/admin/goods/del/",
                         data: {goodsId: id},
                         contentType: "application/x-www-form-urlencoded; charset=utf-8",
                         dataType: "json",

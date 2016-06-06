@@ -791,6 +791,10 @@ input.num-btn {
     padding: 0 !important;
 }
 
+.ho-padding-xxs {
+    padding: 0.08rem;
+}
+
 .ho-padding-xs {
     padding: 0.125rem;
 }

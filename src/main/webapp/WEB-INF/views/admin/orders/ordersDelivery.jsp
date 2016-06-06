@@ -136,7 +136,7 @@
 
             var table = $('#table').DataTable({
                 ajax: {
-                    url: prefix + "/h/admin/orders/ordersList?state=1",
+                    url: prefix + "/admin/orders/ordersList?state=1",
                     type: "GET"
                 },
                 autoWidth: false,
@@ -247,7 +247,7 @@
                 }
                 var url = formToUrlParm(orderFilterForm);
                 console.log(url);
-                var reloadObj = table.ajax.url(prefix + "/h/admin/orders/ordersList" + url);
+                var reloadObj = table.ajax.url(prefix + "/admin/orders/ordersList" + url);
                 reloadObj.load();
                 table.draw();
             })
@@ -271,7 +271,7 @@
                         }
                         $.ajax({
                             type: "POST",
-                            url: prefix + "/h/admin/orders/ordersDelivery",
+                            url: prefix + "/admin/orders/ordersDelivery",
                             data: dForm,
                             contentType: "application/x-www-form-urlencoded; charset=utf-8",
                             dataType: "json",

@@ -1,5 +1,7 @@
 package com.hooper.hoshop.dao;
 
+import com.hooper.hoshop.dto.count.CatsCounter;
+import com.hooper.hoshop.dto.coupon.CouponCatsDto;
 import com.hooper.hoshop.entity.Category;
 import org.apache.ibatis.annotations.Param;
 
@@ -27,4 +29,14 @@ public interface CategoryMapper extends GenericDao<Category, Integer> {
     List<Category> selectAllSecondary(@Param(value = "offset") int offset, @Param(value = "limit") int limit);
 
     int countAllSecondary();
+
+    Integer countCostCatsParent(@Param("id") int id);
+
+    Integer countNumCatsParent(@Param("id") int id);
+
+    List<CatsCounter> countCostByCats(@Param("id") int id);
+
+    List<CatsCounter> countNumByCats(@Param("id") int id);
+
+    List<CouponCatsDto> selectByCouponsId(@Param("id") Integer id);
 }

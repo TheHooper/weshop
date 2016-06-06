@@ -20,24 +20,55 @@
         from h_coupons
         where id = #{id,jdbcType=INTEGER}
     </select>
+    <select id="selectListPaged" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from h_coupons
+        where is_del = 0
+        <if test="title != null">
+            AND title like concat(concat('%',#{title}),'%')
+        </if>
+        ORDER BY id
+        <if test="orderType == 0">
+            ASC
+        </if>
+        <if test="orderType == 1 or orderType == null">
+            DESC
+        </if>
+        limit #{offset},#{limit}
+    </select>
+    <select id="countListPaged" resultType="int" parameterType="java.lang.Integer">
+        select
+        count(*)
+        from h_coupons
+        where is_del = 0
+        <if test="title != null">
+            AND title like concat(concat('%',#{title}),'%')
+        </if>
+        ORDER BY id
+        <if test="orderType == 0">
+            ASC
+        </if>
+        <if test="orderType == 1 or orderType == null">
+            DESC
+        </if>
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         delete from h_coupons
         where id = #{id,jdbcType=INTEGER}
     </delete>
-    <insert id="insert" parameterType="com.hooper.hoshop.entity.Coupon">
-        insert into h_coupons (id, title, price,
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.hooper.hoshop.entity.Coupon">
+        insert into h_coupons (title, price,
         num, legal_goods_cat, limit_days,
         threshold, is_del)
-        values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL},
+        values (#{title,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL},
         #{num,jdbcType=INTEGER}, #{legalGoodsCat,jdbcType=VARCHAR}, #{limitDays,jdbcType=INTEGER},
         #{threshold,jdbcType=DECIMAL}, #{isDel,jdbcType=BIT})
     </insert>
-    <insert id="insertSelective" parameterType="com.hooper.hoshop.entity.Coupon">
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id"
+            parameterType="com.hooper.hoshop.entity.Coupon">
         insert into h_coupons
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
             <if test="title != null">
                 title,
             </if>
@@ -61,9 +92,6 @@
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=INTEGER},
-            </if>
             <if test="title != null">
                 #{title,jdbcType=VARCHAR},
             </if>

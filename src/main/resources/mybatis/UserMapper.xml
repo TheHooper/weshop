@@ -17,15 +17,94 @@
     <result column="last_login_ip" property="lastLoginIp" jdbcType="VARCHAR"/>
     <result column="is_del" property="isDel" jdbcType="BIT"/>
   </resultMap>
+  <resultMap id="MoneyMap" type="com.hooper.hoshop.dto.count.UserMoneyDto" extends="BaseResultMap">
+    <result column="cost_sum" property="costSum" jdbcType="DECIMAL"/>
+  </resultMap>
+  <resultMap id="OrderMap" type="com.hooper.hoshop.dto.count.UserOrdersDto" extends="BaseResultMap">
+    <result column="order_count" property="orderCount" jdbcType="INTEGER"/>
+  </resultMap>
   <sql id="Base_Column_List">
-    id, user_name, password, password_random, gender, mobile, email, avatar, vip, score, 
-    c_time, last_login_time, last_login_ip, is_del
+    h_user.id, user_name, password, password_random, gender, mobile, email, avatar, vip, score,
+    h_user.c_time, last_login_time, last_login_ip, h_user.is_del
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
     select
     <include refid="Base_Column_List"/>
     from h_user
     where id = #{id,jdbcType=INTEGER} AND is_del = 0
+  </select>
+  <select id="selectListPaged" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List"/>
+    from h_user
+    where is_del = 0
+    <if test="name != null">
+      AND user_name = ${name}
+    </if>
+    <if test="mobile != null">
+      AND mobile = ${mobile}
+    </if>
+    ORDER BY c_time
+    <if test="orderType == 0">
+      ASC
+    </if>
+    <if test="orderType == 1 or orderType == null">
+      DESC
+    </if>
+    limit #{offset},#{limit};
+  </select>
+  <select id="countListPaged" resultType="int" parameterType="java.lang.Integer">
+    select
+    COUNT(*)
+    from h_user
+    where is_del = 0
+    <if test="name != null">
+      AND user_name = ${name}
+    </if>
+    <if test="mobile != null">
+      AND mobile = ${mobile}
+    </if>
+    ORDER BY c_time
+    <if test="orderType == 0">
+      ASC
+    </if>
+    <if test="orderType == 1 or orderType == null">
+      DESC
+    </if>
+  </select>
+  <select id="selectUserOrderByCost" resultMap="MoneyMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List"/>,
+    SUM(`h_order`.`r_total`) AS `cost_sum`
+    FROM ((`h_user`
+    LEFT JOIN `h_order`
+    ON ((`h_order`.`user_id` = `h_user`.`id` AND h_order.`status` != 0)))
+    )
+    GROUP BY `h_user`.`id`
+    ORDER BY `cost_sum`
+    <if test="orderType == 0">
+      ASC
+    </if>
+    <if test="orderType == 1 or orderType == null">
+      DESC
+    </if>;
+  </select>
+  <select id="selectUserOrderByOrdersCount" resultMap="OrderMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List"/>,
+    COUNT(*) AS `order_count`
+    FROM ((`h_user`
+    LEFT JOIN `h_order`
+    ON ((`h_order`.`user_id` = `h_user`.`id` AND h_order.`status` != 0)))
+    )
+    GROUP BY `h_user`.`id`
+    ORDER BY `order_count`
+    <if test="orderType == 0">
+      ASC
+    </if>
+    <if test="orderType == 1 or orderType == null">
+      DESC
+    </if>
   </select>
   <select id="selectByMobile" resultMap="BaseResultMap">
     select

@@ -1,8 +1,7 @@
 package com.hooper.hoshop.dao;
 
-import com.hooper.hoshop.dto.Goods.GoodsCatVo;
+import com.hooper.hoshop.dto.count.GoodsCounter;
 import com.hooper.hoshop.entity.Goods;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -27,4 +26,8 @@ public interface GoodsMapper extends GenericDao<Goods, Integer> {
     List<Goods> selectListPagedWithoutPulloff(Map params);
 
     int countListPagedWithoutPulloff(Map params);
+
+    List<GoodsCounter> countCostByGoods();
+
+    List<GoodsCounter> countNumByGoods();
 }

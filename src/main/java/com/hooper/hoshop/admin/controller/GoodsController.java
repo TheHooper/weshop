@@ -1,6 +1,5 @@
 package com.hooper.hoshop.admin.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.hooper.hoshop.admin.form.DataTablePageForm;
 import com.hooper.hoshop.admin.form.GoodsForm;
 import com.hooper.hoshop.admin.form.GoodsSelectorForm;
@@ -9,9 +8,8 @@ import com.hooper.hoshop.common.constant.AdminConstants;
 import com.hooper.hoshop.common.constant.AdminErrorConstant;
 import com.hooper.hoshop.common.exception.BusinessException;
 import com.hooper.hoshop.common.util.DateUtil;
-import com.hooper.hoshop.dto.Goods.GoodsAttrVo;
-import com.hooper.hoshop.dto.Goods.GoodsCatVo;
-import com.hooper.hoshop.dto.Goods.GoodsDto;
+import com.hooper.hoshop.dto.goods.GoodsAttrVo;
+import com.hooper.hoshop.dto.goods.GoodsDto;
 import com.hooper.hoshop.dto.output.Category.DataTablePageOutput;
 import com.hooper.hoshop.dto.output.JsonOutput;
 import com.hooper.hoshop.entity.*;

@@ -8,4 +8,10 @@ public class AdminConstants {
     public static final String SESSION_SIGNIN_ADMIN = "ho_admin";
 
     public static final String ADMIN_TABLE_TIME_FORMATTER = "yy-MM-dd HH:mm";
+
+    public static final String ORDER_DESC = "1";
+    public static final String ORDER_ASC = "0";
+
 }
+
+

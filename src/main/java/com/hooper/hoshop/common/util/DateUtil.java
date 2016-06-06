@@ -1,5 +1,9 @@
 package com.hooper.hoshop.common.util;
 
+import com.hooper.hoshop.common.constant.WebConstant;
+import com.hooper.hoshop.dto.count.DateCounter;
+
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -716,12 +720,6 @@ public class DateUtil {
 
     }
 
-    public static void main(String args[]) {
-
-        long now = System.currentTimeMillis();
-        System.out.println(DateUtil.getFormatDate(new Date(now), "yy-MM-dd HH:mm"));
-    }
-
     /**
      * 获取小时分钟中的小时
      *
@@ -867,5 +865,68 @@ public class DateUtil {
 
         return cal.get(Calendar.DAY_OF_MONTH);
 
+    }
+
+    private static final int FIRST_DAY = Calendar.MONDAY;
+    private static final int FIRST_MONTH = Calendar.JANUARY;
+
+    //获取本周时间
+    public static long[] getWeekdays() {
+        long[] times = new long[7];
+        Calendar calendar = Calendar.getInstance();
+        long hourMills = calendar.get(Calendar.HOUR_OF_DAY) * 3600000L;
+        long minusMills = calendar.get(Calendar.MINUTE) * 60000L;
+        long secondMills = calendar.get(Calendar.SECOND) * 1000L;
+        while (calendar.get(Calendar.DAY_OF_WEEK) != FIRST_DAY) {
+            calendar.add(Calendar.DATE, -1);
+        }
+        for (int i = 0; i < 7; i++) {
+            times[i] = calendar.getTimeInMillis() - (hourMills + minusMills + secondMills);
+            calendar.add(Calendar.DATE, 1);
+        }
+        return times;
+    }
+
+    //获取本年月时间
+    public static long[] getMonthsOfYearMills() {
+        long[] times = new long[12];
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
+        long hourMills = calendar.get(Calendar.HOUR_OF_DAY) * 3600000L;
+        long minusMills = calendar.get(Calendar.MINUTE) * 60000L;
+        long secondMills = calendar.get(Calendar.SECOND) * 1000L;
+        calendar.setTimeInMillis(calendar.getTimeInMillis() - (hourMills + minusMills + secondMills));
+        while (calendar.get(Calendar.MONTH) != FIRST_MONTH) {
+            calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - 1);
+        }
+        for (int i = 0; i < 12; i++) {
+            times[i] = calendar.getTimeInMillis();
+            calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) + 1);
+        }
+        return times;
+    }
+
+    // 获取当前时间是周几
+    public static int getWeekDay(long mills) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(mills - DateUtil.getOneDayMills() * 1);
+        return cal.get(Calendar.DAY_OF_WEEK);
+    }
+
+    public static long getOneDayMills() {
+        return 86399000L;//23:59:59
+    }
+
+    public static long getLastMonthMills() {
+        return 2678400000L;//31days mills
+    }
+
+    public static void main(String[] args) {
+        TreeSet set = new TreeSet();
+        set.add(1);
+        set.add(2);
+        set.add(3);
+        System.out.println(set.contains(3));
+        System.out.println(set.contains(4));
     }
 }

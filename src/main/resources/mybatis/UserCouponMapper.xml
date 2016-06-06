@@ -9,31 +9,88 @@
         <result column="deadline" property="deadline" jdbcType="BIGINT"/>
         <result column="is_del" property="isDel" jdbcType="BIT"/>
     </resultMap>
+    <resultMap id="CouponDto" type="com.hooper.hoshop.dto.coupon.UserCouponDto" extends="BaseResultMap">
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="price" property="price" jdbcType="DECIMAL"/>
+        <result column="num" property="num" jdbcType="INTEGER"/>
+        <result column="limit_days" property="limitDays" jdbcType="INTEGER"/>
+        <result column="threshold" property="threshold" jdbcType="DECIMAL"/>
+    </resultMap>
     <sql id="Base_Column_List">
-        id, coupons_id, user_id, state, deadline, is_del
+        h_user_coupons.id, h_user_coupons.coupons_id, h_user_coupons.user_id,
+        h_user_coupons.state, h_user_coupons.deadline, h_user_coupons.is_del
     </sql>
+    <select id="selectByFilter" resultMap="CouponDto">
+        select
+        <include refid="Base_Column_List"/>,title,price,num,limit_days,threshold
+        from h_user_coupons LEFT JOIN h_coupons ON h_user_coupons.coupons_id = h_coupons.id
+        where h_user_coupons.is_del = 0
+        <if test="userId != null">
+            AND user_id = #{userId}
+        </if>
+        <if test="state != null">
+            AND state = #{state}
+            <if test="state != 2">
+                AND deadline &gt; #{time}
+            </if>
+            <if test="state == 2">
+                AND deadline &lt; #{time}
+            </if>
+        </if>
+        <if test="couponId != null">
+            AND coupons_id = #{couponId}
+        </if>
+        <if test=" limit != null and offset != null">
+            order by deadline desc
+            Limit #{offset},#{limit}
+        </if>
+    </select>
+    <select id="countByFilter" resultType="int">
+        select
+        COUNT(*)
+        from h_user_coupons
+        where h_user_coupons.is_del = 0
+        <if test="userId != null">
+            AND user_id = #{userId}
+        </if>
+        <if test="state != null">
+            AND state = #{state}
+            <if test="state != 2">
+                AND deadline &gt; #{time}
+            </if>
+            <if test="state == 2">
+                AND deadline &lt; #{time}
+            </if>
+        </if>
+        <if test="couponId != null">
+            AND coupons_id = #{couponId}
+        </if>
+    </select>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
         from h_user_coupons
         where id = #{id,jdbcType=INTEGER}
     </select>
+    <select id="selectDtoById" resultMap="CouponDto" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>,title,price,num,limit_days,threshold
+        from h_user_coupons,h_coupons
+        where h_user_coupons.id = #{id,jdbcType=INTEGER} AND h_user_coupons.coupons_id = h_coupons.id
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         delete from h_user_coupons
         where id = #{id,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="com.hooper.hoshop.entity.UserCoupon">
-        insert into h_user_coupons (id, coupons_id, user_id,
+        insert into h_user_coupons (coupons_id, user_id,
         state, deadline, is_del)
-        values (#{id,jdbcType=INTEGER}, #{couponsId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER},
+        values (#{couponsId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER},
         #{state,jdbcType=BIT}, #{deadline,jdbcType=BIGINT}, #{isDel,jdbcType=BIT})
     </insert>
     <insert id="insertSelective" parameterType="com.hooper.hoshop.entity.UserCoupon">
         insert into h_user_coupons
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
             <if test="couponsId != null">
                 coupons_id,
             </if>
@@ -51,9 +108,6 @@
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=INTEGER},
-            </if>
             <if test="couponsId != null">
                 #{couponsId,jdbcType=INTEGER},
             </if>

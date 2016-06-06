@@ -14,10 +14,10 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
     <title>ho商城</title>
-    <link href="<c:url value="../css/frozen.css"/>" rel="stylesheet" type="text/css"/>
-    <link href="<c:url value="../css/homall.css"/>" rel="stylesheet" type="text/css"/>
+    <link href="<c:url value="../../css/frozen.css"/>" rel="stylesheet" type="text/css"/>
+    <link href="<c:url value="../../css/homall.css"/>" rel="stylesheet" type="text/css"/>
     <script type="text/javascript"
-            src="<c:url value="../js/lib/zeptojs/zepto.min.js"/>"></script>
+            src="<c:url value="../../js/lib/zeptojs/zepto.min.js"/>"></script>
 </head>
 <body>
 <!-- header part -->
@@ -294,9 +294,9 @@
 
 
 </body>
-<link href="<c:url value="../css/all-animation.css"/>" rel="stylesheet"
+<link href="<c:url value="../../css/all-animation.css"/>" rel="stylesheet"
       type="text/css"/>
-<script type="text/javascript" src="<c:url value="../js/frozen.js"/>"></script>
+<script type="text/javascript" src="<c:url value="../../js/frozen.js"/>"></script>
 <script type="text/javascript">
     (function () {
         var prefix = "${pageContext.request.contextPath}"
@@ -325,7 +325,7 @@
                 if (!$detailInited) {
                     $.ajax({
                         type: "GET",
-                        url: prefix + "h/goods/detail/single/" + goodsId,
+                        url: prefix + "/goods/detail/single/" + goodsId,
                         data: {},
 //                                contentType: "application/json; charset=utf-8",
                         contentType: "application/x-www-form-urlencoded; charset=utf-8",
@@ -438,7 +438,7 @@
                             }
                             $.ajax({
                                 type: "GET",
-                                url: prefix + "h/goods/sku/" + goodsId,
+                                url: prefix + "/goods/sku/" + goodsId,
                                 data: attrForm,
 //                                contentType: "application/json; charset=utf-8",
                                 contentType: "application/x-www-form-urlencoded; charset=utf-8",
@@ -534,7 +534,7 @@
         var attrEvent = function () {
             $.ajax({
                 type: "GET",
-                url: prefix + "h/goods/attrs/" + goodsId,
+                url: prefix + "/goods/attrs/" + goodsId,
                 data: {},
                 contentType: "application/x-www-form-urlencoded; charset=utf-8",
                 dataType: "json",
@@ -583,7 +583,7 @@
             } else {
                 $.ajax({
                     type: "POST",
-                    url: prefix + "h/carts/add",
+                    url: prefix + "/carts/add",
                     data: cartAddForm,
                     contentType: "application/x-www-form-urlencoded; charset=utf-8",
                     dataType: "json",
@@ -612,7 +612,7 @@
 
         var goCartEvent = function () {
             $('#go-cart-btn').tap(function () {
-                window.location.href = prefix + "h/user/carts";
+                window.location.href = prefix + "/user/carts";
             })
         }
 
@@ -632,7 +632,7 @@
                 } else {
                     var my_val = $.trim($('#ipt').val());
                     // 取得要提交页面的URL
-                    var action = prefix + "/h/orders/buy";
+                    var action = prefix + "/orders/buy";
                     // 创建Form
                     var form = $('<form></form>');
                     // 设置属性

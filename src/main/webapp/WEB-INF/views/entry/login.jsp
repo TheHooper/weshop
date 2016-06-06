@@ -50,8 +50,8 @@
 <div class="ui-form ui-border-t">
     <div class="ui-form-item ui-form-item-l ui-border-b">
         <label class="ui-border-r">
-            <img src="/h/captcha?type=1" class="ho-vertical-align-middle"
-                 onclick="this.src='/h/captcha?type=1&d='+new Date().getTime()"/>
+            <img src="<c:url value="/captcha/getCaptcha"/>" class="ho-vertical-align-middle"
+                 onclick="this.src='<c:url value="/captcha/getCaptcha"/>&d='+new Date().getTime()"/>
         </label>
         <input id="captcha-input" type="text" placeholder="请输入验证码">
         <a href="#" class="ui-icon-close">
@@ -112,7 +112,7 @@
             var password64 = Base64.encode(password);
             $.ajax({
                 type: "POST",
-                url: prefix + "h/user/login",
+                url: prefix + "/user/login",
                 data: {
                     mobile: mobile64,
                     password: password64,
@@ -124,7 +124,7 @@
                 success: function (data) {
                     if (data.code == "0") {
                         $("#error-view").css("display", "none");
-                        window.location.href = prefix + "h/index";
+                        window.location.href = prefix + "/index";
                     } else {
                         $("#error-view").css("display", "block");
                         if (data.code == "5010") {

@@ -196,7 +196,7 @@ function sortDefault() {
 var loadGoods = function (fitlerForm) {
     $.ajax({
         type: "GET",
-        url: prefix + "h/goods/goodses",
+        url: prefix + "/goods/goodses",
         data: fitlerForm,
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
         dataType: "json",

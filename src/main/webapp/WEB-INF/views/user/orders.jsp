@@ -22,7 +22,7 @@
 <body>
 
 <header id="header" class="header">
-    <a href="/h/user/central" class="header-arrow-l"><i id="headerBarCat" class="ui-icon-prev"></i></a>
+    <a href="/user/central" class="header-arrow-l"><i id="headerBarCat" class="ui-icon-prev"></i></a>
     <h2 class="ui-flex-pack-center">我的订单</h2>
     <div class="ui-tab" id="tab1">
         <ul id="topTap" class="ui-tab-nav ui-border-b">
@@ -77,7 +77,7 @@
         function loadOrders() {
             $.ajax({
                 type: "GET",
-                url: prefix + "h/orders/orders",
+                url: prefix + "/orders/orders",
                 data: filterForm,
                 contentType: "application/x-www-form-urlencoded; charset=utf-8",
                 dataType: "json",
@@ -102,6 +102,11 @@
                         + '取消'
                         + '</button>'
                 return footer;
+            } else if (state == 1) {
+                var footer = '<button value="' + id + '" class="ui-btn detail-btn">'
+                        + '详情'
+                        + '</button>'
+                return footer;
             } else if (state == 2) {
                 var footer = '<button value="' + id + '" class="ui-btn detail-btn">'
                         + '详情'
@@ -123,7 +128,7 @@
                 var footer = '<button value="' + id + '" class="ui-btn detail-btn">'
                         + '详情'
                         + '</button>'
-                        + ' <button value="' + id + '" class="ui-btn del-btn">'
+                        + ' <button value="' + id + '" class="ui-btn cancel-btn">'
                         + '删除'
                         + '</button>'
                 return footer;
@@ -132,10 +137,10 @@
 
         function getOrderFaceUrl(state, id) {
             if (state == 0) {
-                var url = "${pageContext.request.contextPath}/h/orders/buy/" + id;
+                var url = "${pageContext.request.contextPath}/orders/buy/" + id;
                 return url;
             } else {
-                var url = "${pageContext.request.contextPath}/h/orders/detail/" + id;
+                var url = "${pageContext.request.contextPath}/orders/detail/" + id;
                 return url;
             }
         }
@@ -156,8 +161,8 @@
                         + '<span style="  background-image:url(' + e.orderPic + '?imageMogr2/thumbnail/200x200)"></span>'
                         + '</div>'
                         + '<div class="ui-list-info">'
-                        + '<h4 class="ui-nowrap">共' + e.goodsNum + '件商品</h4>'
-                        + '<h3 class="ui-nowrap price">&yen;' + e.totalAndDelivery + '</h3>'
+                        + '<h4 class="ui-nowrap">共' + e.goodsNum + '种商品</h4>'
+                        + '<h3 class="ui-nowrap price">&yen;' + getPrice(e.totalAndDelivery, e.rTotal) + '</h3>'
                         + '</div>'
                         + '</li>'
                         + '</ul>'
@@ -176,23 +181,31 @@
             })
         }
 
+        var getPrice = function (total, rTotal) {
+            if (rTotal == null) {
+                return total;
+            } else {
+                return total;
+            }
+        }
+
         var payBtnEvent = function () {
             $(document).on("tap", ".pay-btn", function () {
-                var url = "${pageContext.request.contextPath}/h/orders/buy/" + $(this).attr("value");
+                var url = "${pageContext.request.contextPath}/orders/buy/" + $(this).attr("value");
                 window.location.href = url;
             })
         }
 
         var detailBtnEvent = function () {
             $(document).on("tap", ".detail-btn", function () {
-                var url = "${pageContext.request.contextPath}/h/orders/detail/" + $(this).attr("value");
+                var url = "${pageContext.request.contextPath}/orders/detail/" + $(this).attr("value");
                 window.location.href = url;
             })
         }
 
         var rateBtnEvent = function () {
             $(document).on("tap", ".rate-btn", function () {
-                var url = "${pageContext.request.contextPath}/h/orders/rate/" + $(this).attr("value");
+                var url = "${pageContext.request.contextPath}/orders/rate/" + $(this).attr("value");
                 window.location.href = url;
             })
         }
@@ -210,7 +223,7 @@
                     if (e.index == 0) {
                         $.ajax({
                             type: "POST",
-                            url: prefix + "h/orders/receive",
+                            url: prefix + "/orders/receive",
                             data: {orderId: id},
                             contentType: "application/x-www-form-urlencoded; charset=utf-8",
                             dataType: "json",
@@ -241,12 +254,56 @@
         }
 
 
+        var cancelBtnEvent = function () {
+            $(document).on("tap", ".cancel-btn", function () {
+                var id = $(this).attr("value");
+                var dia = $.dialog({
+                    title: '删除订单',
+                    content: '请确认要删除订单',
+                    button: ["确认", "取消"]
+                });
+
+                dia.on("dialog:action", function (e) {
+                    if (e.index == 0) {
+                        $.ajax({
+                            type: "POST",
+                            url: prefix + "/orders/cancel",
+                            data: {orderId: id},
+                            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                            dataType: "json",
+                            success: function (data) {
+                                if (data.code == "0") {
+                                    el = $.tips({
+                                        content: '已删除订单',
+                                        stayTime: 2000,
+                                        type: "success"
+                                    })
+                                    el.on("tips:hide", function () {
+                                        console.log("tips hide");
+                                    })
+                                    $("#order-panel-section").html("");
+                                    loadOrders();
+                                }
+                            },
+                            error: function (msg) {
+                                console.log(JSON.stringify(msg));
+                            }
+                        })
+                    }
+                });
+                dia.on("dialog:hide", function (e) {
+                    console.log("dialog hide")
+                });
+            })
+        }
+
         initTopBar();
         loadOrders();
         payBtnEvent();
         detailBtnEvent();
         rateBtnEvent();
         receiveBtnEvent();
+        cancelBtnEvent();
 
         $('#topTap').children("li").tap(function () {
             var index = $(this).val();

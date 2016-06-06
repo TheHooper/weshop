@@ -7,8 +7,7 @@ import com.hooper.hoshop.common.exception.BusinessException;
 import com.hooper.hoshop.common.util.DateUtil;
 import com.hooper.hoshop.common.util.security.BASE64;
 import com.hooper.hoshop.common.util.security.MD5;
-import com.hooper.hoshop.dto.Order.OrderDetailOutput;
-import com.hooper.hoshop.dto.Order.OrderDto;
+import com.hooper.hoshop.dto.order.OrderDto;
 import com.hooper.hoshop.dto.output.JsonOutput;
 import com.hooper.hoshop.entity.*;
 import com.hooper.hoshop.service.facade.*;
@@ -89,8 +88,12 @@ public class OrdersController {
     }
 
     @RequestMapping(value = "/cancel", method = {RequestMethod.POST, RequestMethod.GET})
-    public ModelAndView cancel(ModelAndView modelAndView) {
-        return modelAndView;
+    public
+    @ResponseBody
+    JsonOutput cancel(int orderId) {
+        orderService.delete(orderId);
+        JsonOutput output = new JsonOutput();
+        return output;
     }
 
     @UserLoginAnnotation

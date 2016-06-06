@@ -22,7 +22,7 @@
 <body>
 <!-- header -->
 <header class="ui-searchbar-wrap ui-border-b">
-    <a href="/h//category"><i id="headerBarCat" class="ui-icon-cat-tall"></i></a>
+    <a href="/category"><i id="headerBarCat" class="ui-icon-cat-tall"></i></a>
     <div class="ui-searchbar ui-border-radius">
         <i class="ui-icon-search"></i>
         <div class="ui-searchbar-text">搜索商品</div>
@@ -30,7 +30,7 @@
         <i class="ui-icon-close ui-searchbar-close"></i>
     </div>
     <button class="ui-searchbar-cancel">搜索</button>
-    <a href="/h/user/central"><i id="headerBarAccount" class="ui-icon-my"></i></a>
+    <a href="/user/central"><i id="headerBarAccount" class="ui-icon-my"></i></a>
 </header>
 <!-- header E -->
 
@@ -53,13 +53,13 @@
         </a>
     </li>
     <li class="ui-col ui-col-33">
-        <a href="/h/user/carts" class="txt-black">
+        <a href="/user/carts" class="txt-black">
             <i class="ui-icon-cart"></i>
             <p>购物车</p>
         </a>
     </li>
     <li class="ui-col ui-col-33">
-        <a href="/h/user/central" class="txt-black">
+        <a href="/user/central" class="txt-black">
             <i class="ui-icon-personal"></i>
             <p>个人中心</p>
         </a>
@@ -116,7 +116,7 @@
     <div class="hoTopic-wapper">
         <ul class="hoTopic-scroller">
             <li style="background:url(img/food/f1.jpg)"
-                onclick="javascript:window.location.href='/h/user/login'"></li>
+                onclick="javascript:window.location.href='/user/login'"></li>
             <li style="background:url(img/food/f2.jpg)"></li>
             <li style="background:url(img/food/f3.jpg)"></li>
             <li style="background:url(img/food/f4.jpg)"></li>
@@ -130,7 +130,7 @@
 </section>
 <!-- topic E -->
 
-<!-- Hot Goods -->
+<!-- Hot goods -->
 <section class="margin-top-xl">
     <div class="text-center">
         <h2>- 热销商品 -</h2>
@@ -185,7 +185,7 @@
         </ul>
     </div>
 </section>
-<!-- Hot Goods E -->
+<!-- Hot goods E -->
 </body>
 
 <script type="text/javascript" src="<c:url value="../js/frozen.js"/>"></script>
@@ -225,7 +225,7 @@
         var loadHotGoods = function () {
             $.ajax({
                 type: "GET",
-                url: prefix + "h/goods/goodses",
+                url: prefix + "/goods/goodses",
                 data: {
                     limit: 4,
                     offset: 0,

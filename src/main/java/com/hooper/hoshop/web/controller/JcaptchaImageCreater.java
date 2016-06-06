@@ -28,8 +28,7 @@ public class JcaptchaImageCreater {
     @Autowired
     private CustomGenericManageableCaptchaService customGenericManageableCaptchaService;
 
-
-    @RequestMapping
+    @RequestMapping("/getCaptcha")
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) {
         try {
             ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();

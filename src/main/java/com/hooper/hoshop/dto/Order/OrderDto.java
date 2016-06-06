@@ -1,4 +1,4 @@
-package com.hooper.hoshop.dto.Order;
+package com.hooper.hoshop.dto.order;
 
 import java.math.BigDecimal;
 

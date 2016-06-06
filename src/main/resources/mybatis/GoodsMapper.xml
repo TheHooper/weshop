@@ -21,6 +21,9 @@
         <result column="u_time" property="uTime" jdbcType="BIGINT"/>
         <result column="is_del" property="isDel" jdbcType="BIT"/>
     </resultMap>
+    <resultMap id="counterMap" type="com.hooper.hoshop.dto.count.GoodsCounter" extends="BaseResultMap">
+        <result column="counter" property="counter" jdbcType="INTEGER"/>
+    </resultMap>
     <sql id="Base_Column_List">
         id, title, intro, goods_list_pic, goods_main_pic, goods_second_pic, goods_thirth_pic,
         price, o_price, d_charge, status, orginal_num, stock, saled_num, detail_id, c_time,
@@ -354,4 +357,30 @@
         is_del = #{isDel,jdbcType=BIT}
         where id = #{id,jdbcType=INTEGER}
     </update>
+
+    <select id="countCostByGoods" resultMap="counterMap" parameterType="java.lang.Integer">
+        SELECT
+        gg.id, gg.title, gg.intro, gg.goods_list_pic, gg.goods_main_pic, gg.goods_second_pic, gg.goods_thirth_pic,
+        gg.price, gg.o_price, gg.d_charge, gg.status, gg.orginal_num, gg.stock, gg.saled_num, gg.detail_id, gg.c_time,
+        gg.u_time, gg.is_del,
+        SUM(og.price*og.num) AS `counter`
+        FROM h_goods gg
+        LEFT JOIN (h_order_goods og INNER JOIN h_order ON (h_order.`status` > 0 AND h_order.`is_del` = 0 AND
+        h_order.`id` = og.`order_id`)) ON gg.id = og.`goods_id`
+        WHERE gg.`is_del` = 0
+        GROUP BY gg.`id`;
+    </select>
+
+    <select id="countNumByGoods" resultMap="counterMap" parameterType="java.lang.Integer">
+        SELECT
+        gg.id, gg.title, gg.intro, gg.goods_list_pic, gg.goods_main_pic, gg.goods_second_pic, gg.goods_thirth_pic,
+        gg.price, gg.o_price, gg.d_charge, gg.status, gg.orginal_num, gg.stock, gg.saled_num, gg.detail_id, gg.c_time,
+        gg.u_time, gg.is_del,
+        COUNT(*) AS `counter`
+        FROM h_goods gg
+        LEFT JOIN (h_order_goods og INNER JOIN h_order ON (h_order.`status` > 0 AND h_order.`is_del` = 0 AND
+        h_order.`id` = og.`order_id`)) ON gg.id = og.`goods_id`
+        WHERE gg.`is_del` = 0
+        GROUP BY gg.`id`;
+    </select>
 </mapper>

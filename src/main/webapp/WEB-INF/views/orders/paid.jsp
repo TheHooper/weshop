@@ -42,7 +42,7 @@
     var prefix = "${pageContext.request.contextPath}"
 
     $("#back").tap(function () {
-        window.location.href = "${pageContext.request.contextPath}/h/user/orders";
+        window.location.href = "${pageContext.request.contextPath}/user/orders";
     })
 </script>
 </html>

@@ -6,7 +6,7 @@ AddressApi = {
     loadProvince: function (selectId) {
         $.ajax({
             type: "GET",
-            url: AddressApi.urlPrefix + "h/address/provinces",
+            url: AddressApi.urlPrefix + "/address/provinces",
             data: {},
             contentType: "application/x-www-form-urlencoded; charset=utf-8",
             dataType: "json",
@@ -24,7 +24,7 @@ AddressApi = {
     loadCity: function (provinceId, selectId) {
         $.ajax({
             type: "GET",
-            url: AddressApi.urlPrefix + "h/address/cities/" + provinceId,
+            url: AddressApi.urlPrefix + "/address/cities/" + provinceId,
             data: {},
             contentType: "application/x-www-form-urlencoded; charset=utf-8",
             dataType: "json",
@@ -43,7 +43,7 @@ AddressApi = {
     loadArea: function (cityId, selectId) {
         $.ajax({
             type: "GET",
-            url: AddressApi.urlPrefix + "h/address/areas/" + cityId,
+            url: AddressApi.urlPrefix + "/address/areas/" + cityId,
             data: {},
             contentType: "application/x-www-form-urlencoded; charset=utf-8",
             dataType: "json",
@@ -64,7 +64,7 @@ AddressApi = {
         $.ajax({
             type: "GET",
             async: async,
-            url: AddressApi.urlPrefix + "h/address/default/",
+            url: AddressApi.urlPrefix + "/address/default/",
             data: {},
             contentType: "application/x-www-form-urlencoded; charset=utf-8",
             dataType: "json",
@@ -82,7 +82,7 @@ AddressApi = {
         $.ajax({
             type: "GET",
             async: async,
-            url: AddressApi.urlPrefix + "h/address/addresses/",
+            url: AddressApi.urlPrefix + "/address/addresses/",
             data: {},
             contentType: "application/x-www-form-urlencoded; charset=utf-8",
             dataType: "json",
@@ -100,7 +100,7 @@ AddressApi = {
             var pId = $('#' + pSelectId).val();
             $.ajax({
                 type: "GET",
-                url: AddressApi.urlPrefix + "h/address/cities/" + pId,
+                url: AddressApi.urlPrefix + "/address/cities/" + pId,
                 data: {},
                 contentType: "application/x-www-form-urlencoded; charset=utf-8",
                 dataType: "json",
@@ -126,7 +126,7 @@ AddressApi = {
     addAddress: function (addressAddForm, callbackFunction) {
         $.ajax({
             type: "POST",
-            url: AddressApi.urlPrefix + "h/address/add",
+            url: AddressApi.urlPrefix + "/address/add",
             data: addressAddForm,
             contentType: "application/x-www-form-urlencoded; charset=utf-8",
             dataType: "json",

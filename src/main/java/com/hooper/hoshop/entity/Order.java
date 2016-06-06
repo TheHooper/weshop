@@ -175,7 +175,7 @@ public class Order {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Order{");
+        final StringBuilder sb = new StringBuilder("order{");
         sb.append("addressId=").append(addressId);
         sb.append(", id=").append(id);
         sb.append(", sn='").append(sn).append('\'');

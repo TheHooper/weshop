@@ -38,8 +38,8 @@
     </div>
     <div class="ui-form-item ui-form-item-l  ui-border-b">
         <label class="ui-border-r">
-            <img src="/h/captcha?type=1" class="ho-vertical-align-middle"
-                 onclick="this.src='/h/captcha?type=1&d='+new Date().getTime()"/>
+            <img src="<c:url value="/captcha/getCaptcha"/>" class="ho-vertical-align-middle"
+                 onclick="this.src='<c:url value="/captcha/getCaptcha"/>&d='+new Date().getTime()"/>
         </label>
         <input id="captcha-input" type="text" placeholder="请输入图像验证码">
         <a href="javascript:void(0);" class="ui-icon-close"></a>
@@ -114,7 +114,7 @@
             var mobile64 = Base64.encode(mobile);
             $.ajax({
                 type: "POST",
-                url: prefix + "h/sms/sendCode",
+                url: prefix + "/sms/sendCode",
                 data: {
                     mobile: mobile64,
                     captcha: $("#captcha-input").val()
@@ -166,7 +166,7 @@
             var password64 = Base64.encode(password);
             $.ajax({
                 type: "POST",
-                url: prefix + "h/user/register",
+                url: prefix + "/user/register",
                 data: {
                     mobile: mobile64,
                     password: password64,

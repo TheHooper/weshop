@@ -107,27 +107,27 @@
                     <fieldset>
                         <div class="am-form-group am-g am-margin-bottom-xs">
                             <div class="am-u-sm-6 am-u-md-3">
-                                <label for="add-list-review-div">商品列表图:(190*284 1:1.5)</label>
+                                <label for="add-list-review-div">商品列表图:(200*230 1:1.14)</label>
                                 <div id="add-list-review-div">
-                                    <img src="" width="95px" height="142px">
+                                    <img src="" width="115" height="142px">
                                 </div>
                             </div>
                             <div class="am-u-sm-6 am-u-md-3">
-                                <label for="add-main-review-div">商品详情主图:(600*400 3:2)</label>
+                                <label for="add-main-review-div">商品详情主图:(600*600 1:1)</label>
                                 <div id="add-main-review-div">
-                                    <img src="" width="160px" height="100px">
+                                    <img src="" width="160" height="160px">
                                 </div>
                             </div>
                             <div class="am-u-sm-6 am-u-md-3">
-                                <label for="add-second-review-div">商品详情副图1:(600*400 3:2)</label>
+                                <label for="add-second-review-div">商品详情副图1:(600*600 1:1)</label>
                                 <div id="add-second-review-div">
-                                    <img src="" width="160px" height="100px">
+                                    <img src="" width="160px" height="160px">
                                 </div>
                             </div>
                             <div class="am-u-sm-6 am-u-md-3">
-                                <label for="add-thirth-review-div">商品详情副图2:(600*400 3:2)</label>
+                                <label for="add-thirth-review-div">商品详情副图2:(600*600 1:1)</label>
                                 <div id="add-thirth-review-div">
-                                    <img src="" width="160px" height="100px">
+                                    <img src="" width="160px" height="160px">
                                 </div>
                             </div>
                         </div>
@@ -283,27 +283,27 @@
                         <input id="editor-id" style="display: none">
                         <div class="am-form-group am-g am-margin-bottom-xs">
                             <div class="am-u-sm-6 am-u-md-3">
-                                <label for="editor-list-review-div">商品列表图:(190*284 1:1.5)</label>
+                                <label for="editor-list-review-div">商品列表图:(200*230 1:1.5)</label>
                                 <div id="editor-list-review-div">
-                                    <img src="" width="95px" height="142px">
+                                    <img src="" width="100px" height="115px">
                                 </div>
                             </div>
                             <div class="am-u-sm-6 am-u-md-3">
-                                <label for="editor-main-review-div">商品详情主图:(600*400 3:2)</label>
+                                <label for="editor-main-review-div">商品详情主图:(600*600 1:1)</label>
                                 <div id="editor-main-review-div">
-                                    <img src="" width="160px" height="100px">
+                                    <img src="" width="160px" height="160px">
                                 </div>
                             </div>
                             <div class="am-u-sm-6 am-u-md-3">
-                                <label for="editor-second-review-div">商品详情副图1:(600*400 3:2)</label>
+                                <label for="editor-second-review-div">商品详情副图1:(600*600 1:2)</label>
                                 <div id="editor-second-review-div">
-                                    <img src="" width="160px" height="100px">
+                                    <img src="" width="160px" height="160px">
                                 </div>
                             </div>
                             <div class="am-u-sm-6 am-u-md-3">
-                                <label for="editor-thirth-review-div">商品详情副图2:(600*400 3:2)</label>
+                                <label for="editor-thirth-review-div">商品详情副图2:(600*600 1:1)</label>
                                 <div id="editor-thirth-review-div">
-                                    <img src="" width="160px" height="100px">
+                                    <img src="" width="160px" height="160px">
                                 </div>
                             </div>
                         </div>
@@ -466,7 +466,7 @@
 
             var table = $('#table').DataTable({
                 ajax: {
-                    url: prefix + "/h/admin/goods/goodses",
+                    url: prefix + "/admin/goods/goodses",
                     type: "GET"
                 },
                 autoWidth: false,
@@ -571,14 +571,14 @@
             })
 
             $('#parentSelect').on("change", function () {
-                var url = table.ajax.url(prefix + "/h/admin/goods/goodses/?statusStr=" + $('#parentSelect').val());
+                var url = table.ajax.url(prefix + "/admin/goods/goodses/?statusStr=" + $('#parentSelect').val());
                 url.load();
                 table.draw();
             })
 
 
             $('#search-btn').on("click", function () {
-                var url = table.ajax.url(prefix + "/h/admin/goods/goodses/?title=" + $('#search-input').val());
+                var url = table.ajax.url(prefix + "/admin/goods/goodses/?title=" + $('#search-input').val());
                 url.load();
                 table.draw();
             })
@@ -607,7 +607,7 @@
                     //load cat
                     $.ajax({
                         type: "GET",
-                        url: prefix + "/h/admin/goods/cats/" + data.id,
+                        url: prefix + "/admin/goods/cats/" + data.id,
                         data: {},
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
@@ -616,7 +616,7 @@
                                 $('#editor-cats-parent').val(datap.catsParentId);
                                 $.ajax({
                                     type: "GET",
-                                    url: prefix + "/h/admin/cat/cats",
+                                    url: prefix + "/admin/cat/cats",
                                     data: {parentId: datap.catsParentId},
                                     contentType: "application/json; charset=utf-8",
                                     dataType: "json",
@@ -645,7 +645,7 @@
                     //load attr sku
                     $.ajax({
                         type: "GET",
-                        url: prefix + "/h/admin/goods/attrs/" + data.id,
+                        url: prefix + "/admin/goods/attrs/" + data.id,
                         data: {},
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
@@ -742,7 +742,7 @@
                                 })
                                 $.ajax({
                                     type: "GET",
-                                    url: prefix + "/h/admin/goods/skus/" + goodsId,
+                                    url: prefix + "/admin/goods/skus/" + goodsId,
                                     data: {},
                                     contentType: "application/json; charset=utf-8",
                                     dataType: "json",
@@ -777,7 +777,7 @@
                     //load detail
                     $.ajax({
                         type: "GET",
-                        url: prefix + "/h/admin/goods/detail/" + data.id,
+                        url: prefix + "/admin/goods/detail/" + data.id,
                         data: {},
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
@@ -801,7 +801,7 @@
                     if (r) {
                         $.ajax({
                             type: "POST",
-                            url: prefix + "/h/admin/goods/status/",
+                            url: prefix + "/admin/goods/status/",
                             data: {
                                 goodsId: id,
                                 status: "SALEING"
@@ -839,7 +839,7 @@
                     if (r) {
                         $.ajax({
                             type: "POST",
-                            url: prefix + "/h/admin/goods/status/",
+                            url: prefix + "/admin/goods/status/",
                             data: {
                                 goodsId: id,
                                 status: "PULL_OFF"
@@ -877,7 +877,7 @@
                     if (r) {
                         $.ajax({
                             type: "POST",
-                            url: prefix + "/h/admin/goods/del/",
+                            url: prefix + "/admin/goods/del/",
                             data: {goodsId: id},
                             contentType: "application/x-www-form-urlencoded; charset=utf-8",
                             dataType: "json",
@@ -1005,7 +1005,7 @@
                         } else {
                             $.ajax({
                                 type: "POST",
-                                url: prefix + "/h/admin/attr/insert/parent",
+                                url: prefix + "/admin/attr/insert/parent",
                                 data: {
                                     attributeName: attrName
                                 },
@@ -1035,7 +1035,7 @@
                             } else {
                                 $.ajax({
                                     type: "POST",
-                                    url: prefix + "/h/admin/attr/insert/child",
+                                    url: prefix + "/admin/attr/insert/child",
                                     data: {
                                         parentId: parentId,
                                         attributeName: attrName
@@ -1209,7 +1209,7 @@
                 loadAttrParent: function () {
                     $.ajax({
                         type: "GET",
-                        url: prefix + "/h/admin/attr/parents",
+                        url: prefix + "/admin/attr/parents",
                         data: {},
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
@@ -1236,7 +1236,7 @@
                 loadAttrChild: function (TargetId, ParentId) {
                     $.ajax({
                         type: "GET",
-                        url: prefix + "/h/admin/attr/children/" + ParentId,
+                        url: prefix + "/admin/attr/children/" + ParentId,
                         data: {},
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
@@ -1276,7 +1276,7 @@
                 loadCatsParent: function () {
                     $.ajax({
                         type: "GET",
-                        url: prefix + "/h/admin/cat/roots",
+                        url: prefix + "/admin/cat/roots",
                         data: {},
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
@@ -1301,7 +1301,7 @@
                         if (typeof(id) != 'undefined' && id != null && id != 0) {
                             $.ajax({
                                 type: "GET",
-                                url: prefix + "/h/admin/cat/cats",
+                                url: prefix + "/admin/cat/cats",
                                 data: {parentId: id},
                                 contentType: "application/json; charset=utf-8",
                                 dataType: "json",
@@ -1328,7 +1328,7 @@
                         if (typeof(id) != 'undefined' && id != null && id != 0) {
                             $.ajax({
                                 type: "GET",
-                                url: prefix + "/h/admin/cat/cats",
+                                url: prefix + "/admin/cat/cats",
                                 data: {parentId: id},
                                 contentType: "application/json; charset=utf-8",
                                 dataType: "json",
@@ -1419,7 +1419,7 @@
                                 }
                                 $.ajax({
                                     type: "POST",
-                                    url: prefix + "/h/admin/goods/add",
+                                    url: prefix + "/admin/goods/add",
                                     data: $.customParam(goodsForm),
                                     contentType: "application/x-www-form-urlencoded; charset=utf-8",
 //                        contentType: "application/json",
@@ -1537,7 +1537,7 @@
                                 }
                                 $.ajax({
                                     type: "POST",
-                                    url: prefix + "/h/admin/goods/update",
+                                    url: prefix + "/admin/goods/update",
                                     data: $.customParam(goodsForm),
                                     contentType: "application/x-www-form-urlencoded; charset=utf-8",
 //                        contentType: "application/json",

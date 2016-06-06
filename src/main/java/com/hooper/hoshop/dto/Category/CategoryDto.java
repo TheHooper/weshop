@@ -1,4 +1,4 @@
-package com.hooper.hoshop.dto.Category;
+package com.hooper.hoshop.dto.category;
 
 /**
  * Created by 47123 on 2016/5/13.

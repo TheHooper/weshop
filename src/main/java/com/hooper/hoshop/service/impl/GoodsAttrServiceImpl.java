@@ -3,7 +3,7 @@ package com.hooper.hoshop.service.impl;
 import com.hooper.hoshop.common.constant.AdminErrorConstant;
 import com.hooper.hoshop.common.exception.BusinessException;
 import com.hooper.hoshop.dao.GoodsAttrMapper;
-import com.hooper.hoshop.dto.Goods.GoodsAttrVo;
+import com.hooper.hoshop.dto.goods.GoodsAttrVo;
 import com.hooper.hoshop.entity.GoodsAttr;
 import com.hooper.hoshop.service.facade.GoodsAttrService;
 import org.springframework.beans.factory.annotation.Autowired;

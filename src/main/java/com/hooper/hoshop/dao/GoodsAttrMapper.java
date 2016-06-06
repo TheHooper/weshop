@@ -1,6 +1,6 @@
 package com.hooper.hoshop.dao;
 
-import com.hooper.hoshop.dto.Goods.GoodsAttrVo;
+import com.hooper.hoshop.dto.goods.GoodsAttrVo;
 import com.hooper.hoshop.entity.GoodsAttr;
 
 import java.util.List;

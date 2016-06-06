@@ -17,7 +17,7 @@
         from h_goods_attr
         where id = #{id,jdbcType=INTEGER}
     </select>
-    <select id="selectVoListByGoodsId" resultType="com.hooper.hoshop.dto.Goods.GoodsAttrVo"
+    <select id="selectVoListByGoodsId" resultType="com.hooper.hoshop.dto.goods.GoodsAttrVo"
             parameterType="java.lang.Integer">
         select
         g.id, goods_id AS goodsId, attr_id AS attrId, attr_name AS attrName, g.parent_id AS parentId,a.attribute_name AS

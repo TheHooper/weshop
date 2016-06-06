@@ -45,10 +45,11 @@
                             <button type="button" class="am-btn am-btn-default" onclick="$('#addWin').window('open');">
                                 <span class="am-icon-plus"></span>新增优惠券
                             </button>
-                            <button type="button" class="am-btn am-btn-default"
-                                    onclick="$('#batchSendWin').window('open');"><span class="am-icon-send-o"></span>批量发送
+                            <button id="batch-send-btn" type="button" class="am-btn am-btn-default"
+                            ><span class="am-icon-send-o"></span>批量发送
                             </button>
-                            <button type="button" class="am-btn am-btn-default"><span class="am-icon-send"></span>单个发送
+                            <button id="send-btn" type="button" class="am-btn am-btn-default"
+                            ><span class="am-icon-send"></span>单个发送
                             </button>
                         </div>
                     </div>
@@ -72,13 +73,12 @@
                     <table id="table" class="am-table am-table-striped am-table-hover table-main">
                         <thead>
                         <tr>
-                            <th data-field="sn" class="table-title">流水号</th>
-                            <th data-field="logo" class="table-title">主图</th>
-                            <th data-field="typeName" class="table-type">商品数量</th>
-                            <th data-field="typeName" class="table-type">金额</th>
-                            <th data-field="typeName" class="table-type">实付</th>
-                            <th data-field="cTime" class="table-author am-hide-sm-only">创建时间</th>
-                            <th data-field="uTime" class="table-date am-hide-sm-only">状态</th>
+                            <th data-field="sn" class="table-title">id</th>
+                            <th data-field="logo" class="table-title">券名</th>
+                            <th data-field="typeName" class="table-type">面额</th>
+                            <th data-field="typeName" class="table-type">门槛</th>
+                            <th data-field="typeName" class="table-type">有效时长</th>
+                            <th data-field="cTime" class="table-author am-hide-sm-only">数量</th>
                             <th data-field="isDel" class="table-set">操作</th>
                         </tr>
                         </thead>
@@ -105,28 +105,28 @@
                         <legend>新增优惠券</legend>
 
                         <div class="am-form-group">
-                            <label for="doc-ipt-email-1">券名</label>
-                            <input type="email" class="" id="doc-ipt-email-1" placeholder="输入优惠券标题">
+                            <label for="add-title">券名</label>
+                            <input type="text" class="" id="add-title" placeholder="输入优惠券标题">
                         </div>
 
                         <div class="am-form-group">
-                            <label for="doc-ipt-pwd-1">面额</label>
-                            <input type="password" class="" id="doc-ipt-pwd-1" placeholder="输入优惠券面额">
+                            <label for="add-price">面额</label>
+                            <input type="text" class="" id="add-price" placeholder="输入优惠券面额">
                         </div>
 
                         <div class="am-form-group">
-                            <label for="doc-ipt-pwd-1">使用门槛</label>
-                            <input type="password" class="" id="doc-ipt-pwd-1" placeholder="使用门槛">
+                            <label for="add-threshold">使用门槛</label>
+                            <input type="text" class="" id="add-threshold" placeholder="使用门槛">
                         </div>
 
                         <div class="am-form-group">
-                            <label for="doc-ipt-pwd-1">有效天数</label>
-                            <input type="password" class="" id="doc-ipt-pwd-1" placeholder="用户领取后有效天数">
+                            <label for="add-limitDays">有效天数</label>
+                            <input type="text" class="" id="add-limitDays" placeholder="用户领取后有效天数">
                         </div>
 
                         <div class="am-form-group">
-                            <label for="doc-ipt-pwd-1">券数量</label>
-                            <input type="password" class="" id="doc-ipt-pwd-1" placeholder="优惠券数量">
+                            <label for="add-num">券数量</label>
+                            <input type="text" class="" id="add-num" placeholder="优惠券数量">
                         </div>
 
                         <div class="am-form-group am-g am-g-collapse">
@@ -154,9 +154,10 @@
                 </form>
             </div>
             <div data-options="region:'south',border:false" style="text-align:center;margin-bottom: 15px">
-                <a id="add-ok" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" href="javascript:void(0)"
+                <a id="add-coupon-ok" class="easyui-linkbutton" data-options="iconCls:'icon-ok'"
+                   href="javascript:void(0)"
                    style="width:80px">确认</a>
-                <a id="add-cancel" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'"
+                <a id="add-coupon-cancel" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'"
                    href="javascript:void(0)" style="width:80px">取消</a>
             </div>
         </div>
@@ -166,43 +167,103 @@
          style="width:100%;height:100%;padding:5px;">
         <div class="easyui-layout" data-options="fit:true">
             <div data-options="region:'center'" class="am-panel-group " style="padding:10px;">
-                <table class="easyui-datagrid" style="width:100%;height:250px"
-                       data-options="url:'datagrid_data.json',fitColumns:true,singleSelect:true">
+                <table id="batch-send-table" class="easyui-datagrid" style="width:100%;height:250px"
+                       data-options="url:'',pagination:true , fitColumns:true,singleSelect:true">
                     <thead>
                     <tr>
-                        <th data-options="field:'code',width:100">id</th>
-                        <th data-options="field:'name',width:100">优惠券名</th>
+                        <th data-options="field:'id',width:100,formatter:couponBatchFormatter">id</th>
+                        <th data-options="field:'title',width:100">优惠券名</th>
                         <th data-options="field:'price',width:100,align:'right'">面额</th>
-                        <th data-options="field:'price',width:100,align:'right'">门槛</th>
-                        <th data-options="field:'price',width:100,align:'right'">数量</th>
+                        <th data-options="field:'threshold',width:100,align:'right'">门槛</th>
+                        <th data-options="field:'num',width:100,align:'right'">数量</th>
                     </tr>
                     </thead>
                 </table>
+                <div class="am-form  am-margin-top-xl">
+                    <div class="am-form-group">
+                        <label for="batch-send-num">发放数量</label>
+                        <input type="password" class="" id="batch-send-num" placeholder="优惠券数量">
+                    </div>
+                </div>
                 <div class="form-group am-margin-top-xl">
                     <label class="col-sm-2 control-label">发放规则:</label>
                     <div class="col-sm-8 ">
                         <select id="pushSelector"
                                 data-am-selected="{btnWidth: '100%', btnSize: 'sm', btnStyle: 'secondary',dropUp: 0}">
                             <optgroup label="成交量">
-                                <option value="orderCountDesc">用户成交量降序</option>
-                                <option value="orderCountAsc">用户成交量升序</option>
+                                <option value="0">用户成交量降序</option>
+                                <option value="1">用户成交量升序</option>
                             </optgroup>
                             <optgroup label="成交额">
-                                <option value="costSumDesc">用户成交额降序</option>
-                                <option value="costSumAsc">用户成交额升序</option>
+                                <option value="2">用户成交额降序</option>
+                                <option value="3">用户成交额升序</option>
                             </optgroup>
                             <optgroup label="注册时间">
-                                <option value="registerDateDesc">用户注册时间降序</option>
-                                <option value="registerDateAsc">用户注册时间升序</option>
+                                <option value="4">用户注册时间降序</option>
+                                <option value="5">用户注册时间升序</option>
                             </optgroup>
                         </select>
                     </div>
                 </div>
             </div>
             <div data-options="region:'south',border:false" style="text-align:center;margin-bottom: 15px">
-                <a id="add-ok" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" href="javascript:void(0)"
+                <a id="send-batch-ok" class="easyui-linkbutton" data-options="iconCls:'icon-ok'"
+                   href="javascript:void(0)"
                    style="width:80px">确认</a>
-                <a id="add-cancel" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'"
+                <a id="send-batch-cancel" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'"
+                   href="javascript:void(0)" style="width:80px">取消</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="sendWin" class="easyui-window" title="定点发送优惠券" data-options="iconCls:'icon-save',closed:true"
+         style="width:100%;height:100%;padding:5px;">
+        <div class="easyui-layout" data-options="fit:true">
+            <div data-options="region:'center'" class="am-panel-group " style="padding:10px;">
+                <table id="send-coupon-table" class="easyui-datagrid" style="width:100%;height:250px"
+                       data-options="url:'',pagination:true , fitColumns:true,singleSelect:true">
+                    <thead>
+                    <tr>
+                        <th data-options="field:'id',width:100,formatter:couponFormatter">id</th>
+                        <th data-options="field:'title',width:100">优惠券名</th>
+                        <th data-options="field:'price',width:100,align:'right'">面额</th>
+                        <th data-options="field:'threshold',width:100,align:'right'">门槛</th>
+                        <th data-options="field:'num',width:100,align:'right'">数量</th>
+                    </tr>
+                    </thead>
+                </table>
+                <table id="send-user-table" class="easyui-datagrid" style="width:100%;height:250px"
+                       data-options="url:'',pagination:true , fitColumns:true,singleSelect:true,toolbar:'#tb'">
+                    <thead>
+                    <tr>
+                        <th data-options="field:'id',width:100,formatter:userFormatter">id</th>
+                        <th data-options="field:'userName',width:60">用户名</th>
+                        <th data-options="field:'mobile',width:100,align:'right'">手机号</th>
+                        <th data-options="field:'cTime',width:100,align:'right'">注册时间</th>
+                    </tr>
+                    </thead>
+                </table>
+                <div id="tb" style="padding:5px;height:auto">
+                    <div>
+                        <label for="send-user-name">用户名</label>
+                        <input type="text" class="" id="send-user-name" placeholder="搜索用户名">
+                        <label for="send-user-mobile">手机号</label>
+                        <input type="text" class="" id="send-user-mobile" placeholder="搜索手机号">
+                        <a id="send-search" href="javascript:void (0)" class="easyui-linkbutton"
+                           iconCls="am-icon-search">搜索</a>
+                    </div>
+                </div>
+                <div class="am-form">
+                    <div class="am-form-group">
+                        <label for="send-user-tag">已选用户</label>
+                        <textarea id="send-user-tag" class="" rows="5"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div data-options="region:'south',border:false" style="text-align:center;margin-bottom: 15px">
+                <a id="send-ok" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" href="javascript:void(0)"
+                   style="width:80px">确认</a>
+                <a id="send-cancel" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'"
                    href="javascript:void(0)" style="width:80px">取消</a>
             </div>
         </div>
@@ -211,12 +272,25 @@
     <link rel="stylesheet" href="<c:url value="../css/tag/tagsinput.css"/>">
     <script src="<c:url value="../js/tag/tagsinput.js"/>"></script>
     <link rel="stylesheet"
-          href="<c:url value="../h/admin/css/easyui/themes/metro/datagrid.css"/>"></link>
+          href="<c:url value="../css/easyui/themes/metro/datagrid.css"/>"/>
     <link rel="stylesheet"
-          href="<c:url value="../h/admin/css/easyui/themes/metro/pagination.css"/>"></link>
-    <script src="<c:url value="../h/admin/js/easyui/plugins/jquery.pagination.js"/>"></script>
-    <script src="<c:url value="../h/admin/js/easyui/plugins/jquery.datagrid.js"/>"></script>
+          href="<c:url value="../css/easyui/themes/metro/linkbutton.css"/>"/>
+    <link rel="stylesheet"
+          href="<c:url value="../css/easyui/themes/metro/pagination.css"/>"/>
+    <script src="<c:url value="../js/easyui/plugins/jquery.linkbutton.js"/>"></script>
+    <script src="<c:url value="../js/easyui/plugins/jquery.pagination.js"/>"></script>
+    <script src="<c:url value="../js/easyui/plugins/jquery.datagrid.js"/>"></script>
     <script type="text/javascript">
+        function couponBatchFormatter(value, row, index) {
+            return "<input type='radio' class='couponBatchRadio' value='" + value + "' />";
+        }
+        function couponFormatter(value, row, index) {
+            return "<input type='radio' class='couponRadio' value='" + value + "' />";
+        }
+        function userFormatter(value, row, index) {
+            return "<input type='checkbox' class='userCheckBox' mobile='" + row.mobile + "' value='" + value + "' />";
+        }
+
         (function () {
             var prefix = "${pageContext.request.contextPath}"
 
@@ -229,6 +303,55 @@
             )
 
 
+            $("#batch-send-btn").click(function () {
+                $("#batchSendWin").window('open');
+                if (!$("#batch-send-table").hasClass("init")) {
+                    $("#batch-send-table").datagrid({
+                        url: '<c:url value="/admin/coupon/list"/>'
+                    })
+                    $("#batch-send-table").datagrid('reload');
+                    $("#batch-send-table").addClass("init");
+                }
+            })
+
+            $("#send-search").click(function () {
+                var user = $("#send-user-name").val();
+                var mobile = $("#send-user-mobile").val();
+                var url;
+                if (user != "" && typeof (user) != "undefined") {
+                    url = "name=" + user;
+                }
+                if (mobile != "" && typeof (mobile) != "undefined") {
+                    if (url != "" && typeof (url) != "undefined") {
+                        url = url + "&mobile=" + mobile
+                    } else {
+                        url = "mobile=" + mobile;
+                    }
+                }
+                $("#send-user-table").datagrid({
+                    url: prefix + '/admin/coupon/user/list?' + url
+                })
+                $("#send-user-table").datagrid('reload');
+            })
+
+            $("#send-btn").click(function () {
+                $("#sendWin").window('open');
+                if (!$("#send-coupon-table").hasClass("init")) {
+                    $("#send-coupon-table").datagrid({
+                        url: '<c:url value="/admin/coupon/list"/>'
+                    })
+                    $("#send-coupon-table").datagrid('reload');
+                    $("#send-coupon-table").addClass("init");
+                }
+                if (!$("#send-user-table").hasClass("init")) {
+                    $("#send-user-table").datagrid({
+                        url: '<c:url value="/admin/coupon/user/list"/>'
+                    })
+                    $("#send-user-table").datagrid('reload');
+                    $("#send-user-table").addClass("init");
+                }
+            })
+
             var loadSelectBox = function () {
                 $('#add-parent').html("");
 //                $("#editor-parent").html("");
@@ -237,7 +360,7 @@
 //                $("#editor-parent").append(allOp);
                 $.ajax({
                     type: "GET",
-                    url: prefix + "/h/admin/cat/roots",
+                    url: prefix + "/admin/cat/roots",
                     data: {},
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
@@ -263,7 +386,6 @@
                 'interactive': true,
             });
             var addCatsTagValue = "";
-
             function addTag(tagValue) {
                 if (!$("#add-cats").tagExist(tagValue)) {
                     if (addCatsTagValue != "") {
@@ -274,17 +396,15 @@
                     $("#add-cats").importTags(addCatsTagValue);
                 }
             }
-
             function getTagsInputId(tagsInput) {
                 var ids = new Array;
                 var tags = tagsInput.val().split(",");
                 $.each(tags, function (i, e) {
                     var idStr = e.split(":");
-                    ids.push(idStr[1]);
+                    ids.push(parseInt(idStr[1]));
                 })
                 return ids;
             }
-
             $("#add-cats-btn").click(function () {
                 var selectValue = $("#add-parent").val();
                 var selectText = $("#add-parent").find("option:selected").text();
@@ -293,6 +413,38 @@
                 console.log(addCatsTagValue);
                 console.log(getTagsInputId($("#add-cats")))
             })
+
+
+            $('#send-user-tag').tagsInput({
+                width: 'auto',
+                defaultText: '',
+                'interactive': true,
+            });
+            var sendTagValue = "";
+            $(document).on("change", ".userCheckBox", function () {
+                if ($(this).prop("checked")) {
+                    var selectValue = $(this).val();
+                    var selectText = $(this).attr("mobile");
+                    var tag = selectText + ":" + selectValue;
+                    if (!$("#send-user-tag").tagExist(tag)) {
+                        if (sendTagValue != "") {
+                            sendTagValue = $("#send-user-tag").val() + "," + tag;
+                        } else {
+                            sendTagValue = tag + ",";
+                        }
+                        $("#send-user-tag").importTags(sendTagValue);
+                    }
+                } else {
+                    var selectValue = $(this).val();
+                    var selectText = $(this).attr("mobile");
+                    var tag = selectText + ":" + selectValue;
+                    if ($("#send-user-tag").tagExist(tag)) {
+                        $("#send-user-tag").removeTag(tag);
+                        sendTagValue = $("#send-user-tag").val();
+                    }
+                }
+            })
+
 
 
             function praseDate(time) {
@@ -305,39 +457,35 @@
 
             var table = $('#table').DataTable({
                 ajax: {
-                    url: prefix + "/h/admin/orders/ordersList",
+                    url: prefix + "/admin/coupon/list/dataTable",
                     type: "GET"
                 },
                 autoWidth: false,
                 columns: [
                     {
-                        "data": "sn",
+                        "data": "id",
                         "orderable": false,
                         "width": "15%"
                     },
                     {
-                        "data": "orderPic",
+                        "data": "title",
                         "width": "15%"
                     },
                     {
-                        "data": "goodsNum",
+                        "data": "price",
                         "width": "10%"
                     },
                     {
-                        "data": "totalAndDelivery",
+                        "data": "threshold",
                         "width": "10%"
                     },
                     {
-                        "data": "rTotal",
+                        "data": "limitDays",
                         "width": "10%"
                     },
                     {
-                        "data": "cTime",
+                        "data": "num",
                         "width": "15%"
-                    },
-                    {
-                        "data": "status",
-                        "width": "10%"
                     },
                     {
                         "data": "id",
@@ -347,21 +495,6 @@
                 "columnDefs": [
                     {
                         "render": function (data, type, row, meta) {
-                            if (data != null && typeof(data) != "undefined") {
-                                return '<img src="' + data + '" width="60px" height="60px"/>';
-                            } else {
-                                return '<img src="" width="60px" height="60px"/>';
-                            }
-                        },
-                        "targets": 1
-                    }, {
-                        "render": function (data, type, row, meta) {
-                            return statusEnum[data]
-                        },
-                        "targets": 6
-                    },
-                    {
-                        "render": function (data, type, row, meta) {
                             return '<div class="am-btn-toolbar">' +
                                     '<div class="am-btn-group am-btn-group-xs">' +
                                     '<button value="' + data + '" class="am-btn am-btn-default am-btn-xs am-text-secondary editor"><span class="am-icon-eye"></span>详情</button>' +
@@ -369,7 +502,7 @@
                                     '</div>' +
                                     '</div>';
                         },
-                        "targets": 7
+                        "targets": 6
                     }
                 ],
                 serverSide: true,
@@ -402,7 +535,7 @@
                     orderFilterForm.state = null;
                 }
                 var url = formToUrlParm(orderFilterForm);
-                var reloadObj = table.ajax.url(prefix + "/h/admin/orders/ordersList" + url);
+                var reloadObj = table.ajax.url(prefix + "/admin/orders/ordersList" + url);
                 reloadObj.load();
                 table.draw();
             })
@@ -422,11 +555,167 @@
                 }
                 var url = formToUrlParm(orderFilterForm);
                 console.log(url);
-                var reloadObj = table.ajax.url(prefix + "/h/admin/orders/ordersList" + url);
+                var reloadObj = table.ajax.url(prefix + "/admin/orders/ordersList" + url);
                 reloadObj.load();
                 table.draw();
             })
 
+            $("#add-coupon-ok").click(function () {
+                $.messager.confirm('添加优惠券', '确认添加?', function (r) {
+                    if (r) {
+                        var title = $("#add-title").val();
+                        var price = $("#add-price").val();
+                        var threshold = $("#add-threshold").val();
+                        var limitDays = $('#add-limitDays').val();
+                        var num = $('#add-num').val();
+                        var parentCatsId = getTagsInputId($("#add-cats"));
+                        var couponAddForm = {
+                            title: title,
+                            price: price,
+                            threshold: threshold,
+                            limitDays: limitDays,
+                            num: num,
+                            parentCatsId: parentCatsId
+                        }
+                        $.ajax({
+                            type: "POST",
+                            url: prefix + "/admin/coupon/add/",
+                            data: JSON.stringify(couponAddForm),
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (data) {
+                                if (data.code == "0") {
+                                    $.messager.show({
+                                        title: '新增操作',
+                                        msg: '已成功添加.！',
+                                        timeout: 2000,
+                                        showType: 'fade',
+                                        style: {
+                                            right: '',
+                                            top: document.body.scrollTop + document.documentElement.scrollTop,
+                                            bottom: ''
+                                        }
+                                    });
+                                    $("#addWin").window("close");
+                                    table.ajax.reload();
+                                }
+                            },
+                            error: function (msg) {
+                                $.messager.show({
+                                    title: '新增操作',
+                                    msg: JSON.stringify(msg),
+                                    showType: 'fade',
+                                    style: {
+                                        right: '',
+                                        top: document.body.scrollTop + document.documentElement.scrollTop,
+                                        bottom: ''
+                                    }
+                                });
+                            }
+                        })
+                    }
+                })
+
+            });
+
+            $("#send-ok").click(function () {
+                $.messager.confirm('发送优惠券', '确认发送?', function (r) {
+                    if (r) {
+                        var couponId = $(".couponRadio:checked").val();
+                        var userIds = getTagsInputId($("#send-user-tag"));
+                        var couponSendForm = {
+                            couponId: couponId,
+                            userIds: userIds,
+                        }
+                        $.ajax({
+                            type: "POST",
+                            url: prefix + "/admin/coupon/send/",
+                            data: JSON.stringify(couponSendForm),
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (data) {
+                                if (data.code == "0") {
+                                    $.messager.show({
+                                        title: '发送操作',
+                                        msg: '已成功发送.！',
+                                        timeout: 2000,
+                                        showType: 'fade',
+                                        style: {
+                                            right: '',
+                                            top: document.body.scrollTop + document.documentElement.scrollTop,
+                                            bottom: ''
+                                        }
+                                    });
+                                    $("#sendWin").window("close");
+                                }
+                            },
+                            error: function (msg) {
+                                $.messager.show({
+                                    title: '发送操作',
+                                    msg: JSON.stringify(msg),
+                                    showType: 'fade',
+                                    style: {
+                                        right: '',
+                                        top: document.body.scrollTop + document.documentElement.scrollTop,
+                                        bottom: ''
+                                    }
+                                });
+                            }
+                        })
+                    }
+                })
+
+            });
+            $("#send-batch-ok").click(function () {
+                $.messager.confirm('发送优惠券', '确认发送?', function (r) {
+                    if (r) {
+                        var couponId = $(".couponBatchRadio:checked").val();
+                        var num = $("#batch-send-num").val();
+                        var type = $("#pushSelector").val();
+                        var couponSendForm = {
+                            couponId: couponId,
+                            sendType: type,
+                            num: num,
+                        }
+                        $.ajax({
+                            type: "POST",
+                            url: prefix + "/admin/coupon/batchSend/",
+                            data: couponSendForm,
+                            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                            dataType: "json",
+                            success: function (data) {
+                                if (data.code == "0") {
+                                    $.messager.show({
+                                        title: '发送操作',
+                                        msg: '已成功发送.！',
+                                        timeout: 2000,
+                                        showType: 'fade',
+                                        style: {
+                                            right: '',
+                                            top: document.body.scrollTop + document.documentElement.scrollTop,
+                                            bottom: ''
+                                        }
+                                    });
+                                    $("#batchSendWin").window("close");
+                                }
+                            },
+                            error: function (msg) {
+                                $.messager.show({
+                                    title: '发送操作',
+                                    msg: JSON.stringify(msg),
+                                    showType: 'fade',
+                                    style: {
+                                        right: '',
+                                        top: document.body.scrollTop + document.documentElement.scrollTop,
+                                        bottom: ''
+                                    }
+                                });
+                            }
+                        })
+                    }
+                })
+
+            });
             $('#table').find('tbody').on("click", "tr .editor", function () {
                 var tr = $(this).parents("tr");
                 var oData = table.row(tr).data();
@@ -435,7 +724,7 @@
                 if ($('#detail-id').val() != oData.id) {
                     $.ajax({
                         type: "GET",
-                        url: prefix + "/h/admin/orders/detail/" + oData.id,
+                        url: prefix + "/admin/orders/detail/" + oData.id,
                         data: {},
                         contentType: "application/x-www-form-urlencoded; charset=utf-8",
                         dataType: "json",
@@ -485,7 +774,7 @@
                     if (r) {
                         $.ajax({
                             type: "POST",
-                            url: prefix + "/h/admin/goods/del/",
+                            url: prefix + "/admin/goods/del/",
                             data: {goodsId: id},
                             contentType: "application/x-www-form-urlencoded; charset=utf-8",
                             dataType: "json",
@@ -512,45 +801,6 @@
                     }
                 });
             });
-            function getGoodsViewLi(goods) {
-                var li = '<li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left">'
-                        + '<div class="am-u-sm-2 am-list-thumb">'
-                        + '<img src="' + goods.goodsPic + '" width="80px" height="80px"/>'
-                        + '</div>'
-                        + '<div class=" am-u-sm-10  am-list-main">'
-                        + '<h3 class="am-list-item-hd am-text-primary">' + goods.goodsTitle + '</h3>'
-                        + '<div class="am-list-item-text">'
-                        + '<span>' + goods.salesAttr + '</span>'
-                        + '</div>'
-                        + '<div class="am-list-item-text">'
-                        + '<span>x ' + goods.num + '</span>'
-                        + '&nbsp;&nbsp;&nbsp;&yen;<span>' + goods.price + '</span>'
-                        + '</div>'
-                        + '<div class="am-list-item-text">'
-                        + '&yen;<span>' + (parseInt(goods.price) * parseInt(goods.num)) + '</span>'
-                        + '</div>'
-                        + '</div>'
-                        + '</li>'
-                return li;
-            }
-
-//
-//            $(result.aaData).each(function(i,e) {
-//                if (i == 0) {
-//                    registerCouponId =  e.id.toString();
-//                }else{
-//                    registerCouponId = registerCouponId + "," + e.id;
-//                }
-//                var tag = "id:"+ e.id+";"+ e.title;
-//                if (!$('#register_type_tag').tagExist(tag)) {
-//                    var b = $('#register_type_tag').val() + "," + tag;
-//                    $('#register_type_tag').importTags(b);
-//                }
-//            });
-//        }
-//        $("#register_type_tag").addClass("init");
-//            //tag val
-
 
         })();
     </script>

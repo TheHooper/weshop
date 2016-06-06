@@ -214,7 +214,7 @@
             $("#parentSelect").append(allOp);
             $.ajax({
                 type: "GET",
-                url: prefix + "/h/admin/cat/roots",
+                url: prefix + "/admin/cat/roots",
                 data: {},
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -239,7 +239,7 @@
 
         var table = $('#table').DataTable({
             ajax: {
-                url: prefix + "/h/admin/cat/cats/0/",
+                url: prefix + "/admin/cat/cats/0/",
                 type: "GET"
             },
             autoWidth: false,
@@ -311,7 +311,7 @@
         });
 
         $('#parentSelect').on("change", function () {
-            var url = table.ajax.url(prefix + "/h/admin/cat/cats/" + $('#parentSelect').val() + "/");
+            var url = table.ajax.url(prefix + "/admin/cat/cats/" + $('#parentSelect').val() + "/");
             url.load();
             table.draw();
         })
@@ -335,7 +335,7 @@
                 if (r) {
                     $.ajax({
                         type: "POST",
-                        url: prefix + "/h/admin/cat/del",
+                        url: prefix + "/admin/cat/del",
                         data: {
                             id: data.id
                         },
@@ -379,7 +379,7 @@
                 if (r) {
                     $.ajax({
                         type: "POST",
-                        url: prefix + "/h/admin/cat/add",
+                        url: prefix + "/admin/cat/add",
                         data: addForm,
                         contentType: "application/x-www-form-urlencoded; charset=utf-8",
                         dataType: "json",
@@ -414,7 +414,7 @@
             var name = $('#add-parent-name').val();
             $.ajax({
                 type: "POST",
-                url: prefix + "/h/admin/cat/addParent",
+                url: prefix + "/admin/cat/addParent",
                 data: {
                     typeName: name
                 },
@@ -457,7 +457,7 @@
             console.log(editorForm);
             $.ajax({
                 type: "POST",
-                url: prefix + "/h/admin/cat/update",
+                url: prefix + "/admin/cat/update",
                 data: editorForm,
                 contentType: "application/x-www-form-urlencoded; charset=utf-8",
                 dataType: "json",

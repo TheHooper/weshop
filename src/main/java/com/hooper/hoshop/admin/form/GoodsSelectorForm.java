@@ -17,7 +17,7 @@ public class GoodsSelectorForm {
 
     private Integer orderType;//0 asc or 1 desc
 
-    private String statusStr;//status Goods Enum
+    private String statusStr;//status goods Enum
 
     private Integer status;
 

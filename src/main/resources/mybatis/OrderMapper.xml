@@ -269,4 +269,33 @@
       is_del = #{isDel,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+  <select id="countCostByTime" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+    SELECT
+    SUM(`h_order`.`r_total`) AS `cost_sum`
+    FROM h_order
+    WHERE is_del = 0 AND STATUS &gt; 0
+    <if test="startTime != null">
+      AND c_time &gt;= #{startTime}
+    </if>
+    <if test="endTime != null">
+      AND c_time &lt;= #{endTime}
+    </if>
+  </select>
+
+  <select id="countNumByTime" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+    SELECT
+    COUNT(*) AS `order_count`
+    FROM h_order
+    WHERE is_del = 0 AND STATUS &gt; 0
+    <if test="startTime != null">
+      AND c_time &gt;= #{startTime}
+    </if>
+    <if test="endTime != null">
+      AND c_time &lt;= #{endTime}
+    </if>
+  </select>
+
+
 </mapper>

@@ -10,6 +10,14 @@
         <result column="u_time" property="uTime" jdbcType="BIGINT"/>
         <result column="is_del" property="isDel" jdbcType="BIT"/>
     </resultMap>
+    <resultMap id="counterMap" type="com.hooper.hoshop.dto.count.CatsCounter">
+        <id column="cats" property="cats" jdbcType="INTEGER"/>
+        <result column="cats_name" property="catsName" jdbcType="VARCHAR"/>
+        <result column="counter" property="counter" jdbcType="INTEGER"/>
+    </resultMap>
+    <resultMap id="couponCatsDto" type="com.hooper.hoshop.dto.coupon.CouponCatsDto">
+        <result column="parent_name" property="parentName" jdbcType="VARCHAR"/>
+    </resultMap>
     <sql id="Base_Column_List">
         id, logo, type_name, parent_id, c_time, u_time, is_del
     </sql>
@@ -25,6 +33,11 @@
         from h_cats
         where parent_id = 0 AND is_del = 0
         ORDER BY u_time ASC
+    </select>
+    <select id="selectByCouponsId" resultMap="couponCatsDto">
+        SELECT sscats.*,cats.`type_name` AS parent_name
+        FROM h_cats cats,h_cats sscats,h_coupons_cats ccats
+        WHERE ccats.`coupons_id` = #{id} AND ccats.`cats_id` = cats.id AND sscats.`parent_id` = cats.id
     </select>
     <select id="selectCategoryByParent" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
@@ -161,4 +174,37 @@
         is_del = #{isDel,jdbcType=BIT}
         where id = #{id,jdbcType=INTEGER}
     </update>
+
+    <select id="countCostCatsParent" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+        SELECT
+         SUM(og.price*og.num) AS `cost_sum`
+        FROM h_cats c ,h_goods_cats gc, h_order_goods og INNER JOIN h_order ON (h_order.`status` > 0 AND h_order.`is_del` = 0 AND h_order.`id` = og.`order_id`)
+        WHERE  c.id = #{id} AND gc.`cats_parent_id` = c.id AND gc.`goods_id` = og.`goods_id`;
+    </select>
+
+    <select id="countNumCatsParent" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+        SELECT
+          COUNT(*) AS `order_count`
+        FROM h_cats c ,h_goods_cats gc, h_order_goods og INNER JOIN h_order ON (h_order.`status` > 0 AND h_order.`is_del` = 0 AND h_order.`id` = og.`order_id`)
+        WHERE  c.id = #{id} AND gc.`cats_parent_id` = c.id AND gc.`goods_id` = og.`goods_id`;
+    </select>
+
+
+    <select id="countCostByCats" resultMap="counterMap" parameterType="java.lang.Integer">
+        SELECT
+          gc.`cats`,gc.`cats_name`,
+          SUM(og.price*og.num) AS `counter`
+      FROM h_cats c ,h_goods_cats gc, h_order_goods og INNER JOIN h_order ON (h_order.`status` > 0 AND h_order.`is_del` = 0 AND h_order.`id` = og.`order_id`)
+      WHERE  c.id = #{id} AND gc.`cats_parent_id` = c.id AND gc.`goods_id` = og.`goods_id`
+      GROUP BY gc.`cats`;
+    </select>
+
+    <select id="countNumByCats" resultMap="counterMap" parameterType="java.lang.Integer">
+          SELECT
+            gc.`cats`,gc.`cats_name`,
+            COUNT(*) AS `counter`
+          FROM h_cats c ,h_goods_cats gc, h_order_goods og INNER JOIN h_order ON (h_order.`status` > 0 AND h_order.`is_del` = 0 AND h_order.`id` = og.`order_id`)
+          WHERE  c.id = #{id} AND gc.`cats_parent_id` = c.id AND gc.`goods_id` = og.`goods_id`
+          GROUP BY gc.`cats`;
+    </select>
 </mapper>

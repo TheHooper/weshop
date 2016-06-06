@@ -1,7 +1,10 @@
 package com.hooper.hoshop.service.impl;
 
+import com.hooper.hoshop.admin.form.UserFilterForm;
+import com.hooper.hoshop.common.constant.AdminErrorConstant;
 import com.hooper.hoshop.common.constant.WebErrorConstant;
 import com.hooper.hoshop.common.exception.BusinessException;
+import com.hooper.hoshop.common.util.BeanToMapUtil;
 import com.hooper.hoshop.common.util.CodeUtil;
 import com.hooper.hoshop.common.util.security.BASE64;
 import com.hooper.hoshop.common.util.security.MD5;
@@ -13,7 +16,9 @@ import com.hooper.hoshop.web.form.UserRegisterForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by 47123 on 2016/3/19.
@@ -118,6 +123,31 @@ public class UserServiceImpl implements UserService {
             }
         } else {
             throw new BusinessException(WebErrorConstant.PARAM_NULL, "param null error");
+        }
+    }
+
+    @Override
+    public List<User> selectList(UserFilterForm userFilterForm, int offset, int limit) {
+        List<User> result = null;
+        try {
+            Map params = BeanToMapUtil.convertBean(userFilterForm);
+            params.put("offset", offset);
+            params.put("limit", limit);
+            result = userMapper.selectListPaged(params);
+        } catch (Exception e) {
+            throw new BusinessException(AdminErrorConstant.ADMIN_MYSQL_FAILED, "数据库操作失败！" + e.toString());
+        }
+        result = result == null ? new ArrayList<User>() : result;
+        return result;
+    }
+
+    @Override
+    public int countList(UserFilterForm userFilterForm) {
+        try {
+            Map params = BeanToMapUtil.convertBean(userFilterForm);
+            return userMapper.countListPaged(params);
+        } catch (Exception e) {
+            throw new BusinessException(AdminErrorConstant.ADMIN_MYSQL_FAILED, "数据库操作失败！" + e.toString());
         }
     }
 }

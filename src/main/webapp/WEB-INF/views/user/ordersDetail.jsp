@@ -14,16 +14,16 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
     <title>我的订单</title>
-    <link href="<c:url value="../css/frozen.css"/>" rel="stylesheet" type="text/css"/>
-    <link href="<c:url value="../css/homall.css"/>" rel="stylesheet" type="text/css"/>
+    <link href="<c:url value="../../css/frozen.css"/>" rel="stylesheet" type="text/css"/>
+    <link href="<c:url value="../../css/homall.css"/>" rel="stylesheet" type="text/css"/>
     <script type="text/javascript"
-            src="<c:url value="../js/lib/zeptojs/zepto.min.js"/>"></script>
+            src="<c:url value="../../js/lib/zeptojs/zepto.min.js"/>"></script>
 </head>
 <body>
 
 <header id="header" class="header">
-    <a href="${pageContext.request.contextPath}/h/user/orders" class="header-arrow-l"><i id="headerBarCat"
-                                                                                         class="ui-icon-prev"></i></a>
+    <a href="${pageContext.request.contextPath}/user/orders" class="header-arrow-l"><i id="headerBarCat"
+                                                                                       class="ui-icon-prev"></i></a>
     <h2 class="ui-flex-pack-center">订单详情</h2>
 </header>
 
@@ -71,7 +71,7 @@
             <ul id="carts-ul" class="ui-list  ui-border-tb">
                 <c:forEach items="${orderGoodses}" var="orderGoods">
                     <li class="ui-border-t">
-                        <a href="${pageContext.request.contextPath}/h/goods/detail/${orderGoods.goodsId}">
+                        <a href="${pageContext.request.contextPath}/goods/detail/${orderGoods.goodsId}">
                             <div class="ui-list-img">
                                 <span style="background-image:url(${orderGoods.goodsPic}?imageMogr2/thumbnail/200x200)"></span>
                             </div>
@@ -80,11 +80,11 @@
                             <p class="ui-nowrap carts-salesAttr">${orderGoods.salesAttr}</p>
                             <p class="ui-nowrap"><span class="carts-num">x${orderGoods.num}</span>
                                 <span class="ho-margin-left-xs">&yen;${orderGoods.price}</span></p>
-                            <c:if test="${order.status == 3}">
-                                <button class="ui-btn-s">
-                                    评价
-                                </button>
-                            </c:if>
+                                <%--<c:if test="${order.status == 3}">--%>
+                                <%--<button class="ui-btn-s">--%>
+                                <%--评价--%>
+                                <%--</button>--%>
+                                <%--</c:if>--%>
                         </div>
                     </li>
                 </c:forEach>
@@ -118,13 +118,13 @@
             <div class="ui-list-info">
                 <h4 class="ui-nowrap">优惠金额</h4>
             </div>
-            <div class="ui-list-action">&yen;0</div>
+            <div class="ui-list-action">&yen;${order.totalAndDelivery-order.rTotal}</div>
         </li>
         <li class="ui-border-t">
             <div class="ui-list-info">
                 <h4 class="ui-nowrap">实际已付</h4>
             </div>
-            <div class="ui-list-action">&yen;${order.totalAndDelivery}</div>
+            <div class="ui-list-action">&yen;${order.rTotal}</div>
         </li>
     </ul>
     <!-- total end -->
@@ -137,17 +137,17 @@
 </section>
 
 </body>
-<%--<link href="<c:url value="../css/all-animation.css">" rel="stylesheet" type="text/css"/>--%>
-<script type="text/javascript" src="<c:url value="../js/frozen.js"/>"></script>
+<%--<link href="<c:url value="../../css/all-animation.css">" rel="stylesheet" type="text/css"/>--%>
+<script type="text/javascript" src="<c:url value="../../js/frozen.js"/>"></script>
 <script type="text/javascript"
-        src="<c:url value="../js/homall/address.js"/>"></script>
+        src="<c:url value="../../js/homall/address.js"/>"></script>
 <script type="text/javascript">
     (function () {
         var prefix = "${pageContext.request.contextPath}"
 
 
         $("#back-btn").tap(function () {
-            window.location.href = "${pageContext.request.contextPath}/h/user/orders";
+            window.location.href = "${pageContext.request.contextPath}/user/orders";
         })
 
     })();

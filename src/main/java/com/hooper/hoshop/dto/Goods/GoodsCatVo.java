@@ -1,4 +1,4 @@
-package com.hooper.hoshop.dto.Goods;
+package com.hooper.hoshop.dto.goods;
 
 import com.hooper.hoshop.entity.Goods;
 

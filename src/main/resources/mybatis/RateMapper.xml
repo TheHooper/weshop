@@ -18,15 +18,98 @@
         <result column="u_time" property="uTime" jdbcType="BIGINT"/>
         <result column="is_del" property="isDel" jdbcType="BIT"/>
     </resultMap>
+    <resultMap id="rateGoodsVo" type="com.hooper.hoshop.dto.rate.RateGoodsVo" extends="BaseResultMap">
+        <result column="goods_pic" property="goodsPic" jdbcType="VARCHAR"/>
+        <result column="sales_attr" property="salesAttr" jdbcType="VARCHAR"/>
+        <result column="goods_title" property="goodsTitle" jdbcType="VARCHAR"/>
+        <result column="price" property="price" jdbcType="DECIMAL"/>
+        <result column="num" property="num" jdbcType="INTEGER"/>
+    </resultMap>
+    <resultMap id="rateUserVo" type="com.hooper.hoshop.dto.rate.RateUserVo" extends="rateGoodsVo">
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+    </resultMap>
     <sql id="Base_Column_List">
-        id, user_id, goods_id, order_id, username, level, score, comment, pic_url, pic_url1,
-        pic_url2, pic_url3, c_time, u_time, is_del
+        h_user_rate.id, user_id, h_user_rate.goods_id, h_user_rate.order_id, username, level, h_user_rate.score,
+        comment, pic_url, pic_url1,
+        pic_url2, pic_url3, h_user_rate.c_time, h_user_rate.u_time, h_user_rate.is_del
+    </sql>
+    <sql id="Vo_Column_List">
+        goods_pic,sales_attr, goods_title, price, num
     </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
         from h_user_rate
         where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectListPaged" resultMap="rateUserVo" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>,<include refid="Vo_Column_List"/>,h_user.user_name,mobile
+        from h_user_rate LEFT JOIN h_order_goods ON (h_user_rate.goods_id = h_order_goods.goods_id AND
+        h_user_rate.order_id = h_order_goods.order_id)
+        ,h_user
+        where h_user_rate.is_del = 0 AND h_user_rate.user_id = h_user.id
+        <if test="startTime != null">
+            AND h_user_rate.c_time &gt;= #{startTime}
+        </if>
+        <if test="endTime != null">
+            AND h_user_rate.c_time &lt;= #{endTime}
+        </if>
+        <if test=" level != null ">
+            AND level = #{level}
+        </if>
+        ORDER BY h_user_rate.c_time DESC
+        LIMIT #{offset},#{limit}
+    </select>
+    <select id="countListPaged" resultType="int" parameterType="java.lang.Integer">
+        select
+        COUNT(*)
+        from h_user_rate
+        where is_del = 0
+        <if test=" level != null ">
+            AND level = #{level}
+        </if>
+        <if test="startTime != null">
+            AND c_time &gt;= #{startTime}
+        </if>
+        <if test="endTime != null">
+            AND c_time &lt;= #{endTime}
+        </if>
+    </select>
+    <select id="selectByFilter" resultMap="rateGoodsVo" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>,
+        <include refid="Vo_Column_List"/>
+        from h_user_rate LEFT JOIN h_order_goods ON (h_user_rate.goods_id = h_order_goods.goods_id AND
+        h_user_rate.order_id = h_order_goods.order_id)
+        where h_user_rate.is_del = 0
+        <if test=" goodsId != null">
+            AND h_user_rate.goods_id = #{goodsId}
+        </if>
+        <if test=" userId != null">
+            AND h_user_rate.user_id = #{userId}
+        </if>
+        <if test=" level != null ">
+            AND level = #{level}
+        </if>
+        Order by h_user_rate.c_time desc
+        Limit #{offset},#{limit}
+    </select>
+    <select id="countByFilter" resultType="int" parameterType="java.lang.Integer">
+        select
+        COUNT(*)
+        from h_user_rate
+        where is_del = 0
+        <if test=" goodsId != null">
+            AND goods_id = #{goodsId}
+        </if>
+        <if test=" userId != null">
+            AND user_id = #{userId}
+        </if>
+        <if test=" level != null ">
+            AND level = #{level}
+        </if>
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         delete from h_user_rate

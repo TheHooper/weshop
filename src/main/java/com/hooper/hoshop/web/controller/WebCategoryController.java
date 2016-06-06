@@ -1,24 +1,14 @@
 package com.hooper.hoshop.web.controller;
 
-import com.hooper.hoshop.admin.form.DataTablePageForm;
-import com.hooper.hoshop.common.constant.AdminConstants;
-import com.hooper.hoshop.common.util.DateUtil;
-import com.hooper.hoshop.dto.Category.CategoryDto;
-import com.hooper.hoshop.dto.output.Category.DataTablePageOutput;
 import com.hooper.hoshop.entity.Category;
 import com.hooper.hoshop.service.facade.CategoryService;
 import org.apache.log4j.Logger;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**

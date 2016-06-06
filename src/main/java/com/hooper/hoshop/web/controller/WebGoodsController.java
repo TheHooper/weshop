@@ -1,9 +1,7 @@
 package com.hooper.hoshop.web.controller;
 
-import com.hooper.hoshop.common.Enum.UserAuthEnum;
-import com.hooper.hoshop.common.aspect.annotation.UserLoginAnnotation;
 import com.hooper.hoshop.common.exception.NoFoundException;
-import com.hooper.hoshop.dto.Goods.GoodsAttrVo;
+import com.hooper.hoshop.dto.goods.GoodsAttrVo;
 import com.hooper.hoshop.entity.Goods;
 import com.hooper.hoshop.entity.GoodsDetail;
 import com.hooper.hoshop.entity.GoodsSku;

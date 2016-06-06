@@ -1,8 +1,10 @@
 package com.hooper.hoshop.service.impl;
 
 import com.hooper.hoshop.admin.form.OrderDeliveryForm;
+import com.hooper.hoshop.common.Enum.CouponStateEnum;
 import com.hooper.hoshop.common.constant.AdminErrorConstant;
 import com.hooper.hoshop.common.util.BeanToMapUtil;
+import com.hooper.hoshop.dto.coupon.UserCouponDto;
 import com.hooper.hoshop.web.form.OrderFilterForm;
 import com.hooper.hoshop.common.Enum.OrderStateEnum;
 import com.hooper.hoshop.common.constant.WebErrorConstant;
@@ -43,7 +45,7 @@ public class OrderServiceImpl implements OrderService {
     private CartGoodsMapper cartGoodsMapper;
 
     @Autowired
-    private UserMapper userMapper;
+    private UserCouponMapper userCouponMapper;
 
     @Autowired
     private GoodsMapper goodsMapper;
@@ -69,6 +71,10 @@ public class OrderServiceImpl implements OrderService {
                     goodsSku.setStockNum(newStock);
                     goodsSku.setSaledNum(newSaled);
                 }
+                Goods goods = goodsMapper.selectByPrimaryKey(cartGoods.getGoodsId());
+                goods.setStock(goods.getStock() - cartGoods.getNum());
+                goods.setSaledNum(goods.getSaledNum() + cartGoods.getNum());
+                goodsMapper.updateByPrimaryKeySelective(goods);
             } else {
                 throw new CheckOutExcpetion(WebErrorConstant.MISSED_SKU, "missed sku op failed");
             }
@@ -112,7 +118,6 @@ public class OrderServiceImpl implements OrderService {
             orderGoods.setOrderId(orderId);
             orderGoodsMapper.insert(orderGoods);
         }
-
         cartGoodsMapper.cleanCartsByUserId(userId);
         Map<String, Object> result = new HashMap<>();
         result.put("orderGoods", orderGoodses);
@@ -124,6 +129,8 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Map<String, Object> checkout(GoodsCheckoutForm goodsCheckoutForm, int userId) {
         Goods goods = goodsMapper.selectByPrimaryKey(goodsCheckoutForm.getGoodsId());
+
+
         OrderGoods orderGoods = new OrderGoods();
         BeanUtils.copyProperties(goodsCheckoutForm, orderGoods);
         Map<String, Integer> attrIds = SkuIdUtil.skuIdToMap(orderGoods.getSkuId());
@@ -140,9 +147,9 @@ public class OrderServiceImpl implements OrderService {
         order.setUserId(userId);
         order.setSn(System.currentTimeMillis() + CodeUtil.getRandomString(3));
         order.setOrderPic(goods.getGoodsMainPic());
-        order.setTotal(goods.getPrice());
-        order.setGoodsNum(1);
-        order.setTotalAndDelivery(goods.getPrice().add(goods.getdCharge()));
+        order.setTotal(goods.getPrice().multiply(new BigDecimal(goodsCheckoutForm.getNum())));
+        order.setGoodsNum(goodsCheckoutForm.getNum());
+        order.setTotalAndDelivery(order.getTotal().add(goods.getdCharge()));
         order.setStatus(OrderStateEnum.WAIT_PAY.getValue());
         order.setcTime(System.currentTimeMillis());
         order.setIsDel(false);
@@ -151,6 +158,22 @@ public class OrderServiceImpl implements OrderService {
 
         orderGoods.setOrderId(orderId);
         orderGoodsMapper.insert(orderGoods);
+
+        //sku
+        Map map = new HashMap<String, Object>();
+        map.put("goodsId", goodsCheckoutForm.getGoodsId());
+        map.put("skuId1", goodsCheckoutForm.getSkuId());
+        GoodsSku goodsSku = goodsSkuMapper.selectBySkuIdAndGoodsId(map);
+        if (goodsSku != null) {
+            int newStock = goodsSku.getStockNum() - goodsCheckoutForm.getNum();
+            int newSaled = goodsSku.getSaledNum() + goodsCheckoutForm.getNum();
+            goodsSku.setStockNum(newStock);
+            goodsSku.setSaledNum(newSaled);
+
+            goods.setStock(goods.getStock() - goodsCheckoutForm.getNum());
+            goods.setSaledNum(goods.getSaledNum() + goodsCheckoutForm.getNum());
+            goodsMapper.updateByPrimaryKeySelective(goods);
+        }
 
         Map<String, Object> result = new HashMap<>();
         result.put("orderGoods", orderGoods);
@@ -218,7 +241,13 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public int delete(Integer id) {
-        return 0;
+        Order order = orderMapper.selectByPrimaryKey(id);
+        if (order != null) {
+            order.setIsDel(true);
+            return orderMapper.updateByPrimaryKeySelective(order);
+        } else {
+            throw new BusinessException(WebErrorConstant.MISSED_ORDER, "非法操作！");
+        }
     }
 
     @Override
@@ -254,6 +283,22 @@ public class OrderServiceImpl implements OrderService {
                 order.setStatus(OrderStateEnum.WAIT_SHIP.getValue());
                 order.setAddressId(orderPayForm.getAddressId());
                 order.setpTime(System.currentTimeMillis());
+
+                if (orderPayForm.getCouponId() != null) {
+                    UserCouponDto couponDto = userCouponMapper.selectDtoById(orderPayForm.getCouponId());
+                    if (couponDto != null) {
+                        order.setrTotal(order.getTotalAndDelivery().subtract(couponDto.getPrice()));
+                        UserCoupon coupon = new UserCoupon();
+                        coupon.setId(couponDto.getId());
+                        coupon.setState(CouponStateEnum.USED.getValue());
+                        userCouponMapper.updateByPrimaryKeySelective(coupon);
+                    } else {
+                        order.setrTotal(order.getTotalAndDelivery());
+                    }
+                } else {
+                    order.setrTotal(order.getTotalAndDelivery());
+                }
+
                 orderMapper.updateByPrimaryKeySelective(order);
             } else {
                 throw new BusinessException(WebErrorConstant.ILLEGAL_USER, "非法操作！");

@@ -7,7 +7,7 @@ public class UserCoupon {
 
     private Integer userId;
 
-    private Boolean state;
+    private Integer state;
 
     private Long deadline;
 
@@ -37,11 +37,11 @@ public class UserCoupon {
         this.userId = userId;
     }
 
-    public Boolean getState() {
+    public Integer getState() {
         return state;
     }
 
-    public void setState(Boolean state) {
+    public void setState(Integer state) {
         this.state = state;
     }
 

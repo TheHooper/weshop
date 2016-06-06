@@ -21,7 +21,7 @@
 </head>
 <body>
 <div id="header" class="header">
-    <a href="/h/index" class="header-arrow-l"><i id="headerBarCat" class="ui-icon-prev"></i></a>
+    <a href="/index" class="header-arrow-l"><i id="headerBarCat" class="ui-icon-prev"></i></a>
     <h2>个人中心</h2>
 </div>
 
@@ -30,7 +30,7 @@
      class="ui-flex ui-flex-ver ui-flex-align-center ui-flex-pack-center padding-vertical-m back-white">
     <div class="ui-avatar-lg">
         <span style="background-image:url(<c:url
-                value="../h/img/avatar/avatar.jpg"/>)"></span>
+                value="../img/avatar/avatar.jpg"/>)"></span>
     </div>
     <div class="ui-flex-pack-end">
         <h3 id="username">${ho_user.userName}</h3>
@@ -41,29 +41,35 @@
 <!-- tool bar -->
 <div class="ui-row-flex ui-border ui-whitespace padding-vertical-s margin-top-s text-center back-white">
     <div class="ui-col ui-col">
-        <a href="/h/user/orders" class="color-black">
+        <a href="/user/orders" class="color-black">
         <i class="ui-icon-dingdan"></i>
         <h5>全部订单</h5>
         </a>
     </div>
     <div class="ui-col ui-col">
+        <a href="/user/orders?state=1" class="color-black">
         <i class="ui-icon-daifahuo"></i>
         <h5>待发货</h5>
+        </a>
     </div>
     <div class="ui-col ui-col">
+        <a href="/user/orders?state=2" class="color-black">
         <i class="ui-icon-daishouhuo1"></i>
         <h5>待收货</h5>
+        </a>
     </div>
     <div class="ui-col ui-col">
+        <a href="/user/orders?state=3" class="color-black">
         <i class="ui-icon-daipingjia"></i>
         <h5>待评价</h5>
+        </a>
     </div>
 </div>
 <!-- tool bar end -->
 
 <!-- list -->
 <ul class="ui-list ui-list-one ui-list-link ui-border-tb margin-top-s">
-    <li>
+    <li onclick="window.location.href = '/user/coupon'">
         <div class="ui-list-icon">
             <span class="ui-icon-coupons"></span>
         </div>
@@ -78,15 +84,6 @@
         <div class="ui-list-info ui-border-t">
             <h4 class="ui-nowrap">手机号</h4>
             <div class="ui-txt-info">${ho_user.mobile}</div>
-        </div>
-    </li>
-    <li class="ui-border-t">
-        <div class="ui-list-icon">
-            <span class="ui-icon-birthday"></span>
-        </div>
-        <div class="ui-list-info">
-            <h4 class="ui-nowrap">生日</h4>
-            <div class="ui-txt-info">1994-09-16</div>
         </div>
     </li>
     <li>

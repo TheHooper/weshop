@@ -185,7 +185,7 @@ public class Goods {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Goods{");
+        final StringBuilder sb = new StringBuilder("goods{");
         sb.append("cTime=").append(cTime);
         sb.append(", dCharge=").append(dCharge);
         sb.append(", goodsListPic='").append(goodsListPic).append('\'');
