@@ -34,8 +34,8 @@ public class SmsController {
     public
     @ResponseBody
     JsonOutput sendSms(HttpServletRequest request, String mobile, String captcha) {
-//        Boolean isResponseCorrect = customGenericManageableCaptchaService.validateResponseForID(request.getSession().getId(), captcha);
-//        if (isResponseCorrect) {
+        Boolean isResponseCorrect = customGenericManageableCaptchaService.validateResponseForID(request.getSession().getId(), captcha);
+        if (isResponseCorrect) {
             if (mobile != null && !"".equals(mobile)) {
                 mobile = BASE64.decrypt(mobile);
                 if (ValidUtil.isMobile(mobile)) {
@@ -50,8 +50,8 @@ public class SmsController {
             } else {
                 throw new BusinessException(WebErrorConstant.PARAM_NULL, "未获取到手机号");
             }
-//        } else {
-//            throw new BusinessException(WebErrorConstant.PARAM_VALID_ERROR, "验证码错误!");
-//        }
+        } else {
+            throw new BusinessException(WebErrorConstant.PARAM_VALID_ERROR, "验证码错误!");
+        }
     }
 }

@@ -36,14 +36,14 @@
         <a href="javascript:void(0);" class="ui-icon-close">
         </a>
     </div>
-    <%--<div class="ui-form-item ui-form-item-l  ui-border-b">--%>
-    <%--<label class="ui-border-r">--%>
-    <%--<img src="<c:url value="/captcha/getCaptcha"/>" class="ho-vertical-align-middle"--%>
-    <%--onclick="this.src='<c:url value="/captcha/getCaptcha"/>&d='+new Date().getTime()"/>--%>
-    <%--</label>--%>
-    <%--<input id="captcha-input" type="text" placeholder="请输入图像验证码">--%>
-    <%--<a href="javascript:void(0);" class="ui-icon-close"></a>--%>
-    <%--</div>--%>
+    <div class="ui-form-item ui-form-item-l  ui-border-b">
+        <label class="ui-border-r">
+            <img src="<c:url value="/captcha/getCaptcha"/>" class="ho-vertical-align-middle"
+                 onclick="this.src='<c:url value="/captcha/getCaptcha"/>&d='+new Date().getTime()"/>
+        </label>
+        <input id="captcha-input" type="text" placeholder="请输入图像验证码">
+        <a href="javascript:void(0);" class="ui-icon-close"></a>
+    </div>
     <div class="ui-form-item ui-form-item-r ui-border-b">
         <input id="mobileCode-input" type="text" placeholder="请输入短信验证码">
         <!-- 若按钮不可点击则添加 disabled 类 -->

@@ -47,17 +47,17 @@
 
 <br/>
 
-<%--<div class="ui-form ui-border-t">--%>
-<%--<div class="ui-form-item ui-form-item-l ui-border-b">--%>
-<%--<label class="ui-border-r">--%>
-<%--<img src="/captcha/getCaptcha" class="ho-vertical-align-middle"--%>
-<%--onclick="this.src='/captcha/getCaptcha'"/>--%>
-<%--</label>--%>
-<%--<input id="captcha-input" type="text" placeholder="请输入验证码">--%>
-<%--<a href="#" class="ui-icon-close">--%>
-<%--</a>--%>
-<%--</div>--%>
-<%--</div>--%>
+<div class="ui-form ui-border-t">
+    <div class="ui-form-item ui-form-item-l ui-border-b">
+        <label class="ui-border-r">
+            <img src="/captcha/getCaptcha" class="ho-vertical-align-middle"
+                 onclick="this.src='/captcha/getCaptcha'"/>
+        </label>
+        <input id="captcha-input" type="text" placeholder="请输入验证码">
+        <a href="#" class="ui-icon-close">
+        </a>
+    </div>
+</div>
 
 <br/>
 
