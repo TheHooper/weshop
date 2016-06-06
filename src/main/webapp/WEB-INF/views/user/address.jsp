@@ -119,7 +119,7 @@
         src="<c:url value="../../js/util/base64.min.js"/>"></script>
 <script type="text/javascript">
     (function () {
-        var prefix = ""
+        var prefix = "${pageContext.request.contextPath}"
 
         AddressApi.urlPrefix = prefix;
         console.log(AddressApi.urlPrefix);
@@ -306,7 +306,7 @@
                             dataType: "json",
                             success: function (data) {
                                 if (data.code == "0") {
-                                    window.location.href = "/orders/paid";
+                                    window.location.href = "${pageContext.request.contextPath}/orders/paid";
                                 } else {
                                     el = $.tips({
                                         content: data.msg,

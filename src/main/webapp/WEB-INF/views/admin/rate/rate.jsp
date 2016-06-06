@@ -169,7 +169,7 @@
 
 <script type="text/javascript">
     (function () {
-        var prefix = ""
+        var prefix = "${pageContext.request.contextPath}"
 
         var statusEnum = new Array(
                 '<span class="am-badge am-badge-success">好评</span>',

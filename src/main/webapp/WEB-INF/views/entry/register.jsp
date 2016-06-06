@@ -97,7 +97,7 @@
 <script type="text/javascript"
         src="<c:url value="../js/util/base64.min.js"/>"></script>
 <script>
-    var prefix = ""
+    var prefix = "${pageContext.request.contextPath}"
 
     //var base64 = BASE64.encoder(str);//返回编码后的字符
     // var unicode= BASE64.decoder(base64Str);//返回会解码后的unicode码数组。

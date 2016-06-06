@@ -76,7 +76,7 @@
 <script src="<c:url value="../js/chart/Chart.js"/>"></script>
 <script type="text/javascript">
     (function () {
-        var prefix = ""
+        var prefix = "${pageContext.request.contextPath}"
 
 
         function praseDate(time) {

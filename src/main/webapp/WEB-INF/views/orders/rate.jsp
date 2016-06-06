@@ -23,8 +23,8 @@
 <body>
 
 <header id="header" class="header">
-    <a href="/user/orders" class="header-arrow-l"><i id="headerBarCat"
-                                                     class="ui-icon-prev"></i></a>
+    <a href="${pageContext.request.contextPath}/user/orders" class="header-arrow-l"><i id="headerBarCat"
+                                                                                       class="ui-icon-prev"></i></a>
     <h2 class="ui-flex-pack-center">订单评价</h2>
 </header>
 
@@ -101,11 +101,11 @@
 <script type="text/javascript" src="<c:url value="../../js/util/rating.js"/>"></script>
 <script type="text/javascript">
     (function () {
-        var prefix = ""
+        var prefix = "${pageContext.request.contextPath}"
 
 
         $("#back-btn").tap(function () {
-            window.location.href = "/user/orders";
+            window.location.href = "${pageContext.request.contextPath}/user/orders";
         })
 
         var rateIdArrays = new Array();
@@ -180,7 +180,7 @@
         })
 
         $("#back").tap(function () {
-            window.location.href = "/user/orders?state=3";
+            window.location.href = "${pageContext.request.contextPath}/user/orders?state=3";
         })
     })();
 </script>

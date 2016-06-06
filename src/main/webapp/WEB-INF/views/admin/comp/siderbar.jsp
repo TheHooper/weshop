@@ -80,7 +80,7 @@
 <script type="text/javascript">
     var path = location.pathname.split('/');
     var app = path[1];
-    var prefix = "";
+    var prefix = "${pageContext.request.contextPath}";
     $('.logout').click(function (e) {
         $.post(prefix + '/logout', function (data) {
             if (data == "success") {

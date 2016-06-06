@@ -292,7 +292,7 @@
         }
 
         (function () {
-            var prefix = ""
+            var prefix = "${pageContext.request.contextPath}"
 
             var statusEnum = new Array(
                     '<span class="am-badge am-badge-danger">待付款</span>',

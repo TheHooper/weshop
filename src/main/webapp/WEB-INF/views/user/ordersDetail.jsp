@@ -22,8 +22,8 @@
 <body>
 
 <header id="header" class="header">
-    <a href="/user/orders" class="header-arrow-l"><i id="headerBarCat"
-                                                     class="ui-icon-prev"></i></a>
+    <a href="${pageContext.request.contextPath}/user/orders" class="header-arrow-l"><i id="headerBarCat"
+                                                                                       class="ui-icon-prev"></i></a>
     <h2 class="ui-flex-pack-center">订单详情</h2>
 </header>
 
@@ -71,7 +71,7 @@
             <ul id="carts-ul" class="ui-list  ui-border-tb">
                 <c:forEach items="${orderGoodses}" var="orderGoods">
                     <li class="ui-border-t">
-                        <a href="/goods/detail/${orderGoods.goodsId}">
+                        <a href="${pageContext.request.contextPath}/goods/detail/${orderGoods.goodsId}">
                             <div class="ui-list-img">
                                 <span style="background-image:url(${orderGoods.goodsPic}?imageMogr2/thumbnail/200x200)"></span>
                             </div>
@@ -143,11 +143,11 @@
         src="<c:url value="../../js/homall/address.js"/>"></script>
 <script type="text/javascript">
     (function () {
-        var prefix = ""
+        var prefix = "${pageContext.request.contextPath}"
 
 
         $("#back-btn").tap(function () {
-            window.location.href = "/user/orders";
+            window.location.href = "${pageContext.request.contextPath}/user/orders";
         })
 
     })();

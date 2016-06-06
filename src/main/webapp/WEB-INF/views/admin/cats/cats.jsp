@@ -204,7 +204,7 @@
 <script src="<c:url value="../js/qiniu/qiniu.min.js"/>"></script>
 <script type="text/javascript">
     (function () {
-        var prefix = ""
+        var prefix = "${pageContext.request.contextPath}"
 
         var loadSelectBox = function () {
             $('#add-parent').html("");

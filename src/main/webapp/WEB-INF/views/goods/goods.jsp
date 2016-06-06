@@ -299,7 +299,7 @@
 <script type="text/javascript" src="<c:url value="../../js/frozen.js"/>"></script>
 <script type="text/javascript">
     (function () {
-        var prefix = ""
+        var prefix = "${pageContext.request.contextPath}"
 
         var goodsId = ${goods.id};
         var pics = new Array();
