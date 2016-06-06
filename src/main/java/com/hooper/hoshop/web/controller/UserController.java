@@ -49,8 +49,8 @@ public class UserController {
         if (result.hasErrors()) {
             throw new BusinessException(WebErrorConstant.PARAM_VALID_ERROR, result.getFieldErrors().get(0).getDefaultMessage());
         }
-        Boolean isResponseCorrect = customGenericManageableCaptchaService.validateResponseForID(request.getSession().getId(), userLoginForm.getCaptcha());
-        if (isResponseCorrect) {
+//        Boolean isResponseCorrect = customGenericManageableCaptchaService.validateResponseForID(request.getSession().getId(), userLoginForm.getCaptcha());
+//        if (isResponseCorrect) {
             String mobile = BASE64.decrypt(userLoginForm.getMobile());
             String password = BASE64.decrypt(userLoginForm.getPassword());
             userLoginForm.setMobile(mobile);
@@ -63,9 +63,9 @@ public class UserController {
             }
             JsonOutput output = new JsonOutput();
             return output;
-        } else {
-            throw new BusinessException(WebErrorConstant.PARAM_VALID_ERROR, "验证码错误!");
-        }
+//        } else {
+//            throw new BusinessException(WebErrorConstant.PARAM_VALID_ERROR, "验证码错误!");
+//        }
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -79,8 +79,8 @@ public class UserController {
         if (result.hasErrors()) {
             throw new BusinessException(WebErrorConstant.PARAM_VALID_ERROR, result.getFieldErrors().get(0).getDefaultMessage());
         }
-        Boolean isResponseCorrect = customGenericManageableCaptchaService.validateResponseForID(request.getSession().getId(), registerForm.getCaptcha());
-        if (isResponseCorrect) {
+//        Boolean isResponseCorrect = customGenericManageableCaptchaService.validateResponseForID(request.getSession().getId(), registerForm.getCaptcha());
+//        if (isResponseCorrect) {
             String mobile = BASE64.decrypt(registerForm.getMobile());
             if (!ValidUtil.isMobile(mobile)) {
                 throw new BusinessException(WebErrorConstant.PARAM_VALID_ERROR, "手机格式有误");
@@ -103,9 +103,9 @@ public class UserController {
 
             JsonOutput output = new JsonOutput();
             return output;
-        } else {
-            throw new BusinessException(WebErrorConstant.PARAM_VALID_ERROR, "验证码错误!");
-        }
+//        } else {
+//            throw new BusinessException(WebErrorConstant.PARAM_VALID_ERROR, "验证码错误!");
+//        }
     }
 
     @RequestMapping(value = "/forgetPassword", method = {RequestMethod.GET})
