@@ -167,7 +167,7 @@
                     });
                 },
                 error: function (msg) {
-                    alert(msg);
+                    console.log(msg);
                 }
             })
         }
@@ -194,7 +194,7 @@
                     }
                 },
                 error: function (msg) {
-                    alert(msg);
+                    console.log(msg);
                 }
             })
         }
@@ -262,7 +262,7 @@
                     }
                 },
                 error: function (msg) {
-                    alert(msg);
+                    console.log(msg);
                 }
             })
         }
