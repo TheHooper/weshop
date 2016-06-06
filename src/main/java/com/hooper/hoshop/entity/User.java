@@ -3,6 +3,8 @@ package com.hooper.hoshop.entity;
 public class User {
     private Integer id;
 
+    private String openId;
+
     private String userName;
 
     private String password;
@@ -28,6 +30,22 @@ public class User {
     private String lastLoginIp;
 
     private Boolean isDel;
+
+    public Boolean getDel() {
+        return isDel;
+    }
+
+    public void setDel(Boolean del) {
+        isDel = del;
+    }
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
+    }
 
     public Integer getId() {
         return id;

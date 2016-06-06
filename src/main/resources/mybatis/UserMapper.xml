@@ -3,6 +3,7 @@
 <mapper namespace="com.hooper.hoshop.dao.UserMapper">
   <resultMap id="BaseResultMap" type="com.hooper.hoshop.entity.User">
     <id column="id" property="id" jdbcType="INTEGER"/>
+    <result column="open_id" property="openId" jdbcType="VARCHAR"/>
     <result column="user_name" property="userName" jdbcType="VARCHAR"/>
     <result column="password" property="password" jdbcType="VARCHAR"/>
     <result column="password_random" property="passwordRandom" jdbcType="VARCHAR"/>
@@ -24,7 +25,7 @@
     <result column="order_count" property="orderCount" jdbcType="INTEGER"/>
   </resultMap>
   <sql id="Base_Column_List">
-    h_user.id, user_name, password, password_random, gender, mobile, email, avatar, vip, score,
+    h_user.id, open_id,user_name, password, password_random, gender, mobile, email, avatar, vip, score,
     h_user.c_time, last_login_time, last_login_ip, h_user.is_del
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
@@ -105,6 +106,12 @@
     <if test="orderType == 1 or orderType == null">
       DESC
     </if>
+  </select>
+  <select id="selectByOpenId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from h_user
+    where open_id = #{openId} AND is_del = 0
   </select>
   <select id="selectByMobile" resultMap="BaseResultMap">
     select

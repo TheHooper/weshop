@@ -28,6 +28,8 @@ public interface UserMapper extends GenericDao<User, Integer> {
 
     User selectByMobile(String mobile);
 
+    User selectByOpenId(String openId);
+
     User selectByName(String name);
 
     List<User> selectListPaged(Map map);

@@ -32,6 +32,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 /**
@@ -52,7 +53,7 @@ public class UserController {
     public void initMpService() {
         config = new WxMpInMemoryConfigStorage();
         config.setAppId("wxd54b0096cd349d32"); // 设置微信公众号的appid
-        config.setSecret("e9b4743203f743e287cf21da8dbd4fb3 "); // 设置微信公众号的app corpSecret
+        config.setSecret("e9b4743203f743e287cf21da8dbd4fb3"); // 设置微信公众号的app corpSecret
         config.setToken("hooperhooper"); // 设置微信公众号的token
         config.setAesKey("0y0TxC8fdQseeYGDatfb6LRe7CU64V4o86BSiPF5nAE"); // 设置微信公众号的EncodingAESKey
 
@@ -94,14 +95,23 @@ public class UserController {
 //        }
     }
 
-    @RequestMapping(value = "/wregister", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView wregisterView(String code, ModelAndView modelAndView) {
+    @RequestMapping(value = "/wechat/login", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView wregisterView(String code, ModelAndView modelAndView, HttpSession session) {
         logger.warn("================================" + code);
         if (code != null) {
             try {
                 WxMpOAuth2AccessToken wxMpOAuth2AccessToken = wxMpService.oauth2getAccessToken(code);
                 WxMpUser wxMpUser = wxMpService.oauth2getUserInfo(wxMpOAuth2AccessToken, null);
                 logger.warn(wxMpUser.toString());
+                User user = userService.selectByOpenId(wxMpUser.getOpenId());
+                if (user == null) {
+                    modelAndView = new ModelAndView("/entry/register");
+                    modelAndView.addObject("WxMpUser", wxMpUser);
+                    return modelAndView;
+                } else {
+                    session.setAttribute(WebConstant.SESSION_SIGNIN_USER, user);
+                    return new ModelAndView("/index");
+                }
             } catch (WxErrorException e) {
                 logger.warn("================================" + e.toString());
             }

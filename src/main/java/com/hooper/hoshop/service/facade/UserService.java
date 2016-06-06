@@ -19,6 +19,8 @@ public interface UserService extends GenericService<User, Integer> {
 
     public User selectByName(String name);
 
+    public User selectByOpenId(String openId);
+
     public User checkUserByMobile(UserLoginForm userLoginForm);
 
     public List<User> selectList(UserFilterForm userFilterForm, int offset, int limit);

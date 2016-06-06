@@ -100,7 +100,7 @@ public class WechatController {
         WxMenu.WxMenuButton shopButton = new WxMenu.WxMenuButton();
         shopButton.setName("微商城");
         shopButton.setType("view");
-        shopButton.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxd54b0096cd349d32&redirect_uri=http%3A%2F%2Fwww.shenma063.cn%2Fuser%2Fwregister&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect");
+        shopButton.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxd54b0096cd349d32&redirect_uri=http%3A%2F%2Fwww.shenma063.cn%2Fuser%2Fwechat%2Flogin&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect");
         shopButton.setKey("Homall shop");
 
         buttons.add(softServiceButton);

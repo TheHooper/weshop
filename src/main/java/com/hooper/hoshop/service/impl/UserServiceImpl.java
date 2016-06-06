@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ *
  * Created by 47123 on 2016/3/19.
  */
 @Service
@@ -91,6 +92,19 @@ public class UserServiceImpl implements UserService {
         if (name != null && !"".equals(name)) {
             try {
                 return userMapper.selectByName(name);
+            } catch (Exception e) {
+                throw new BusinessException(WebErrorConstant.MYSQL_FAILED, "数据库操作失败！" + e.toString());
+            }
+        } else {
+            throw new BusinessException(WebErrorConstant.PARAM_NULL, "param null error");
+        }
+    }
+
+    @Override
+    public User selectByOpenId(String openId) {
+        if (openId != null && !"".equals(openId)) {
+            try {
+                return userMapper.selectByOpenId(openId);
             } catch (Exception e) {
                 throw new BusinessException(WebErrorConstant.MYSQL_FAILED, "数据库操作失败！" + e.toString());
             }
