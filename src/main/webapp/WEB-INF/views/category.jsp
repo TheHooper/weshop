@@ -39,7 +39,7 @@ To change this template use File | Settings | File Templates.
 <body>
 <!-- header -->
 <header class="ui-searchbar-wrap ui-border-b">
-    <a href="/h/index"><i id="headerBarCat" class="ui-icon-prev"></i></a>
+    <a href="/index"><i id="headerBarCat" class="ui-icon-prev"></i></a>
     <div class="ui-searchbar ui-border-radius">
         <i class="ui-icon-search"></i>
         <div class="ui-searchbar-text">搜索商品</div>
@@ -57,7 +57,7 @@ To change this template use File | Settings | File Templates.
         <div class="hoTopic-vertical-wapper">
             <div class="ui-scroller">
                 <ul id="cat-parent-ul">
-
+                    <li onclick="window.location.href='/goods/list'">所有商品</li>
                 </ul>
             </div>
         </div>
@@ -86,7 +86,7 @@ To change this template use File | Settings | File Templates.
         var loadParentCats = function () {
             $.ajax({
                 type: "GET",
-                url: prefix + "/h/admin/cat/roots",
+                url: prefix + "/admin/cat/roots",
                 data: {},
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -150,7 +150,7 @@ To change this template use File | Settings | File Templates.
             console.log(parentId);
             $.ajax({
                 type: "GET",
-                url: prefix + "/h/admin/cat/cats/" + parentId,
+                url: prefix + "/admin/cat/cats/" + parentId,
                 data: {},
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -182,7 +182,7 @@ To change this template use File | Settings | File Templates.
         var getCatObj = function (id, name, pic) {
             var qiniuAPI = "?imageMogr2/thumbnail/200x200";
             return $('<li>'
-                    + '<a href="' + prefix + '/h/goods/list?catId=' + id + '">'
+                    + '<a href="' + prefix + '/goods/list?catId=' + id + '">'
                     + '<div class="ui-grid-trisect-img">'
                     + '<span style="background-image:url(' + pic + ')"></span>'
                     + ' </div>'
