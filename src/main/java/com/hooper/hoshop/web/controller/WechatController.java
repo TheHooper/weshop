@@ -37,7 +37,7 @@ public class WechatController {
     public void initMpService() {
         config = new WxMpInMemoryConfigStorage();
         config.setAppId("wxd54b0096cd349d32"); // 设置微信公众号的appid
-        config.setSecret("e9b4743203f743e287cf21da8dbd4fb3 "); // 设置微信公众号的app corpSecret
+        config.setSecret("e9b4743203f743e287cf21da8dbd4fb3"); // 设置微信公众号的app corpSecret
         config.setToken("hooperhooper"); // 设置微信公众号的token
         config.setAesKey("0y0TxC8fdQseeYGDatfb6LRe7CU64V4o86BSiPF5nAE"); // 设置微信公众号的EncodingAESKey
 
@@ -83,7 +83,7 @@ public class WechatController {
         WxMenu.WxMenuButton businessBookButton = new WxMenu.WxMenuButton();
         businessBookButton.setName("Hooper AND W");
         businessBookButton.setType("view");
-        businessBookButton.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxc409abdf7a9e1707&redirect_uri=http%3A%2F%2Fwww.shenma063.cn%2Fecshop-web%2Fuser%2Fwechat%2Flogin&response_type=code&scope=snsapi_base#wechat_redirect");
+        businessBookButton.setUrl("");
         businessBookButton.setKey("cloth shop");
 
       /*  WxMenuButton businessQueryButton = new WxMenuButton();

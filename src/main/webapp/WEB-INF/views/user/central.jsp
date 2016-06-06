@@ -102,7 +102,7 @@
             <h4 class="ui-nowrap">我的评价</h4>
         </div>
     </li>
-    <li class="ui-border-t">
+    <li class="ui-border-t" onclick="window.location.href = '/user/address'">
         <div class="ui-list-icon">
             <span class="ui-icon-express"></span>
         </div>

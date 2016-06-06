@@ -13,7 +13,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
-    <title>确认订单</title>
+    <title>地址管理</title>
     <link href="<c:url value="../css/frozen.css"/>" rel="stylesheet" type="text/css"/>
     <link href="<c:url value="../css/homall.css"/>" rel="stylesheet" type="text/css"/>
     <script type="text/javascript"
@@ -24,7 +24,10 @@
             src="<c:url value="../../js/lib/zeptojs/zepto.min.js"/>"></script>
 </head>
 <body>
-
+<div id="header" class="header">
+    <a href="/user/central" class="header-arrow-l"><i id="headerBarCat" class="ui-icon-prev"></i></a>
+    <h2>地址管理</h2>
+</div>
 
 <section id="add-address-section" style="display: none">
     <div class="ui-form ui-border-b ho-margin-top-sm">

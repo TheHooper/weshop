@@ -188,6 +188,6 @@ public class UserController {
     @UserLoginAnnotation
     @RequestMapping("address")
     public String addressView() {
-        return "/user/adress";
+        return "/user/address";
     }
 }
