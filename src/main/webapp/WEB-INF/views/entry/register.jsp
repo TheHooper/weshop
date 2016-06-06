@@ -168,6 +168,11 @@
                 type: "POST",
                 url: prefix + "/user/register",
                 data: {
+                    openId: "${WxMpUser.openId}",
+                    nickname: "${WxMpUser.nickname}",
+                    city: "${WxMpUser.city}",
+                    province: "${WxMpUser.province}",
+                    headImgUrl: "${WxMpUser.headImgUrl}",
                     mobile: mobile64,
                     password: password64,
                     mobileCode: mobileCode,

@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
  * Created by 47123 on 2016/3/19.
  */
 @Service
@@ -44,7 +43,15 @@ public class UserServiceImpl implements UserService {
                 user.setPasswordRandom(salt);
                 user.setcTime(System.currentTimeMillis());
                 user.setIsDel(false);
-                user.toString();
+                if (userRegisterForm.getOpenId() != null) {
+                    user.setOpenId(userRegisterForm.getOpenId());
+                }
+                if (userRegisterForm.getNickname() != null) {
+                    user.setUserName(userRegisterForm.getNickname());
+                }
+                if (userRegisterForm.getHeadImgUrl() != null) {
+                    user.setAvatar(userRegisterForm.getHeadImgUrl());
+                }
                 return userMapper.insert(user);
             } catch (Exception e) {
                 throw new BusinessException(WebErrorConstant.MYSQL_FAILED, "数据库操作失败！" + e.toString());

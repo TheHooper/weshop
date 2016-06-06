@@ -95,16 +95,16 @@ public class UserController {
 //        }
     }
 
-    @RequestMapping(value = "/wechat/login", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "/wechatLogin", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView wregisterView(String code, ModelAndView modelAndView, HttpSession session) {
         logger.warn("================================" + code);
         if (code != null) {
             try {
                 WxMpOAuth2AccessToken wxMpOAuth2AccessToken = wxMpService.oauth2getAccessToken(code);
-                WxMpUser wxMpUser = wxMpService.oauth2getUserInfo(wxMpOAuth2AccessToken, null);
-                logger.warn(wxMpUser.toString());
-                User user = userService.selectByOpenId(wxMpUser.getOpenId());
+                User user = userService.selectByOpenId(wxMpOAuth2AccessToken.getOpenId());
                 if (user == null) {
+                    WxMpUser wxMpUser = wxMpService.oauth2getUserInfo(wxMpOAuth2AccessToken, null);
+                    logger.warn(wxMpUser.toString());
                     modelAndView = new ModelAndView("/entry/register");
                     modelAndView.addObject("WxMpUser", wxMpUser);
                     return modelAndView;
