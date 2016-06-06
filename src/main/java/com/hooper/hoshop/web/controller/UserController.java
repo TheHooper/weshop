@@ -10,7 +10,6 @@ import com.hooper.hoshop.dto.output.JsonOutput;
 import com.hooper.hoshop.entity.User;
 import com.hooper.hoshop.service.facade.UserService;
 import com.hooper.hoshop.service.impl.CustomGenericManageableCaptchaService;
-import com.hooper.hoshop.service.impl.WeChatHttpClientService;
 import com.hooper.hoshop.web.form.UserLoginForm;
 import com.hooper.hoshop.web.form.UserRegisterForm;
 import com.octo.captcha.service.image.ImageCaptchaService;
@@ -184,5 +183,11 @@ public class UserController {
     @RequestMapping("coupon")
     public String couponView() {
         return "/user/coupon";
+    }
+
+    @UserLoginAnnotation
+    @RequestMapping("address")
+    public String addressView() {
+        return "/user/adress";
     }
 }

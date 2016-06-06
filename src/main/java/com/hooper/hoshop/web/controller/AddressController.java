@@ -88,4 +88,15 @@ public class AddressController {
         return output;
     }
 
+    @UserLoginAnnotation
+    @RequestMapping(value = "/del", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    JsonOutput del(Integer addressId, HttpSession session) {
+        User user = (User) session.getAttribute(WebConstant.SESSION_SIGNIN_USER);
+        addressService.delete(addressId);
+        JsonOutput output = new JsonOutput();
+        return output;
+    }
+
 }
