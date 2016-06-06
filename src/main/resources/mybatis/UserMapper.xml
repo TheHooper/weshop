@@ -130,12 +130,12 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.hooper.hoshop.entity.User">
-    insert into h_user (user_name, password,
+    insert into h_user (open_id,user_name, password,
     password_random, gender, mobile,
       email, avatar, vip, score, 
       c_time, last_login_time, last_login_ip, 
       is_del)
-    values (#{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+    values (#{openId,jdbcType=VARCHAR},#{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
     #{passwordRandom,jdbcType=VARCHAR}, #{gender,jdbcType=BIT}, #{mobile,jdbcType=VARCHAR},
       #{email,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, #{vip,jdbcType=BIT}, #{score,jdbcType=INTEGER}, 
       #{cTime,jdbcType=BIGINT}, #{lastLoginTime,jdbcType=BIGINT}, #{lastLoginIp,jdbcType=VARCHAR}, 
