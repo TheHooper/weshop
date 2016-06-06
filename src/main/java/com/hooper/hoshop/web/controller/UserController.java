@@ -10,16 +10,27 @@ import com.hooper.hoshop.dto.output.JsonOutput;
 import com.hooper.hoshop.entity.User;
 import com.hooper.hoshop.service.facade.UserService;
 import com.hooper.hoshop.service.impl.CustomGenericManageableCaptchaService;
+import com.hooper.hoshop.service.impl.WeChatHttpClientService;
 import com.hooper.hoshop.web.form.UserLoginForm;
 import com.hooper.hoshop.web.form.UserRegisterForm;
 import com.octo.captcha.service.image.ImageCaptchaService;
+import me.chanjar.weixin.common.exception.WxErrorException;
+import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage;
+import me.chanjar.weixin.mp.api.WxMpMessageRouter;
+import me.chanjar.weixin.mp.api.WxMpService;
+import me.chanjar.weixin.mp.api.WxMpServiceImpl;
+import me.chanjar.weixin.mp.bean.result.WxMpOAuth2AccessToken;
+import me.chanjar.weixin.mp.bean.result.WxMpUser;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -30,9 +41,25 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping(value = "/user")
 public class UserController {
+    private final Logger logger = Logger.getLogger(UserController.class);
 
     @Resource
     UserService userService;
+
+    WxMpInMemoryConfigStorage config;
+    WxMpService wxMpService;
+
+    @PostConstruct
+    public void initMpService() {
+        config = new WxMpInMemoryConfigStorage();
+        config.setAppId("wxd54b0096cd349d32"); // 设置微信公众号的appid
+        config.setSecret("e9b4743203f743e287cf21da8dbd4fb3 "); // 设置微信公众号的app corpSecret
+        config.setToken("hooperhooper"); // 设置微信公众号的token
+        config.setAesKey("0y0TxC8fdQseeYGDatfb6LRe7CU64V4o86BSiPF5nAE"); // 设置微信公众号的EncodingAESKey
+
+        wxMpService = new WxMpServiceImpl();
+        wxMpService.setWxMpConfigStorage(config);
+    }
 
     @Autowired
     private CustomGenericManageableCaptchaService customGenericManageableCaptchaService;
@@ -66,6 +93,21 @@ public class UserController {
 //        } else {
 //            throw new BusinessException(WebErrorConstant.PARAM_VALID_ERROR, "验证码错误!");
 //        }
+    }
+
+    @RequestMapping(value = "/wregister", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView wregisterView(String code, ModelAndView modelAndView) {
+        logger.warn("================================" + code);
+        if (code != null) {
+            try {
+                WxMpOAuth2AccessToken wxMpOAuth2AccessToken = wxMpService.oauth2getAccessToken(code);
+                WxMpUser wxMpUser = wxMpService.oauth2getUserInfo(wxMpOAuth2AccessToken, null);
+                logger.warn(wxMpUser.toString());
+            } catch (WxErrorException e) {
+                logger.warn("================================" + e.toString());
+            }
+        }
+        return modelAndView;
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -107,6 +149,7 @@ public class UserController {
 //            throw new BusinessException(WebErrorConstant.PARAM_VALID_ERROR, "验证码错误!");
 //        }
     }
+
 
     @RequestMapping(value = "/forgetPassword", method = {RequestMethod.GET})
     public String forgetPasswordView() {
