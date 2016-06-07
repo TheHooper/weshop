@@ -120,7 +120,8 @@
 <!-- topic -->
 <section class="ui-panel">
     <h2 class="ui-arrowlink"><span>六一喂食计划</span><!--<span class="ui-panel-title-tips">更多</span>--></h2>
-    <div class="hoTopic-head" style="background-image: url(img/section/t1.png);">
+    <div class="hoTopic-head"
+         style="background-image: url(http://7xtgdy.com1.z0.glb.clouddn.com/FjoYI02PD6mvkxnG58mohvHjddeC);">
         <div class="arrow-up hoTopic-head-arrow">
         </div>
     </div>

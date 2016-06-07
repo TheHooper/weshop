@@ -103,8 +103,8 @@ public class UserController {
             try {
                 WxMpOAuth2AccessToken wxMpOAuth2AccessToken = wxMpService.oauth2getAccessToken(code);
                 User user = userService.selectByOpenId(wxMpOAuth2AccessToken.getOpenId());
+                WxMpUser wxMpUser = wxMpService.oauth2getUserInfo(wxMpOAuth2AccessToken, null);
                 if (user == null) {
-                    WxMpUser wxMpUser = wxMpService.oauth2getUserInfo(wxMpOAuth2AccessToken, null);
                     logger.warn(wxMpUser.toString());
                     modelAndView = new ModelAndView("/entry/register");
                     modelAndView.addObject("WxMpUser", wxMpUser);
