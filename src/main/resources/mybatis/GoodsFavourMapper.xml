@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hooper.hoshop.dao.GoodsFavourMapper">
+    <resultMap id="BaseResultMap" type="com.hooper.hoshop.entity.GoodsFavour">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="goods_id" property="goodsId" jdbcType="INTEGER"/>
+        <result column="c_time" property="cTime" jdbcType="BIGINT"/>
+    </resultMap>
+    <resultMap id="GoodsMap" type="com.hooper.hoshop.entity.Goods">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="intro" property="intro" jdbcType="VARCHAR"/>
+        <result column="goods_list_pic" property="goodsListPic" jdbcType="VARCHAR"/>
+        <result column="goods_main_pic" property="goodsMainPic" jdbcType="VARCHAR"/>
+        <result column="goods_second_pic" property="goodsSecondPic" jdbcType="VARCHAR"/>
+        <result column="goods_thirth_pic" property="goodsThirthPic" jdbcType="VARCHAR"/>
+        <result column="price" property="price" jdbcType="DECIMAL"/>
+        <result column="o_price" property="oPrice" jdbcType="DECIMAL"/>
+        <result column="d_charge" property="dCharge" jdbcType="DECIMAL"/>
+        <result column="status" property="status" jdbcType="BIT"/>
+        <result column="orginal_num" property="orginalNum" jdbcType="INTEGER"/>
+        <result column="stock" property="stock" jdbcType="INTEGER"/>
+        <result column="saled_num" property="saledNum" jdbcType="INTEGER"/>
+        <result column="detail_id" property="detailId" jdbcType="INTEGER"/>
+        <result column="c_time" property="cTime" jdbcType="BIGINT"/>
+        <result column="u_time" property="uTime" jdbcType="BIGINT"/>
+        <result column="is_del" property="isDel" jdbcType="BIT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, user_id, goods_id,c_time
+  </sql>
+    <sql id="goods_List">
+         h_goods.id, title, intro, goods_list_pic, goods_main_pic, goods_second_pic, goods_thirth_pic,
+        price, o_price, d_charge, status, orginal_num, stock, saled_num, detail_id, h_goods_favour.c_time,
+        u_time, is_del
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from h_goods_favour
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectByUserIdAndGoods" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from h_goods_favour
+        where user_id = #{userId,jdbcType=INTEGER}
+        AND goods_id = #{goodsId,jdbcType=INTEGER}
+    </select>
+    <select id="selectPagedByUser" resultMap="GoodsMap">
+        SELECT
+        <include refid="goods_List"/>
+        FROM h_goods_favour,h_goods
+        WHERE user_id = #{userId} AND h_goods_favour.goods_id = h_goods.id
+        ORDER BY h_goods_favour.c_time desc
+        LIMIT #{offset},#{limit}
+    </select>
+    <delete id="deleteByGoodsIdAndUserId" parameterType="java.lang.Integer">
+    delete from h_goods_favour
+    where user_id = #{userId,jdbcType=INTEGER}
+    AND goods_id = #{goodsId}
+  </delete>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from h_goods_favour
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.hooper.hoshop.entity.GoodsFavour">
+    insert into h_goods_favour (user_id, goods_id,
+      c_time)
+    values (#{userId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER},
+      #{cTime,jdbcType=BIGINT})
+  </insert>
+    <insert id="insertSelective" parameterType="com.hooper.hoshop.entity.GoodsFavour">
+        insert into h_goods_favour
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="goodsId != null">
+                goods_id,
+            </if>
+            <if test="cTime != null">
+                c_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="goodsId != null">
+                #{goodsId,jdbcType=INTEGER},
+            </if>
+            <if test="cTime != null">
+                #{cTime,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hooper.hoshop.entity.GoodsFavour">
+        update h_goods_favour
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="goodsId != null">
+                goods_id = #{goodsId,jdbcType=INTEGER},
+            </if>
+            <if test="cTime != null">
+                c_time = #{cTime,jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.hooper.hoshop.entity.GoodsFavour">
+    update h_goods_favour
+    set user_id = #{userId,jdbcType=INTEGER},
+      goods_id = #{goodsId,jdbcType=INTEGER},
+      c_time = #{cTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

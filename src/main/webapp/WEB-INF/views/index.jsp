@@ -73,7 +73,7 @@
     <ul class="ui-grid-trisect ui-flex ui-flex-align-stretch">
         <li>
             <div class="ui-border back-white" style="height: 100%">
-                <div class="text-center padding-vertical-m">
+                <div class="text-center ho-padding-top-sm">
                     <h5 class="ui-nowrap">TISSOT</h5>
                 </div>
                 <div class="ui-grid-trisect-img">
@@ -83,7 +83,7 @@
         </li>
         <li>
             <div class="ui-border back-white">
-                <div class="text-center padding-vertical-m">
+                <div class="text-center ho-padding-top-sm">
                     <h5 class="ui-nowrap">Red Wing</h5>
                 </div>
                 <div class="ui-grid-trisect-img">
@@ -93,7 +93,7 @@
         </li>
         <li>
             <div class="ui-border back-white">
-                <div class="text-center padding-vertical-m">
+                <div class="text-center ho-padding-top-sm">
                     <h5 class="ui-nowrap">Tommy</h5>
                 </div>
                 <div class="ui-grid-trisect-img">
