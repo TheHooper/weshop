@@ -26,4 +26,7 @@ public class WebErrorConstant {
     public static final String MISSED_SKU = "4001";
     public static final String MISSED_ORDER = "4011";
     public static final String ILLEGAL_USER = "4012";
+
+    //favour
+    public static final String UN_LOGIN_FAVOUR = "6000";
 }

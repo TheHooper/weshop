@@ -13,7 +13,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
-    <title>找回密码</title>
+    <title>修改密码</title>
     <link href="<c:url value="${pageContext.request.contextPath}/css/frozen.css"/>" rel="stylesheet" type="text/css"/>
     <link href="<c:url value="${pageContext.request.contextPath}/css/homall.css"/>" rel="stylesheet" type="text/css"/>
     <script type="text/javascript"
@@ -21,8 +21,8 @@
 </head>
 <body>
 <header id="header" class="header">
-    <a href="/" class="header-arrow-l"><i id="headerBarCat" class="ui-icon-prev"></i></a>
-    <h2 class="ui-flex-pack-center">找回自己</h2>
+    <a href="/user/central" class="header-arrow-l"><i id="headerBarCat" class="ui-icon-prev"></i></a>
+    <h2 class="ui-flex-pack-center">修改密码</h2>
 </header>
 
 <section id="forPassword">
@@ -95,10 +95,10 @@
         <i class="ui-icon-success ho-text-xxxl"></i>
     </div>
     <p>
-        密码已经修改，赶紧登录吧~
+        密码已经修改成功~！
     </p>
     <div class="ui-notice-btn">
-        <button id="back" class="ui-btn-primary ui-btn-lg">返回登录</button>
+        <button id="back" class="ui-btn-primary ui-btn-lg">返回</button>
     </div>
 </section>
 
@@ -219,7 +219,7 @@
         }
 
         $("#back").tap(function () {
-            window.location.href = prefix + "/user/login";
+            window.location.href = prefix + "/user/central";
         })
     })();
 </script>

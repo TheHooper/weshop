@@ -14,11 +14,16 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
     <title>ho商城</title>
-    <link href="<c:url value="../../css/frozen.css"/>" rel="stylesheet" type="text/css"/>
-    <link href="<c:url value="../../css/homall.css"/>" rel="stylesheet" type="text/css"/>
+    <link href="<c:url value="${pageContext.request.contextPath}/css/frozen.css"/>" rel="stylesheet" type="text/css"/>
+    <link href="<c:url value="${pageContext.request.contextPath}/css/homall.css"/>" rel="stylesheet" type="text/css"/>
     <script type="text/javascript"
-            src="<c:url value="../../js/lib/zeptojs/zepto.min.js"/>"></script>
+            src="<c:url value="${pageContext.request.contextPath}/js/lib/zeptojs/zepto.min.js"/>"></script>
 </head>
+<style>
+    .currentRate {
+        font-weight: 900;
+    }
+</style>
 <body>
 <!-- header part -->
 <header id="header" class="ui-header">
@@ -142,55 +147,14 @@
     </ul>
     <!-- detail end -->
     <!-- rate -->
-    <ul class="ui-list ui-list-text  ui-border-tb margin-top-m">
+    <ul id="defaultRate" class="ui-list ui-list-text  ui-border-tb margin-top-m">
         <li id="rate-arrow-link" class="ui-arrowlink">
             <h4 class="list-title">商品评价</h4>
-            <div id="rateNum" class="ui-txt-info txt-m margin-right-m">5条评价</div>
+            <div class="ui-txt-info txt-m margin-right-m"><span id="rateNum"></span>条评价</div>
         </li>
-        <li class="ui-border-t">
-            <div class="ui-row-flex  ui-justify-flex">
-                    <span class="comment-item-star">
-                        <span class="real-star comment-stars-width2"></span>
-                    </span>
-                <div class="price-fade">
-                    <h5>mikeghgh</h5>
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="ui-row-flex ui-justify-flex txt-m">
-                感觉不太行，整个CCP一样
-            </div>
-        </li>
-        <li>
-            <div class="price-fade">
-                <h5>2016-05-12</h5>
-            </div>
-        </li>
-        <li class="ui-border-t">
-            <div class="ui-row-flex  ui-justify-flex">
-                    <span class="comment-item-star">
-                        <span class="real-star comment-stars-width5"></span>
-                    </span>
-                <div class="price-fade">
-                    <h5>mikegfgf</h5>
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="ui-row-flex ui-justify-flex txt-m">
-                我是红卫兵
-            </div>
-        </li>
-        <li>
-            <div class="price-fade">
-                <h5>2016-06-13</h5>
-            </div>
-        </li>
+
     </ul>
-    <div class="ui-row back-white text-center ui-border-b">
-        <i class="ui-icon-unfold"><label class="txt-m">更多评价</label></i>
-    </div>
+
     <!-- rate end -->
 </section>
 <!-- 商品 页面 end-->
@@ -203,88 +167,51 @@
 
 <!-- 评价 页面-->
 <section id="rate-section" class="ui-container" style="display: none">
-    <div class="ui-row-flex  text-center back-grey padding-vertical-s txt-fade">
-        <div class="ui-col ui-col">
+    <ul id="rate-level-ul" class="ui-row-flex  text-center back-grey padding-vertical-s txt-fade">
+        <li class="ui-col ui-col currentRate">
             全部<span id="all-rate-num">(28)</span>
-        </div>
-        <div class="ui-col ui-col">
+        </li>
+        <li value="0" class="ui-col ui-col">
             好评<span id="good-rate-num">(25)</span>
-        </div>
-        <div class="ui-col ui-col">
+        </li>
+        <li value="1" class="ui-col ui-col">
             中评<span id="nor-rate-num">(2)</span>
-        </div>
-        <div class="ui-col ui-col">
+        </li>
+        <li value="2" class="ui-col ui-col">
             差评<span id="bad-rate-num">(1)</span>
-        </div>
-        <div class="ui-col ui-col">
-            有图<span id="pic-rate-num">(5)</span>
-        </div>
-    </div>
-    <ul class="ui-list ui-list-text  ui-border-tb">
-        <li class="ui-border-t">
-            <div class="ui-row-flex  ui-justify-flex">
-                    <span class="comment-item-star">
-                        <span class="real-star comment-stars-width2"></span>
-                    </span>
-                <div class="price-fade">
-                    <h5>mikeghgh</h5>
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="ui-row-flex ui-justify-flex txt-m">
-                感觉不太行，整个CCP一样
-            </div>
-        </li>
-        <li>
-            <div class="ui-row-flex ui-whitespace padding-fix">
-                <img src="http://img30.360buyimg.com/shaidan/s310x310_jfs/t2743/145/737207555/3827/ea7747e/5724a059Ne169562d.jpg"
-                     class="comment-item-img"/>
-                <img src="http://img30.360buyimg.com/shaidan/s310x310_jfs/t2743/145/737207555/3827/ea7747e/5724a059Ne169562d.jpg"
-                     class="comment-item-img"/>
-                <img src="http://img30.360buyimg.com/shaidan/s310x310_jfs/t2743/145/737207555/3827/ea7747e/5724a059Ne169562d.jpg"
-                     class="comment-item-img"/>
-                <img src="http://img30.360buyimg.com/shaidan/s310x310_jfs/t2743/145/737207555/3827/ea7747e/5724a059Ne169562d.jpg"
-                     class="comment-item-img"/>
-            </div>
-        </li>
-        <li>
-            <div class="price-fade">
-                <h5>2016-05-12</h5>
-            </div>
-        </li>
-        <li class="ui-border-t">
-            <div class="ui-row-flex  ui-justify-flex">
-                    <span class="comment-item-star">
-                        <span class="real-star comment-stars-width5"></span>
-                    </span>
-                <div class="price-fade">
-                    <h5>mikegfgf</h5>
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="ui-row-flex ui-justify-flex txt-m">
-                我是红卫兵
-            </div>
-        </li>
-        <li>
-            <div class="ui-row-flex ui-whitespace padding-fix">
-                <img src="http://img30.360buyimg.com/shaidan/s310x310_jfs/t1936/178/2833003571/103010/b8c7b885/56f8a2dbNf5cc2281.jpg"
-                     class="comment-item-img"/>
-                <img src="http://img30.360buyimg.com/shaidan/s310x310_jfs/t1936/178/2833003571/103010/b8c7b885/56f8a2dbNf5cc2281.jpg"
-                     class="comment-item-img"/>
-            </div>
-        </li>
-        <li>
-            <div class="price-fade">
-                <h5>2016-06-13</h5>
-            </div>
         </li>
     </ul>
-    <div class="ui-row back-white text-center ui-border-b">
-        <i class="ui-icon-unfold"><label class="txt-m">更多评价</label></i>
-    </div>
+    <ul id="rates-ul" class="ui-list ui-list-text  ui-border-tb">
+
+        <%--<li class="ui-border-t">--%>
+        <%--<div class="ui-row-flex  ui-justify-flex">--%>
+        <%--<span class="comment-item-star">--%>
+        <%--<span class="real-star comment-stars-width5"></span>--%>
+        <%--</span>--%>
+        <%--<div class="price-fade">--%>
+        <%--<h5>mikegfgf</h5>--%>
+        <%--</div>--%>
+        <%--</div>--%>
+        <%--</li>--%>
+        <%--<li>--%>
+        <%--<div class="ui-row-flex ui-justify-flex txt-m">--%>
+        <%--我是红卫兵--%>
+        <%--</div>--%>
+        <%--</li>--%>
+        <%--<li>--%>
+        <%--<div class="ui-row-flex ui-whitespace padding-fix">--%>
+        <%--<img src="http://img30.360buyimg.com/shaidan/s310x310_jfs/t1936/178/2833003571/103010/b8c7b885/56f8a2dbNf5cc2281.jpg"--%>
+        <%--class="comment-item-img"/>--%>
+        <%--<img src="http://img30.360buyimg.com/shaidan/s310x310_jfs/t1936/178/2833003571/103010/b8c7b885/56f8a2dbNf5cc2281.jpg"--%>
+        <%--class="comment-item-img"/>--%>
+        <%--</div>--%>
+        <%--</li>--%>
+        <%--<li>--%>
+        <%--<div class="price-fade">--%>
+        <%--<h5>2016-06-13</h5>--%>
+        <%--</div>--%>
+        <%--</li>--%>
+    </ul>
 </section>
 <!-- 评价 页面 end-->
 
@@ -294,9 +221,9 @@
 
 
 </body>
-<link href="<c:url value="../../css/all-animation.css"/>" rel="stylesheet"
+<link href="<c:url value="${pageContext.request.contextPath}/css/all-animation.css"/>" rel="stylesheet"
       type="text/css"/>
-<script type="text/javascript" src="<c:url value="../../js/frozen.js"/>"></script>
+<script type="text/javascript" src="<c:url value="${pageContext.request.contextPath}/js/frozen.js"/>"></script>
 <script type="text/javascript">
     (function () {
         var prefix = "${pageContext.request.contextPath}"
@@ -663,6 +590,189 @@
             })
         }
 
+        var RateForm = {
+            goodsId:${goods.id},
+            offset: 0,
+            limit: 5,
+            level: null
+        }
+
+        var loadRate = function (ulId, ulId2) {
+            $.ajax({
+                type: "GET",
+                url: prefix + "/rate/list",
+                data: RateForm,
+                contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data.code == null) {
+                        $(data).each(function (i, e) {
+                            var li = '<li class="ui-border-t">'
+                                    + '<div class="ui-row-flex  ui-justify-flex">'
+                                    + '<span class="comment-item-star">'
+                                    + '<span class="real-star comment-stars-width' + e.score + '"></span>'
+                                    + '</span>'
+                                    + '<div class="price-fade">'
+                                    + '<h5>' + e.username + ' </h5>'
+                                    + '</div>'
+                                    + '</div>'
+                                    + '</li>'
+                                    + '<li>'
+                                    + '<div class="ui-row-flex ui-justify-flex txt-m">'
+                                    + e.comment
+                                    + '</div>'
+                                    + '</li>'
+                                    + '<li>'
+                                    + '<div class="price-fade">'
+                                    + '<h5>' + e.timeStr + '</h5>'
+                                    + '</div>'
+                                    + '</li>';
+                            if (ulId != null) {
+                                $("#" + ulId).append(li);
+                            }
+                            if (ulId2 != null) {
+                                $("#" + ulId2).append(li);
+                            }
+                        })
+                    }
+
+                },
+                error: function (msg) {
+                    console.log(JSON.stringify(msg));
+                }
+            })
+        }
+
+        var countRate
+        var countRate = function () {
+            $.ajax({
+                type: "GET",
+                url: prefix + "/rate/counter",
+                data: RateForm,
+                contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data.code == null) {
+                        countRate = data;
+                        $("#all-rate-num").text(data.total);
+                        $("#rateNum").text(data.total);
+                        $("#good-rate-num").text(data.countGood);
+                        $("#bad-rate-num").text(data.countBad);
+                        $("#nor-rate-num").text(data.countMid);
+                    }
+                    attrSelectEvent();
+                },
+                error: function (msg) {
+                    console.log(JSON.stringify(msg));
+                }
+            })
+        }
+
+        var loadFavour = function () {
+            $.ajax({
+                type: "POST",
+                url: prefix + "/favour/single",
+                data: {goodsId: "${goods.id}"},
+                contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data == null) {
+                        $("#favor-btn").children("span").addClass("ui-icon-shouchang1");
+                        $("#favor-btn").children("h6").text("关注");
+                        $("#favor-btn").addClass("favour-add");
+                        return;
+                    } else if (data.code == 6000) {
+                        $("#favor-btn").tap(function () {
+                            $.tips({
+                                content: data.msg,
+                                stayTime: 2000,
+                                type: "warn"
+                            })
+                        })
+                        return;
+                    } else if (data.code == null) {
+                        $("#favor-btn").children("span").addClass("ui-icon-star");
+                        $("#favor-btn").children("h6").text("已关注");
+                        $("#favor-btn").addClass("favour-cancel");
+                    }
+                },
+                error: function (msg) {
+                    console.log(JSON.stringify(msg));
+                }
+            })
+        }
+
+        $(document).on("tap", ".favour-add", function () {
+            $.ajax({
+                type: "POST",
+                url: prefix + "/favour/add",
+                data: {goodsId: "${goods.id}"},
+                contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data.code == 0) {
+                        $("#favor-btn").children("span").addClass("ui-icon-star");
+                        $("#favor-btn").children("h6").text("已关注");
+                        $("#favor-btn").removeClass("favour-add");
+                        $("#favor-btn").addClass("favour-cancel");
+                        $.tips({
+                            content: "商品已关注",
+                            stayTime: 2000,
+                            type: "success"
+                        })
+                    } else if (data.code == 6000) {
+                        $.tips({
+                            content: data.msg,
+                            stayTime: 2000,
+                            type: "warn"
+                        })
+                    }
+                },
+                error: function (msg) {
+                    console.log(JSON.stringify(msg));
+                }
+            })
+        })
+
+
+        $(document).on("tap", ".favour-cancel", function () {
+            $.ajax({
+                type: "POST",
+                url: prefix + "/favour/del",
+                data: {goodsId:${goods.id}},
+                contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data.code == 0) {
+                        $("#favor-btn").children("span").addClass("ui-icon-shouchang1");
+                        $("#favor-btn").children("h6").text("关注");
+                        $("#favor-btn").removeClass("favour-cancel");
+                        $("#favor-btn").addClass("favour-add");
+                        $.tips({
+                            content: "关注已取消",
+                            stayTime: 2000,
+                            type: "success"
+                        })
+                    }
+                },
+                error: function (msg) {
+                    console.log(JSON.stringify(msg));
+                }
+            })
+        })
+
+
+        var rateLevelEvent = function () {
+            $('#rate-level-ul').children("li").tap(function () {
+                var index = $(this).val();
+                $('#rate-level-ul').children("li").removeClass("currentRate");
+                $(this).addClass("currentRate");
+                RateForm.level = $(this).attr("value");
+                $("#rates-ul").html("");
+                loadRate(null, "rates-ul");
+            })
+        }
+
         tapEvent();
         numEvent();
         attrEvent();
@@ -670,7 +780,10 @@
         addToCartEvent();
         goCartEvent();
         buyEvent();
-
+        loadRate("defaultRate", "rates-ul");
+        countRate();
+        rateLevelEvent();
+        loadFavour();
 
         $(".ui-tab-nav li").tap(function () {
             $(".ui-tab-nav li").removeClass("current");

@@ -21,7 +21,7 @@
 </head>
 <body>
 <div id="header" class="header">
-    <a href="/index" class="header-arrow-l"><i id="headerBarCat" class="ui-icon-prev"></i></a>
+    <a href="/" class="header-arrow-l"><i id="headerBarCat" class="ui-icon-prev"></i></a>
     <h2>个人中心</h2>
 </div>
 
@@ -29,8 +29,7 @@
 <div id="avatar-section"
      class="ui-flex ui-flex-ver ui-flex-align-center ui-flex-pack-center padding-vertical-m back-white">
     <div class="ui-avatar-lg">
-        <span style="background-image:url(<c:url
-                value="../img/avatar/avatar.jpg"/>)"></span>
+        <span style="background-image:url(${ho_user.avatar})"></span>
     </div>
     <div class="ui-flex-pack-end">
         <h3 id="username">${ho_user.userName}</h3>
@@ -86,7 +85,7 @@
             <div class="ui-txt-info">${ho_user.mobile}</div>
         </div>
     </li>
-    <li>
+    <li onclick="window.location.href = '/user/favour'">
         <div class="ui-list-icon">
             <span class="ui-icon-collect"></span>
         </div>
@@ -94,7 +93,7 @@
             <h4 class="ui-nowrap">我的收藏</h4>
         </div>
     </li>
-    <li>
+    <li onclick="window.location.href = '/user/rate'">
         <div class="ui-list-icon">
             <span class="ui-icon-comment"></span>
         </div>
@@ -111,7 +110,7 @@
             <div class="ui-reddot ui-reddot-static"></div>
         </div>
     </li>
-    <li class="ui-border-t">
+    <li class="ui-border-t" onclick="window.location.href = '/user/resetPassword'">
         <div class="ui-list-icon">
             <span class="ui-icon-safe"></span>
         </div>

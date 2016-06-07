@@ -1,20 +1,17 @@
 package com.hooper.hoshop.web.form;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 /**
  * Created by 47123 on 2016/5/23.
  */
 public class UserNewPasswordForm {
+    @NotBlank(message = "手机、密码不能为空")
     private String mobile;
+    @NotBlank(message = "手机、密码不能为空")
     private String password;
-    private String captcha;
-
-    public String getCaptcha() {
-        return captcha;
-    }
-
-    public void setCaptcha(String captcha) {
-        this.captcha = captcha;
-    }
+    @NotBlank(message = "手机验证码不能为空")
+    private String mobileCode;
 
     public String getMobile() {
         return mobile;
@@ -22,6 +19,14 @@ public class UserNewPasswordForm {
 
     public void setMobile(String mobile) {
         this.mobile = mobile;
+    }
+
+    public String getMobileCode() {
+        return mobileCode;
+    }
+
+    public void setMobileCode(String mobileCode) {
+        this.mobileCode = mobileCode;
     }
 
     public String getPassword() {

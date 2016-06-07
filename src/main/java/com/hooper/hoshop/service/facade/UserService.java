@@ -3,6 +3,7 @@ package com.hooper.hoshop.service.facade;
 import com.hooper.hoshop.admin.form.UserFilterForm;
 import com.hooper.hoshop.entity.User;
 import com.hooper.hoshop.web.form.UserLoginForm;
+import com.hooper.hoshop.web.form.UserNewPasswordForm;
 import com.hooper.hoshop.web.form.UserRegisterForm;
 
 import java.util.List;
@@ -26,4 +27,6 @@ public interface UserService extends GenericService<User, Integer> {
     public List<User> selectList(UserFilterForm userFilterForm, int offset, int limit);
 
     public int countList(UserFilterForm userFilterForm);
+
+    public int changePassword(UserNewPasswordForm userNewPasswordForm);
 }

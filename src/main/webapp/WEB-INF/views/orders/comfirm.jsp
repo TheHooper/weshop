@@ -14,14 +14,10 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
     <title>确认订单</title>
-    <link href="<c:url value="../css/frozen.css"/>" rel="stylesheet" type="text/css"/>
-    <link href="<c:url value="../css/homall.css"/>" rel="stylesheet" type="text/css"/>
+    <link href="<c:url value="${pageContext.request.contextPath}/css/frozen.css"/>" rel="stylesheet" type="text/css"/>
+    <link href="<c:url value="${pageContext.request.contextPath}/css/homall.css"/>" rel="stylesheet" type="text/css"/>
     <script type="text/javascript"
-            src="<c:url value="../js/lib/zeptojs/zepto.min.js"/>"></script>
-    <link href="<c:url value="../../css/frozen.css"/>" rel="stylesheet" type="text/css"/>
-    <link href="<c:url value="../../css/homall.css"/>" rel="stylesheet" type="text/css"/>
-    <script type="text/javascript"
-            src="<c:url value="../../js/lib/zeptojs/zepto.min.js"/>"></script>
+            src="<c:url value="${pageContext.request.contextPath}/js/lib/zeptojs/zepto.min.js"/>"></script>
 </head>
 <body>
 
@@ -99,7 +95,7 @@
             <div class="ui-list-info">
                 <h4 class="ui-nowrap">实际应付</h4>
             </div>
-            <div class="ui-list-action">&yen;<span id="r-total-view"></span>${order.totalAndDelivery}</div>
+            <div class="ui-list-action">&yen;<span id="r-total-view">${order.totalAndDelivery}</span></div>
         </li>
     </ul>
     <!-- total end -->
@@ -199,19 +195,16 @@
 
 </body>
 <%--<link href="../css/all-animation.css" rel="stylesheet" type="text/css"/>--%>
-<script type="text/javascript" src="<c:url value="../js/frozen.js"/>"></script>
+<script type="text/javascript" src="<c:url value="${pageContext.request.contextPath}/js/frozen.js"/>"></script>
 <script type="text/javascript"
-        src="<c:url value="../js/homall/address.js"/>"></script>
+        src="<c:url value="${pageContext.request.contextPath}/js/homall/address.js"/>"></script>
 <script type="text/javascript"
-        src="<c:url value="../js/util/base64.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="../../js/frozen.js"/>"></script>
-<script type="text/javascript"
-        src="<c:url value="../../js/homall/address.js"/>"></script>
-<script type="text/javascript"
-        src="<c:url value="../../js/util/base64.min.js"/>"></script>
+        src="<c:url value="${pageContext.request.contextPath}/js/util/base64.min.js"/>"></script>
+
 <script type="text/javascript">
     (function () {
         var prefix = "${pageContext.request.contextPath}"
+        console.log(prefix);
 
         AddressApi.urlPrefix = prefix;
         console.log(AddressApi.urlPrefix);
@@ -343,7 +336,7 @@
         var toAddress = function (defaultAddress, addresses) {
             if (defaultAddress != null) {
                 var text = defaultAddress.name + "," + defaultAddress.mobile + "," +
-                        defaultAddress.province + defaultAddress.city + defaultAddress.area + address.detail;
+                        defaultAddress.province + defaultAddress.city + defaultAddress.area + defaultAddress.detail;
                 $("#pay-address-id").val(defaultAddress.id);
                 $("#pay-address-div").text(text);
             } else {

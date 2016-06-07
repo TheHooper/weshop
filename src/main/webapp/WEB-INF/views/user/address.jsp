@@ -14,22 +14,24 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
     <title>地址管理</title>
-    <link href="<c:url value="../css/frozen.css"/>" rel="stylesheet" type="text/css"/>
-    <link href="<c:url value="../css/homall.css"/>" rel="stylesheet" type="text/css"/>
+    <link href="<c:url value="${pageContext.request.contextPath}/css/frozen.css"/>" rel="stylesheet" type="text/css"/>
+    <link href="<c:url value="${pageContext.request.contextPath}/css/homall.css"/>" rel="stylesheet" type="text/css"/>
     <script type="text/javascript"
-            src="<c:url value="../js/lib/zeptojs/zepto.min.js"/>"></script>
-    <link href="<c:url value="../../css/frozen.css"/>" rel="stylesheet" type="text/css"/>
-    <link href="<c:url value="../../css/homall.css"/>" rel="stylesheet" type="text/css"/>
-    <script type="text/javascript"
-            src="<c:url value="../../js/lib/zeptojs/zepto.min.js"/>"></script>
+            src="<c:url value="${pageContext.request.contextPath}/js/lib/zeptojs/zepto.min.js"/>"></script>
 </head>
 <body>
-<div id="header" class="header">
+<header id="header" class="header">
     <a href="/user/central" class="header-arrow-l"><i id="headerBarCat" class="ui-icon-prev"></i></a>
-    <h2>地址管理</h2>
-</div>
+    <h2 class="ui-flex-pack-center">地址管理</h2>
+    <div class="ui-tab" id="tab1">
+        <ul id="topTap" class="ui-tab-nav ui-border-b">
+            <li value="0" class="current">查看</li>
+            <li value="1">新增</li>
+        </ul>
+    </div>
+</header>
 
-<section id="add-address-section" style="display: none">
+<section id="add-address-section" class="ho-margin-top-mm" style="display: none">
     <div class="ui-form ui-border-b ho-margin-top-sm">
         <div class="ui-form-item ui-form-item-l ui-border-b">
             <label class="ui-border-r">
@@ -91,90 +93,69 @@
 </section>
 
 
-<section id="select-address-section">
-    <ul id="select-address-ul" class="ui-list ui-list-text ui-list-radio ui-border-tb ho-margin-top-sm">
+<section id="select-address-section" class="ho-margin-top-mm">
+    <ul id="select-address-ul" class="ui-list ui-list-pure ui-border-tb">
+        <%--<li class="ui-border-t">--%>
+        <%--<p><span>胡攀 </span><span class="date"> 15112533082</span></p>--%>
+        <%--<h4 class="ui-nowrap-multi">北京市市辖区东城区中南海</h4>--%>
+        <%--<p class="ho-text-right">--%>
+        <%--<button id="to-list-address-section-btn" class="ui-btn ">--%>
+        <%--设为默认--%>
+        <%--</button>--%>
+        <%--<button id="to-add-address-section-btn" class="ui-btn">--%>
+        <%--删除地址--%>
+        <%--</button>--%>
+        <%--</p>--%>
+        <%--</li>--%>
     </ul>
-    <div class="ui-btn-wrap ho-margin-top-sm">
-        <button id="select-address-confirm-btn" class="ui-btn-lg ui-btn-primary">
-            确认选择
-        </button>
-        <button id="select-address-canel-btn" class="ui-btn-lg ho-margin-top-xs">
-            返回
-        </button>
+    <div class="ho-margin-top-sm">
+        <button onclick="window.location.href='/user/central'" class="ui-btn-default ui-btn-lg">返回</button>
     </div>
 </section>
 
 
 </body>
-<%--<link href="../css/all-animation.css" rel="stylesheet" type="text/css"/>--%>
-<script type="text/javascript" src="<c:url value="../js/frozen.js"/>"></script>
+<%--<link href="${pageContext.request.contextPath}/css/all-animation.css" rel="stylesheet" type="text/css"/>--%>
 <script type="text/javascript"
-        src="<c:url value="../js/homall/address.js"/>"></script>
+        src="<c:url value="${pageContext.request.contextPath}/js/homall/address.js"/>"></script>
 <script type="text/javascript"
-        src="<c:url value="../js/util/base64.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="../../js/frozen.js"/>"></script>
-<script type="text/javascript"
-        src="<c:url value="../../js/homall/address.js"/>"></script>
-<script type="text/javascript"
-        src="<c:url value="../../js/util/base64.min.js"/>"></script>
+        src="<c:url value="${pageContext.request.contextPath}/js/util/base64.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="${pageContext.request.contextPath}/js/frozen.js"/>"></script>
+<%--<script type="text/javascript"--%>
+<%--src="<c:url value="${pageContext.request.contextPath}/js/lib/zeptojs/zepto.min.js"/>"></script>--%>
 <script type="text/javascript">
     (function () {
-        var prefix = "${pageContext.request.contextPath}"
+        var prefix = "${pageContext.request.contextPath}";
 
         AddressApi.urlPrefix = prefix;
-        console.log(AddressApi.urlPrefix);
         AddressApi.loadProvince("province-select");
         AddressApi.bindAutoLoadEvent("province-select", "city-select", "area-select");
 
-        $("#address-canel-btn").tap(function () {
-            $("#add-address-section").css("display", "none");
-            $("#select-address-section").css("display", "none");
-            $("#select-coupon-section").css("display", "none");
-            $("#pay-section").css("display", "block");
-        })
-
-        $("#select-address-canel-btn").tap(function () {
-            $("#add-address-section").css("display", "none");
-            $("#select-address-section").css("display", "none");
-            $("#select-coupon-section").css("display", "none");
-            $("#pay-section").css("display", "block");
-        })
-
-        $("#to-add-address-section-btn").tap(function () {
+        var showAdd = function () {
             $("#add-address-section").css("display", "block");
             $("#select-address-section").css("display", "none");
-            $("#select-coupon-section").css("display", "none");
-            $("#pay-section").css("display", "none");
-        })
+        };
 
-        $("#to-list-address-section-btn").tap(function () {
-            $("#select-coupon-section").css("display", "none");
+        var showList = function () {
             $("#add-address-section").css("display", "none");
             $("#select-address-section").css("display", "block");
-            $("#pay-section").css("display", "none");
-        })
+        };
 
-        $("#to-list-coupon-section-btn").tap(function () {
-            if ($("#coupon-tip").text() == 0) {
-                el = $.tips({
-                    content: '本次订单无可用优惠券',
-                    stayTime: 2000,
-                    type: "warn"
-                })
+        $('#topTap').children("li").tap(function () {
+            var index = $(this).val();
+            $('#topTap').children("li").removeClass("current");
+            $(this).addClass("current");
+            if ($(this).attr("value") == 0) {
+                showList();
             } else {
-                $("#add-address-section").css("display", "none");
-                $("#select-address-section").css("display", "none");
-                $("#pay-section").css("display", "none");
-                $("#select-coupon-section").css("display", "block");
+                showAdd();
             }
-        })
+        });
 
-        $("#select-coupon-canel").tap(function () {
-            $("#add-address-section").css("display", "none");
-            $("#select-address-section").css("display", "none");
-            $("#pay-section").css("display", "block");
-            $("#select-coupon-section").css("display", "none");
-        })
+        $("#address-canel-btn").tap(function () {
+            showList();
+        });
+
 
 
         $("#address-confirm-btn").tap(function () {
@@ -207,214 +188,122 @@
 
             function afterAdd() {
                 $("#add-address-section").css("display", "none");
-                $("#pay-section").css("display", "block");
+                $("#select-address-section").css("display", "block");
+                $('#topTap').children("li").removeClass("current");
+                var lis = $('#topTap').children("li");
+                $(lis[0]).addClass("current");
                 $("#add-address-name-input").val("");
                 $("#add-address-mobile-input").val("");
                 $("#add-address-detail-input").val("");
+                $.tips({
+                    content: '添加成功',
+                    stayTime: 2000,
+                    type: "success"
+                })
+                $("#select-address-ul").html("");
+                loadAddress();
             }
-
             AddressApi.addAddress(addressForm, afterAdd);
-        })
 
-        $("#select-address-confirm-btn").tap(function () {
-            var selected = $(".select-address-radio:checked");
-            var parentLi = selected.parents("li");
-            var infoDiv = parentLi.children(".select-address-info");
-            var nameMobile = infoDiv.children("p").text();
-            var address = infoDiv.children("h4").text();
-            $("#pay-address-id").val($(selected).val());
-            $("#pay-address-div").text(nameMobile + address);
-            $("#add-address-section").css("display", "none");
-            $("#select-address-section").css("display", "none");
-            $("#pay-section").css("display", "block");
         });
 
-        var defaultAddress = AddressApi.loadDefaultAddress(false, null);
-        var addresses = AddressApi.loadAddresses(false, null);
 
-        var toAddress = function (defaultAddress, addresses) {
-            if (defaultAddress != null) {
-                var text = defaultAddress.name + "," + defaultAddress.mobile + "," +
-                        defaultAddress.province + defaultAddress.city + defaultAddress.area + address.detail;
-                $("#pay-address-id").val(defaultAddress.id);
-                $("#pay-address-div").text(text);
-            } else {
-                console.log($(addresses));
-                if ($(addresses).length > 0) {
-                    var address = addresses[0];
-                    var text = address.name + "," + address.mobile + "," +
-                            address.province + address.city + address.area + address.detail;
-                    $("#pay-address-id").val(address.id);
-                    $("#pay-address-div").text(text);
-                } else {
-                    $("#pay-address-div").text("暂无地址，请添加");
-                }
-            }
-        }
-        toAddress(defaultAddress, addresses);
-
-        var toAddressSelect = function (addresses) {
-            var id = $("#pay-address-id").val();
+        var loadAddress = function () {
+            $("#select-address-ul").html("");
+            var addresses = AddressApi.loadAddresses(false, null);
             $(addresses).each(function (i, e) {
-                var input;
-                if (id == e.id) {
-                    input = '<input type="radio" value="' + e.id + '" checked class="select-address-radio" name="radio">';
+                var defaultor;
+                if (e.isDefault == true) {
+                    defaultor = '<span class="ho-margin-right-xs color-blue">默认地址</span>';
                 } else {
-                    input = '<input type="radio" value="' + e.id + '"  class="select-address-radio" name="radio">';
+                    defaultor = '<button value="' + e.id + '" class="ui-btn to-default ho-margin-right-xs">' + '设为默认' + '</button>';
                 }
-                var li = ' <li class="ui-border-t">'
-                        + '<label class="ui-radio" for="radio">'
-                        + input
-                        + '</label>'
-                        + '<div class="ui-list-info select-address-info">'
-                        + '<p class="ui-nowrap" >' + e.name + "," + e.mobile + "," + '</p>'
-                        + '<h4 class="ui-nowrap">' + e.province + e.city + e.area + e.detail + '</h4>'
-                        + '</div>'
+                var li = '<li class="ui-border-t">'
+                        + '<p><span>' + e.name + '</span><span class="date"> ' + e.mobile + '</span></p>'
+                        + '<h4 class="ui-nowrap-multi">' + e.province + e.city + e.area + e.detail + '</h4>'
+                        + '<p class="ho-text-right">'
+                        + defaultor
+                        + '<button value="' + e.id + '" class="ui-btn to-del">'
+                        + '删除地址'
+                        + '</button>'
+                        + '</p>'
                         + '</li>'
                 $("#select-address-ul").append(li);
             })
         }
-        toAddressSelect(addresses);
 
+        loadAddress();
 
-        $("#pay-btn").tap(function () {
+        $(document).on("tap", ".to-default", function () {
+            var id = $(this).attr("value");
             var dia = $.dialog({
-                title: '请输入密码',
-                content: '<div class="ui-form-item ui-form-item-pure ui-border-b"><input id="pay-password"type="password" placeholder="密码"></div>',
+                title: '确认设为默认地址?',
+                content: '',
                 button: ["确认", "取消"]
             });
 
             dia.on("dialog:action", function (e) {
                 console.log(e.index)
                 if (e.index == 0) {
-                    var password = $("#pay-password").val();
-                    if (password == null || password == "") {
-                        el = $.tips({
-                            content: '请输入密码',
-                            stayTime: 2000,
-                            type: "success"
-                        })
-                    } else {
-                        var password64 = Base64.encode(password);
-                        payForm.password = password64;
-                        payForm.addressId = $("#pay-address-id").val();
-                        $.ajax({
-                            type: "POST",
-                            url: prefix + "/orders/pay",
-                            data: payForm,
-                            contentType: "application/x-www-form-urlencoded; charset=utf-8",
-                            dataType: "json",
-                            success: function (data) {
-                                if (data.code == "0") {
-                                    window.location.href = "${pageContext.request.contextPath}/orders/paid";
-                                } else {
-                                    el = $.tips({
-                                        content: data.msg,
-                                        stayTime: 2000,
-                                        type: "warn"
-                                    })
-                                }
-                            },
-                            error: function (msg) {
-
+                    $.ajax({
+                        type: "POST",
+                        url: prefix + "/address/setDefault",
+                        data: {addressId: id},
+                        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.code == 0) {
+                                $.tips({
+                                    content: '修改成功',
+                                    stayTime: 2000,
+                                    type: "success"
+                                })
+                                loadAddress();
                             }
-                        })
-                    }
-                }
-            });
-        });
-
-
-        var loadCoupon = function () {
-            var ids = new Array();
-            $(".orderGoods-id").each(function (i, e) {
-                ids.push($(e).val());
-            })
-            couponsForm.goodsIds = ids;
-            $.ajax({
-                type: "POST",
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'charset': 'utf-8'
-                },
-                url: prefix + "/coupon/useable",
-                data: JSON.stringify(couponsForm),
-                //contentType: "application/x-www-form-urlencoded; charset=utf-8",
-                dataType: "json",
-                success: function (data) {
-                    if (data.code == null) {
-                        console.log(data);
-                        $("#coupon-tip").text(data.length)
-                        if (data.length > 0) {
-                            $("#select-coupon-ul").html("");
-                            $(data).each(function (i, e) {
-                                var li = '<li>'
-                                        + '<div class="ui-avatar ho-text-center" style=" background-image:none">'
-                                        + '<label class="ui-radio" for="radio">'
-                                        + '<input  value="' + e.id + '" type="radio" name="CouponRadio">'
-                                        + '</label>'
-                                        + '</div>'
-                                        + '<div class="ui-list-info ui-border-t">'
-                                        + '<h4 class="ui-nowrap">' + e.title + '</h4>'
-                                        + '<p class="ui-nowrap">有效期至：' + generateDate(e.deadline) + '</p>'
-                                        + '<p class="ui-nowrap">满 &yen;' + e.threshold + ' - &yen;<span id="couponFee' + e.id + '">' + e.price + '</span></p>'
-                                        + '</div>'
-                                        + '</li>'
-                                $("#select-coupon-ul").append($(li));
-                            })
+                        },
+                        error: function (msg) {
+                            console.log(JSON.stringify(msg));
                         }
-                    }
-                },
-                error: function (msg) {
-                    console.log(JSON.stringify(msg));
+                    })
                 }
             })
-        }
+        })
 
-        loadCoupon();
+        $(document).on("tap", ".to-del", function () {
+            var id = $(this).attr("value");
+            var dia = $.dialog({
+                title: '确认删除该地址',
+                content: '',
+                button: ["确认", "取消"]
+            });
 
-        //加载日期
-        function generateDate(time) {
-            var data = new Date(parseInt(time));
-            var formatDate = data.format('yyyy-MM-dd');
-            return formatDate;
-        }
-
-        //日期格式方法
-        Date.prototype.format = function (fmt) {
-            var o = {
-                "M+": this.getMonth() + 1, //月份
-                "d+": this.getDate(), //日
-                "h+": this.getHours() % 12 == 0 ? 12 : this.getHours() % 12, //小时
-                "H+": this.getHours(), //小时
-                "m+": this.getMinutes(), //分
-                "s+": this.getSeconds(), //秒
-                "q+": Math.floor((this.getMonth() + 3) / 3), //季度
-                "S": this.getMilliseconds() //毫秒
-            };
-            var week = {
-                "0": "\u65e5",
-                "1": "\u4e00",
-                "2": "\u4e8c",
-                "3": "\u4e09",
-                "4": "\u56db",
-                "5": "\u4e94",
-                "6": "\u516d"
-            };
-            if (/(y+)/.test(fmt)) {
-                fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-            }
-            if (/(E+)/.test(fmt)) {
-                fmt = fmt.replace(RegExp.$1, ((RegExp.$1.length > 1) ? (RegExp.$1.length > 2 ? "\u661f\u671f" : "\u5468") : "") + week[this.getDay() + ""]);
-            }
-            for (var k in o) {
-                if (new RegExp("(" + k + ")").test(fmt)) {
-                    fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            dia.on("dialog:action", function (e) {
+                console.log(e.index)
+                if (e.index == 0) {
+                    $.ajax({
+                        type: "POST",
+                        url: prefix + "/address/del",
+                        data: {addressId: id},
+                        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.code == 0) {
+                                $.tips({
+                                    content: '删除成功',
+                                    stayTime: 2000,
+                                    type: "success"
+                                })
+                                loadAddress();
+                            }
+                        },
+                        error: function (msg) {
+                            console.log(JSON.stringify(msg));
+                        }
+                    })
                 }
-            }
-            return fmt;
-        }
+            })
+        })
+
     })();
 </script>
 </html>

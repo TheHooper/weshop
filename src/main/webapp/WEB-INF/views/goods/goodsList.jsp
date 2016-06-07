@@ -25,8 +25,8 @@
 <body>
 <!-- header -->
 <header class="ui-searchbar-wrap ui-border-b">
-    <a href="<c:url value="../h//category"/>"><i id="headerBarCat"
-                                                 class="ui-icon-prev"></i></a>
+    <a href="<c:url value="../category"/>"><i id="headerBarCat"
+                                              class="ui-icon-prev"></i></a>
     <div class="ui-searchbar ui-border-radius">
         <i class="ui-icon-search"></i>
         <div class="ui-searchbar-text">搜索商品</div>
@@ -118,7 +118,7 @@
 //            $("#sonCat").height(scrollerHeight + 2);
 //        }
 
-var prefix = "${pageContext.request.scheme}" + "://" + "${pageContext.request.serverName}" + ":" + "${pageContext.request.localPort}" + "/";
+var prefix = "${pageContext.request.contextPath}";
 
 var basicOffset = 0;
 var basiclimit = 6;

@@ -57,7 +57,7 @@ To change this template use File | Settings | File Templates.
         <div class="hoTopic-vertical-wapper">
             <div class="ui-scroller">
                 <ul id="cat-parent-ul">
-                    <li onclick="window.location.href='/goods/list'">所有商品</li>
+                    <li value="-1" onclick="window.location.href='/goods/list'">所有商品</li>
                 </ul>
             </div>
         </div>
@@ -96,7 +96,7 @@ To change this template use File | Settings | File Templates.
                             var li = $('<li value="' + e.id + '">' + e.typeName + '</li>')
                             $("#cat-parent-ul").append(li);
                         });
-                        var firstLI = $("#cat-parent-ul").children("li").get(0);
+                        var firstLI = $("#cat-parent-ul").children("li").get(1);
                         if (typeof (firstLI) != "undefined") {
                             $(firstLI).addClass("ul-cat-active");
                         }
@@ -139,44 +139,46 @@ To change this template use File | Settings | File Templates.
             $(document).on("tap", ".ui-scroller li", function (e) {
                 $(".ul-cat-active").removeClass("ul-cat-active");
                 $(e.target).addClass("ul-cat-active");
-                loadActiveCats();
+                if ($(this).attr("value") != -1) {
+                    loadActiveCats();
+                }
             })
             //change the sonCat method
         }
 
         var loadActiveCats = function () {
             var parentId = $(".ul-cat-active").attr("value");
-
-            console.log(parentId);
-            $.ajax({
-                type: "GET",
-                url: prefix + "/admin/cat/cats/" + parentId,
-                data: {},
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (data) {
-                    if (typeof (data.code) == "undefined") {
-                        $("#son-cat-ul").html("");
-                        console.log(data);
-                        $(data.data).each(function (i, e) {
-                            var cat;
-                            if (typeof(e.logo) == "undefined") {
-                                cat = getCatObj(e.id, e.typeName, "");
-                            } else {
-                                cat = getCatObj(e.id, e.typeName, e.logo);
+            if (parentId != -1) {
+                $.ajax({
+                    type: "GET",
+                    url: prefix + "/admin/cat/cats/" + parentId,
+                    data: {},
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        if (typeof (data.code) == "undefined") {
+                            $("#son-cat-ul").html("");
+                            console.log(data);
+                            $(data.data).each(function (i, e) {
+                                var cat;
+                                if (typeof(e.logo) == "undefined") {
+                                    cat = getCatObj(e.id, e.typeName, "");
+                                } else {
+                                    cat = getCatObj(e.id, e.typeName, e.logo);
+                                }
+                                console.log(i);
+                                $("#son-cat-ul").append(cat);
+                            })
+                            if (data.data.length < 1) {
+                                $("#son-cat-ul").html("<h3 class='ho-text-center'>抱歉,暂无分类</h3>");
                             }
-                            console.log(i);
-                            $("#son-cat-ul").append(cat);
-                        })
-                        if (data.data.length < 1) {
-                            $("#son-cat-ul").html("<h3 class='ho-text-center'>抱歉,暂无分类</h3>");
                         }
+                    },
+                    error: function (msg) {
+                        alert(msg);
                     }
-                },
-                error: function (msg) {
-                    alert(msg);
-                }
-            })
+                })
+            }
         }
 
         var getCatObj = function (id, name, pic) {

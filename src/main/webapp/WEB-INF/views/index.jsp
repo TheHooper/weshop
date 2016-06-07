@@ -47,7 +47,7 @@
 <!-- toolBar -->
 <ul class="ui-row text-center margin-top-s padding-vertical-s">
     <li class="ui-col ui-col-33">
-        <a class="txt-black">
+        <a href="/user/orders" class="txt-black">
             <i class="ui-icon-history"></i>
             <p>订单查询</p>
         </a>

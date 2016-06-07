@@ -232,6 +232,18 @@
       </if>
     </trim>
   </insert>
+  <update id="updatePassword" parameterType="com.hooper.hoshop.entity.User">
+    update h_user
+    <set>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.hooper.hoshop.entity.User">
     update h_user
     <set>

@@ -124,7 +124,7 @@
                 success: function (data) {
                     if (data.code == "0") {
                         $("#error-view").css("display", "none");
-                        window.location.href = prefix + "/index";
+                        window.location.href = prefix + "/";
                     } else {
                         $("#error-view").css("display", "block");
                         if (data.code == "5010") {

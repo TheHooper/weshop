@@ -21,7 +21,7 @@
 </head>
 <body>
 <header id="header" class="header">
-    <a href="/index" class="header-arrow-l"><i id="headerBarCat" class="ui-icon-prev"></i></a>
+    <a href="/" class="header-arrow-l"><i id="headerBarCat" class="ui-icon-prev"></i></a>
     <h2 class="ui-flex-pack-center">购物车</h2>
 </header>
 

@@ -21,7 +21,7 @@
 </head>
 <body>
 <header id="header" class="header">
-    <a href="/h/index" class="header-arrow-l"><i id="headerBarCat" class="ui-icon-prev"></i></a>
+    <a href="/" class="header-arrow-l"><i id="headerBarCat" class="ui-icon-prev"></i></a>
     <h2 class="ui-flex-pack-center">加入HoMall</h2>
 </header>
 
@@ -185,7 +185,7 @@
                         $("#error-view").css("display", "none");
                         $(".ui-poptips").css("display", "block");
                         setTimeout(function () {
-                            window.location.href = "../index";
+                            window.location.href = "${pageContext.request.contextPath}/";
                         }, 1000)
                     } else {
                         $("#error-view").css("display", "block");

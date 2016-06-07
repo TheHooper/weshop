@@ -12,6 +12,7 @@ import com.hooper.hoshop.dao.UserMapper;
 import com.hooper.hoshop.entity.User;
 import com.hooper.hoshop.service.facade.UserService;
 import com.hooper.hoshop.web.form.UserLoginForm;
+import com.hooper.hoshop.web.form.UserNewPasswordForm;
 import com.hooper.hoshop.web.form.UserRegisterForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,23 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     UserMapper userMapper;
+
+    public int changePassword(UserNewPasswordForm userNewPasswordForm) {
+        if (userNewPasswordForm != null) {
+            try {
+                User user = userMapper.selectByMobile(userNewPasswordForm.getMobile());
+                String newPassword = userNewPasswordForm.getPassword();
+                String MD5psw = MD5.encrypt(newPassword + user.getPasswordRandom());
+                user.setPassword(MD5psw);
+                user.setIsDel(false);
+                return userMapper.updatePassword(user);
+            } catch (Exception e) {
+                throw new BusinessException(WebErrorConstant.MYSQL_FAILED, "数据库操作失败！" + e.toString());
+            }
+        } else {
+            throw new BusinessException(WebErrorConstant.PARAM_NULL, "param null error");
+        }
+    }
 
     @Override
     public int register(UserRegisterForm userRegisterForm) {

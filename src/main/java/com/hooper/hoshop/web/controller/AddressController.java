@@ -65,6 +65,17 @@ public class AddressController {
     }
 
     @UserLoginAnnotation
+    @RequestMapping(value = "/setDefault", method = {RequestMethod.GET, RequestMethod.POST})
+    public
+    @ResponseBody
+    JsonOutput setDefaultAddress(Integer addressId, HttpSession session) {
+        User user = (User) session.getAttribute(WebConstant.SESSION_SIGNIN_USER);
+        addressService.setDefaultAddress(user.getId(), addressId);
+        JsonOutput output = new JsonOutput();
+        return output;
+    }
+
+    @UserLoginAnnotation
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public
     @ResponseBody

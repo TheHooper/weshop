@@ -132,11 +132,6 @@ AddressApi = {
             dataType: "json",
             success: function (data) {
                 if (data.code == 0) {
-                    $.tips({
-                        content: '添加成功',
-                        stayTime: 2000,
-                        type: "success"
-                    })
                     callbackFunction();
                 }
             },

@@ -11,6 +11,7 @@ import com.hooper.hoshop.entity.User;
 import com.hooper.hoshop.service.facade.UserService;
 import com.hooper.hoshop.service.impl.CustomGenericManageableCaptchaService;
 import com.hooper.hoshop.web.form.UserLoginForm;
+import com.hooper.hoshop.web.form.UserNewPasswordForm;
 import com.hooper.hoshop.web.form.UserRegisterForm;
 import com.octo.captcha.service.image.ImageCaptchaService;
 import me.chanjar.weixin.common.exception.WxErrorException;
@@ -146,7 +147,7 @@ public class UserController {
             }
             registerForm.setMobile(mobile);
             registerForm.setPassword(password);
-            customGenericManageableCaptchaService.removeCaptcha(request.getSession().getId());
+//            customGenericManageableCaptchaService.removeCaptcha(request.getSession().getId());
             request.getSession().removeAttribute(WebConstant.SESSION_SMS_CODE);
             userService.register(registerForm);
             User user = userService.selectByMobile(mobile);
@@ -165,10 +166,38 @@ public class UserController {
         return "entry/forgetPassword";
     }
 
+    @RequestMapping(value = "/resetPassword", method = {RequestMethod.GET})
+    public String resetPasswordView() {
+        return "user/resetPassword";
+    }
 
-    @RequestMapping(value = "/forgetPassword", method = {RequestMethod.POST})
-    public String forgetPassword() {
-        return "entry/forgetPassword";
+    @RequestMapping(value = "/resetPassword", method = {RequestMethod.POST})
+    public
+    @ResponseBody
+    JsonOutput forgetPassword(@Valid UserNewPasswordForm registerForm, BindingResult result, HttpServletRequest request) {
+        if (result.hasErrors()) {
+            throw new BusinessException(WebErrorConstant.PARAM_VALID_ERROR, result.getFieldErrors().get(0).getDefaultMessage());
+        }
+        String mobile = BASE64.decrypt(registerForm.getMobile());
+        if (!ValidUtil.isMobile(mobile)) {
+            throw new BusinessException(WebErrorConstant.PARAM_VALID_ERROR, "手机格式有误");
+        }
+        String smsCode = (String) request.getSession().getAttribute(WebConstant.SESSION_SMS_CODE);
+        if (smsCode == null || !registerForm.getMobileCode().equals(smsCode)) {
+            throw new BusinessException(WebErrorConstant.PARAM_VALID_ERROR, "手机验证码有误");
+        }
+        String password = BASE64.decrypt(registerForm.getPassword());
+        if (password.length() > 16 || password.length() < 6) {
+            throw new BusinessException(WebErrorConstant.PARAM_VALID_ERROR, "密码长度要在6~16个字符范围内");
+        }
+        registerForm.setMobile(mobile);
+        registerForm.setPassword(password);
+//        customGenericManageableCaptchaService.removeCaptcha(request.getSession().getId());
+        request.getSession().removeAttribute(WebConstant.SESSION_SMS_CODE);
+        userService.changePassword(registerForm);
+
+        JsonOutput output = new JsonOutput();
+        return output;
     }
 
     @UserLoginAnnotation
@@ -199,5 +228,17 @@ public class UserController {
     @RequestMapping("address")
     public String addressView() {
         return "/user/address";
+    }
+
+    @UserLoginAnnotation
+    @RequestMapping("favour")
+    public String favourView() {
+        return "/user/favour";
+    }
+
+    @UserLoginAnnotation
+    @RequestMapping("rate")
+    public String rateView() {
+        return "/user/rate";
     }
 }
