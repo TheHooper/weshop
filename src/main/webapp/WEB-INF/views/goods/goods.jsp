@@ -168,7 +168,7 @@
 <!-- 评价 页面-->
 <section id="rate-section" class="ui-container" style="display: none">
     <ul id="rate-level-ul" class="ui-row-flex  text-center back-grey padding-vertical-s txt-fade">
-        <li class="ui-col ui-col currentRate">
+        <li value="-1" class="ui-col ui-col currentRate">
             全部<span id="all-rate-num">(28)</span>
         </li>
         <li value="0" class="ui-col ui-col">
@@ -822,7 +822,11 @@
                 var index = $(this).val();
                 $('#rate-level-ul').children("li").removeClass("currentRate");
                 $(this).addClass("currentRate");
-                RateForm.level = $(this).attr("value");
+                if ($(this).attr("value") == -1) {
+                    RateForm.level = null;
+                } else {
+                    RateForm.level = $(this).attr("value");
+                }
                 RateForm.offset = 0;
                 $("#rates-ul").html("");
                 loadRate(null, "rates-ul");

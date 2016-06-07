@@ -25,7 +25,7 @@
     <h2 class="ui-flex-pack-center">我的评价</h2>
     <div class="ui-tab" id="tab1">
         <ul id="topTap" class="ui-tab-nav ui-border-b">
-            <li class="current">全部</li>
+            <li value="-1" class="current">全部</li>
             <li value="0">好评</li>
             <li value="1">中评</li>
             <li value="2">差评</li>
@@ -63,7 +63,11 @@
             var index = $(this).val();
             $('#topTap').children("li").removeClass("current");
             $(this).addClass("current");
-            form.level = $(this).attr("value");
+            if ($(this).attr("value") == -1) {
+                form.level = null;
+            } else {
+                form.level = $(this).attr("value");
+            }
             $("#rate-ul").html("");
             loadRate();
         })
