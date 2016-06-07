@@ -37,9 +37,15 @@
 <!-- slider -->
 <div class="ui-slider" id="indexSlider">
     <ul class="ui-slider-content" style="width: 300%">
-        <li><span style="background-image:url(img/slider/winterCloth.jpg)"></span></li>
-        <li><span style="background-image:url(img/slider/pearl.jpg)"></span></li>
-        <li><span style="background-image:url(img/slider/pack.jpg)"></span></li>
+        <li onclick="javascript:window.location.href='/goods/detail/9'"><span
+                style="background-image:url(http://7xtgdy.com1.z0.glb.clouddn.com/FvICg_y4bdix6QofUfq6yS7AUiR1)"></span>
+        </li>
+        <li onclick="javascript:window.location.href='/goods/detail/18'"><span
+                style="background-image:url(http://7xtgdy.com1.z0.glb.clouddn.com/Fu_rsd3aub5K2ijMKjuRmtUOv3NP)"></span>
+        </li>
+        <li onclick="javascript:window.location.href='/goods/detail/15'"><span
+                style="background-image:url(http://7xtgdy.com1.z0.glb.clouddn.com/FrGdfZ8N81A1UdVoBoic4MMMNCNm)"></span>
+        </li>
     </ul>
 </div>
 <!-- slider E -->
@@ -76,18 +82,22 @@
                 <div class="text-center ho-padding-top-sm">
                     <h5 class="ui-nowrap">TISSOT</h5>
                 </div>
-                <div class="ui-grid-trisect-img">
-                    <span style="background-image:url(img/recommand/rTissot1.jpg)"></span>
+                <div class="ho-text-center ho-margin-top-sm">
+                    <a href="/goods/detail/18">
+                        <img src="http://7xtgdy.com1.z0.glb.clouddn.com/FjB_qZXZbYx16NsvCZUEAStBJE8i?imageView2/2/w/100/h/100"/>
+                    </a>
                 </div>
             </div>
         </li>
         <li>
             <div class="ui-border back-white">
                 <div class="text-center ho-padding-top-sm">
-                    <h5 class="ui-nowrap">Red Wing</h5>
+                    <h5 class="ui-nowrap">Danner</h5>
                 </div>
-                <div class="ui-grid-trisect-img">
-                    <span style="background-image:url(img/recommand/rRedWing.jpg)"></span>
+                <div class="ho-text-center ho-margin-top-sm">
+                    <a href="/goods/detail/17">
+                        <img src="http://7xtgdy.com1.z0.glb.clouddn.com/FrH06T7SZjxeF_WNiCV1fvH47BDZ?imageView2/2/w/100/h/100"/>
+                    </a>
                 </div>
             </div>
         </li>
@@ -96,8 +106,10 @@
                 <div class="text-center ho-padding-top-sm">
                     <h5 class="ui-nowrap">Tommy</h5>
                 </div>
-                <div class="ui-grid-trisect-img">
-                    <span style="background-image:url(img/recommand/rTommy.jpg)"></span>
+                <div class="ho-text-center ho-margin-top-sm">
+                    <a href="/goods/detail/9">
+                        <img src="http://7xtgdy.com1.z0.glb.clouddn.com/Fk-4CYY1Na4OWWKACFGqrBe8aou_?imageView2/2/w/100/h/100"/>
+                    </a>
                 </div>
             </div>
         </li>
@@ -107,7 +119,7 @@
 
 <!-- topic -->
 <section class="ui-panel">
-    <h2 class="ui-arrowlink"><span>六一喂食计划</span><span class="ui-panel-title-tips">更多</span></h2>
+    <h2 class="ui-arrowlink"><span>六一喂食计划</span><!--<span class="ui-panel-title-tips">更多</span>--></h2>
     <div class="hoTopic-head" style="background-image: url(img/section/t1.png);">
         <div class="arrow-up hoTopic-head-arrow">
         </div>
@@ -115,16 +127,10 @@
     <!-- html -->
     <div class="hoTopic-wapper">
         <ul class="hoTopic-scroller">
-            <li style="background:url(img/food/f1.jpg)"
-                onclick="javascript:window.location.href='/user/login'"></li>
-            <li style="background:url(img/food/f2.jpg)"></li>
-            <li style="background:url(img/food/f3.jpg)"></li>
-            <li style="background:url(img/food/f4.jpg)"></li>
-            <li style="background:url(img/food/f5.jpg)"></li>
-            <li style="background:url(img/food/f1.jpg)"></li>
-            <li></li>
-            <li></li>
-            <li></li>
+            <li style="background:url(http://7xtgdy.com1.z0.glb.clouddn.com/Fi8oVGYSQX6aVyO9S_AdkcrGWkdt?imageView2/2/w/80/h/80)"
+                onclick="javascript:window.location.href='/goods/detail/15'"></li>
+            <li style="background:url(http://7xtgdy.com1.z0.glb.clouddn.com/Fq41a7tr_EYOIN-thBGAAcNRFPqg?imageView2/2/w/80/h/80)"
+                onclick="javascript:window.location.href='/goods/detail/13'"></li>
         </ul>
     </div>
 </section>

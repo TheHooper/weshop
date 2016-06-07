@@ -194,7 +194,7 @@
 
                         <div class="am-form-group">
                             <label for="editor-num">券数量</label>
-                            <input type="text" class="" id="editor-num" disabled placeholder="优惠券数量">
+                            <input type="number" class="" id="editor-num" disabled placeholder="优惠券数量">
                         </div>
 
                         <div class="am-form-group">
@@ -234,7 +234,7 @@
                 <div class="am-form  am-margin-top-xl">
                     <div class="am-form-group">
                         <label for="batch-send-num">发放数量</label>
-                        <input type="password" class="" id="batch-send-num" placeholder="优惠券数量">
+                        <input type="number" class="" id="batch-send-num" placeholder="优惠券数量">
                     </div>
                 </div>
                 <div class="form-group am-margin-top-xl">

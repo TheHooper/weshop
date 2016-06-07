@@ -249,6 +249,7 @@ $('#goodsContent').dropload({
                 if (typeof (data.code) == "undefined") {
                     if (data.length == 0) {
                         me.resetload();
+                        me.noData();
                     } else {
                         fitlerForm.offset = parseInt(fitlerForm.offset) + parseInt(data.length);
                         console.log(data);

@@ -26,7 +26,7 @@
     <h2 class="ui-flex-pack-center">我的订单</h2>
     <div class="ui-tab" id="tab1">
         <ul id="topTap" class="ui-tab-nav ui-border-b">
-            <li class="current">全部订单</li>
+            <li value="-1" class="current">全部订单</li>
             <li value="0">待付款</li>
             <li value="1">待发货</li>
             <li value="2">待收货</li>
@@ -309,7 +309,11 @@
             var index = $(this).val();
             $('#topTap').children("li").removeClass("current");
             $(this).addClass("current");
-            filterForm.state = $(this).attr("value");
+            if ($(this).attr("value") == -1) {
+                filterForm.state = null;
+            } else {
+                filterForm.state = $(this).attr("value");
+            }
             $("#order-panel-section").html("");
             loadOrders();
         })

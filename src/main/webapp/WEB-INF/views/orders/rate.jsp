@@ -162,7 +162,7 @@
                     console.log(data);
                     if (data.code == "0") {
                         el = $.tips({
-                            content: '已确认收货',
+                            content: '已成功评价',
                             stayTime: 2000,
                             type: "success"
                         })

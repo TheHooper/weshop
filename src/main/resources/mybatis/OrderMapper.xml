@@ -273,7 +273,7 @@
 
   <select id="countCostByTime" resultType="java.lang.Integer" parameterType="java.lang.Integer">
     SELECT
-    SUM(`h_order`.`r_total`) AS `cost_sum`
+    SUM(`h_order`.`total_and_delivery`) AS `cost_sum`
     FROM h_order
     WHERE is_del = 0 AND STATUS &gt; 0
     <if test="startTime != null">

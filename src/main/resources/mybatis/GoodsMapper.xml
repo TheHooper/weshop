@@ -365,7 +365,7 @@
         gg.u_time, gg.is_del,
         SUM(og.price*og.num) AS `counter`
         FROM h_goods gg
-        LEFT JOIN (h_order_goods og INNER JOIN h_order ON (h_order.`status` > 0 AND h_order.`is_del` = 0 AND
+        INNER JOIN (h_order_goods og INNER JOIN h_order ON (h_order.`status` > 0 AND h_order.`is_del` = 0 AND
         h_order.`id` = og.`order_id`)) ON gg.id = og.`goods_id`
         WHERE gg.`is_del` = 0
         GROUP BY gg.`id`;
@@ -378,7 +378,7 @@
         gg.u_time, gg.is_del,
         COUNT(*) AS `counter`
         FROM h_goods gg
-        LEFT JOIN (h_order_goods og INNER JOIN h_order ON (h_order.`status` > 0 AND h_order.`is_del` = 0 AND
+        INNER JOIN (h_order_goods og INNER JOIN h_order ON (h_order.`status` > 0 AND h_order.`is_del` = 0 AND
         h_order.`id` = og.`order_id`)) ON gg.id = og.`goods_id`
         WHERE gg.`is_del` = 0
         GROUP BY gg.`id`;
