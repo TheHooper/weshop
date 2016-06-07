@@ -44,6 +44,14 @@ public class WebCouponController {
         return treeSet;
     }
 
+    @UserLoginAnnotation
+    @RequestMapping(value = "/coupon", method = {RequestMethod.POST, RequestMethod.GET})
+    public
+    @ResponseBody
+    UserCouponDto getUserCoupon(int userCouponId) {
+        return couponService.selectUserCouponById(userCouponId);
+    }
+
 
     @UserLoginAnnotation
     @RequestMapping(value = "/list", method = {RequestMethod.POST, RequestMethod.GET})

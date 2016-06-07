@@ -7,6 +7,7 @@ import com.hooper.hoshop.common.exception.BusinessException;
 import com.hooper.hoshop.common.util.DateUtil;
 import com.hooper.hoshop.common.util.security.BASE64;
 import com.hooper.hoshop.common.util.security.MD5;
+import com.hooper.hoshop.dto.coupon.UserCouponDto;
 import com.hooper.hoshop.dto.order.OrderDto;
 import com.hooper.hoshop.dto.output.JsonOutput;
 import com.hooper.hoshop.entity.*;
@@ -50,6 +51,9 @@ public class OrdersController {
 
     @Resource
     RateService rateService;
+
+    @Resource
+    CouponService couponService;
 
     @UserLoginAnnotation
     @RequestMapping(value = "/checkout", method = {RequestMethod.POST, RequestMethod.GET})
@@ -127,7 +131,10 @@ public class OrdersController {
         Order order = orderService.selectById(orderId);
         Address address = addressService.selectById(order.getAddressId());
         List<OrderGoods> orderGoodses = orderService.selectOrderGoodsByOrderId(orderId);
-
+        UserCouponDto userCouponDto = null;
+        if (order.getCouponsId() != null) {
+            userCouponDto = couponService.selectUserCouponById(order.getCouponsId());
+        }
         OrderDto orderDto = new OrderDto();
         BeanUtils.copyProperties(order, orderDto);
         orderDto.setcTime(DateUtil.getFormatDate(new Date(order.getcTime()), WebConstant.TIME_FORMATTER));
@@ -143,6 +150,7 @@ public class OrdersController {
         //coupon judege coupon id first
         modelAndView = new ModelAndView("user/ordersDetail");
         modelAndView.addObject("order", orderDto);
+        modelAndView.addObject("coupon", userCouponDto);
         modelAndView.addObject("address", address);
         modelAndView.addObject("orderGoodses", orderGoodses);
         return modelAndView;

@@ -287,6 +287,7 @@ public class OrderServiceImpl implements OrderService {
                 if (orderPayForm.getCouponId() != null) {
                     UserCouponDto couponDto = userCouponMapper.selectDtoById(orderPayForm.getCouponId());
                     if (couponDto != null) {
+                        order.setCouponsId(orderPayForm.getCouponId());
                         order.setrTotal(order.getTotalAndDelivery().subtract(couponDto.getPrice()));
                         UserCoupon coupon = new UserCoupon();
                         coupon.setId(couponDto.getId());

@@ -6,7 +6,8 @@
 <div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
     <div class="am-offcanvas-bar admin-offcanvas-bar">
         <ul class="am-list admin-sidebar-list">
-            <li><a href="admin-index.html"><span class="am-icon-home"></span> 首页</a></li>
+            <li><a href="<c:url value="${pageContext.request.contextPath}/admin/index"/>"><span
+                    class="am-icon-home"></span> 首页</a></li>
             <li class="admin-parent">
                 <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}"><span class="am-icon-file"></span> 页面模块
                     <span class="am-icon-angle-right am-fr am-margin-right"></span></a>

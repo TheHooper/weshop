@@ -39,7 +39,7 @@ To change this template use File | Settings | File Templates.
 <body>
 <!-- header -->
 <header class="ui-searchbar-wrap ui-border-b">
-    <a href="/index"><i id="headerBarCat" class="ui-icon-prev"></i></a>
+    <a href="/"><i id="headerBarCat" class="ui-icon-prev"></i></a>
     <div class="ui-searchbar ui-border-radius">
         <i class="ui-icon-search"></i>
         <div class="ui-searchbar-text">搜索商品</div>
@@ -83,6 +83,17 @@ To change this template use File | Settings | File Templates.
 <script type="text/javascript">
     (function () {
         var prefix = "${pageContext.request.contextPath}"
+
+        $('.ui-searchbar').tap(function () {
+            $('.ui-searchbar-wrap').addClass('focus');
+            $('.ui-searchbar-input input').focus();
+        });
+        $('.ui-searchbar-cancel').tap(function () {
+            $('.ui-searchbar-wrap').removeClass('focus');
+            var searcher = $('.ui-searchbar-input input').val()
+            window.location.href = prefix + "/goods/list?title=" + searcher;
+        });
+
         var loadParentCats = function () {
             $.ajax({
                 type: "GET",

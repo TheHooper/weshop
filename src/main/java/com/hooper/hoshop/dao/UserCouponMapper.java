@@ -20,6 +20,8 @@ public interface UserCouponMapper extends GenericDao<UserCoupon, Integer> {
 
     int updateByPrimaryKey(UserCoupon record);
 
+    int deleteByCouponId(@Param("couponId") Integer couponId);
+
     UserCouponDto selectDtoById(@Param("id") Integer id);
 
     List<UserCouponDto> selectByFilter(Map map);

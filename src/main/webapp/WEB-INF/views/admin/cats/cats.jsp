@@ -500,7 +500,7 @@
         var addOption = {
             runtimes: 'html5,flash,html4',      // 上传模式,依次退化
             browse_button: 'add-logo-btn',         // 上传选择的点选按钮，**必需**
-            uptoken_url: prefix + 'h/admin/qiniu/uptoken',         // Ajax 请求 uptoken 的 Url，**强烈建议设置**（服务端提供）
+            uptoken_url: prefix + '/admin/qiniu/uptoken',         // Ajax 请求 uptoken 的 Url，**强烈建议设置**（服务端提供）
             get_new_uptoken: false,             // 设置上传文件的时候是否每次都重新获取新的 uptoken
             domain: 'http://7xtgdy.com1.z0.glb.clouddn.com/',     // bucket 域名，下载资源时用到，**必需**
             container: 'add-logo-div',             // 上传区域 DOM ID，默认是 browser_button 的父元素，
@@ -552,7 +552,7 @@
         var editorOption = {
             runtimes: 'html5,flash,html4',      // 上传模式,依次退化
             browse_button: 'editor-upload-btn',         // 上传选择的点选按钮，**必需**
-            uptoken_url: prefix + 'h/admin/qiniu/uptoken',         // Ajax 请求 uptoken 的 Url，**强烈建议设置**（服务端提供）
+            uptoken_url: prefix + '/admin/qiniu/uptoken',         // Ajax 请求 uptoken 的 Url，**强烈建议设置**（服务端提供）
             get_new_uptoken: false,             // 设置上传文件的时候是否每次都重新获取新的 uptoken
             domain: 'http://7xtgdy.com1.z0.glb.clouddn.com/',     // bucket 域名，下载资源时用到，**必需**
             container: 'editor-upload',             // 上传区域 DOM ID，默认是 browser_button 的父元素，

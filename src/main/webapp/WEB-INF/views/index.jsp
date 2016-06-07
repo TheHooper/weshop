@@ -137,51 +137,7 @@
     </div>
     <div>
         <ul id="goodsListUl" class="ui-grid-halve">
-            <li>
-                <div class="ui-border">
-                    <div class="ui-grid-trisect-img">
-                        <span style="background-image:url(http://placeholder.qiniudn.com/190x284)"></span>
-                    </div>
-                    <div class="padding-horizontal-xs">
-                        <h4 class="ui-nowrap-multi">长书名长书名长书名长书名长书名长书名长书名</h4>
-                        <h5 class="ui-nowrap price">&yen;2100 </h5>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="ui-border">
-                    <div class="ui-grid-trisect-img">
-                        <span style="background-image:url(https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3317215011,2199206441&fm=116&gp=0.jpg)"></span>
-                        <%--<img src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3317215011,2199206441&fm=116&gp=0.jpg" width="190" height="284">--%>
-                    </div>
-                    <div class="padding-horizontal-xs">
-                        <h4 class="ui-nowrap-multi">长书名长书名长书名长书名长书名长书名长书名</h4>
-                        <h5 class="ui-nowrap price">&yen;2200 </h5>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="ui-border">
-                    <div class="ui-grid-trisect-img">
-                        <span style="background-image:url(http://placeholder.qiniudn.com/190x284)"></span>
-                    </div>
-                    <div class="padding-horizontal-xs">
-                        <h4 class="ui-nowrap-multi">长书名长书名长书名长书名长书名长书名长书名</h4>
-                        <h5 class="ui-nowrap price">&yen;220 </h5>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="ui-border">
-                    <div class="ui-grid-trisect-img">
-                        <img src="http://7xtgdy.com1.z0.glb.clouddn.com/Fn8jhpiWstdSIduZLjnlmPwHeYSl"/>
-                    </div>
-                    <div class="padding-horizontal-xs">
-                        <h4 class="ui-nowrap-multi">长书名长书名长书名长书名长书名长书名长书名</h4>
-                        <h5 class="ui-nowrap price">&yen;200 </h5>
-                    </div>
-                </div>
-            </li>
+
         </ul>
     </div>
 </section>
@@ -213,8 +169,10 @@
             $('.ui-searchbar-wrap').addClass('focus');
             $('.ui-searchbar-input input').focus();
         });
-        $('.ui-searchbar-close').tap(function () {
+        $('.ui-searchbar-cancel').tap(function () {
             $('.ui-searchbar-wrap').removeClass('focus');
+            var searcher = $('.ui-searchbar-input input').val()
+            window.location.href = prefix + "/goods/list?title=" + searcher;
         });
 
         var scroll = new fz.Scroll('.hoTopic-wapper', {

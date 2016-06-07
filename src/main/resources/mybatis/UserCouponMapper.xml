@@ -29,9 +29,8 @@
             AND user_id = #{userId}
         </if>
         <if test="state != null">
-            AND state = #{state}
             <if test="state != 2">
-                AND deadline &gt; #{time}
+                AND state = #{state} AND deadline &gt; #{time}
             </if>
             <if test="state == 2">
                 AND deadline &lt; #{time}
@@ -54,9 +53,8 @@
             AND user_id = #{userId}
         </if>
         <if test="state != null">
-            AND state = #{state}
             <if test="state != 2">
-                AND deadline &gt; #{time}
+                AND state = #{state} AND deadline &gt; #{time}
             </if>
             <if test="state == 2">
                 AND deadline &lt; #{time}
@@ -154,5 +152,11 @@
         deadline = #{deadline,jdbcType=BIGINT},
         is_del = #{isDel,jdbcType=BIT}
         where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="deleteByCouponId" parameterType="com.hooper.hoshop.entity.UserCoupon">
+        update h_user_coupons
+        set
+        is_del = 1
+        where coupons_id = #{couponId,jdbcType=INTEGER}
     </update>
 </mapper>

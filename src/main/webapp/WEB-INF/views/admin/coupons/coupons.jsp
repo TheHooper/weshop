@@ -163,6 +163,58 @@
         </div>
     </div>
 
+
+    <div id="DetailWin" class="easyui-window" title="详情优惠券" data-options="iconCls:'icon-save',closed:true"
+         style="width:100%;height:100%;padding:5px;">
+        <div class="easyui-layout" data-options="fit:true">
+            <div data-options="region:'center'" class="am-panel-group" style="padding:10px 0px 0px 10px;">
+                <form id="detailChart-parent" class="am-form">
+                    <fieldset>
+                        <legend>优惠券详情</legend>
+                        <input type="text" id="detail-id" style="display: none"/>
+                        <div class="am-form-group">
+                            <label for="editor-title">券名</label>
+                            <input type="text" class="" id="editor-title" disabled placeholder="输入优惠券标题">
+                        </div>
+
+                        <div class="am-form-group">
+                            <label for="editor-price">面额</label>
+                            <input type="text" class="" id="editor-price" disabled placeholder="输入优惠券面额">
+                        </div>
+
+                        <div class="am-form-group">
+                            <label for="editor-threshold">使用门槛</label>
+                            <input type="text" class="" id="editor-threshold" disabled placeholder="使用门槛">
+                        </div>
+
+                        <div class="am-form-group">
+                            <label for="editor-limitDays">有效天数</label>
+                            <input type="text" class="" id="editor-limitDays" disabled placeholder="用户领取后有效天数">
+                        </div>
+
+                        <div class="am-form-group">
+                            <label for="editor-num">券数量</label>
+                            <input type="text" class="" id="editor-num" disabled placeholder="优惠券数量">
+                        </div>
+
+                        <div class="am-form-group">
+                            <label for="editor-cats">优惠券适用范围</label>
+                            <textarea id="editor-cats" class="" rows="5"></textarea>
+                        </div>
+                    </fieldset>
+                </form>
+                <canvas width="120" height="40" id="detailChart"></canvas>
+            </div>
+            <div data-options="region:'south',border:false" style="text-align:center;margin-bottom: 15px">
+                <a id="editor-coupon-ok" class="easyui-linkbutton" data-options="iconCls:'icon-ok'"
+                   href="javascript:void(0)"
+                   style="width:80px">确认</a>
+                <a id="editor-coupon-cancel" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'"
+                   href="javascript:void(0)" style="width:80px">取消</a>
+            </div>
+        </div>
+    </div>
+
     <div id="batchSendWin" class="easyui-window" title="批量发送优惠券" data-options="iconCls:'icon-save',closed:true"
          style="width:100%;height:100%;padding:5px;">
         <div class="easyui-layout" data-options="fit:true">
@@ -280,6 +332,7 @@
     <script src="<c:url value="../js/easyui/plugins/jquery.linkbutton.js"/>"></script>
     <script src="<c:url value="../js/easyui/plugins/jquery.pagination.js"/>"></script>
     <script src="<c:url value="../js/easyui/plugins/jquery.datagrid.js"/>"></script>
+    <script src="<c:url value="../js/chart/Chart.js"/>"></script>
     <script type="text/javascript">
         function couponBatchFormatter(value, row, index) {
             return "<input type='radio' class='couponBatchRadio' value='" + value + "' />";
@@ -716,48 +769,103 @@
                 })
 
             });
+
+            var detailTagValue = "";
+            $('#editor-cats').tagsInput({
+                width: 'auto',
+                defaultText: '',
+                'interactive': false,
+            });
+            function deatilAddTag(tagValue) {
+                if (!$("#editor-cats").tagExist(tagValue)) {
+                    if (detailTagValue != "") {
+                        detailTagValue = detailTagValue + "," + tagValue;
+                    } else {
+                        detailTagValue = tagValue + ",";
+                    }
+                    $("#editor-cats").importTags(detailTagValue);
+                }
+            }
+
             $('#table').find('tbody').on("click", "tr .editor", function () {
                 var tr = $(this).parents("tr");
                 var oData = table.row(tr).data();
                 console.log(oData);
                 $('#DetailWin').window('open');
                 if ($('#detail-id').val() != oData.id) {
+                    $("#editor-title").val(oData.title);
+                    $("#editor-price").val(oData.price);
+                    $("#editor-threshold").val(oData.threshold);
+                    $('#editor-limitDays').val(oData.limitDays);
+                    $('#editor-num').val(oData.num);
+                    $("#editor-cats").removeTag(detailTagValue);
+                    detailTagValue = "";
                     $.ajax({
                         type: "GET",
-                        url: prefix + "/admin/orders/detail/" + oData.id,
-                        data: {},
+                        url: prefix + "/admin/coupon/cats/",
+                        data: {couponId: oData.id},
                         contentType: "application/x-www-form-urlencoded; charset=utf-8",
                         dataType: "json",
                         success: function (data) {
                             if (typeof (data.code) == "undefined") {
-                                console.log(data);
-                                $("#detail-id").val(data.order.id);
-
-                                $("#detail-mobile").text(data.user.mobile);
-                                $("#detail-username").text(data.user.name);
-
-                                $("#detail-sn").text(data.order.sn);
-                                $("#detail-state").text(oData.statusStr);
-                                $("#detail-total").text(data.order.totalAndDelivery);
-                                $("#detail-rtotal").text(data.order.rTotal);
-                                $("#detail-ctime").text(oData.cTime);
-                                $("#detail-ptime").text(oData.pTime);
-                                $("#detail-dcom").text(data.order.deliveryCom);
-                                $("#detail-dno").text(data.order.deliveryNo);
-                                $("#detail-dtime").text(oData.deliveryTime);
-
-                                $("#detail-address-name").text(data.address.name);
-                                $("#detail-address-mobile").text(data.address.mobile);
-                                $("#detail-address-pca").text(data.address.province + "," + data.address.city + "," + data.address.area);
-                                $("#detail-address-detail").text(data.address.detail);
-
-                                $("#detail-goods").html("");
-                                if (data.orderGoodses != null) {
-                                    $(data.orderGoodses).each(function (i, e) {
-                                        var li = getGoodsViewLi(e);
-                                        $("#detail-goods").append($(li));
+                                if (data.length == 0) {
+                                    deatilAddTag("所有类别");
+                                } else {
+                                    $(data).each(function (i, e) {
+                                        deatilAddTag(e.parentName);
                                     })
                                 }
+
+                            }
+                        },
+                        error: function (msg) {
+                            alert(msg);
+                            }
+                    })
+                    $('#detailChart').remove(); // this is my <canvas> element
+                    $('#detailChart-parent').append('<canvas width="120" height="40" id="detailChart"></canvas>');
+                    $.ajax({
+                        type: "GET",
+                        url: prefix + "/admin/coupon/counter/",
+                        data: {couponId: oData.id},
+                        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.code == null) {
+                                console.log(data);
+                                var ctx = $("#detailChart");
+                                var chart = new Chart(ctx, {
+                                    type: 'bar',
+                                    data: {
+                                        labels: ["未使用", "已使用", "已过期"],
+                                        datasets: [{
+                                            label: '使用情况',
+                                            data: [data.unuse, data.used, data.fade],
+                                            backgroundColor: [
+                                                'rgba(255, 99, 132, 0.2)',
+                                                'rgba(54, 162, 235, 0.2)',
+                                                'rgba(255, 206, 86, 0.2)',
+                                                'rgba(75, 192, 192, 0.2)',
+                                            ],
+                                            borderColor: [
+                                                'rgba(255,99,132,1)',
+                                                'rgba(54, 162, 235, 1)',
+                                                'rgba(255, 206, 86, 1)',
+                                                'rgba(75, 192, 192, 1)',
+                                            ],
+                                            borderWidth: 1
+                                        }]
+                                    },
+                                    options: {
+                                        scales: {
+                                            yAxes: [{
+                                                ticks: {
+                                                    beginAtZero: true
+                                                }
+                                            }]
+                                        }
+                                    }
+                                });
                             }
                         },
                         error: function (msg) {
@@ -770,19 +878,19 @@
                 var tr = $(this).parents("tr");
                 var data = table.row(tr).data();
                 var id = data.id;
-                $.messager.confirm('删除商品', '确认删除该订单?', function (r) {
+                $.messager.confirm('删除商品', '确认删除该优惠券?用户的优惠券也会消失', function (r) {
                     if (r) {
                         $.ajax({
                             type: "POST",
-                            url: prefix + "/admin/goods/del/",
-                            data: {goodsId: id},
+                            url: prefix + "/admin/coupon/del",
+                            data: {couponId: id},
                             contentType: "application/x-www-form-urlencoded; charset=utf-8",
                             dataType: "json",
                             success: function (data) {
                                 if (data.code == "0") {
                                     $.messager.show({
                                         title: '删除',
-                                        msg: '已删除商品.！',
+                                        msg: '已删除优惠券.！',
                                         timeout: 2000,
                                         showType: 'fade',
                                         style: {

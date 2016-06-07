@@ -100,7 +100,7 @@
             <div class="ui-list-info">
                 <h4 class="ui-nowrap">优惠券</h4>
             </div>
-            <div class="ui-list-action color-blue">圣诞优惠券</div>
+            <div class="ui-list-action color-blue"><c:if test="${coupon != null}">${coupon.title}</c:if></div>
         </li>
         <li>
             <div class="ui-list-info">

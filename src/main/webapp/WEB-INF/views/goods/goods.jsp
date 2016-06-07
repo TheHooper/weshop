@@ -182,7 +182,6 @@
         </li>
     </ul>
     <ul id="rates-ul" class="ui-list ui-list-text  ui-border-tb">
-
         <%--<li class="ui-border-t">--%>
         <%--<div class="ui-row-flex  ui-justify-flex">--%>
         <%--<span class="comment-item-star">--%>
@@ -224,6 +223,10 @@
 <link href="<c:url value="${pageContext.request.contextPath}/css/all-animation.css"/>" rel="stylesheet"
       type="text/css"/>
 <script type="text/javascript" src="<c:url value="${pageContext.request.contextPath}/js/frozen.js"/>"></script>
+<link href="<c:url value="${pageContext.request.contextPath}/css/dropload/dropload.css"/>" rel="stylesheet"
+      type="text/css"/>
+<script type="text/javascript"
+        src="<c:url value="${pageContext.request.contextPath}/js/dropload/dropload.js"/>"></script>
 <script type="text/javascript">
     (function () {
         var prefix = "${pageContext.request.contextPath}"
@@ -597,6 +600,57 @@
             level: null
         }
 
+        // dropload
+        $('#rate-section').dropload({
+            scrollArea: window,
+            loadUpFn: function (me) {
+                $.ajax({
+                    type: "GET",
+                    url: prefix + "/rate/list",
+                    data: RateForm,
+                    contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        if (typeof (data.code) == "undefined") {
+                            if (data.length == 0) {
+                                me.noData();
+                                me.resetload();
+                            } else {
+                                RateForm.offset = parseInt(RateForm.offset) + parseInt(data.length);
+                                $(data).each(function (i, e) {
+                                    var li = '<li class="ui-border-t">'
+                                            + '<div class="ui-row-flex  ui-justify-flex">'
+                                            + '<span class="comment-item-star">'
+                                            + '<span class="real-star comment-stars-width' + e.score + '"></span>'
+                                            + '</span>'
+                                            + '<div class="price-fade">'
+                                            + '<h5>' + e.username + ' </h5>'
+                                            + '</div>'
+                                            + '</div>'
+                                            + '</li>'
+                                            + '<li>'
+                                            + '<div class="ui-row-flex ui-justify-flex txt-m">'
+                                            + e.comment
+                                            + '</div>'
+                                            + '</li>'
+                                            + '<li>'
+                                            + '<div class="price-fade">'
+                                            + '<h5>' + e.timeStr + '</h5>'
+                                            + '</div>'
+                                            + '</li>';
+                                    $("#rates-ul").append(li);
+                                })
+                                me.resetload();
+                            }
+                        }
+                    },
+                    error: function (msg) {
+                        me.resetload();
+                    }
+                })
+            }
+        });
+
         var loadRate = function (ulId, ulId2) {
             $.ajax({
                 type: "GET",
@@ -606,6 +660,7 @@
                 dataType: "json",
                 success: function (data) {
                     if (data.code == null) {
+                        RateForm.offset = parseInt(RateForm.offset) + parseInt(data.length);
                         $(data).each(function (i, e) {
                             var li = '<li class="ui-border-t">'
                                     + '<div class="ui-row-flex  ui-justify-flex">'
@@ -768,6 +823,7 @@
                 $('#rate-level-ul').children("li").removeClass("currentRate");
                 $(this).addClass("currentRate");
                 RateForm.level = $(this).attr("value");
+                RateForm.offset = 0;
                 $("#rates-ul").html("");
                 loadRate(null, "rates-ul");
             })

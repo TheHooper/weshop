@@ -14,10 +14,10 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
     <title>ho商城登录</title>
-    <link href="<c:url value="../css/frozen.css"/>" rel="stylesheet" type="text/css"/>
-    <link href="<c:url value="../css/homall.css"/>" rel="stylesheet" type="text/css"/>
+    <link href="<c:url value="${pageContext.request.contextPath}/css/frozen.css"/>" rel="stylesheet" type="text/css"/>
+    <link href="<c:url value="${pageContext.request.contextPath}/css/homall.css"/>" rel="stylesheet" type="text/css"/>
     <script type="text/javascript"
-            src="<c:url value="../js/lib/zeptojs/zepto.min.js"/>"></script>
+            src="<c:url value="${pageContext.request.contextPath}/js/lib/zeptojs/zepto.min.js"/>"></script>
 </head>
 <body>
 <header id="header" class="header">
@@ -97,9 +97,9 @@
 </div>
 
 </body>
-<script type="text/javascript" src="<c:url value="../js/frozen.js"/>"></script>
+<script type="text/javascript" src="<c:url value="${pageContext.request.contextPath}/js/frozen.js"/>"></script>
 <script type="text/javascript"
-        src="<c:url value="../js/util/base64.min.js"/>"></script>
+        src="<c:url value="${pageContext.request.contextPath}/js/util/base64.min.js"/>"></script>
 <script>
     var prefix = "${pageContext.request.contextPath}"
     var backUrl = "${backUrl}";

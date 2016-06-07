@@ -14,10 +14,10 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
     <title>ho商城商品列表</title>
-    <link href="<c:url value="../css/frozen.css"/>" rel="stylesheet" type="text/css"/>
-    <link href="<c:url value="../css/homall.css"/>" rel="stylesheet" type="text/css"/>
+    <link href="<c:url value="${pageContext.request.contextPath}/css/frozen.css"/>" rel="stylesheet" type="text/css"/>
+    <link href="<c:url value="${pageContext.request.contextPath}/css/homall.css"/>" rel="stylesheet" type="text/css"/>
     <script type="text/javascript"
-            src="<c:url value="../js/lib/zeptojs/zepto.min.js"/>"></script>
+            src="<c:url value="${pageContext.request.contextPath}/js/lib/zeptojs/zepto.min.js"/>"></script>
 </head>
 <style>
 
@@ -25,8 +25,8 @@
 <body>
 <!-- header -->
 <header class="ui-searchbar-wrap ui-border-b">
-    <a href="<c:url value="../category"/>"><i id="headerBarCat"
-                                              class="ui-icon-prev"></i></a>
+    <a href="<c:url value="${pageContext.request.contextPath}/category"/>"><i id="headerBarCat"
+                                                                              class="ui-icon-prev"></i></a>
     <div class="ui-searchbar ui-border-radius">
         <i class="ui-icon-search"></i>
         <div class="ui-searchbar-text">搜索商品</div>
@@ -55,7 +55,7 @@
 </div>
 <!-- too E-->
 
-<section class="ui-panel padding-top-s">
+<section id="goodsContent" class="ui-panel padding-top-s">
     <div>
         <ul id="goodsListUl" class="ui-grid-halve">
             <li>
@@ -107,8 +107,13 @@
 </section>
 
 </body>
-<script type="text/javascript" src="<c:url value="../js/frozen.js"/>"></script>
-<script type="text/javascript" src="<c:url value="../js/homall/goods.js"/>"></script>
+<script type="text/javascript" src="<c:url value="${pageContext.request.contextPath}/js/frozen.js"/>"></script>
+<script type="text/javascript" src="<c:url value="${pageContext.request.contextPath}/js/homall/goods.js"/>"></script>
+<link href="<c:url value="${pageContext.request.contextPath}/css/dropload/dropload.css"/>" rel="stylesheet"
+      type="text/css"/>
+<script type="text/javascript"
+        src="<c:url value="${pageContext.request.contextPath}/js/dropload/dropload.js"/>"></script>
+
 <script type="text/javascript">
 //        var initHeight = function () {
 //            var winHeight = $(window).height();
@@ -121,7 +126,7 @@
 var prefix = "${pageContext.request.contextPath}";
 
 var basicOffset = 0;
-var basiclimit = 6;
+var basiclimit = 4;
 var fitlerForm = {
     title: "${title}",
     catId: "${catId}",
@@ -133,6 +138,18 @@ var fitlerForm = {
     offset: basicOffset
 }
 
+
+$('.ui-searchbar').tap(function () {
+    $('.ui-searchbar-wrap').addClass('focus');
+    $('.ui-searchbar-input input').focus();
+});
+$('.ui-searchbar-cancel').tap(function () {
+    $('.ui-searchbar-wrap').removeClass('focus');
+    var searcher = $('.ui-searchbar-input input').val()
+    fitlerForm.title = searcher;
+    $("#goodsListUl").html("");
+    loadGoods(fitlerForm);
+});
 
 function sort(target) {
     fitlerForm.limit = basiclimit;
@@ -167,7 +184,7 @@ function sort(target) {
         fitlerForm.time = 0;
         fitlerForm.price = 0;
     }
-
+    $("#goodsListUl").html("");
     loadGoods(fitlerForm);
 }
 
@@ -180,6 +197,7 @@ function sortDefault() {
     fitlerForm.orderType = 1;
     fitlerForm.limit = basiclimit;
     fitlerForm.offset = basicOffset;
+    $("#goodsListUl").html("");
     loadGoods(fitlerForm);
 }
 
@@ -202,10 +220,13 @@ var loadGoods = function (fitlerForm) {
         dataType: "json",
         success: function (data) {
             if (typeof (data.code) == "undefined") {
-                $("#goodsListUl").html("");
-                console.log(data);
-                GoodsApi.urlPrefix = prefix;
-                GoodsApi.loadGoodsListFace(data, "goodsListUl");
+                if (data.length == 0) {
+                } else {
+                    fitlerForm.offset = parseInt(fitlerForm.offset) + parseInt(data.length);
+                    console.log(data);
+                    GoodsApi.urlPrefix = prefix;
+                    GoodsApi.loadGoodsListFace(data, "goodsListUl");
+                }
             }
         },
         error: function (msg) {
@@ -213,6 +234,36 @@ var loadGoods = function (fitlerForm) {
         }
     })
 }
+
+// dropload
+$('#goodsContent').dropload({
+    scrollArea: window,
+    loadDownFn: function (me) {
+        $.ajax({
+            type: "GET",
+            url: prefix + "/goods/goodses",
+            data: fitlerForm,
+            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                if (typeof (data.code) == "undefined") {
+                    if (data.length == 0) {
+                        me.resetload();
+                    } else {
+                        fitlerForm.offset = parseInt(fitlerForm.offset) + parseInt(data.length);
+                        console.log(data);
+                        GoodsApi.urlPrefix = prefix;
+                        GoodsApi.loadGoodsListFace(data, "goodsListUl");
+                        me.resetload();
+                    }
+                }
+            },
+            error: function (msg) {
+                me.resetload();
+            }
+        })
+    }
+});
 //        var initScroll = function () {
 //            var scroll = new fz.Scroll('.ui-scroller', {
 //                scrollY: true
@@ -230,6 +281,7 @@ var loadGoods = function (fitlerForm) {
 
         function init() {
             initSearchBar();
+            $("#goodsListUl").html("");
             loadGoods(fitlerForm);
         }
 

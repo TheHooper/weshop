@@ -312,6 +312,13 @@
                 $("#add-address-name-input").val("");
                 $("#add-address-mobile-input").val("");
                 $("#add-address-detail-input").val("");
+                var addresses = AddressApi.loadAddresses(false, null);
+                toAddress(null, addresses);
+                $.tips({
+                    content: '地址添加成功',
+                    stayTime: 2000,
+                    type: "success"
+                });
             }
 
             AddressApi.addAddress(addressForm, afterAdd);

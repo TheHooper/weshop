@@ -12,6 +12,7 @@ import com.hooper.hoshop.dao.*;
 import com.hooper.hoshop.dto.count.UserMoneyDto;
 import com.hooper.hoshop.dto.count.UserOrdersDto;
 import com.hooper.hoshop.dto.coupon.CouponCatsDto;
+import com.hooper.hoshop.dto.coupon.CouponCounter;
 import com.hooper.hoshop.dto.coupon.UserCouponDto;
 import com.hooper.hoshop.entity.*;
 import com.hooper.hoshop.service.facade.CouponService;
@@ -53,6 +54,28 @@ public class CouponServiceImpl implements CouponService {
     @Override
     public List<UserCoupon> selectUserCopuns(UserCouponFilterForm userCouponFilterForm) {
         return null;
+    }
+
+    public UserCouponDto selectUserCouponById(int userCouponId) {
+        return userCouponMapper.selectDtoById(userCouponId);
+    }
+
+    @Override
+    public CouponCounter selectCouponCounter(int couponId) {
+        Map filter = new HashMap();
+        filter.put("couponId", couponId);
+        filter.put("time", System.currentTimeMillis());
+        filter.put("state", 0);
+        int unuse = userCouponMapper.countByFilter(filter);
+        filter.put("state", 1);
+        int used = userCouponMapper.countByFilter(filter);
+        filter.put("state", 2);
+        int fade = userCouponMapper.countByFilter(filter);
+        CouponCounter couponCounter = new CouponCounter();
+        couponCounter.setUnuse(unuse);
+        couponCounter.setUsed(used);
+        couponCounter.setFade(fade);
+        return couponCounter;
     }
 
     @Override
@@ -185,9 +208,13 @@ public class CouponServiceImpl implements CouponService {
         return 0;
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public int delete(Integer id) {
-        return 0;
+        Coupon coupon = couponMapper.selectByPrimaryKey(id);
+        coupon.setIsDel(true);
+        couponMapper.updateByPrimaryKey(coupon);
+        return userCouponMapper.deleteByCouponId(coupon.getId());
     }
 
     @Override

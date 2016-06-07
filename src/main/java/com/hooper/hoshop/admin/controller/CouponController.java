@@ -4,6 +4,8 @@ import com.hooper.hoshop.admin.form.DataTablePageForm;
 import com.hooper.hoshop.admin.form.EasyPageForm;
 import com.hooper.hoshop.admin.form.UserFilterForm;
 import com.hooper.hoshop.admin.form.coupon.*;
+import com.hooper.hoshop.dto.coupon.CouponCatsDto;
+import com.hooper.hoshop.dto.coupon.CouponCounter;
 import com.hooper.hoshop.dto.output.Category.DataTablePageOutput;
 import com.hooper.hoshop.dto.output.EasyPageOutput;
 import com.hooper.hoshop.dto.output.JsonOutput;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,6 +39,28 @@ public class CouponController {
     @RequestMapping(value = "coupons", method = {RequestMethod.GET, RequestMethod.POST})
     public String couponsView() {
         return "admin/coupons/coupons";
+    }
+
+    @RequestMapping(value = "/cats", method = {RequestMethod.POST, RequestMethod.GET})
+    @ResponseBody
+    public List<CouponCatsDto> cats(Integer couponId) {
+        List<CouponCatsDto> couponCatsDtos = couponService.selectCategoriesByCouponsId(couponId);
+        couponCatsDtos = couponCatsDtos == null ? new ArrayList<CouponCatsDto>() : couponCatsDtos;
+        return couponCatsDtos;
+    }
+
+    @RequestMapping(value = "/counter", method = {RequestMethod.POST, RequestMethod.GET})
+    @ResponseBody
+    public CouponCounter counter(Integer couponId) {
+        return couponService.selectCouponCounter(couponId);
+    }
+
+    @RequestMapping(value = "/del", method = {RequestMethod.POST, RequestMethod.GET})
+    @ResponseBody
+    public JsonOutput del(Integer couponId) {
+        couponService.delete(couponId);
+        JsonOutput output = new JsonOutput();
+        return output;
     }
 
     @RequestMapping(value = "/add", method = {RequestMethod.POST})
@@ -99,6 +124,7 @@ public class CouponController {
         output.setRecordsTotal(count);
         return output;
     }
+
 
     @RequestMapping(value = "/user/list", method = {RequestMethod.POST, RequestMethod.GET})
     public
